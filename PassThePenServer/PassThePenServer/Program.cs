@@ -12,6 +12,7 @@ namespace PassThePenServer
         {
             Console.WriteLine("Server is up...");
             Console.ReadLine();
+
         }
     }
 }
