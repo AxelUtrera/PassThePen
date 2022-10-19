@@ -1,7 +1,8 @@
-PassThePenServer/PassThePenServer/bin
+PassThePen/bin
+PassThePenClient/.vs
 PassThePenServer/.vs
 PassThePenServer/PassThePenServer/obj
-PassThePenClient/PassThePenServer/bin
-PassThePenClient/.vs
-PassThePenClient/PassThePenServer/obj
+PassThePenServer/PassThePenServer/bin
+PassThePen/obj
+
 
