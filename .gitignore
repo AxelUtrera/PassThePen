@@ -1,8 +1,15 @@
-PassThePen/bin
 PassThePenClient/.vs
 PassThePenServer/.vs
-PassThePenServer/PassThePenServer/obj
+PassThePenClient/PassThePen/obj
+PassThePenClient/PassThePen/bin
 PassThePenServer/PassThePenServer/bin
-PassThePen/obj
+PassThePenServer/PassThePenServer/obj
+PassThePenServer/Comunication/obj
+PassThePenServer/Comunication/bin
+PassThePenServer/DataAccess/obj
+PassThePenServer/DataAccess/bin
+PassThePenServer/Logic/obj
+PassThePenServer/Logic/bin
+
 
 
