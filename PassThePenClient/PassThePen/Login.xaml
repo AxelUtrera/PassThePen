@@ -33,9 +33,9 @@
             <Image Source="Img/logo_Pass_the_pen.png" HorizontalAlignment="Center" Height="199" Margin="0,30,0,0" Width="228"/>
 
             <Label x:Name="label_Email" Margin=" 195,50,50,0 " FontSize="15" Content="{x:Static p:Resources.Global_Email_Label}"/>
-            <TextBox Margin="200,0" BorderBrush="black" Height="20"/>
+            <TextBox Name="TextBox_Email" Margin="200,0" BorderBrush="black" Height="20"/>
             <Label x:Name="label_Password" Margin="195,30 ,50,0" FontSize="15" Content="{x:Static p:Resources.Global_Label_Password}"/>
-            <PasswordBox Margin="200,0" BorderBrush="Black" Height="20"/>
+            <PasswordBox Name="PasswordBox_Password"  Margin="200,0" BorderBrush="Black" Height="20"/>
 
             <Button Cursor="Hand" x:Name="Button_login" Margin="50,25,50,0" Width="200" Height="35" Foreground="#f3f3f3" FontSize="16" Click="Button_login_Click" >
                 <Button.Template >

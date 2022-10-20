@@ -27,6 +27,23 @@ namespace PassThePen
 
         private void Button_login_Click(object sender, RoutedEventArgs e)
         {
+            PassThePenService.PlayerMgtClient client = new PassThePenService.PlayerMgtClient();
+            string email = TextBox_Email.Text;
+            string pasword = PasswordBox_Password.Password;
+
+            //200 = status code "OK"
+            int playerValid = 200;
+            int resultAutenticatePlayer = client.AutenticatePlayer(email, pasword);
+
+
+            if (resultAutenticatePlayer == playerValid)
+            {
+                MessageBox.Show("La validacion fue exitosa");
+            }
+            else
+            {
+                MessageBox.Show("Hubo un error en la validacion");
+            }
 
         }
 

@@ -11,22 +11,30 @@ namespace DataAccess
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Runtime.Serialization;
+
+    [DataContract]
     public partial class Player
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+
         public Player()
         {
             this.FriendRequest = new HashSet<FriendRequest>();
             this.Friends = new HashSet<Friends>();
             this.Game = new HashSet<Game>();
         }
-    
+        [DataMember]    
         public string username { get; set; }
+        [DataMember]
         public string password { get; set; }
+        [DataMember]
         public string name { get; set; }
+        [DataMember]
         public string lastname { get; set; }
+        [DataMember]
         public string email { get; set; }
+        [DataMember]
         public byte[] profileImage { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
