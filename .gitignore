@@ -1,7 +1,7 @@
 PassThePenClient/.vs
 PassThePenServer/.vs
 PassThePenClient/PassThePen/obj
-PassThePenClient/PassThePen/bin
+PassThePenClient/PassThePen/bin*
 PassThePenServer/PassThePenServer/bin
 PassThePenServer/PassThePenServer/obj
 PassThePenServer/Comunication/obj

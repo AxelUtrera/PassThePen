@@ -1,0 +1,292 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="passthepenModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="passthepenModelStoreContainer">
+    <EntitySet Name="FriendRequest" EntityType="passthepenModel.Store.FriendRequest" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Friends" EntityType="passthepenModel.Store.Friends" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Game" EntityType="passthepenModel.Store.Game" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Player" EntityType="passthepenModel.Store.Player" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GamesPlayed" EntityType="passthepenModel.Store.GamesPlayed" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="fk_usernamePlayer_FriendRequest" Association="passthepenModel.Store.fk_usernamePlayer_FriendRequest">
+      <End Role="Player" EntitySet="Player" />
+      <End Role="FriendRequest" EntitySet="FriendRequest" />
+    </AssociationSet>
+    <AssociationSet Name="fk_usernamePlayer_Friend" Association="passthepenModel.Store.fk_usernamePlayer_Friend">
+      <End Role="Player" EntitySet="Player" />
+      <End Role="Friends" EntitySet="Friends" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GamesPlayed_Game" Association="passthepenModel.Store.FK_GamesPlayed_Game">
+      <End Role="Game" EntitySet="Game" />
+      <End Role="GamesPlayed" EntitySet="GamesPlayed" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GamesPlayed_Player" Association="passthepenModel.Store.FK_GamesPlayed_Player">
+      <End Role="Player" EntitySet="Player" />
+      <End Role="GamesPlayed" EntitySet="GamesPlayed" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="FriendRequest">
+    <Key>
+      <PropertyRef Name="idRequest" />
+      <PropertyRef Name="usernamePlayer" />
+    </Key>
+    <Property Name="idRequest" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="usernamePlayer" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="friendUsername" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="status" Type="varchar" Nullable="false" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Friends">
+    <Key>
+      <PropertyRef Name="idFriend" />
+      <PropertyRef Name="usernamePlayer" />
+    </Key>
+    <Property Name="idFriend" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="usernamePlayer" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="friendUsername" Type="varchar" Nullable="false" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Game">
+    <Key>
+      <PropertyRef Name="idGame" />
+    </Key>
+    <Property Name="idGame" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="winner" Type="varchar" Nullable="false" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Player">
+    <Key>
+      <PropertyRef Name="username" />
+    </Key>
+    <Property Name="username" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="password" Type="varchar" Nullable="false" MaxLength="64" />
+    <Property Name="name" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="lastname" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="email" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="profileImage" Type="varbinary(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="GamesPlayed">
+    <Key>
+      <PropertyRef Name="Game_idGame" />
+      <PropertyRef Name="Player_username" />
+    </Key>
+    <Property Name="Game_idGame" Type="int" Nullable="false" />
+    <Property Name="Player_username" Type="varchar" Nullable="false" MaxLength="20" />
+  </EntityType>
+  <Association Name="fk_usernamePlayer_FriendRequest">
+    <End Role="Player" Type="passthepenModel.Store.Player" Multiplicity="1" />
+    <End Role="FriendRequest" Type="passthepenModel.Store.FriendRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Player">
+        <PropertyRef Name="username" />
+      </Principal>
+      <Dependent Role="FriendRequest">
+        <PropertyRef Name="usernamePlayer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_usernamePlayer_Friend">
+    <End Role="Player" Type="passthepenModel.Store.Player" Multiplicity="1" />
+    <End Role="Friends" Type="passthepenModel.Store.Friends" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Player">
+        <PropertyRef Name="username" />
+      </Principal>
+      <Dependent Role="Friends">
+        <PropertyRef Name="usernamePlayer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GamesPlayed_Game">
+    <End Role="Game" Type="passthepenModel.Store.Game" Multiplicity="1" />
+    <End Role="GamesPlayed" Type="passthepenModel.Store.GamesPlayed" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Game">
+        <PropertyRef Name="idGame" />
+      </Principal>
+      <Dependent Role="GamesPlayed">
+        <PropertyRef Name="Game_idGame" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GamesPlayed_Player">
+    <End Role="GamesPlayed" Type="passthepenModel.Store.GamesPlayed" Multiplicity="*" />
+    <End Role="Player" Type="passthepenModel.Store.Player" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Player">
+        <PropertyRef Name="username" />
+      </Principal>
+      <Dependent Role="GamesPlayed">
+        <PropertyRef Name="Player_username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="passthepenModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="FriendRequest">
+          <Key>
+            <PropertyRef Name="idRequest" />
+            <PropertyRef Name="usernamePlayer" />
+          </Key>
+          <Property Name="idRequest" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="usernamePlayer" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="friendUsername" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Player" Relationship="Self.fk_usernamePlayer_FriendRequest" FromRole="FriendRequest" ToRole="Player" />
+        </EntityType>
+        <EntityType Name="Friends">
+          <Key>
+            <PropertyRef Name="idFriend" />
+            <PropertyRef Name="usernamePlayer" />
+          </Key>
+          <Property Name="idFriend" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="usernamePlayer" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="friendUsername" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Player" Relationship="Self.fk_usernamePlayer_Friend" FromRole="Friends" ToRole="Player" />
+        </EntityType>
+        <EntityType Name="Game">
+          <Key>
+            <PropertyRef Name="idGame" />
+          </Key>
+          <Property Name="idGame" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="winner" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Player" Relationship="Self.GamesPlayed" FromRole="Game" ToRole="Player" />
+        </EntityType>
+        <EntityType Name="Player">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="profileImage" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="true" />
+          <NavigationProperty Name="FriendRequest" Relationship="Self.fk_usernamePlayer_FriendRequest" FromRole="Player" ToRole="FriendRequest" />
+          <NavigationProperty Name="Friends" Relationship="Self.fk_usernamePlayer_Friend" FromRole="Player" ToRole="Friends" />
+          <NavigationProperty Name="Game" Relationship="Self.GamesPlayed" FromRole="Player" ToRole="Game" />
+        </EntityType>
+        <Association Name="fk_usernamePlayer_FriendRequest">
+          <End Role="Player" Type="Self.Player" Multiplicity="1" />
+          <End Role="FriendRequest" Type="Self.FriendRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="FriendRequest">
+              <PropertyRef Name="usernamePlayer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usernamePlayer_Friend">
+          <End Role="Player" Type="Self.Player" Multiplicity="1" />
+          <End Role="Friends" Type="Self.Friends" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Player">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="Friends">
+              <PropertyRef Name="usernamePlayer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="GamesPlayed">
+          <End Role="Game" Type="Self.Game" Multiplicity="*" />
+          <End Role="Player" Type="Self.Player" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="passthepenEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="FriendRequest" EntityType="Self.FriendRequest" />
+          <EntitySet Name="Friends" EntityType="Self.Friends" />
+          <EntitySet Name="Game" EntityType="Self.Game" />
+          <EntitySet Name="Player" EntityType="Self.Player" />
+          <AssociationSet Name="fk_usernamePlayer_FriendRequest" Association="Self.fk_usernamePlayer_FriendRequest">
+            <End Role="Player" EntitySet="Player" />
+            <End Role="FriendRequest" EntitySet="FriendRequest" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usernamePlayer_Friend" Association="Self.fk_usernamePlayer_Friend">
+            <End Role="Player" EntitySet="Player" />
+            <End Role="Friends" EntitySet="Friends" />
+          </AssociationSet>
+          <AssociationSet Name="GamesPlayed" Association="Self.GamesPlayed">
+            <End Role="Game" EntitySet="Game" />
+            <End Role="Player" EntitySet="Player" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="passthepenModelStoreContainer" CdmEntityContainer="passthepenEntities">
+    <EntitySetMapping Name="FriendRequest">
+      <EntityTypeMapping TypeName="IsTypeOf(passthepenModel.FriendRequest)">
+        <MappingFragment StoreEntitySet="FriendRequest">
+          <ScalarProperty Name="idRequest" ColumnName="idRequest" />
+          <ScalarProperty Name="usernamePlayer" ColumnName="usernamePlayer" />
+          <ScalarProperty Name="friendUsername" ColumnName="friendUsername" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Friends">
+      <EntityTypeMapping TypeName="IsTypeOf(passthepenModel.Friends)">
+        <MappingFragment StoreEntitySet="Friends">
+          <ScalarProperty Name="idFriend" ColumnName="idFriend" />
+          <ScalarProperty Name="usernamePlayer" ColumnName="usernamePlayer" />
+          <ScalarProperty Name="friendUsername" ColumnName="friendUsername" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Game">
+      <EntityTypeMapping TypeName="IsTypeOf(passthepenModel.Game)">
+        <MappingFragment StoreEntitySet="Game">
+          <ScalarProperty Name="idGame" ColumnName="idGame" />
+          <ScalarProperty Name="winner" ColumnName="winner" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Player">
+      <EntityTypeMapping TypeName="IsTypeOf(passthepenModel.Player)">
+        <MappingFragment StoreEntitySet="Player">
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="lastname" ColumnName="lastname" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="profileImage" ColumnName="profileImage" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="GamesPlayed" TypeName="passthepenModel.GamesPlayed" StoreEntitySet="GamesPlayed">
+      <EndProperty Name="Game">
+        <ScalarProperty Name="idGame" ColumnName="Game_idGame" />
+      </EndProperty>
+      <EndProperty Name="Player">
+        <ScalarProperty Name="username" ColumnName="Player_username" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
