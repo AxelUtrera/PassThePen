@@ -1,0 +1,15 @@
+PassThePenClient/.vs
+PassThePenServer/.vs
+PassThePenClient/PassThePen/obj
+PassThePenClient/PassThePen/bin*
+PassThePenServer/PassThePenServer/bin
+PassThePenServer/PassThePenServer/obj
+PassThePenServer/Comunication/obj
+PassThePenServer/Comunication/bin
+PassThePenServer/DataAccess/obj
+PassThePenServer/DataAccess/bin
+PassThePenServer/Logic/obj
+PassThePenServer/Logic/bin
+
+
+
