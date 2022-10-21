@@ -27,9 +27,18 @@ namespace PassThePen
 
         private void Button_Send_Click(object sender, RoutedEventArgs e)
         {
+            
             if (ValidateEmail(texBox_emailCodigo.Text))
             {
-                MessageBox.Show("Email Valido");
+                PassThePenService.PlayerMgtClient client = new PassThePenService.PlayerMgtClient();
+                if (client.AutenticateEmail(texBox_emailCodigo.Text) == 200)
+                {
+                    MessageBox.Show("Email encontrado y valido");
+                }
+                else
+                {
+                    MessageBox.Show("Email no encontrado");
+                }
             }
             else
             {
@@ -39,9 +48,8 @@ namespace PassThePen
 
         private void Button_cancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Hide();
             Login login = new Login();
-            login.Show();
+            login.ShowDialog();
         }
 
         private void Button_Valid_Click(object sender, RoutedEventArgs e)

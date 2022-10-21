@@ -28,14 +28,18 @@ namespace PassThePen
         private void Button_login_Click(object sender, RoutedEventArgs e)
         {
             PassThePenService.PlayerMgtClient client = new PassThePenService.PlayerMgtClient();
-            string email = TextBox_Email.Text;
-            string pasword = PasswordBox_Password.Password;
+
+            
+            PassThePenService.Player player = new PassThePenService.Player()
+            {
+                email = TextBox_EmailUser.Text,
+                password = PasswordBox_PasswordUser.Password
+            };
 
             //200 = status code "OK"
             int playerValid = 200;
-            int resultAutenticatePlayer = client.AutenticatePlayer(email, pasword);
-
-
+            int resultAutenticatePlayer = client.AutenticatePlayer(player);
+           
             if (resultAutenticatePlayer == playerValid)
             {
                 MessageBox.Show("La validacion fue exitosa");
@@ -44,7 +48,6 @@ namespace PassThePen
             {
                 MessageBox.Show("Hubo un error en la validacion");
             }
-
         }
 
         private void Button_Register_Click(object sender, RoutedEventArgs e)
@@ -55,7 +58,8 @@ namespace PassThePen
 
         private void Button_Forgot_Password_Click(object sender, RoutedEventArgs e)
         {
-
+            ChangePassword changePassword = new ChangePassword();
+            changePassword.ShowDialog();
         }
 
         private void Button_Exit_Click(object sender, RoutedEventArgs e)

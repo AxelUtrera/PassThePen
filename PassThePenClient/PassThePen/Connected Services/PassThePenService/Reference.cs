@@ -149,10 +149,16 @@ namespace PassThePen.PassThePenService {
         System.Threading.Tasks.Task<int> AddPlayerAsync(PassThePen.PassThePenService.Player player);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerMgt/AutenticatePlayer", ReplyAction="http://tempuri.org/IPlayerMgt/AutenticatePlayerResponse")]
-        int AutenticatePlayer(string username, string password);
+        int AutenticatePlayer(PassThePen.PassThePenService.Player player);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerMgt/AutenticatePlayer", ReplyAction="http://tempuri.org/IPlayerMgt/AutenticatePlayerResponse")]
-        System.Threading.Tasks.Task<int> AutenticatePlayerAsync(string username, string password);
+        System.Threading.Tasks.Task<int> AutenticatePlayerAsync(PassThePen.PassThePenService.Player player);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerMgt/AutenticateEmail", ReplyAction="http://tempuri.org/IPlayerMgt/AutenticateEmailResponse")]
+        int AutenticateEmail(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerMgt/AutenticateEmail", ReplyAction="http://tempuri.org/IPlayerMgt/AutenticateEmailResponse")]
+        System.Threading.Tasks.Task<int> AutenticateEmailAsync(string email);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -190,12 +196,20 @@ namespace PassThePen.PassThePenService {
             return base.Channel.AddPlayerAsync(player);
         }
         
-        public int AutenticatePlayer(string username, string password) {
-            return base.Channel.AutenticatePlayer(username, password);
+        public int AutenticatePlayer(PassThePen.PassThePenService.Player player) {
+            return base.Channel.AutenticatePlayer(player);
         }
         
-        public System.Threading.Tasks.Task<int> AutenticatePlayerAsync(string username, string password) {
-            return base.Channel.AutenticatePlayerAsync(username, password);
+        public System.Threading.Tasks.Task<int> AutenticatePlayerAsync(PassThePen.PassThePenService.Player player) {
+            return base.Channel.AutenticatePlayerAsync(player);
+        }
+        
+        public int AutenticateEmail(string email) {
+            return base.Channel.AutenticateEmail(email);
+        }
+        
+        public System.Threading.Tasks.Task<int> AutenticateEmailAsync(string email) {
+            return base.Channel.AutenticateEmailAsync(email);
         }
     }
 }

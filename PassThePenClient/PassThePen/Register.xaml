@@ -30,17 +30,17 @@
             <Image Source="Img/logo_Pass_the_pen.png" Height="146" Width="158"/>
 
             <Label x:Name="label_Email" Margin=" 195,10,50,0 " FontSize="15" Content="{x:Static p:Resources.Global_Email_Label}"/>
-            <TextBox Margin="200,0" BorderBrush="black" Height="20"/>
+            <TextBox Name="TexBox_Email" Margin="200,0" BorderBrush="black" Height="20"/>
             <Label x:Name="label_Nickname" Margin="195,15,50,0" FontSize="15" Content="{x:Static p:Resources.Register_Nickname_Label}" Width="388"/>
-            <TextBox Margin="200,0" BorderBrush="Black" Height="20"/>
+            <TextBox Name="TextBox_Username" Margin="200,0" BorderBrush="Black" Height="20"/>
             <Label x:Name="label_Name" Margin=" 195,15,50,0 " FontSize="15" Content="{x:Static p:Resources.Register_Name_Label}"/>
-            <TextBox Margin="200,0" BorderBrush="black" Height="20"/>
+            <TextBox Name="TextBox_Name" Margin="200,0" BorderBrush="black" Height="20"/>
             <Label x:Name="label_Lastname" Margin=" 195,15,50,0 " FontSize="15" Content="{x:Static p:Resources.Register_LastName_Label}"/>
-            <TextBox Margin="200,0" BorderBrush="black" Height="20"/>
+            <TextBox Name="TextBox_LastName" Margin="200,0" BorderBrush="black" Height="20"/>
             <Label x:Name="label_Password" Margin="195,15,50,0" FontSize="15" Content="{x:Static p:Resources.Global_Label_Password}" Width="388"/>
-            <PasswordBox Margin="200,0" BorderBrush="Black" Height="20"/>
+            <PasswordBox Name="PasswordBox_Password" Margin="200,0" BorderBrush="Black" Height="20"/>
             <Label x:Name="label_Confirm_Password" Margin="195,15,50,0" FontSize="15" Content="{x:Static p:Resources.Register_Repeat_Password}" Width="388"/>
-            <PasswordBox Margin="200,0" BorderBrush="Black" Height="20"/>
+            <PasswordBox Name="PasswordBox_RepeatPassword" Margin="200,0" BorderBrush="Black" Height="20"/>
 
             <Button Cursor="Hand" Margin="50,45,50,0" Width="200" Height="35" Foreground="#f3f3f3" FontSize="16" Click="Button_Register_Click" >
                 <Button.Template >
@@ -51,8 +51,6 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-
-
 
         </StackPanel>
     </Grid>

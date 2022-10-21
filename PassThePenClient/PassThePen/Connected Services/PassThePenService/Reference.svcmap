@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="5d60d099-51ba-48db-82cb-01436e7cd36d" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="abe8db48-4e91-4219-bb51-d1a7cc894c88" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,7 +22,7 @@
     <MetadataSource Address="http://localhost:8082/?singleWsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="PlayerMgt.wsdl" MetadataType="Wsdl" ID="5bb5082c-4293-4c60-b23c-97f3ee69a4fc" SourceId="1" SourceUrl="http://localhost:8082/?singleWsdl" />
+    <MetadataFile FileName="PlayerMgt.wsdl" MetadataType="Wsdl" ID="66574d11-3433-42c5-b024-5de1f8e2068d" SourceId="1" SourceUrl="http://localhost:8082/?singleWsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
