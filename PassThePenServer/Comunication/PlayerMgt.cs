@@ -1,4 +1,4 @@
-﻿using DataAccess;
+﻿using Logic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,14 +9,15 @@ namespace Comunication
 {
     public class PlayerMgt : IPlayerMgt
     {
-        public int AddPlayer(Player player)
+        public int AddPlayer(DataAccess.Player player)
         {
-            return 1;
+            return PlayerLogic.AddPlayerToDB(player);
         }
 
-        public int AutenticatePlayer(string username, string password)
+        public int AutenticatePlayer(DataAccess.Player player)
         {
-            return 1;
+            PlayerLogic playerLogic = new PlayerLogic();
+            return playerLogic.AutenticatePlayerDB(player);
         }
     }
 }

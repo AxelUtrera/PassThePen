@@ -1,5 +1,4 @@
-﻿using DataAccess;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
@@ -12,9 +11,9 @@ namespace Comunication
       public interface IPlayerMgt
       {
             [OperationContract]
-            int AddPlayer(Player player);
+            int AddPlayer(DataAccess.Player player);
 
             [OperationContract]
-            int AutenticatePlayer(string username, string password);
+            int AutenticatePlayer(DataAccess.Player player);
       }
 }
