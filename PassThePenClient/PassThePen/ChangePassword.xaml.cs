@@ -48,8 +48,7 @@ namespace PassThePen
 
         private void Button_cancel_Click(object sender, RoutedEventArgs e)
         {
-            Login login = new Login();
-            login.ShowDialog();
+            Close();
         }
 
         private void Button_Valid_Click(object sender, RoutedEventArgs e)
