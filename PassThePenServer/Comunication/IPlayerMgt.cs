@@ -16,5 +16,8 @@ namespace Comunication
 
             [OperationContract]
             int AutenticatePlayer(string username, string password);
+
+            [OperationContract]
+            int AutenticateEmail(string email);
       }
 }

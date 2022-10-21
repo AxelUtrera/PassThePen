@@ -1,4 +1,5 @@
 ﻿using DataAccess;
+using Logic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,12 @@ namespace Comunication
         public int AutenticatePlayer(string username, string password)
         {
             return 1;
+        }
+
+        public int AutenticateEmail(string email)
+        {
+            PlayerLogic playerLogic = new PlayerLogic();
+            return playerLogic.AutenticateEmail(email); 
         }
     }
 }
