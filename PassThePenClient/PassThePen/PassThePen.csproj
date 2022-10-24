@@ -57,8 +57,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ChangePassword.xaml.cs">
-      <DependentUpon>ChangePassword.xaml</DependentUpon>
+    <Compile Include="RecoverPassword.xaml.cs">
+      <DependentUpon>RecoverPassword.xaml</DependentUpon>
     </Compile>
     <Compile Include="Connected Services\PassThePenService\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -68,7 +68,7 @@
     <Compile Include="Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
     </Compile>
-    <Page Include="ChangePassword.xaml">
+    <Page Include="RecoverPassword.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

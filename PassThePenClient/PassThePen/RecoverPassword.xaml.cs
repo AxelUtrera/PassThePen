@@ -18,9 +18,9 @@ namespace PassThePen
     /// <summary>
     /// Lógica de interacción para ChangePassword.xaml
     /// </summary>
-    public partial class ChangePassword : Window
+    public partial class RecoverPassword : Window
     {
-        public ChangePassword()
+        public RecoverPassword()
         {
             InitializeComponent();
         }
