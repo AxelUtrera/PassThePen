@@ -15,5 +15,8 @@ namespace Comunication
 
             [OperationContract]
             int AutenticatePlayer(DataAccess.Player player);
+
+            [OperationContract]
+            int AutenticateEmail(string email);
       }
 }

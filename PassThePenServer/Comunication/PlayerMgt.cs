@@ -19,5 +19,11 @@ namespace Comunication
             PlayerLogic playerLogic = new PlayerLogic();
             return playerLogic.AutenticatePlayerDB(player);
         }
+
+        public int AutenticateEmail(string email)
+        { 
+            PlayerLogic playerLogic = new PlayerLogic();
+            return playerLogic.AutenticateEmail(email); 
+        }
     }
 }
