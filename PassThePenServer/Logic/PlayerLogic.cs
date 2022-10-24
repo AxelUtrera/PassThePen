@@ -56,5 +56,20 @@ namespace Logic
             }
             return statusCode;
         }
+        public int AutenticateEmail(string email)
+        {
+            int emailResult = 500;
+            using (var dataBase = new DataAccess.passthepenEntities())
+            {
+                var playerEmail = (from Player in dataBase.Player where
+                                   Player.email.Equals(email) select Player).Count();
+                if(playerEmail > 0)
+                {
+                    emailResult = 200;
+                }
+            }
+            return emailResult;
+        }
+
     }
 }

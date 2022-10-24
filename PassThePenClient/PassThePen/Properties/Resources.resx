@@ -117,6 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ChangePassword_Cancel_Button" xml:space="preserve">
+    <value>Cancelar</value>
+    <comment>Used by: Change Password</comment>
+  </data>
+  <data name="ChangePassword_Code_Label" xml:space="preserve">
+    <value>Introduce el código de validación </value>
+    <comment>Used by: Change Password</comment>
+  </data>
+  <data name="ChangePassword_Send_Button" xml:space="preserve">
+    <value>Enviar</value>
+    <comment>Used by: Change Password</comment>
+  </data>
+  <data name="ChangePassword_Title_Label" xml:space="preserve">
+    <value>¿Olvidaste tu contraseña?</value>
+    <comment>Used by: Change Password</comment>
+  </data>
+  <data name="ChangePassword_Valid_Button" xml:space="preserve">
+    <value>Validar</value>
+    <comment>Used by: Change Password</comment>
+  </data>
   <data name="Global_Email_Label" xml:space="preserve">
     <value>Correo </value>
     <comment>Used by: login</comment>
