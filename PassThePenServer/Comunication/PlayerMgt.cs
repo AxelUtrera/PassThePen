@@ -1,4 +1,5 @@
-﻿using Logic;
+﻿using DataAccess;
+using Logic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,24 @@ namespace Comunication
         { 
             PlayerLogic playerLogic = new PlayerLogic();
             return playerLogic.AutenticateEmail(email); 
+        }
+
+        public bool UpdateDataPlayer(string username, Player player)
+        {
+            PlayerLogic playerLogic = new PlayerLogic();
+            return playerLogic.UpdateDataPlayer(username, player);
+        }
+
+        public Player GetDataPlayer(string username)
+        {
+            PlayerLogic playerLogic = new PlayerLogic();
+            return playerLogic.ObtainPlayerData(username);
+        }
+
+        public bool UpdatePlayerPassword(string username, string password)
+        {
+            PlayerLogic playerLogic = new PlayerLogic();
+            return playerLogic.UpdatePassword(username, password);
         }
 
         public int CodeEmail(string to, String affair, int validationCode)

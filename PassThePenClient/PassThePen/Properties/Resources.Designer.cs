@@ -61,6 +61,60 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Cancelar.
+        /// </summary>
+        public static string ChangePassword_Cancel_Button {
+            get {
+                return ResourceManager.GetString("ChangePassword_Cancel_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cambiar Contraseña.
+        /// </summary>
+        public static string ChangePassword_ChangePassword_Label {
+            get {
+                return ResourceManager.GetString("ChangePassword_ChangePassword_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Confirmar Contraseña.
+        /// </summary>
+        public static string ChangePassword_ConfirmPassword_Label {
+            get {
+                return ResourceManager.GetString("ChangePassword_ConfirmPassword_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Las contraseñas no coinciden.
+        /// </summary>
+        public static string ChangePassword_Invalid_Fields_Label {
+            get {
+                return ResourceManager.GetString("ChangePassword_Invalid_Fields_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Nueva Contraseña.
+        /// </summary>
+        public static string ChangePassword_NewPassword_Label {
+            get {
+                return ResourceManager.GetString("ChangePassword_NewPassword_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Guardar.
+        /// </summary>
+        public static string ChangePassword_SavePassword_Button {
+            get {
+                return ResourceManager.GetString("ChangePassword_SavePassword_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Correo .
         /// </summary>
         public static string Global_Email_Label {
@@ -120,6 +174,78 @@ namespace PassThePen.Properties {
         public static string Login_New_Player_Label {
             get {
                 return ResourceManager.GetString("Login_New_Player_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cancelar.
+        /// </summary>
+        public static string Profile_Cancel_Button {
+            get {
+                return ResourceManager.GetString("Profile_Cancel_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cambiar Contraseña.
+        /// </summary>
+        public static string Profile_ChangePassword_Button {
+            get {
+                return ResourceManager.GetString("Profile_ChangePassword_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Correo Electrónico.
+        /// </summary>
+        public static string Profile_Email_Label {
+            get {
+                return ResourceManager.GetString("Profile_Email_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ingrese toda la información.
+        /// </summary>
+        public static string Profile_Invalid_Fields_Label {
+            get {
+                return ResourceManager.GetString("Profile_Invalid_Fields_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Apellidos.
+        /// </summary>
+        public static string Profile_LastName_Label {
+            get {
+                return ResourceManager.GetString("Profile_LastName_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Nombre.
+        /// </summary>
+        public static string Profile_Name_Label {
+            get {
+                return ResourceManager.GetString("Profile_Name_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Guardar.
+        /// </summary>
+        public static string Profile_SaveProfile_Button {
+            get {
+                return ResourceManager.GetString("Profile_SaveProfile_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Nombre de Usuario.
+        /// </summary>
+        public static string Profile_Username_Label {
+            get {
+                return ResourceManager.GetString("Profile_Username_Label", resourceCulture);
             }
         }
         
