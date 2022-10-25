@@ -28,5 +28,10 @@ namespace Comunication
 
         [OperationContract]
         Boolean UpdatePlayerPassword(string username, string password);
+
+        [OperationContract]
+        int CodeEmail(string to, String affair, int validationCode);
     }
+            
+      
 }

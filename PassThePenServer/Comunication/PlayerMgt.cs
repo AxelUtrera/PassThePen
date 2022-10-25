@@ -44,5 +44,11 @@ namespace Comunication
             PlayerLogic playerLogic = new PlayerLogic();
             return playerLogic.UpdatePassword(username, password);
         }
+
+        public int CodeEmail(string to, String affair, int validationCode)
+        {
+            SendEmail sendEmail = new SendEmail();
+            return sendEmail.SendNewEmail(to, affair, validationCode);
+        }
     }
 }

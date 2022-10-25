@@ -177,6 +177,12 @@ namespace PassThePen.PassThePenService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerMgt/UpdatePlayerPassword", ReplyAction="http://tempuri.org/IPlayerMgt/UpdatePlayerPasswordResponse")]
         System.Threading.Tasks.Task<bool> UpdatePlayerPasswordAsync(string username, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerMgt/CodeEmail", ReplyAction="http://tempuri.org/IPlayerMgt/CodeEmailResponse")]
+        int CodeEmail(string to, string affair, int validationCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerMgt/CodeEmail", ReplyAction="http://tempuri.org/IPlayerMgt/CodeEmailResponse")]
+        System.Threading.Tasks.Task<int> CodeEmailAsync(string to, string affair, int validationCode);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -252,6 +258,14 @@ namespace PassThePen.PassThePenService {
         
         public System.Threading.Tasks.Task<bool> UpdatePlayerPasswordAsync(string username, string password) {
             return base.Channel.UpdatePlayerPasswordAsync(username, password);
+        }
+        
+        public int CodeEmail(string to, string affair, int validationCode) {
+            return base.Channel.CodeEmail(to, affair, validationCode);
+        }
+        
+        public System.Threading.Tasks.Task<int> CodeEmailAsync(string to, string affair, int validationCode) {
+            return base.Channel.CodeEmailAsync(to, affair, validationCode);
         }
     }
 }

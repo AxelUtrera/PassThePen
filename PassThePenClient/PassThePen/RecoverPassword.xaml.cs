@@ -15,9 +15,7 @@ using System.Windows.Shapes;
 
 namespace PassThePen
 {
-    /// <summary>
-    /// Lógica de interacción para ChangePassword.xaml
-    /// </summary>
+    
     public partial class RecoverPassword : Window
     {
         public RecoverPassword()
@@ -27,13 +25,23 @@ namespace PassThePen
 
         private void Button_Send_Click(object sender, RoutedEventArgs e)
         {
-            
+            String emailCodigo = texBox_emailCodigo.Text;            
             if (ValidateEmail(texBox_emailCodigo.Text))
             {
                 PassThePenService.PlayerMgtClient client = new PassThePenService.PlayerMgtClient();
-                if (client.AutenticateEmail(texBox_emailCodigo.Text) == 200)
+                if (client.AutenticateEmail(emailCodigo) == 200)
                 {
-                    MessageBox.Show("Email encontrado y valido");
+                    Random randomNumber = new Random();
+                    int validationCode = randomNumber.Next(100000, 1000000);
+                    String affair = "New Validation Code";
+                    if(client.CodeEmail(emailCodigo, affair, validationCode) == 200)
+                    {
+                        MessageBox.Show("Corrreo Enviado");
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se pudo enviar el codigo");
+                    }
                 }
                 else
                 {
