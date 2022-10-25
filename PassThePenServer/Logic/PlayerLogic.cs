@@ -56,6 +56,7 @@ namespace Logic
             }
             return statusCode;
         }
+
         public int AutenticateEmail(string email)
         {
             int emailResult = 500;
@@ -69,6 +70,56 @@ namespace Logic
                 }
             }
             return emailResult;
+        }
+
+        public Player ObtainPlayerData(string username)
+        {
+            Player playerObtained = null;
+            using (var dataBaseContext = new passthepenEntities())
+            {
+                //playerObtained = (((Player)(from Player in dataBaseContext.Player
+                //                        where Player.username.Equals(username)
+                //                      select Player)));
+
+                playerObtained = dataBaseContext.Player.Find(username);
+            }
+            return playerObtained;
+        }
+
+        public Boolean UpdateDataPlayer(String username, Player player)
+        {
+            Boolean isUpdated = false;
+            using (var dataBaseContext = new passthepenEntities())
+            {
+                var updatedPlayer = dataBaseContext.Player.First(u => u.username == username);
+                updatedPlayer.name = player.name;
+                updatedPlayer.lastname = player.lastname;
+                updatedPlayer.email = player.email;
+                updatedPlayer.profileImage = player.profileImage;
+                int returnValue = dataBaseContext.SaveChanges();
+                if (returnValue > 0)
+                {
+                    isUpdated = true;
+                }
+            }
+            return isUpdated;
+        }
+
+        public Boolean UpdatePassword(string username, string password)
+        {
+            Boolean isChanged = false;
+            string encriptedPassword = Encription.ToSHA2Hash(password);
+            using (var dataBaseContext = new passthepenEntities())
+            {
+                var updatedPassword = dataBaseContext.Player.First(u => u.username == username);
+                updatedPassword.password = encriptedPassword;
+                int returnValue = dataBaseContext.SaveChanges();
+                if (returnValue > 0)
+                {
+                    isChanged = true;
+                }
+            }
+            return isChanged;
         }
 
     }

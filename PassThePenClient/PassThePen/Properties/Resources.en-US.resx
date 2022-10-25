@@ -118,131 +118,131 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ChangePassword_Cancel_Button" xml:space="preserve">
-    <value>Cancelar</value>
+    <value>Cancel</value>
     <comment>Used by: Change Password</comment>
   </data>
   <data name="ChangePassword_ChangePassword_Label" xml:space="preserve">
-    <value>Cambiar Contraseña</value>
+    <value>Change Password</value>
     <comment>Used by: Change Password</comment>
   </data>
   <data name="ChangePassword_ConfirmPassword_Label" xml:space="preserve">
-    <value>Confirmar Contraseña</value>
+    <value>Confirm Password</value>
     <comment>Used by: Change Password</comment>
   </data>
   <data name="ChangePassword_Invalid_Fields_Label" xml:space="preserve">
-    <value>Las contraseñas no coinciden</value>
+    <value>Passwords do not match</value>
     <comment>Used by: Change Password</comment>
   </data>
   <data name="ChangePassword_NewPassword_Label" xml:space="preserve">
-    <value>Nueva Contraseña</value>
+    <value>New Password</value>
     <comment>Used by: Change Password</comment>
   </data>
   <data name="ChangePassword_SavePassword_Button" xml:space="preserve">
-    <value>Guardar</value>
+    <value>Save</value>
     <comment>Used by: Change Password</comment>
   </data>
   <data name="Global_Email_Label" xml:space="preserve">
-    <value>Correo </value>
+    <value>Email</value>
     <comment>Used by: login</comment>
   </data>
   <data name="Global_Label_Password" xml:space="preserve">
-    <value>Contraseña</value>
+    <value>Password</value>
     <comment>Used by: login, Register</comment>
   </data>
   <data name="Login_Forgot_Password_Button" xml:space="preserve">
-    <value>¿Olvidaste tu contraseña?</value>
+    <value>Forgot your password?</value>
     <comment>Used by: login</comment>
   </data>
   <data name="Login_Login_Button" xml:space="preserve">
-    <value>Iniciar sesión</value>
+    <value>Log In</value>
     <comment>Used by: login</comment>
   </data>
   <data name="Login_Login_tittle" xml:space="preserve">
-    <value>Inicio de sesión</value>
+    <value>Login</value>
     <comment>Used by: login</comment>
   </data>
   <data name="Login_New_Player_Button" xml:space="preserve">
-    <value>Registrate aquí</value>
+    <value>Sign Up Here</value>
     <comment>Used by: login</comment>
   </data>
   <data name="Login_New_Player_Label" xml:space="preserve">
-    <value>¿Aun no tienes una cuenta?</value>
+    <value>You still do not have an account?</value>
     <comment>Used by: login</comment>
   </data>
   <data name="Profile_Cancel_Button" xml:space="preserve">
-    <value>Cancelar</value>
+    <value>Cancel</value>
     <comment>Used by: Profile</comment>
   </data>
   <data name="Profile_ChangePassword_Button" xml:space="preserve">
-    <value>Cambiar Contraseña</value>
+    <value>Change Password</value>
     <comment>Used by: Profile</comment>
   </data>
   <data name="Profile_Email_Label" xml:space="preserve">
-    <value>Correo Electrónico</value>
+    <value>Email</value>
     <comment>Used by: Profile</comment>
   </data>
   <data name="Profile_Invalid_Fields_Label" xml:space="preserve">
-    <value>Ingrese toda la información</value>
+    <value>Please fill all the fields</value>
     <comment>Used by: Profile</comment>
   </data>
   <data name="Profile_LastName_Label" xml:space="preserve">
-    <value>Apellidos</value>
+    <value>Last Name</value>
     <comment>Used by: Profile</comment>
   </data>
   <data name="Profile_Name_Label" xml:space="preserve">
-    <value>Nombre</value>
+    <value>Name</value>
     <comment>Used by: Profile</comment>
   </data>
   <data name="Profile_SaveProfile_Button" xml:space="preserve">
-    <value>Guardar</value>
+    <value>Save</value>
     <comment>Used by: Profile</comment>
   </data>
   <data name="Profile_Username_Label" xml:space="preserve">
-    <value>Nombre de Usuario</value>
+    <value>Username</value>
     <comment>Used by: Profile</comment>
   </data>
   <data name="RecoverPassword_Cancel_Button" xml:space="preserve">
-    <value>Cancelar</value>
+    <value>Cancel</value>
     <comment>Used by: Recover Password</comment>
   </data>
   <data name="RecoverPassword_Code_Label" xml:space="preserve">
-    <value>Introduce el código de validación </value>
+    <value>Enter the validation code</value>
     <comment>Used by: Recover Password</comment>
   </data>
   <data name="RecoverPassword_Send_Button" xml:space="preserve">
-    <value>Enviar</value>
+    <value>Send</value>
     <comment>Used by: Recover Password</comment>
   </data>
   <data name="RecoverPassword_Title_Label" xml:space="preserve">
-    <value>¿Olvidaste tu contraseña?</value>
+    <value>Forgot your password?</value>
     <comment>Used by: Recover Password</comment>
   </data>
   <data name="RecoverPassword_Valid_Button" xml:space="preserve">
-    <value>Validar</value>
+    <value>Validate</value>
     <comment>Used by: Recover Password</comment>
   </data>
   <data name="Register_LastName_Label" xml:space="preserve">
-    <value>Apellidos</value>
+    <value>Last Name</value>
     <comment>Used by: Register</comment>
   </data>
   <data name="Register_Name_Label" xml:space="preserve">
-    <value>Nombre(s)</value>
+    <value>Name</value>
     <comment>Used by: Register</comment>
   </data>
   <data name="Register_Nickname_Label" xml:space="preserve">
-    <value>Nombre de usuario</value>
+    <value>Username</value>
     <comment>Used by: Register</comment>
   </data>
   <data name="Register_Register_Button" xml:space="preserve">
-    <value>Registrarme</value>
+    <value>Sign Up</value>
     <comment>Used by: Register</comment>
   </data>
   <data name="Register_Repeat_Password" xml:space="preserve">
-    <value>Confirmar contraseña</value>
+    <value>Confirm Password</value>
     <comment>Used by: Register</comment>
   </data>
-  <data name="Register_tittle" xml:space="preserve">
-    <value>Registrar nuevo usuario</value>
+  <data name="String1" xml:space="preserve">
+    <value>Sign Up New User</value>
     <comment>Used by: Register</comment>
   </data>
 </root>

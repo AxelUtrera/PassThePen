@@ -70,38 +70,47 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Introduce el código de validación .
+        ///   Busca una cadena traducida similar a Cambiar Contraseña.
         /// </summary>
-        public static string ChangePassword_Code_Label {
+        public static string ChangePassword_ChangePassword_Label {
             get {
-                return ResourceManager.GetString("ChangePassword_Code_Label", resourceCulture);
+                return ResourceManager.GetString("ChangePassword_ChangePassword_Label", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Enviar.
+        ///   Busca una cadena traducida similar a Confirmar Contraseña.
         /// </summary>
-        public static string ChangePassword_Send_Button {
+        public static string ChangePassword_ConfirmPassword_Label {
             get {
-                return ResourceManager.GetString("ChangePassword_Send_Button", resourceCulture);
+                return ResourceManager.GetString("ChangePassword_ConfirmPassword_Label", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a ¿Olvidaste tu contraseña?.
+        ///   Busca una cadena traducida similar a Las contraseñas no coinciden.
         /// </summary>
-        public static string ChangePassword_Title_Label {
+        public static string ChangePassword_Invalid_Fields_Label {
             get {
-                return ResourceManager.GetString("ChangePassword_Title_Label", resourceCulture);
+                return ResourceManager.GetString("ChangePassword_Invalid_Fields_Label", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Validar.
+        ///   Busca una cadena traducida similar a Nueva Contraseña.
         /// </summary>
-        public static string ChangePassword_Valid_Button {
+        public static string ChangePassword_NewPassword_Label {
             get {
-                return ResourceManager.GetString("ChangePassword_Valid_Button", resourceCulture);
+                return ResourceManager.GetString("ChangePassword_NewPassword_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Guardar.
+        /// </summary>
+        public static string ChangePassword_SavePassword_Button {
+            get {
+                return ResourceManager.GetString("ChangePassword_SavePassword_Button", resourceCulture);
             }
         }
         
@@ -165,6 +174,123 @@ namespace PassThePen.Properties {
         public static string Login_New_Player_Label {
             get {
                 return ResourceManager.GetString("Login_New_Player_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cancelar.
+        /// </summary>
+        public static string Profile_Cancel_Button {
+            get {
+                return ResourceManager.GetString("Profile_Cancel_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cambiar Contraseña.
+        /// </summary>
+        public static string Profile_ChangePassword_Button {
+            get {
+                return ResourceManager.GetString("Profile_ChangePassword_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Correo Electrónico.
+        /// </summary>
+        public static string Profile_Email_Label {
+            get {
+                return ResourceManager.GetString("Profile_Email_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ingrese toda la información.
+        /// </summary>
+        public static string Profile_Invalid_Fields_Label {
+            get {
+                return ResourceManager.GetString("Profile_Invalid_Fields_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Apellidos.
+        /// </summary>
+        public static string Profile_LastName_Label {
+            get {
+                return ResourceManager.GetString("Profile_LastName_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Nombre.
+        /// </summary>
+        public static string Profile_Name_Label {
+            get {
+                return ResourceManager.GetString("Profile_Name_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Guardar.
+        /// </summary>
+        public static string Profile_SaveProfile_Button {
+            get {
+                return ResourceManager.GetString("Profile_SaveProfile_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Nombre de Usuario.
+        /// </summary>
+        public static string Profile_Username_Label {
+            get {
+                return ResourceManager.GetString("Profile_Username_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cancelar.
+        /// </summary>
+        public static string RecoverPassword_Cancel_Button {
+            get {
+                return ResourceManager.GetString("RecoverPassword_Cancel_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Introduce el código de validación .
+        /// </summary>
+        public static string RecoverPassword_Code_Label {
+            get {
+                return ResourceManager.GetString("RecoverPassword_Code_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Enviar.
+        /// </summary>
+        public static string RecoverPassword_Send_Button {
+            get {
+                return ResourceManager.GetString("RecoverPassword_Send_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a ¿Olvidaste tu contraseña?.
+        /// </summary>
+        public static string RecoverPassword_Title_Label {
+            get {
+                return ResourceManager.GetString("RecoverPassword_Title_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Validar.
+        /// </summary>
+        public static string RecoverPassword_Valid_Button {
+            get {
+                return ResourceManager.GetString("RecoverPassword_Valid_Button", resourceCulture);
             }
         }
         

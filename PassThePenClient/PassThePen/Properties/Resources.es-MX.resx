@@ -142,7 +142,7 @@
     <comment>Used by: Change Password</comment>
   </data>
   <data name="Global_Email_Label" xml:space="preserve">
-    <value>Correo </value>
+    <value>Correo</value>
     <comment>Used by: login</comment>
   </data>
   <data name="Global_Label_Password" xml:space="preserve">
@@ -206,7 +206,7 @@
     <comment>Used by: Recover Password</comment>
   </data>
   <data name="RecoverPassword_Code_Label" xml:space="preserve">
-    <value>Introduce el código de validación </value>
+    <value>Introduce el código de validación</value>
     <comment>Used by: Recover Password</comment>
   </data>
   <data name="RecoverPassword_Send_Button" xml:space="preserve">

@@ -1,8 +1,8 @@
-﻿using System;
+﻿using PassThePen.PassThePenService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,56 +25,36 @@ namespace PassThePen
             InitializeComponent();
         }
 
-        private void Button_Send_Click(object sender, RoutedEventArgs e)
-        {
-            
-            if (ValidateEmail(texBox_emailCodigo.Text))
-            {
-                PassThePenService.PlayerMgtClient client = new PassThePenService.PlayerMgtClient();
-                if (client.AutenticateEmail(texBox_emailCodigo.Text) == 200)
-                {
-                    MessageBox.Show("Email encontrado y valido");
-                }
-                else
-                {
-                    MessageBox.Show("Email no encontrado");
-                }
-            }
-            else
-            {
-                MessageBox.Show("Email Invalido");
-            }
-        }
-
-        private void Button_cancel_Click(object sender, RoutedEventArgs e)
+        private void Button_Cancel_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
-        private void Button_Valid_Click(object sender, RoutedEventArgs e)
+        private void Button_Change_Password_Click(object sender, RoutedEventArgs e)
         {
-
+            PlayerMgtClient client = new PlayerMgtClient();
+            if (ValidatePassword())
+            {
+                string password = PasswordBox_ConfirmPassword.Password;
+                if (client.UpdatePlayerPassword("dpax", password))
+                {
+                    MessageBox.Show("Contraseña actualizada con exito");
+                }
+            }
         }
 
-        public static Boolean ValidateEmail(String email)
+        private Boolean ValidatePassword()
         {
-            String expresion;
-            expresion = "\\w+([-+.']\\w +)*@\\w+([-.]\\w +)*\\.\\w+([-.]\\w +)*";
-            if (Regex.IsMatch(email, expresion))
+            Label_InvalidPasswords.Visibility = Visibility.Hidden;
+            Boolean isValid = true;
+            string newPassword = PasswordBox_NewPassword.Password;
+            string confirmPassword = PasswordBox_ConfirmPassword.Password;
+            if (!newPassword.Equals(confirmPassword) || string.IsNullOrEmpty(newPassword) || string.IsNullOrEmpty(confirmPassword))
             {
-                if (Regex.Replace(email, expresion, String.Empty).Length == 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                Label_InvalidPasswords.Visibility = Visibility.Visible;
+                isValid = false;
             }
-            else
-            {
-                return false;
-            }
+            return isValid;
         }
     }
 }
