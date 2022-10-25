@@ -42,7 +42,9 @@ namespace PassThePen
            
             if (resultAutenticatePlayer == playerValid)
             {
+                MainMenu.username = TextBox_EmailUser.Text;
                 MessageBox.Show("La validacion fue exitosa");
+                InvokeMainMenu();
             }
             else
             {
@@ -58,7 +60,8 @@ namespace PassThePen
 
         private void Button_Forgot_Password_Click(object sender, RoutedEventArgs e)
         {
-            
+            RecoverPassword recover = new RecoverPassword();
+            recover.Show();
         }
 
         private void Button_Exit_Click(object sender, RoutedEventArgs e)
@@ -66,5 +69,10 @@ namespace PassThePen
             Close();
         }
         
+        private void InvokeMainMenu()
+        {
+            MainMenu mainMenu = new MainMenu();
+            mainMenu.Show();
+        }
     }
 }

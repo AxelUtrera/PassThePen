@@ -159,6 +159,24 @@ namespace PassThePen.PassThePenService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerMgt/AutenticateEmail", ReplyAction="http://tempuri.org/IPlayerMgt/AutenticateEmailResponse")]
         System.Threading.Tasks.Task<int> AutenticateEmailAsync(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerMgt/UpdateDataPlayer", ReplyAction="http://tempuri.org/IPlayerMgt/UpdateDataPlayerResponse")]
+        bool UpdateDataPlayer(string username, PassThePen.PassThePenService.Player player);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerMgt/UpdateDataPlayer", ReplyAction="http://tempuri.org/IPlayerMgt/UpdateDataPlayerResponse")]
+        System.Threading.Tasks.Task<bool> UpdateDataPlayerAsync(string username, PassThePen.PassThePenService.Player player);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerMgt/GetDataPlayer", ReplyAction="http://tempuri.org/IPlayerMgt/GetDataPlayerResponse")]
+        PassThePen.PassThePenService.Player GetDataPlayer(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerMgt/GetDataPlayer", ReplyAction="http://tempuri.org/IPlayerMgt/GetDataPlayerResponse")]
+        System.Threading.Tasks.Task<PassThePen.PassThePenService.Player> GetDataPlayerAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerMgt/UpdatePlayerPassword", ReplyAction="http://tempuri.org/IPlayerMgt/UpdatePlayerPasswordResponse")]
+        bool UpdatePlayerPassword(string username, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerMgt/UpdatePlayerPassword", ReplyAction="http://tempuri.org/IPlayerMgt/UpdatePlayerPasswordResponse")]
+        System.Threading.Tasks.Task<bool> UpdatePlayerPasswordAsync(string username, string password);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -210,6 +228,30 @@ namespace PassThePen.PassThePenService {
         
         public System.Threading.Tasks.Task<int> AutenticateEmailAsync(string email) {
             return base.Channel.AutenticateEmailAsync(email);
+        }
+        
+        public bool UpdateDataPlayer(string username, PassThePen.PassThePenService.Player player) {
+            return base.Channel.UpdateDataPlayer(username, player);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdateDataPlayerAsync(string username, PassThePen.PassThePenService.Player player) {
+            return base.Channel.UpdateDataPlayerAsync(username, player);
+        }
+        
+        public PassThePen.PassThePenService.Player GetDataPlayer(string username) {
+            return base.Channel.GetDataPlayer(username);
+        }
+        
+        public System.Threading.Tasks.Task<PassThePen.PassThePenService.Player> GetDataPlayerAsync(string username) {
+            return base.Channel.GetDataPlayerAsync(username);
+        }
+        
+        public bool UpdatePlayerPassword(string username, string password) {
+            return base.Channel.UpdatePlayerPassword(username, password);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdatePlayerPasswordAsync(string username, string password) {
+            return base.Channel.UpdatePlayerPasswordAsync(username, password);
         }
     }
 }
