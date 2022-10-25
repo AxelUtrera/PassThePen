@@ -18,5 +18,8 @@ namespace Comunication
 
             [OperationContract]
             int AutenticateEmail(string email);
+
+            [OperationContract]
+            int CodeEmail(string to, String affair, int validationCode);
       }
 }

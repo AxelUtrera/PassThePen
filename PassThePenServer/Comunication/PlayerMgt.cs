@@ -25,5 +25,11 @@ namespace Comunication
             PlayerLogic playerLogic = new PlayerLogic();
             return playerLogic.AutenticateEmail(email); 
         }
+
+        public int CodeEmail(string to, String affair, int validationCode)
+        {
+            SendEmail sendEmail = new SendEmail();
+            return sendEmail.SendNewEmail(to, affair, validationCode);
+        }
     }
 }

@@ -74,6 +74,22 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
+      <xs:element name="CodeEmail">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="to" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="affair" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="validationCode" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CodeEmailResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="CodeEmailResult" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
     </xs:schema>
     <xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:element name="anyType" nillable="true" type="xs:anyType" />
@@ -148,6 +164,12 @@
   <wsdl:message name="IPlayerMgt_AutenticateEmail_OutputMessage">
     <wsdl:part name="parameters" element="tns:AutenticateEmailResponse" />
   </wsdl:message>
+  <wsdl:message name="IPlayerMgt_CodeEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:CodeEmail" />
+  </wsdl:message>
+  <wsdl:message name="IPlayerMgt_CodeEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CodeEmailResponse" />
+  </wsdl:message>
   <wsdl:portType name="IPlayerMgt">
     <wsdl:operation name="AddPlayer">
       <wsdl:input wsaw:Action="http://tempuri.org/IPlayerMgt/AddPlayer" message="tns:IPlayerMgt_AddPlayer_InputMessage" />
@@ -160,6 +182,10 @@
     <wsdl:operation name="AutenticateEmail">
       <wsdl:input wsaw:Action="http://tempuri.org/IPlayerMgt/AutenticateEmail" message="tns:IPlayerMgt_AutenticateEmail_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPlayerMgt/AutenticateEmailResponse" message="tns:IPlayerMgt_AutenticateEmail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CodeEmail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerMgt/CodeEmail" message="tns:IPlayerMgt_CodeEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerMgt/CodeEmailResponse" message="tns:IPlayerMgt_CodeEmail_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IPlayerMgt" type="tns:IPlayerMgt">
@@ -185,6 +211,15 @@
     </wsdl:operation>
     <wsdl:operation name="AutenticateEmail">
       <soap12:operation soapAction="http://tempuri.org/IPlayerMgt/AutenticateEmail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CodeEmail">
+      <soap12:operation soapAction="http://tempuri.org/IPlayerMgt/CodeEmail" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
