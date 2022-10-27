@@ -4,10 +4,38 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PassThePen"
+        xmlns:p ="clr-namespace:PassThePen.Properties"
         mc:Ignorable="d"
-        Title="MainMenu" Height="450" Width="800">
+        Title="MainMenu" Height="1080" Width="1920">
     <Grid>
-        <Button Content="Profile" HorizontalAlignment="Left" Margin="688,30,0,0" VerticalAlignment="Top" Height="29" Width="84" Click="Button_Profile_Click"/>
-
+        <StackPanel>
+            <StackPanel>
+                
+            </StackPanel>
+            
+            
+            
+            <StackPanel Orientation="Horizontal">
+                <Button Cursor="Hand" Margin="100,50,50,50" Width="300" Height="60" Foreground="#f3f3f3" FontSize="25">
+                    <Button.Template >
+                        <ControlTemplate TargetType="{x:Type Button}" >
+                            <Border Background="Green" BorderBrush="Green"  CornerRadius="7,7,7,7">
+                                <ContentPresenter Content="{x:Static p:Resources.Register_Register_Button}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                
+                <Button Cursor="Hand" Margin="1070,50,0,50" Width="300" Height="60" Foreground="#f3f3f3" FontSize="25" >
+                    <Button.Template >
+                        <ControlTemplate TargetType="{x:Type Button}" >
+                            <Border Background="OrangeRed" BorderBrush="OrangeRed"  CornerRadius="7,7,7,7">
+                                <ContentPresenter Content="{x:Static p:Resources.Register_Register_Button}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>

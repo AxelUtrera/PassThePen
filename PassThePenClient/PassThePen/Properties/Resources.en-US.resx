@@ -241,8 +241,4 @@
     <value>Confirm Password</value>
     <comment>Used by: Register</comment>
   </data>
-  <data name="String1" xml:space="preserve">
-    <value>Sign Up New User</value>
-    <comment>Used by: Register</comment>
-  </data>
 </root>
