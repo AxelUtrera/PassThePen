@@ -12,7 +12,7 @@ namespace Logic
     public class SendEmail
     {
         public const string from = "PassThePen@outlook.com";
-        public const string displayName = "Validation Code";
+        public const string displayName = "Pass The Pen";
         public const string body = "Your validation code is: ";
 
         public int SendNewEmail(String to, String affair, int validationCode)
@@ -33,7 +33,7 @@ namespace Logic
                 client.EnableSsl = true;
                 client.Send(mailMessage);
             }
-            catch (Exception ex)
+            catch (SmtpException ex)
             {
                 String message = ex.Message;
                 result = 500;
