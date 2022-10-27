@@ -59,7 +59,7 @@
             </Button.Template>
         </Button>
         <Border Height="130" Width="130" BorderThickness="1" BorderBrush="Black" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="15,35,0,0">
-            <Image x:Name="Image_ProfileImage" Stretch="Fill" HorizontalAlignment="Center" Height="130" VerticalAlignment="Center" Width="130" Source=""/>
+            <Image x:Name="Image_ProfileImage" Stretch="Fill" HorizontalAlignment="Center" Height="130" VerticalAlignment="Center" Width="130"/>
         </Border>
         <Label x:Name="InvalidFields_Label" Content="{x:Static p:Resources.Profile_Invalid_Fields_Label}" Foreground="Red" HorizontalAlignment="Left" Margin="154,437,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
 

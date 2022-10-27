@@ -149,6 +149,10 @@
     <value>Password</value>
     <comment>Used by: login, Register</comment>
   </data>
+  <data name="Global_Username_Label" xml:space="preserve">
+    <value>Username</value>
+    <comment>Used by: Login.</comment>
+  </data>
   <data name="Login_Forgot_Password_Button" xml:space="preserve">
     <value>Forgot your password?</value>
     <comment>Used by: login</comment>
@@ -168,6 +172,26 @@
   <data name="Login_New_Player_Label" xml:space="preserve">
     <value>You still do not have an account?</value>
     <comment>Used by: login</comment>
+  </data>
+  <data name="MainManu_FriendList_Label" xml:space="preserve">
+    <value>Friend list</value>
+    <comment>Used by: MainMenu</comment>
+  </data>
+  <data name="MainMenu_ExitGame_Button" xml:space="preserve">
+    <value>Leave to play</value>
+    <comment>Used by: MainMenu</comment>
+  </data>
+  <data name="MainMenu_GameMenu_Label" xml:space="preserve">
+    <value>Game menu</value>
+    <comment>Used by: MainMenu</comment>
+  </data>
+  <data name="MainMenu_Play_Button" xml:space="preserve">
+    <value>Play!</value>
+    <comment>Used by: MainMenu</comment>
+  </data>
+  <data name="Main_Add_Button" xml:space="preserve">
+    <value>Add</value>
+    <comment>Used by: MainMenu</comment>
   </data>
   <data name="Profile_Cancel_Button" xml:space="preserve">
     <value>Cancel</value>

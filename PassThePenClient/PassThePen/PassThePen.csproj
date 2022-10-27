@@ -166,5 +166,11 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Img\Icon_Search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Img\Icon_Setings.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

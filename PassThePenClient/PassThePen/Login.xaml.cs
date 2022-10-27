@@ -32,7 +32,7 @@ namespace PassThePen
             
             PassThePenService.Player player = new PassThePenService.Player()
             {
-                email = TextBox_EmailUser.Text,
+                username = TextBox_Username.Text,
                 password = PasswordBox_PasswordUser.Password
             };
 
@@ -42,7 +42,7 @@ namespace PassThePen
            
             if (resultAutenticatePlayer == playerValid)
             {
-                MainMenu.username = TextBox_EmailUser.Text;
+                MainMenu.username = TextBox_Username.Text;
                 MessageBox.Show("La validacion fue exitosa");
                 InvokeMainMenu();
             }
@@ -60,8 +60,10 @@ namespace PassThePen
 
         private void Button_Forgot_Password_Click(object sender, RoutedEventArgs e)
         {
-            RecoverPassword recover = new RecoverPassword();
-            recover.Show();
+            /*RecoverPassword recover = new RecoverPassword();
+            recover.Show();*/
+            MainMenu menu = new MainMenu();
+            menu.Show();
         }
 
         private void Button_Exit_Click(object sender, RoutedEventArgs e)

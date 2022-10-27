@@ -32,5 +32,10 @@ namespace PassThePen
             Profile profile = new Profile();
             profile.Show();
         }
+
+        private void Button_ExitGame_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

@@ -169,6 +169,26 @@
     <value>¿Aun no tienes una cuenta?</value>
     <comment>Used by: login</comment>
   </data>
+  <data name="MainManu_FriendList_Label" xml:space="preserve">
+    <value>Lista de amigos</value>
+    <comment>Used by: MainMenu</comment>
+  </data>
+  <data name="MainMenu_ExitGame_Button" xml:space="preserve">
+    <value>Salir del juego</value>
+    <comment>Used by: MainMenu</comment>
+  </data>
+  <data name="MainMenu_GameMenu_Label" xml:space="preserve">
+    <value>Menú de juego</value>
+    <comment>Used by: MainMenu</comment>
+  </data>
+  <data name="MainMenu_Play_Button" xml:space="preserve">
+    <value>Jugar!</value>
+    <comment>Used by: MainMenu</comment>
+  </data>
+  <data name="Main_Add_Button" xml:space="preserve">
+    <value>Agregar</value>
+    <comment>Used by: MainMenu</comment>
+  </data>
   <data name="Profile_Cancel_Button" xml:space="preserve">
     <value>Cancelar</value>
     <comment>Used by: Profile</comment>

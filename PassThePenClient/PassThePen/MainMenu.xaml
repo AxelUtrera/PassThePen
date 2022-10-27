@@ -6,31 +6,95 @@
         xmlns:local="clr-namespace:PassThePen"
         xmlns:p ="clr-namespace:PassThePen.Properties"
         mc:Ignorable="d"
-        Title="MainMenu" Height="1080" Width="1920">
+        WindowState="Maximized"
+        WindowStyle="None"
+        ShowInTaskbar="False"
+        Width="1535" Height="870">
     <Grid>
         <StackPanel>
             <StackPanel>
-                
+                <Grid Height="150">
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="300"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="300"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <!--<Border  Grid.Column="0" Height="70" BorderThickness="1" BorderBrush="Black" VerticalAlignment="Top" Margin="50,40,0,0" HorizontalAlignment="Left" Width="70" >
+                        <Image Name="Image_ProfileImage" Source="Img/Pen_Background.jpg" Stretch="fill"  HorizontalAlignment="Center" Height="70" VerticalAlignment="Center" Width="70" />
+                    </Border>-->
+                    <Image HorizontalAlignment="Left" 
+                           Margin="30,30"
+                           Width="50"
+                           Height="50"
+                           Source="Img/Icon_Setings.png" 
+                           Name="Button_Settings" 
+                           Grid.Column="0" 
+                           Cursor="Hand" 
+                           RenderTransformOrigin="0.609,1.917"
+                           MouseLeftButtonDown="Button_Profile_Click" VerticalAlignment="Top"/>
+
+                    <Label Grid.Column="1" Content="{x:Static p:Resources.MainMenu_GameMenu_Label}" FontSize="35" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="DemiBold"></Label>
+                </Grid>
             </StackPanel>
-            
-            
-            
+
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="400"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="400"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Margin="45,30,0,50" Width="310" >
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="{x:Static p:Resources.MainManu_FriendList_Label}" FontSize="20" FontWeight="bold"/>
+                            <Image Source="/Img/Icon_Search.png" Margin="115,0" Width="30" Cursor="Hand"/>
+                        </StackPanel>
+                        <Border Grid.Column="0" Width="305" Height="405"  BorderThickness="2" BorderBrush="Black" CornerRadius="10">
+                            <ListBox Margin="0" Height="400" Width="300" BorderBrush="Transparent">
+
+                            </ListBox>
+                        </Border>
+                        <StackPanel Orientation="Horizontal" Margin="3">
+                            <TextBox  Height="33" Width="200" Background="AliceBlue" BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" FontSize="18">
+                                <TextBox.Resources>
+                                    <Style TargetType="{x:Type Border}">
+                                        <Setter Property="CornerRadius" Value="10"/>
+                                    </Style>
+                                </TextBox.Resources>
+                            </TextBox>
+                            <Button Cursor="Hand" Margin="10,0,0,0" Width="95" Height="33" Foreground="#f3f3f3" FontSize="18">
+                                <Button.Template >
+                                    <ControlTemplate TargetType="{x:Type Button}" >
+                                        <Border Background="Green" BorderBrush="Green"  CornerRadius="7,7,7,7">
+                                            <ContentPresenter Content="{x:Static p:Resources.Main_Add_Button}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+
+            </StackPanel>
+
             <StackPanel Orientation="Horizontal">
-                <Button Cursor="Hand" Margin="100,50,50,50" Width="300" Height="60" Foreground="#f3f3f3" FontSize="25">
+                <Button Cursor="Hand" Margin="100,50,50,50" Width="250" Height="50" Foreground="#f3f3f3" FontSize="23">
                     <Button.Template >
                         <ControlTemplate TargetType="{x:Type Button}" >
                             <Border Background="Green" BorderBrush="Green"  CornerRadius="7,7,7,7">
-                                <ContentPresenter Content="{x:Static p:Resources.Register_Register_Button}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ContentPresenter Content="{x:Static p:Resources.MainMenu_Play_Button}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-                
-                <Button Cursor="Hand" Margin="1070,50,0,50" Width="300" Height="60" Foreground="#f3f3f3" FontSize="25" >
+
+                <Button Cursor="Hand" Margin="780,50,0,50" Width="250" Height="50" Foreground="#f3f3f3" FontSize="23" Click="Button_ExitGame_Click">
                     <Button.Template >
                         <ControlTemplate TargetType="{x:Type Button}" >
                             <Border Background="OrangeRed" BorderBrush="OrangeRed"  CornerRadius="7,7,7,7">
-                                <ContentPresenter Content="{x:Static p:Resources.Register_Register_Button}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ContentPresenter Content="{x:Static p:Resources.MainMenu_ExitGame_Button}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
                         </ControlTemplate>
                     </Button.Template>

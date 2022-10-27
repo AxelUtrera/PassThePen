@@ -133,6 +133,15 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Nombre de usuario.
+        /// </summary>
+        public static string Global_Username_Label {
+            get {
+                return ResourceManager.GetString("Global_Username_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a ¿Olvidaste tu contraseña?.
         /// </summary>
         public static string Login_Forgot_Password_Button {
@@ -174,6 +183,51 @@ namespace PassThePen.Properties {
         public static string Login_New_Player_Label {
             get {
                 return ResourceManager.GetString("Login_New_Player_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Agregar.
+        /// </summary>
+        public static string Main_Add_Button {
+            get {
+                return ResourceManager.GetString("Main_Add_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Lista de amigos.
+        /// </summary>
+        public static string MainManu_FriendList_Label {
+            get {
+                return ResourceManager.GetString("MainManu_FriendList_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Salir del juego.
+        /// </summary>
+        public static string MainMenu_ExitGame_Button {
+            get {
+                return ResourceManager.GetString("MainMenu_ExitGame_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Menú de juego.
+        /// </summary>
+        public static string MainMenu_GameMenu_Label {
+            get {
+                return ResourceManager.GetString("MainMenu_GameMenu_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Jugar!.
+        /// </summary>
+        public static string MainMenu_Play_Button {
+            get {
+                return ResourceManager.GetString("MainMenu_Play_Button", resourceCulture);
             }
         }
         

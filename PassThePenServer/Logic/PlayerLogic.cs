@@ -19,7 +19,7 @@ namespace Logic
             {
                 dataBase.Database.Log = Console.WriteLine;
                 var user = (from Player in dataBase.Player
-                            where Player.email.Equals(player.email)
+                            where Player.username.Equals(player.username)
                             && Player.password.Equals(passwordHash)
                             select Player).Count();
 
@@ -35,6 +35,7 @@ namespace Logic
 
         public static int AddPlayerToDB(Player player)
         {
+            //Tarea: Validar que no exista el usuario a agregar en la base de datos.
             int statusCode = 500;
             using (var dataBase = new passthepenEntities())
             {
