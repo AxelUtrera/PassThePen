@@ -50,5 +50,11 @@ namespace Comunication
             SendEmail sendEmail = new SendEmail();
             return sendEmail.SendNewEmail(to, affair, validationCode);
         }
+
+        public int UpdatePassword(string SendEmail, string password)
+        {
+            PlayerLogic playerLogic = new PlayerLogic();
+            return playerLogic.UpdatePasswordEmail(SendEmail, password);
+        }
     }
 }
