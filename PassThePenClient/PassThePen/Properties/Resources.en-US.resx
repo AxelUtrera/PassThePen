@@ -205,8 +205,20 @@
     <value>Cancel</value>
     <comment>Used by: Recover Password</comment>
   </data>
+  <data name="RecoverPassword_Change_Button" xml:space="preserve">
+    <value>Change</value>
+    <comment>Used by: Recover Password</comment>
+  </data>
   <data name="RecoverPassword_Code_Label" xml:space="preserve">
     <value>Enter the validation code</value>
+    <comment>Used by: Recover Password</comment>
+  </data>
+  <data name="RecoverPassword_NewPassword_Label" xml:space="preserve">
+    <value>Type your new password</value>
+    <comment>Used by: Recover Password</comment>
+  </data>
+  <data name="RecoverPassword_RepitPassword_Label" xml:space="preserve">
+    <value>Retype your password</value>
     <comment>Used by: Recover Password</comment>
   </data>
   <data name="RecoverPassword_Send_Button" xml:space="preserve">

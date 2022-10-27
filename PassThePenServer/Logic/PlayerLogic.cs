@@ -122,5 +122,22 @@ namespace Logic
             return isChanged;
         }
 
+        public int UpdatePasswordEmail(string email, string password)
+        {
+            int result = 500;
+            string encriptedPassword = Encription.ToSHA2Hash(password);
+            using (var dataBaseContext = new passthepenEntities())
+            {
+                var updatePasswordEmail = dataBaseContext.Player.First(e => e.email == email);
+                updatePasswordEmail.password = encriptedPassword;
+                int returnValue = dataBaseContext.SaveChanges();
+                if (returnValue > 0)
+                {
+                    result = 500;
+                }
+            }
+            return result;
+        }
+        
     }
 }

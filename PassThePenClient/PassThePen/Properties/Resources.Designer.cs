@@ -259,11 +259,38 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Cambiar.
+        /// </summary>
+        public static string RecoverPassword_Change_Button {
+            get {
+                return ResourceManager.GetString("RecoverPassword_Change_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Introduce el código de validación .
         /// </summary>
         public static string RecoverPassword_Code_Label {
             get {
                 return ResourceManager.GetString("RecoverPassword_Code_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Introduca su nueva contraseña.
+        /// </summary>
+        public static string RecoverPassword_NewPassword_Label {
+            get {
+                return ResourceManager.GetString("RecoverPassword_NewPassword_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Escriba de nuevo su contraseña.
+        /// </summary>
+        public static string RecoverPassword_RepitPassword_Label {
+            get {
+                return ResourceManager.GetString("RecoverPassword_RepitPassword_Label", resourceCulture);
             }
         }
         

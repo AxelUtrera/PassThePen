@@ -18,6 +18,8 @@ namespace PassThePen
     
     public partial class RecoverPassword : Window
     {
+        private int validationCode;
+        private String email;
         public RecoverPassword()
         {
             InitializeComponent();
@@ -25,27 +27,33 @@ namespace PassThePen
 
         private void Button_Send_Click(object sender, RoutedEventArgs e)
         {
-            String emailCodigo = texBox_emailCodigo.Text;            
-            if (ValidateEmail(texBox_emailCodigo.Text))
+            PassThePenService.PlayerMgtClient client = new PassThePenService.PlayerMgtClient();
+            email = texBox_emailCode.Text;            
+            if (ValidateEmail(email) && client.AutenticateEmail(email) == 200)
             {
-                PassThePenService.PlayerMgtClient client = new PassThePenService.PlayerMgtClient();
-                if (client.AutenticateEmail(emailCodigo) == 200)
+                Random randomNumber = new Random();
+                validationCode = randomNumber.Next(100000, 1000000);
+                String affair = "Validation Code";
+                try 
                 {
-                    Random randomNumber = new Random();
-                    int validationCode = randomNumber.Next(100000, 1000000);
-                    String affair = "New Validation Code";
-                    if(client.CodeEmail(emailCodigo, affair, validationCode) == 200)
+                    if (client.CodeEmail(email, affair, validationCode) == 200)
                     {
-                        MessageBox.Show("Corrreo Enviado");
+                        MessageBox.Show("Código de validación enviado con exito");
+                        label_Email.Visibility = Visibility.Hidden;
+                        label_Code.Visibility = Visibility.Visible;
+                        Button_Valid.Visibility = Visibility.Visible;
+                        Button_Send.Visibility = Visibility.Hidden;
+                        texBox_emailCode.Text = "";
+
                     }
                     else
                     {
                         MessageBox.Show("No se pudo enviar el codigo");
                     }
                 }
-                else
+                catch (TimeoutException)
                 {
-                    MessageBox.Show("Email no encontrado");
+                    MessageBox.Show("Tiempo de espera excedido, favor de intentar más tarde");
                 }
             }
             else
@@ -61,28 +69,55 @@ namespace PassThePen
 
         private void Button_Valid_Click(object sender, RoutedEventArgs e)
         {
-
+            if (Int32.Parse(texBox_emailCode.Text) == validationCode)
+            {
+                label_Email.Visibility = Visibility.Collapsed;
+                label_Code.Visibility = Visibility.Collapsed;
+                texBox_emailCode.Visibility = Visibility.Collapsed;
+                panel_Email.Visibility = Visibility.Collapsed;
+                label_NewPassword.Visibility = Visibility.Visible;
+                label_repitPassword.Visibility = Visibility.Visible;
+                texBox_newPassword.Visibility = Visibility.Visible;
+                texBox_repitPassword.Visibility = Visibility.Visible;
+                panel_Password.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                MessageBox.Show("Codigo incorrecto");
+            }
         }
 
         public static Boolean ValidateEmail(String email)
         {
+            Boolean result;
             String expresion;
             expresion = "\\w+([-+.']\\w +)*@\\w+([-.]\\w +)*\\.\\w+([-.]\\w +)*";
             if (Regex.IsMatch(email, expresion))
             {
                 if (Regex.Replace(email, expresion, String.Empty).Length == 0)
                 {
-                    return true;
+                    result = true;
                 }
                 else
                 {
-                    return false;
+                    result = false;
                 }
             }
             else
             {
-                return false;
+                result = false;
             }
+            return result;
+        }
+
+        private void Button_change_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_cancel_password_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }
