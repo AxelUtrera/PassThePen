@@ -77,8 +77,8 @@ namespace PassThePen
                 panel_Email.Visibility = Visibility.Collapsed;
                 label_NewPassword.Visibility = Visibility.Visible;
                 label_repitPassword.Visibility = Visibility.Visible;
-                texBox_newPassword.Visibility = Visibility.Visible;
-                texBox_repitPassword.Visibility = Visibility.Visible;
+                passwordBox_newPassword.Visibility = Visibility.Visible;
+                passwordBox_repitPassword.Visibility = Visibility.Visible;
                 panel_Password.Visibility = Visibility.Visible;
             }
             else
@@ -112,7 +112,34 @@ namespace PassThePen
 
         private void Button_change_Click(object sender, RoutedEventArgs e)
         {
+            PassThePenService.PlayerMgtClient client = new PassThePenService.PlayerMgtClient();
+            if (ValidatePassword())
+            {
+                if (client.UpdatePassword(email, passwordBox_newPassword.Password) == 200)
+                {
+                    MessageBox.Show("La contraseña ha sido cambiada con exito");
+                    Close();
+                }
+                else
+                {
+                    MessageBox.Show("La contraseña no ha podido cambiar");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Las contraseñas no son iguales");
+            }
+        }
 
+        public  Boolean ValidatePassword()
+        {
+            Boolean result = true;
+            if (! passwordBox_newPassword.Password.Equals(passwordBox_repitPassword.Password))
+            {
+                result = false;
+            }
+
+            return result;
         }
 
         private void Button_cancel_password_Click(object sender, RoutedEventArgs e)

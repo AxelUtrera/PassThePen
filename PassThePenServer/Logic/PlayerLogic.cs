@@ -133,7 +133,7 @@ namespace Logic
                 int returnValue = dataBaseContext.SaveChanges();
                 if (returnValue > 0)
                 {
-                    result = 500;
+                    result = 200;
                 }
             }
             return result;

@@ -134,6 +134,21 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
+      <xs:element name="UpdatePassword">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="UpdatePasswordResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UpdatePasswordResult" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
     </xs:schema>
     <xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:element name="anyType" nillable="true" type="xs:anyType" />
@@ -232,6 +247,12 @@
   <wsdl:message name="IPlayerMgt_CodeEmail_OutputMessage">
     <wsdl:part name="parameters" element="tns:CodeEmailResponse" />
   </wsdl:message>
+  <wsdl:message name="IPlayerMgt_UpdatePassword_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePassword" />
+  </wsdl:message>
+  <wsdl:message name="IPlayerMgt_UpdatePassword_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePasswordResponse" />
+  </wsdl:message>
   <wsdl:portType name="IPlayerMgt">
     <wsdl:operation name="AddPlayer">
       <wsdl:input wsaw:Action="http://tempuri.org/IPlayerMgt/AddPlayer" message="tns:IPlayerMgt_AddPlayer_InputMessage" />
@@ -260,6 +281,10 @@
     <wsdl:operation name="CodeEmail">
       <wsdl:input wsaw:Action="http://tempuri.org/IPlayerMgt/CodeEmail" message="tns:IPlayerMgt_CodeEmail_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPlayerMgt/CodeEmailResponse" message="tns:IPlayerMgt_CodeEmail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePassword">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerMgt/UpdatePassword" message="tns:IPlayerMgt_UpdatePassword_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerMgt/UpdatePasswordResponse" message="tns:IPlayerMgt_UpdatePassword_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IPlayerMgt" type="tns:IPlayerMgt">
@@ -321,6 +346,15 @@
     </wsdl:operation>
     <wsdl:operation name="CodeEmail">
       <soap12:operation soapAction="http://tempuri.org/IPlayerMgt/CodeEmail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePassword">
+      <soap12:operation soapAction="http://tempuri.org/IPlayerMgt/UpdatePassword" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
