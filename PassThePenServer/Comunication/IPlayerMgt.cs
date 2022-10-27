@@ -31,6 +31,9 @@ namespace Comunication
 
         [OperationContract]
         int CodeEmail(string to, String affair, int validationCode);
+
+        [OperationContract]
+        int UpdatePassword(string email, string password);
     }
             
       
