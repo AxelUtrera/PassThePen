@@ -60,10 +60,8 @@ namespace PassThePen
 
         private void Button_Forgot_Password_Click(object sender, RoutedEventArgs e)
         {
-            /*RecoverPassword recover = new RecoverPassword();
-            recover.Show();*/
-            MainMenu menu = new MainMenu();
-            menu.Show();
+            RecoverPassword recover = new RecoverPassword();
+            recover.Show();
         }
 
         private void Button_Exit_Click(object sender, RoutedEventArgs e)
