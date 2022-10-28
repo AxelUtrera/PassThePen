@@ -36,5 +36,10 @@ namespace PassThePen
         {
             this.Close();
         }
+
+        private void Button_InviteFriendImage_Button(object sender, RoutedEventArgs e)
+        { 
+            this.Close();
+        }
     }
 }

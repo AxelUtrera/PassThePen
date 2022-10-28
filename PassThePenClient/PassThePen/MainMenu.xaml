@@ -5,12 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PassThePen"
         xmlns:p ="clr-namespace:PassThePen.Properties"
+        
         mc:Ignorable="d"
         WindowState="Maximized"
         WindowStyle="None"
         ShowInTaskbar="False"
         Width="1535" Height="870">
-    <Grid>
+    <Grid >
         <StackPanel>
             <StackPanel>
                 <Grid Height="150">
@@ -20,11 +21,10 @@
                         <ColumnDefinition Width="300"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
-                    <!--<Border  Grid.Column="0" Height="70" BorderThickness="1" BorderBrush="Black" VerticalAlignment="Top" Margin="50,40,0,0" HorizontalAlignment="Left" Width="70" >
-                        <Image Name="Image_ProfileImage" Source="Img/Pen_Background.jpg" Stretch="fill"  HorizontalAlignment="Center" Height="70" VerticalAlignment="Center" Width="70" />
-                    </Border>-->
+
+               
                     <Image HorizontalAlignment="Left" 
-                           Margin="30,30"
+                           Margin="50,30"
                            Width="50"
                            Height="50"
                            Source="Img/Icon_Setings.png" 
@@ -46,10 +46,30 @@
                         <ColumnDefinition Width="400"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel Margin="45,30,0,50" Width="310" >
+                    <StackPanel Margin="0,30" Width="310" Grid.Column="0">
                         <StackPanel Orientation="Horizontal">
                             <Label Content="{x:Static p:Resources.MainManu_FriendList_Label}" FontSize="20" FontWeight="bold"/>
                             <Image Source="/Img/Icon_Search.png" Margin="115,0" Width="30" Cursor="Hand"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Cursor="Hand" Width="120" Margin="0,0,0,5" Height="35" Foreground="#f3f3f3" FontSize="18">
+                                <Button.Template >
+                                    <ControlTemplate TargetType="{x:Type Button}" >
+                                        <Border Background="YellowGreen" BorderBrush="YellowGreen" CornerRadius="7,7,7,7">
+                                            <ContentPresenter Content="{x:Static p:Resources.MainMenu_Friends_Button}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                            <Button Cursor="Hand" Margin="30,0,0,5" Width="120" Height="35" Foreground="#f3f3f3" FontSize="18">
+                                <Button.Template >
+                                    <ControlTemplate TargetType="{x:Type Button}" >
+                                        <Border Background="YellowGreen" BorderBrush="YellowGreen"  CornerRadius="7,7,7,7">
+                                            <ContentPresenter Content="{x:Static p:Resources.MainMenu_FriendRequests_Button}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
                         </StackPanel>
                         <Border Grid.Column="0" Width="305" Height="405"  BorderThickness="2" BorderBrush="Black" CornerRadius="10">
                             <ListBox Margin="0" Height="400" Width="300" BorderBrush="Transparent">
@@ -74,6 +94,51 @@
                                 </Button.Template>
                             </Button>
                         </StackPanel>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" >
+                        <Grid Grid.Column="1" Height="550">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            
+                            <Button Cursor="Hand" Grid.Column="1" Width="60" Height="60" Background="Transparent" Click="Button_InviteFriendImage_Button" BorderThickness="0">
+                                <Image Source="Img/Icon_AddUser.png" Width="40"></Image>
+                            </Button>
+
+                            <Button Cursor="Hand" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="50,15,0,0" Width="60" Height="60" BorderThickness="0" Background="Transparent" Click="Button_InviteFriendImage_Button">
+                                <Image Source="Img/Icon_AddUser.png" Width="40"></Image>
+                            </Button>
+
+                            <Button Cursor="Hand" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,15,50,0" Width="60" Height="60" BorderThickness="0" Background="Transparent" Click="Button_InviteFriendImage_Button">
+                                <Image Source="Img/Icon_AddUser.png" Width="40"></Image>
+                            </Button>
+
+                            <Button Cursor="Hand" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Width="60" Height="60" BorderThickness="0" Background="Transparent" Click="Button_InviteFriendImage_Button">
+                                <Image Source="Img/Icon_AddUser.png" Width="40"></Image>
+                            </Button>
+
+                            <Button Cursor="Hand" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="60" Height="60" BorderThickness="0" Background="Transparent" Click="Button_InviteFriendImage_Button">
+                                <Image Source="Img/Icon_AddUser.png" Width="40"></Image>
+                            </Button>
+
+                            <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <Border  Height="100" Width="100" BorderThickness="1" BorderBrush="Black" VerticalAlignment="Top" HorizontalAlignment="Center">
+                                    <Image x:Name="Image_ProfileImage"  Stretch="Fill" HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="100"/>
+                                </Border>
+                            </StackPanel>
+                            
+                            
+
+
+                        </Grid>
                     </StackPanel>
                 </Grid>
 

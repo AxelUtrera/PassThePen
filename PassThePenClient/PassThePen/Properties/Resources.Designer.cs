@@ -214,6 +214,24 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Solicitudes.
+        /// </summary>
+        public static string MainMenu_FriendRequests_Button {
+            get {
+                return ResourceManager.GetString("MainMenu_FriendRequests_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Amigos.
+        /// </summary>
+        public static string MainMenu_Friends_Button {
+            get {
+                return ResourceManager.GetString("MainMenu_Friends_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Menú de juego.
         /// </summary>
         public static string MainMenu_GameMenu_Label {

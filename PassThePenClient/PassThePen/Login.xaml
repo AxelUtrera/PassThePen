@@ -13,7 +13,7 @@
     <Grid>
 
         <Grid.Background>
-            <ImageBrush ImageSource="Img/Pen_Background.jpg" Stretch="UniformToFill"/>
+            <ImageBrush ImageSource="Img/BackGround_PassThePen.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
 
         <StackPanel Width="640" Height="700" Background="White">
@@ -30,7 +30,7 @@
             </Button>
 
 
-            <Image Source="Img/logo_Pass_the_pen.png" HorizontalAlignment="Center" Height="199" Margin="0,30,0,0" Width="228"/>
+            <Image Source="Img/Logo_Pass_the_pen.png" HorizontalAlignment="Center" Height="199" Margin="0,30,0,0" Width="228"/>
 
             <Label x:Name="label_Username" Margin=" 195,50,50,0 " FontSize="15" Content="{x:Static p:Resources.Global_Username_Label}"/>
             <TextBox Name="TextBox_Username" Margin="200,0"></TextBox>
