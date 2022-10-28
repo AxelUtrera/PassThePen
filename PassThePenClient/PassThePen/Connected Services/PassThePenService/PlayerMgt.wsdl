@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="PlayerMgt" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
-  <wsp:Policy wsu:Id="NetTcpBinding_IPlayerMgt_policy">
+<wsdl:definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="ImplementationServices" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="NetTcpBinding_IPlayerManagement_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IAutentication_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
@@ -46,10 +75,69 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
+      <xs:element name="UpdateDataPlayer">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+            <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/DataAccess" minOccurs="0" name="player" nillable="true" type="q2:Player" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="UpdateDataPlayerResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UpdateDataPlayerResult" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetDataPlayer">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetDataPlayerResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/DataAccess" minOccurs="0" name="GetDataPlayerResult" nillable="true" type="q3:Player" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="UpdatePlayerPassword">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="UpdatePlayerPasswordResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UpdatePlayerPasswordResult" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="UpdatePassword">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="UpdatePasswordResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="UpdatePasswordResult" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="AutenticatePlayer">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/DataAccess" minOccurs="0" name="player" nillable="true" type="q2:Player" />
+            <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/DataAccess" minOccurs="0" name="player" nillable="true" type="q4:Player" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -74,50 +162,6 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element name="UpdateDataPlayer">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
-            <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/DataAccess" minOccurs="0" name="player" nillable="true" type="q3:Player" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="UpdateDataPlayerResponse">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element minOccurs="0" name="UpdateDataPlayerResult" type="xs:boolean" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="GetDataPlayer">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="GetDataPlayerResponse">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/DataAccess" minOccurs="0" name="GetDataPlayerResult" nillable="true" type="q4:Player" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="UpdatePlayerPassword">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
-            <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="UpdatePlayerPasswordResponse">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element minOccurs="0" name="UpdatePlayerPasswordResult" type="xs:boolean" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
       <xs:element name="CodeEmail">
         <xs:complexType>
           <xs:sequence>
@@ -131,21 +175,6 @@
         <xs:complexType>
           <xs:sequence>
             <xs:element minOccurs="0" name="CodeEmailResult" type="xs:int" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="UpdatePassword">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
-            <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="UpdatePasswordResponse">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element minOccurs="0" name="UpdatePasswordResult" type="xs:int" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -205,111 +234,95 @@
       <xs:element name="Player" nillable="true" type="tns:Player" />
     </xs:schema>
   </wsdl:types>
-  <wsdl:message name="IPlayerMgt_AddPlayer_InputMessage">
+  <wsdl:message name="IPlayerManagement_AddPlayer_InputMessage">
     <wsdl:part name="parameters" element="tns:AddPlayer" />
   </wsdl:message>
-  <wsdl:message name="IPlayerMgt_AddPlayer_OutputMessage">
+  <wsdl:message name="IPlayerManagement_AddPlayer_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddPlayerResponse" />
   </wsdl:message>
-  <wsdl:message name="IPlayerMgt_AutenticatePlayer_InputMessage">
-    <wsdl:part name="parameters" element="tns:AutenticatePlayer" />
-  </wsdl:message>
-  <wsdl:message name="IPlayerMgt_AutenticatePlayer_OutputMessage">
-    <wsdl:part name="parameters" element="tns:AutenticatePlayerResponse" />
-  </wsdl:message>
-  <wsdl:message name="IPlayerMgt_AutenticateEmail_InputMessage">
-    <wsdl:part name="parameters" element="tns:AutenticateEmail" />
-  </wsdl:message>
-  <wsdl:message name="IPlayerMgt_AutenticateEmail_OutputMessage">
-    <wsdl:part name="parameters" element="tns:AutenticateEmailResponse" />
-  </wsdl:message>
-  <wsdl:message name="IPlayerMgt_UpdateDataPlayer_InputMessage">
+  <wsdl:message name="IPlayerManagement_UpdateDataPlayer_InputMessage">
     <wsdl:part name="parameters" element="tns:UpdateDataPlayer" />
   </wsdl:message>
-  <wsdl:message name="IPlayerMgt_UpdateDataPlayer_OutputMessage">
+  <wsdl:message name="IPlayerManagement_UpdateDataPlayer_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdateDataPlayerResponse" />
   </wsdl:message>
-  <wsdl:message name="IPlayerMgt_GetDataPlayer_InputMessage">
+  <wsdl:message name="IPlayerManagement_GetDataPlayer_InputMessage">
     <wsdl:part name="parameters" element="tns:GetDataPlayer" />
   </wsdl:message>
-  <wsdl:message name="IPlayerMgt_GetDataPlayer_OutputMessage">
+  <wsdl:message name="IPlayerManagement_GetDataPlayer_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetDataPlayerResponse" />
   </wsdl:message>
-  <wsdl:message name="IPlayerMgt_UpdatePlayerPassword_InputMessage">
+  <wsdl:message name="IPlayerManagement_UpdatePlayerPassword_InputMessage">
     <wsdl:part name="parameters" element="tns:UpdatePlayerPassword" />
   </wsdl:message>
-  <wsdl:message name="IPlayerMgt_UpdatePlayerPassword_OutputMessage">
+  <wsdl:message name="IPlayerManagement_UpdatePlayerPassword_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdatePlayerPasswordResponse" />
   </wsdl:message>
-  <wsdl:message name="IPlayerMgt_CodeEmail_InputMessage">
-    <wsdl:part name="parameters" element="tns:CodeEmail" />
-  </wsdl:message>
-  <wsdl:message name="IPlayerMgt_CodeEmail_OutputMessage">
-    <wsdl:part name="parameters" element="tns:CodeEmailResponse" />
-  </wsdl:message>
-  <wsdl:message name="IPlayerMgt_UpdatePassword_InputMessage">
+  <wsdl:message name="IPlayerManagement_UpdatePassword_InputMessage">
     <wsdl:part name="parameters" element="tns:UpdatePassword" />
   </wsdl:message>
-  <wsdl:message name="IPlayerMgt_UpdatePassword_OutputMessage">
+  <wsdl:message name="IPlayerManagement_UpdatePassword_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdatePasswordResponse" />
   </wsdl:message>
-  <wsdl:portType name="IPlayerMgt">
+  <wsdl:message name="IAutentication_AutenticatePlayer_InputMessage">
+    <wsdl:part name="parameters" element="tns:AutenticatePlayer" />
+  </wsdl:message>
+  <wsdl:message name="IAutentication_AutenticatePlayer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AutenticatePlayerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAutentication_AutenticateEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:AutenticateEmail" />
+  </wsdl:message>
+  <wsdl:message name="IAutentication_AutenticateEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AutenticateEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAutentication_CodeEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:CodeEmail" />
+  </wsdl:message>
+  <wsdl:message name="IAutentication_CodeEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CodeEmailResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IPlayerManagement">
     <wsdl:operation name="AddPlayer">
-      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerMgt/AddPlayer" message="tns:IPlayerMgt_AddPlayer_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerMgt/AddPlayerResponse" message="tns:IPlayerMgt_AddPlayer_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="AutenticatePlayer">
-      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerMgt/AutenticatePlayer" message="tns:IPlayerMgt_AutenticatePlayer_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerMgt/AutenticatePlayerResponse" message="tns:IPlayerMgt_AutenticatePlayer_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="AutenticateEmail">
-      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerMgt/AutenticateEmail" message="tns:IPlayerMgt_AutenticateEmail_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerMgt/AutenticateEmailResponse" message="tns:IPlayerMgt_AutenticateEmail_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerManagement/AddPlayer" message="tns:IPlayerManagement_AddPlayer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerManagement/AddPlayerResponse" message="tns:IPlayerManagement_AddPlayer_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="UpdateDataPlayer">
-      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerMgt/UpdateDataPlayer" message="tns:IPlayerMgt_UpdateDataPlayer_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerMgt/UpdateDataPlayerResponse" message="tns:IPlayerMgt_UpdateDataPlayer_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerManagement/UpdateDataPlayer" message="tns:IPlayerManagement_UpdateDataPlayer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerManagement/UpdateDataPlayerResponse" message="tns:IPlayerManagement_UpdateDataPlayer_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetDataPlayer">
-      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerMgt/GetDataPlayer" message="tns:IPlayerMgt_GetDataPlayer_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerMgt/GetDataPlayerResponse" message="tns:IPlayerMgt_GetDataPlayer_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerManagement/GetDataPlayer" message="tns:IPlayerManagement_GetDataPlayer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerManagement/GetDataPlayerResponse" message="tns:IPlayerManagement_GetDataPlayer_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="UpdatePlayerPassword">
-      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerMgt/UpdatePlayerPassword" message="tns:IPlayerMgt_UpdatePlayerPassword_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerMgt/UpdatePlayerPasswordResponse" message="tns:IPlayerMgt_UpdatePlayerPassword_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="CodeEmail">
-      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerMgt/CodeEmail" message="tns:IPlayerMgt_CodeEmail_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerMgt/CodeEmailResponse" message="tns:IPlayerMgt_CodeEmail_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerManagement/UpdatePlayerPassword" message="tns:IPlayerManagement_UpdatePlayerPassword_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerManagement/UpdatePlayerPasswordResponse" message="tns:IPlayerManagement_UpdatePlayerPassword_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="UpdatePassword">
-      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerMgt/UpdatePassword" message="tns:IPlayerMgt_UpdatePassword_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerMgt/UpdatePasswordResponse" message="tns:IPlayerMgt_UpdatePassword_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerManagement/UpdatePassword" message="tns:IPlayerManagement_UpdatePassword_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerManagement/UpdatePasswordResponse" message="tns:IPlayerManagement_UpdatePassword_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:binding name="NetTcpBinding_IPlayerMgt" type="tns:IPlayerMgt">
-    <wsp:PolicyReference URI="#NetTcpBinding_IPlayerMgt_policy" />
-    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
-    <wsdl:operation name="AddPlayer">
-      <soap12:operation soapAction="http://tempuri.org/IPlayerMgt/AddPlayer" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
+  <wsdl:portType name="IAutentication">
     <wsdl:operation name="AutenticatePlayer">
-      <soap12:operation soapAction="http://tempuri.org/IPlayerMgt/AutenticatePlayer" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
+      <wsdl:input wsaw:Action="http://tempuri.org/IAutentication/AutenticatePlayer" message="tns:IAutentication_AutenticatePlayer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAutentication/AutenticatePlayerResponse" message="tns:IAutentication_AutenticatePlayer_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="AutenticateEmail">
-      <soap12:operation soapAction="http://tempuri.org/IPlayerMgt/AutenticateEmail" style="document" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IAutentication/AutenticateEmail" message="tns:IAutentication_AutenticateEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAutentication/AutenticateEmailResponse" message="tns:IAutentication_AutenticateEmail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CodeEmail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAutentication/CodeEmail" message="tns:IAutentication_CodeEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAutentication/CodeEmailResponse" message="tns:IAutentication_CodeEmail_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NetTcpBinding_IPlayerManagement" type="tns:IPlayerManagement">
+    <wsp:PolicyReference URI="#NetTcpBinding_IPlayerManagement_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="AddPlayer">
+      <soap12:operation soapAction="http://tempuri.org/IPlayerManagement/AddPlayer" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -318,7 +331,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="UpdateDataPlayer">
-      <soap12:operation soapAction="http://tempuri.org/IPlayerMgt/UpdateDataPlayer" style="document" />
+      <soap12:operation soapAction="http://tempuri.org/IPlayerManagement/UpdateDataPlayer" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -327,7 +340,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetDataPlayer">
-      <soap12:operation soapAction="http://tempuri.org/IPlayerMgt/GetDataPlayer" style="document" />
+      <soap12:operation soapAction="http://tempuri.org/IPlayerManagement/GetDataPlayer" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -336,16 +349,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="UpdatePlayerPassword">
-      <soap12:operation soapAction="http://tempuri.org/IPlayerMgt/UpdatePlayerPassword" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="CodeEmail">
-      <soap12:operation soapAction="http://tempuri.org/IPlayerMgt/CodeEmail" style="document" />
+      <soap12:operation soapAction="http://tempuri.org/IPlayerManagement/UpdatePlayerPassword" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -354,7 +358,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="UpdatePassword">
-      <soap12:operation soapAction="http://tempuri.org/IPlayerMgt/UpdatePassword" style="document" />
+      <soap12:operation soapAction="http://tempuri.org/IPlayerManagement/UpdatePassword" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -363,13 +367,53 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
-  <wsdl:service name="PlayerMgt">
-    <wsdl:port name="NetTcpBinding_IPlayerMgt" binding="tns:NetTcpBinding_IPlayerMgt">
+  <wsdl:binding name="NetTcpBinding_IAutentication" type="tns:IAutentication">
+    <wsp:PolicyReference URI="#NetTcpBinding_IAutentication_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="AutenticatePlayer">
+      <soap12:operation soapAction="http://tempuri.org/IAutentication/AutenticatePlayer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AutenticateEmail">
+      <soap12:operation soapAction="http://tempuri.org/IAutentication/AutenticateEmail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CodeEmail">
+      <soap12:operation soapAction="http://tempuri.org/IAutentication/CodeEmail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ImplementationServices">
+    <wsdl:port name="NetTcpBinding_IPlayerManagement" binding="tns:NetTcpBinding_IPlayerManagement">
       <soap12:address location="net.tcp://localhost:8081/PassThePen" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>DESKTOP-POD0G4T\DELL</Upn>
+          <Upn>LAPTOP-6VNVF6O9\danie</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IAutentication" binding="tns:NetTcpBinding_IAutentication">
+      <soap12:address location="net.tcp://localhost:8081/PassThePen" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>LAPTOP-6VNVF6O9\danie</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

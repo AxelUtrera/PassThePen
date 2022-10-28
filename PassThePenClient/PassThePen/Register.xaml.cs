@@ -27,7 +27,7 @@ namespace PassThePen
 
         private void Button_Register_Click(object sender, RoutedEventArgs e)
         {
-            PassThePenService.PlayerMgtClient client = new PassThePenService.PlayerMgtClient();
+            PassThePenService.PlayerManagementClient client = new PassThePenService.PlayerManagementClient();
 
             string password = PasswordBox_Password.Password;
             string repeatedPassword = PasswordBox_RepeatPassword.Password;

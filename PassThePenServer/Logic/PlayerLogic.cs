@@ -22,14 +22,11 @@ namespace Logic
                             where Player.username.Equals(player.username)
                             && Player.password.Equals(passwordHash)
                             select Player).Count();
-
-                
                 if (user > 0)
                 {
                     userResult = 200;
                 }
             }
-
             return userResult;
         }
 
@@ -58,6 +55,7 @@ namespace Logic
             return statusCode;
         }
 
+
         public int AutenticateEmail(string email)
         {
             int emailResult = 500;
@@ -73,23 +71,29 @@ namespace Logic
             return emailResult;
         }
 
+
         public Player ObtainPlayerData(string username)
         {
-            Player playerObtained = null;
+            Player playerSend = null;
             using (var dataBaseContext = new passthepenEntities())
             {
-                //playerObtained = (((Player)(from Player in dataBaseContext.Player
-                //                        where Player.username.Equals(username)
-                //                      select Player)));
-
-                playerObtained = dataBaseContext.Player.Find(username);
+                Player playerObtained = dataBaseContext.Player.Find(username);
+                playerSend = new Player()
+                {
+                    username = playerObtained.username,
+                    name = playerObtained.name,
+                    lastname = playerObtained.lastname,
+                    email = playerObtained.email,
+                    profileImage = playerObtained.profileImage
+                };
             }
-            return playerObtained;
+            return playerSend;
         }
 
-        public Boolean UpdateDataPlayer(String username, Player player)
+
+        public int UpdateDataPlayer(String username, Player player)
         {
-            Boolean isUpdated = false;
+            int stateCode = 500;
             using (var dataBaseContext = new passthepenEntities())
             {
                 var updatedPlayer = dataBaseContext.Player.First(u => u.username == username);
@@ -100,15 +104,15 @@ namespace Logic
                 int returnValue = dataBaseContext.SaveChanges();
                 if (returnValue > 0)
                 {
-                    isUpdated = true;
+                    stateCode = 200;
                 }
             }
-            return isUpdated;
+            return stateCode;
         }
 
-        public Boolean UpdatePassword(string username, string password)
+        public int UpdatePassword(string username, string password)
         {
-            Boolean isChanged = false;
+            int stateCode = 500;
             string encriptedPassword = Encription.ToSHA2Hash(password);
             using (var dataBaseContext = new passthepenEntities())
             {
@@ -117,11 +121,12 @@ namespace Logic
                 int returnValue = dataBaseContext.SaveChanges();
                 if (returnValue > 0)
                 {
-                    isChanged = true;
+                    stateCode = 200;
                 }
             }
-            return isChanged;
+            return stateCode;
         }
+
 
         public int UpdatePasswordEmail(string email, string password)
         {

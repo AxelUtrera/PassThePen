@@ -27,7 +27,7 @@ namespace PassThePen
 
         private void Button_login_Click(object sender, RoutedEventArgs e)
         {
-            PassThePenService.PlayerMgtClient client = new PassThePenService.PlayerMgtClient();
+            PassThePenService.AutenticationClient client = new PassThePenService.AutenticationClient();
 
             
             PassThePenService.Player player = new PassThePenService.Player()
@@ -60,10 +60,12 @@ namespace PassThePen
 
         private void Button_Forgot_Password_Click(object sender, RoutedEventArgs e)
         {
-            /*RecoverPassword recover = new RecoverPassword();
-            recover.Show();*/
-            MainMenu menu = new MainMenu();
-            menu.Show();
+            //RecoverPassword recover = new RecoverPassword();
+            //recover.Show();
+            //MainMenu menu = new MainMenu();
+            //menu.Show();
+            Match match = new Match();
+            match.Show();
         }
 
         private void Button_Exit_Click(object sender, RoutedEventArgs e)

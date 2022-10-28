@@ -189,6 +189,22 @@
     <value>Agregar</value>
     <comment>Used by: MainMenu</comment>
   </data>
+  <data name="Match_CurrentDraw_Label" xml:space="preserve">
+    <value>Dibujo Actual</value>
+    <comment>Used by: Match</comment>
+  </data>
+  <data name="Match_ScorePlayer_Label" xml:space="preserve">
+    <value>Puntaje:</value>
+    <comment>Used by: Match</comment>
+  </data>
+  <data name="Match_Score_Label" xml:space="preserve">
+    <value>Puntaje</value>
+    <comment>Used by: Match</comment>
+  </data>
+  <data name="Match_TimeRemaining_Label" xml:space="preserve">
+    <value>Tiempo Restante</value>
+    <comment>Used by: Match</comment>
+  </data>
   <data name="Profile_Cancel_Button" xml:space="preserve">
     <value>Cancelar</value>
     <comment>Used by: Profile</comment>

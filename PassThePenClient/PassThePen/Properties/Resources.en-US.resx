@@ -193,6 +193,22 @@
     <value>Add</value>
     <comment>Used by: MainMenu</comment>
   </data>
+  <data name="Match_CurrentDraw_Label" xml:space="preserve">
+    <value>Current Draw</value>
+    <comment>Used by: Match</comment>
+  </data>
+  <data name="Match_ScorePlayer_Label" xml:space="preserve">
+    <value>Score:</value>
+    <comment>Used by: Match</comment>
+  </data>
+  <data name="Match_Score_Label" xml:space="preserve">
+    <value>Score</value>
+    <comment>Used by: Match</comment>
+  </data>
+  <data name="Match_TimeRemaining_Label" xml:space="preserve">
+    <value>Time Remaining</value>
+    <comment>Used by: Match</comment>
+  </data>
   <data name="Profile_Cancel_Button" xml:space="preserve">
     <value>Cancel</value>
     <comment>Used by: Profile</comment>

@@ -232,6 +232,42 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Dibujo Actual.
+        /// </summary>
+        public static string Match_CurrentDraw_Label {
+            get {
+                return ResourceManager.GetString("Match_CurrentDraw_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Puntaje.
+        /// </summary>
+        public static string Match_Score_Label {
+            get {
+                return ResourceManager.GetString("Match_Score_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Puntaje:.
+        /// </summary>
+        public static string Match_ScorePlayer_Label {
+            get {
+                return ResourceManager.GetString("Match_ScorePlayer_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Tiempo Restante.
+        /// </summary>
+        public static string Match_TimeRemaining_Label {
+            get {
+                return ResourceManager.GetString("Match_TimeRemaining_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Cancelar.
         /// </summary>
         public static string Profile_Cancel_Button {

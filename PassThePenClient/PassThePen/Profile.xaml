@@ -13,14 +13,14 @@
     <Grid Margin="0,1,0,-1">
 
         <Label Content="{x:Static p:Resources.Profile_Username_Label}" HorizontalAlignment="Left" Margin="40,182,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="Username_TextBox" HorizontalAlignment="Center" Margin="0,208,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="420" IsEnabled="False"/>
+        <TextBox x:Name="TextBox_Username" HorizontalAlignment="Center" Margin="0,208,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="420" IsEnabled="False"/>
         <Label Content="{x:Static p:Resources.Profile_Name_Label}" HorizontalAlignment="Left" Margin="40,242,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="Name_TextBox" HorizontalAlignment="Center" Margin="0,268,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="420"/>
+        <TextBox x:Name="TextBox_Name" HorizontalAlignment="Center" Margin="0,268,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="420"/>
         <Label Content="{x:Static p:Resources.Profile_LastName_Label}" HorizontalAlignment="Left" Margin="40,306,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.079,0.515"/>
-        <TextBox x:Name="Lastname_TextBox" HorizontalAlignment="Center" Margin="0,332,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="420"/>
+        <TextBox x:Name="TextBox_Lastname" HorizontalAlignment="Center" Margin="0,332,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="420"/>
         <Label Content="{x:Static p:Resources.Profile_Email_Label}" HorizontalAlignment="Left" Margin="40,369,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="Email_TextBox" HorizontalAlignment="Center" Margin="0,395,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="420"/>
-        <Button Cursor="Hand" Margin="364,578,36,97" Width="100" Height="25" Foreground="White" FontSize="13" Click="SaveProfileChanges">
+        <TextBox x:Name="TextBox_Email" HorizontalAlignment="Center" Margin="0,395,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="420"/>
+        <Button Cursor="Hand" Margin="364,578,36,97" Width="100" Height="25" Foreground="White" FontSize="13" Click="Button_SaveProfileChanges_Click">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border Background="Green" BorderBrush="Green" CornerRadius="7,7,7,7">
@@ -52,8 +52,8 @@
         <Button Cursor="Hand" Margin="302,140,158,520" Width="40" Height="40" Foreground="White" FontSize="13" Click="Button_Select_Image_Click" Panel.ZIndex="1">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
-                    <Border Background="Green" BorderBrush="Green" CornerRadius="15,15,15,15">
-                        <ContentPresenter Content="X" HorizontalAlignment="Center" VerticalAlignment="Center"></ContentPresenter>
+                    <Border Background="Gray" BorderBrush="Gray" CornerRadius="15,15,15,15">
+                        <Image Source="C:\Users\danie\Documents\Universidad\7mo Semestre\Tecnologias\PassThePen\PassThePenClient\PassThePen\Img\Icon_ProfileImage.png"></Image>
                     </Border>
                 </ControlTemplate>
             </Button.Template>
