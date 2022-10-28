@@ -27,7 +27,7 @@ namespace PassThePen
 
         private void Button_Send_Click(object sender, RoutedEventArgs e)
         {
-            PassThePenService.PlayerMgtClient client = new PassThePenService.PlayerMgtClient();
+            PassThePenService.AutenticationClient client = new PassThePenService.AutenticationClient();
             email = texBox_emailCode.Text;            
             if (ValidateEmail(email) && client.AutenticateEmail(email) == 200)
             {
@@ -112,7 +112,7 @@ namespace PassThePen
 
         private void Button_change_Click(object sender, RoutedEventArgs e)
         {
-            PassThePenService.PlayerMgtClient client = new PassThePenService.PlayerMgtClient();
+            PassThePenService.PlayerManagementClient client = new PassThePenService.PlayerManagementClient();
             if (ValidatePassword())
             {
                 if (client.UpdatePassword(email, passwordBox_newPassword.Password) == 200)

@@ -139,82 +139,64 @@ namespace PassThePen.PassThePenService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PassThePenService.IPlayerMgt")]
-    public interface IPlayerMgt {
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PassThePenService.IPlayerManagement")]
+    public interface IPlayerManagement {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerMgt/AddPlayer", ReplyAction="http://tempuri.org/IPlayerMgt/AddPlayerResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManagement/AddPlayer", ReplyAction="http://tempuri.org/IPlayerManagement/AddPlayerResponse")]
         int AddPlayer(PassThePen.PassThePenService.Player player);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerMgt/AddPlayer", ReplyAction="http://tempuri.org/IPlayerMgt/AddPlayerResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManagement/AddPlayer", ReplyAction="http://tempuri.org/IPlayerManagement/AddPlayerResponse")]
         System.Threading.Tasks.Task<int> AddPlayerAsync(PassThePen.PassThePenService.Player player);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerMgt/AutenticatePlayer", ReplyAction="http://tempuri.org/IPlayerMgt/AutenticatePlayerResponse")]
-        int AutenticatePlayer(PassThePen.PassThePenService.Player player);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManagement/UpdateDataPlayer", ReplyAction="http://tempuri.org/IPlayerManagement/UpdateDataPlayerResponse")]
+        int UpdateDataPlayer(string username, PassThePen.PassThePenService.Player player);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerMgt/AutenticatePlayer", ReplyAction="http://tempuri.org/IPlayerMgt/AutenticatePlayerResponse")]
-        System.Threading.Tasks.Task<int> AutenticatePlayerAsync(PassThePen.PassThePenService.Player player);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManagement/UpdateDataPlayer", ReplyAction="http://tempuri.org/IPlayerManagement/UpdateDataPlayerResponse")]
+        System.Threading.Tasks.Task<int> UpdateDataPlayerAsync(string username, PassThePen.PassThePenService.Player player);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerMgt/AutenticateEmail", ReplyAction="http://tempuri.org/IPlayerMgt/AutenticateEmailResponse")]
-        int AutenticateEmail(string email);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerMgt/AutenticateEmail", ReplyAction="http://tempuri.org/IPlayerMgt/AutenticateEmailResponse")]
-        System.Threading.Tasks.Task<int> AutenticateEmailAsync(string email);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerMgt/UpdateDataPlayer", ReplyAction="http://tempuri.org/IPlayerMgt/UpdateDataPlayerResponse")]
-        bool UpdateDataPlayer(string username, PassThePen.PassThePenService.Player player);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerMgt/UpdateDataPlayer", ReplyAction="http://tempuri.org/IPlayerMgt/UpdateDataPlayerResponse")]
-        System.Threading.Tasks.Task<bool> UpdateDataPlayerAsync(string username, PassThePen.PassThePenService.Player player);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerMgt/GetDataPlayer", ReplyAction="http://tempuri.org/IPlayerMgt/GetDataPlayerResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManagement/GetDataPlayer", ReplyAction="http://tempuri.org/IPlayerManagement/GetDataPlayerResponse")]
         PassThePen.PassThePenService.Player GetDataPlayer(string username);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerMgt/GetDataPlayer", ReplyAction="http://tempuri.org/IPlayerMgt/GetDataPlayerResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManagement/GetDataPlayer", ReplyAction="http://tempuri.org/IPlayerManagement/GetDataPlayerResponse")]
         System.Threading.Tasks.Task<PassThePen.PassThePenService.Player> GetDataPlayerAsync(string username);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerMgt/UpdatePlayerPassword", ReplyAction="http://tempuri.org/IPlayerMgt/UpdatePlayerPasswordResponse")]
-        bool UpdatePlayerPassword(string username, string password);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManagement/UpdatePlayerPassword", ReplyAction="http://tempuri.org/IPlayerManagement/UpdatePlayerPasswordResponse")]
+        int UpdatePlayerPassword(string username, string password);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerMgt/UpdatePlayerPassword", ReplyAction="http://tempuri.org/IPlayerMgt/UpdatePlayerPasswordResponse")]
-        System.Threading.Tasks.Task<bool> UpdatePlayerPasswordAsync(string username, string password);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManagement/UpdatePlayerPassword", ReplyAction="http://tempuri.org/IPlayerManagement/UpdatePlayerPasswordResponse")]
+        System.Threading.Tasks.Task<int> UpdatePlayerPasswordAsync(string username, string password);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerMgt/CodeEmail", ReplyAction="http://tempuri.org/IPlayerMgt/CodeEmailResponse")]
-        int CodeEmail(string to, string affair, int validationCode);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerMgt/CodeEmail", ReplyAction="http://tempuri.org/IPlayerMgt/CodeEmailResponse")]
-        System.Threading.Tasks.Task<int> CodeEmailAsync(string to, string affair, int validationCode);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerMgt/UpdatePassword", ReplyAction="http://tempuri.org/IPlayerMgt/UpdatePasswordResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManagement/UpdatePassword", ReplyAction="http://tempuri.org/IPlayerManagement/UpdatePasswordResponse")]
         int UpdatePassword(string email, string password);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerMgt/UpdatePassword", ReplyAction="http://tempuri.org/IPlayerMgt/UpdatePasswordResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManagement/UpdatePassword", ReplyAction="http://tempuri.org/IPlayerManagement/UpdatePasswordResponse")]
         System.Threading.Tasks.Task<int> UpdatePasswordAsync(string email, string password);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IPlayerMgtChannel : PassThePen.PassThePenService.IPlayerMgt, System.ServiceModel.IClientChannel {
+    public interface IPlayerManagementChannel : PassThePen.PassThePenService.IPlayerManagement, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class PlayerMgtClient : System.ServiceModel.ClientBase<PassThePen.PassThePenService.IPlayerMgt>, PassThePen.PassThePenService.IPlayerMgt {
+    public partial class PlayerManagementClient : System.ServiceModel.ClientBase<PassThePen.PassThePenService.IPlayerManagement>, PassThePen.PassThePenService.IPlayerManagement {
         
-        public PlayerMgtClient() {
+        public PlayerManagementClient() {
         }
         
-        public PlayerMgtClient(string endpointConfigurationName) : 
+        public PlayerManagementClient(string endpointConfigurationName) : 
                 base(endpointConfigurationName) {
         }
         
-        public PlayerMgtClient(string endpointConfigurationName, string remoteAddress) : 
+        public PlayerManagementClient(string endpointConfigurationName, string remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public PlayerMgtClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public PlayerManagementClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public PlayerMgtClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public PlayerManagementClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
@@ -224,6 +206,89 @@ namespace PassThePen.PassThePenService {
         
         public System.Threading.Tasks.Task<int> AddPlayerAsync(PassThePen.PassThePenService.Player player) {
             return base.Channel.AddPlayerAsync(player);
+        }
+        
+        public int UpdateDataPlayer(string username, PassThePen.PassThePenService.Player player) {
+            return base.Channel.UpdateDataPlayer(username, player);
+        }
+        
+        public System.Threading.Tasks.Task<int> UpdateDataPlayerAsync(string username, PassThePen.PassThePenService.Player player) {
+            return base.Channel.UpdateDataPlayerAsync(username, player);
+        }
+        
+        public PassThePen.PassThePenService.Player GetDataPlayer(string username) {
+            return base.Channel.GetDataPlayer(username);
+        }
+        
+        public System.Threading.Tasks.Task<PassThePen.PassThePenService.Player> GetDataPlayerAsync(string username) {
+            return base.Channel.GetDataPlayerAsync(username);
+        }
+        
+        public int UpdatePlayerPassword(string username, string password) {
+            return base.Channel.UpdatePlayerPassword(username, password);
+        }
+        
+        public System.Threading.Tasks.Task<int> UpdatePlayerPasswordAsync(string username, string password) {
+            return base.Channel.UpdatePlayerPasswordAsync(username, password);
+        }
+        
+        public int UpdatePassword(string email, string password) {
+            return base.Channel.UpdatePassword(email, password);
+        }
+        
+        public System.Threading.Tasks.Task<int> UpdatePasswordAsync(string email, string password) {
+            return base.Channel.UpdatePasswordAsync(email, password);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PassThePenService.IAutentication")]
+    public interface IAutentication {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAutentication/AutenticatePlayer", ReplyAction="http://tempuri.org/IAutentication/AutenticatePlayerResponse")]
+        int AutenticatePlayer(PassThePen.PassThePenService.Player player);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAutentication/AutenticatePlayer", ReplyAction="http://tempuri.org/IAutentication/AutenticatePlayerResponse")]
+        System.Threading.Tasks.Task<int> AutenticatePlayerAsync(PassThePen.PassThePenService.Player player);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAutentication/AutenticateEmail", ReplyAction="http://tempuri.org/IAutentication/AutenticateEmailResponse")]
+        int AutenticateEmail(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAutentication/AutenticateEmail", ReplyAction="http://tempuri.org/IAutentication/AutenticateEmailResponse")]
+        System.Threading.Tasks.Task<int> AutenticateEmailAsync(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAutentication/CodeEmail", ReplyAction="http://tempuri.org/IAutentication/CodeEmailResponse")]
+        int CodeEmail(string to, string affair, int validationCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAutentication/CodeEmail", ReplyAction="http://tempuri.org/IAutentication/CodeEmailResponse")]
+        System.Threading.Tasks.Task<int> CodeEmailAsync(string to, string affair, int validationCode);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IAutenticationChannel : PassThePen.PassThePenService.IAutentication, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class AutenticationClient : System.ServiceModel.ClientBase<PassThePen.PassThePenService.IAutentication>, PassThePen.PassThePenService.IAutentication {
+        
+        public AutenticationClient() {
+        }
+        
+        public AutenticationClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public AutenticationClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public AutenticationClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public AutenticationClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
         }
         
         public int AutenticatePlayer(PassThePen.PassThePenService.Player player) {
@@ -242,44 +307,12 @@ namespace PassThePen.PassThePenService {
             return base.Channel.AutenticateEmailAsync(email);
         }
         
-        public bool UpdateDataPlayer(string username, PassThePen.PassThePenService.Player player) {
-            return base.Channel.UpdateDataPlayer(username, player);
-        }
-        
-        public System.Threading.Tasks.Task<bool> UpdateDataPlayerAsync(string username, PassThePen.PassThePenService.Player player) {
-            return base.Channel.UpdateDataPlayerAsync(username, player);
-        }
-        
-        public PassThePen.PassThePenService.Player GetDataPlayer(string username) {
-            return base.Channel.GetDataPlayer(username);
-        }
-        
-        public System.Threading.Tasks.Task<PassThePen.PassThePenService.Player> GetDataPlayerAsync(string username) {
-            return base.Channel.GetDataPlayerAsync(username);
-        }
-        
-        public bool UpdatePlayerPassword(string username, string password) {
-            return base.Channel.UpdatePlayerPassword(username, password);
-        }
-        
-        public System.Threading.Tasks.Task<bool> UpdatePlayerPasswordAsync(string username, string password) {
-            return base.Channel.UpdatePlayerPasswordAsync(username, password);
-        }
-        
         public int CodeEmail(string to, string affair, int validationCode) {
             return base.Channel.CodeEmail(to, affair, validationCode);
         }
         
         public System.Threading.Tasks.Task<int> CodeEmailAsync(string to, string affair, int validationCode) {
             return base.Channel.CodeEmailAsync(to, affair, validationCode);
-        }
-        
-        public int UpdatePassword(string email, string password) {
-            return base.Channel.UpdatePassword(email, password);
-        }
-        
-        public System.Threading.Tasks.Task<int> UpdatePasswordAsync(string email, string password) {
-            return base.Channel.UpdatePasswordAsync(email, password);
         }
     }
 }

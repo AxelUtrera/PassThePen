@@ -25,28 +25,27 @@ namespace PassThePen
         public Profile()
         {
             InitializeComponent();
+            SetDataPlayer();
         }
 
-        private void SaveProfileChanges(object sender, RoutedEventArgs e)
+        private void Button_SaveProfileChanges_Click(object sender, RoutedEventArgs e)
         {
-            PlayerMgtClient client = new PlayerMgtClient();
+            PlayerManagementClient client = new PlayerManagementClient();
             if (ValidateInformation())
             {
                 Byte[] image = ImageToByte(Image_ProfileImage.Source as BitmapImage);
-                Console.WriteLine(image);
                 Player player = new Player()
                 {
-                    username = Username_TextBox.Text,
-                    name = Name_TextBox.Text,
-                    lastname = Lastname_TextBox.Text,
-                    email = Email_TextBox.Text,
+                    username = TextBox_Username.Text,
+                    name = TextBox_Name.Text,
+                    lastname = TextBox_Lastname.Text,
+                    email = TextBox_Email.Text,
                     profileImage = image
                 };
-                if (client.UpdateDataPlayer("dpax", player))
+
+                if (client.UpdateDataPlayer(MainMenu.username, player) == 200)
                 {
                     MessageBox.Show("Perfil actualizado con exito");
-                    Console.WriteLine(player.email);
-                    Console.WriteLine(player.profileImage);
                 }
                 else
                 {
@@ -55,23 +54,28 @@ namespace PassThePen
             }
         }
 
+
         private void SetDataPlayer()
         {
-            PassThePenService.PlayerMgtClient client = new PassThePenService.PlayerMgtClient();
-            Player playerObtained = client.GetDataPlayer("dpax");
-
+            PassThePenService.PlayerManagementClient client = new PassThePenService.PlayerManagementClient();
+            Player playerObtained = client.GetDataPlayer(MainMenu.username);
             if (playerObtained != null)
             {
-                Console.WriteLine("NO esta vacio");
+                TextBox_Username.Text = playerObtained.username;
+                TextBox_Name.Text = playerObtained.name;
+                TextBox_Lastname.Text = playerObtained.lastname;
+                TextBox_Email.Text = playerObtained.email;
+                Image_ProfileImage.Source = LoadBitmapFromBytes(playerObtained.profileImage);
             }
 
         }
+
 
         private Boolean ValidateInformation()
         {
             InvalidFields_Label.Visibility = Visibility.Hidden;
             Boolean isValid = true;
-            if (Email_TextBox.Text.Equals("") || Name_TextBox.Text.Equals("") || Lastname_TextBox.Text.Equals(""))
+            if (TextBox_Email.Text.Equals("") || TextBox_Name.Text.Equals("") || TextBox_Lastname.Text.Equals(""))
             {
                 InvalidFields_Label.Visibility = Visibility.Visible;
                 isValid = false;
@@ -79,16 +83,19 @@ namespace PassThePen
             return isValid;
         }
 
+
         private void Button_Cancel_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
+
 
         private void Button_ChangePassword_Click(object sender, RoutedEventArgs e)
         {
             ChangePassword changePasswordWindow = new ChangePassword();
             changePasswordWindow.Show();
         }
+
 
         private void Button_Select_Image_Click(object sender, RoutedEventArgs e)
         {
@@ -102,6 +109,7 @@ namespace PassThePen
             }
         }
 
+
         public static byte[] ImageToByte(BitmapImage imageSource)
         {
             var encoder = new JpegBitmapEncoder();
@@ -113,5 +121,24 @@ namespace PassThePen
                 return ms.ToArray();
             }
         }
+
+
+        public static BitmapImage LoadBitmapFromBytes(byte[] bytes)
+        {
+            var image = new BitmapImage();
+            using (var stream = new MemoryStream(bytes))
+            {
+                stream.Seek(0, SeekOrigin.Begin);
+                image.BeginInit();
+                image.StreamSource = stream;
+                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.UriSource = null;
+                image.EndInit();
+            }
+
+            return image;
+        }
+
     }
 }

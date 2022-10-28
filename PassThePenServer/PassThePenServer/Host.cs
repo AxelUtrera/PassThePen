@@ -11,7 +11,7 @@ namespace PassThePenServer
     {
         static void Main(string[] args)
         {
-            using(ServiceHost host = new ServiceHost(typeof(Comunication.PlayerMgt)))
+            using(ServiceHost host = new ServiceHost(typeof(Comunication.ImplementationServices)))
             {
                 host.Open();
                 Console.WriteLine("Server is up...");

@@ -32,13 +32,17 @@ namespace PassThePen
 
         private void Button_Change_Password_Click(object sender, RoutedEventArgs e)
         {
-            PlayerMgtClient client = new PlayerMgtClient();
+            PlayerManagementClient client = new PlayerManagementClient();
             if (ValidatePassword())
             {
                 string password = PasswordBox_ConfirmPassword.Password;
-                if (client.UpdatePlayerPassword("dpax", password))
+                if (client.UpdatePlayerPassword(MainMenu.username, password) == 200)
                 {
-                    MessageBox.Show("Contraseña actualizada con exito");
+                    MessageBox.Show("Contraseña actualizada con exito", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    MessageBox.Show("La contraseña no pudo ser actualizada", "", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }

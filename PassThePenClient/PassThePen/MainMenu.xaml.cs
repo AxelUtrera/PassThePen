@@ -24,7 +24,6 @@ namespace PassThePen
         public MainMenu()
         {
             InitializeComponent();
-            Console.WriteLine(username);
         }
 
         private void Button_Profile_Click(object sender, RoutedEventArgs e)
