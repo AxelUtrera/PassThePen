@@ -14,7 +14,7 @@
 
     <Grid >
         <Grid.Background>
-            <ImageBrush ImageSource="Img/Pen_Background.jpg" Stretch="UniformToFill"/>
+            <ImageBrush ImageSource="Img/BackGround_PassThePen.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
 
         <StackPanel Width="640" Height="700" Background="White">

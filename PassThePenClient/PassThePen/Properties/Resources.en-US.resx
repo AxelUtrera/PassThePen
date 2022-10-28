@@ -181,6 +181,14 @@
     <value>Leave to play</value>
     <comment>Used by: MainMenu</comment>
   </data>
+  <data name="MainMenu_FriendRequests_Button" xml:space="preserve">
+    <value>Requests</value>
+    <comment>Used by: MainMenu</comment>
+  </data>
+  <data name="MainMenu_Friends_Button" xml:space="preserve">
+    <value>Friends</value>
+    <comment>Used by: MainMenu</comment>
+  </data>
   <data name="MainMenu_GameMenu_Label" xml:space="preserve">
     <value>Game menu</value>
     <comment>Used by: MainMenu</comment>

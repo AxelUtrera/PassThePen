@@ -143,10 +143,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Img\Pen_Background.jpg" />
+    <Resource Include="Img\BackGround_PassThePen.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Img\logo_Pass_the_pen.png" />
+    <Resource Include="Img\Logo_Pass_the_pen.png" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
@@ -171,6 +171,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Img\Icon_Setings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Img\Icon_AddUser.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
