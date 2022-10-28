@@ -52,19 +52,19 @@
                             <Image Source="/Img/Icon_Search.png" Margin="115,0" Width="30" Cursor="Hand"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Button Cursor="Hand" Width="120" Margin="0,0,0,5" Height="35" Foreground="#f3f3f3" FontSize="18">
+                            <Button Cursor="Hand" Width="140" Margin="0,0,0,5" Height="35" Foreground="Black" FontSize="18">
                                 <Button.Template >
                                     <ControlTemplate TargetType="{x:Type Button}" >
-                                        <Border Background="YellowGreen" BorderBrush="YellowGreen" CornerRadius="7,7,7,7">
+                                        <Border Background="Yellow" BorderBrush="Yellow" CornerRadius="7,7,7,7">
                                             <ContentPresenter Content="{x:Static p:Resources.MainMenu_Friends_Button}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                         </Border>
                                     </ControlTemplate>
                                 </Button.Template>
                             </Button>
-                            <Button Cursor="Hand" Margin="30,0,0,5" Width="120" Height="35" Foreground="#f3f3f3" FontSize="18">
+                            <Button Cursor="Hand" Margin="15,0,0,5" Width="150" Height="35" Foreground="#f3f3f3" FontSize="18">
                                 <Button.Template >
                                     <ControlTemplate TargetType="{x:Type Button}" >
-                                        <Border Background="YellowGreen" BorderBrush="YellowGreen"  CornerRadius="7,7,7,7">
+                                        <Border Background="Coral" BorderBrush="YellowGreen"  CornerRadius="7,7,7,7">
                                             <ContentPresenter Content="{x:Static p:Resources.MainMenu_FriendRequests_Button}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                         </Border>
                                     </ControlTemplate>
