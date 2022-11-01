@@ -143,27 +143,38 @@
                 </Grid>
 
             </StackPanel>
+             
+             
+            <StackPanel >
 
-            <StackPanel Orientation="Horizontal">
-                <Button Cursor="Hand" Margin="100,50,50,50" Width="250" Height="50" Foreground="#f3f3f3" FontSize="23">
-                    <Button.Template >
-                        <ControlTemplate TargetType="{x:Type Button}" >
-                            <Border Background="Green" BorderBrush="Green"  CornerRadius="7,7,7,7">
-                                <ContentPresenter Content="{x:Static p:Resources.MainMenu_Play_Button}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
+                <Grid Margin="0,40,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Cursor="Hand" Margin="110,0,0,50" Width="250" Height="50" Foreground="#f3f3f3" FontSize="23" HorizontalAlignment="Left">
+                        <Button.Template >
+                            <ControlTemplate TargetType="{x:Type Button}" >
+                                <Border Background="Green" BorderBrush="Green"  CornerRadius="7,7,7,7">
+                                    <ContentPresenter Content="{x:Static p:Resources.MainMenu_Play_Button}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
 
-                <Button Cursor="Hand" Margin="780,50,0,50" Width="250" Height="50" Foreground="#f3f3f3" FontSize="23" Click="Button_ExitGame_Click">
-                    <Button.Template >
-                        <ControlTemplate TargetType="{x:Type Button}" >
-                            <Border Background="OrangeRed" BorderBrush="OrangeRed"  CornerRadius="7,7,7,7">
-                                <ContentPresenter Content="{x:Static p:Resources.MainMenu_ExitGame_Button}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
+                    <Button Grid.Column="1" Cursor="Hand" Width="250" Height="50" Foreground="#f3f3f3" FontSize="23" HorizontalAlignment="Right" Margin="0,0,100,50" Click="Button_ExitGame_Click" >
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}" >
+                                <Border Background="OrangeRed" BorderBrush="OrangeRed" CornerRadius="7,7,7,7">
+                                    <ContentPresenter Content="{x:Static p:Resources.MainMenu_ExitGame_Button}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
+                </Grid>
+                
             </StackPanel>
         </StackPanel>
     </Grid>
