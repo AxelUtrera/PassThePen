@@ -28,7 +28,6 @@ namespace PassThePen
         private void Button_login_Click(object sender, RoutedEventArgs e)
         {
             PassThePenService.AutenticationClient client = new PassThePenService.AutenticationClient();
-
             
             PassThePenService.Player player = new PassThePenService.Player()
             {

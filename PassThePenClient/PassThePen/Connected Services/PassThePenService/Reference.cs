@@ -315,4 +315,79 @@ namespace PassThePen.PassThePenService {
             return base.Channel.CodeEmailAsync(to, affair, validationCode);
         }
     }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PassThePenService.IFriendRequests")]
+    public interface IFriendRequests {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendRequests/GetFriendRequestsList", ReplyAction="http://tempuri.org/IFriendRequests/GetFriendRequestsListResponse")]
+        string[] GetFriendRequestsList();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendRequests/GetFriendRequestsList", ReplyAction="http://tempuri.org/IFriendRequests/GetFriendRequestsListResponse")]
+        System.Threading.Tasks.Task<string[]> GetFriendRequestsListAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendRequests/SendFriendRequests", ReplyAction="http://tempuri.org/IFriendRequests/SendFriendRequestsResponse")]
+        int SendFriendRequests(PassThePen.PassThePenService.Player player);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendRequests/SendFriendRequests", ReplyAction="http://tempuri.org/IFriendRequests/SendFriendRequestsResponse")]
+        System.Threading.Tasks.Task<int> SendFriendRequestsAsync(PassThePen.PassThePenService.Player player);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendRequests/DeclienFriendRequests", ReplyAction="http://tempuri.org/IFriendRequests/DeclienFriendRequestsResponse")]
+        int DeclienFriendRequests(PassThePen.PassThePenService.Player player);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendRequests/DeclienFriendRequests", ReplyAction="http://tempuri.org/IFriendRequests/DeclienFriendRequestsResponse")]
+        System.Threading.Tasks.Task<int> DeclienFriendRequestsAsync(PassThePen.PassThePenService.Player player);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IFriendRequestsChannel : PassThePen.PassThePenService.IFriendRequests, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class FriendRequestsClient : System.ServiceModel.ClientBase<PassThePen.PassThePenService.IFriendRequests>, PassThePen.PassThePenService.IFriendRequests {
+        
+        public FriendRequestsClient() {
+        }
+        
+        public FriendRequestsClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public FriendRequestsClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public FriendRequestsClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public FriendRequestsClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public string[] GetFriendRequestsList() {
+            return base.Channel.GetFriendRequestsList();
+        }
+        
+        public System.Threading.Tasks.Task<string[]> GetFriendRequestsListAsync() {
+            return base.Channel.GetFriendRequestsListAsync();
+        }
+        
+        public int SendFriendRequests(PassThePen.PassThePenService.Player player) {
+            return base.Channel.SendFriendRequests(player);
+        }
+        
+        public System.Threading.Tasks.Task<int> SendFriendRequestsAsync(PassThePen.PassThePenService.Player player) {
+            return base.Channel.SendFriendRequestsAsync(player);
+        }
+        
+        public int DeclienFriendRequests(PassThePen.PassThePenService.Player player) {
+            return base.Channel.DeclienFriendRequests(player);
+        }
+        
+        public System.Threading.Tasks.Task<int> DeclienFriendRequestsAsync(PassThePen.PassThePenService.Player player) {
+            return base.Channel.DeclienFriendRequestsAsync(player);
+        }
+    }
 }

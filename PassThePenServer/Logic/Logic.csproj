@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Encription.cs" />
+    <Compile Include="FriendRequestsLogic.cs" />
     <Compile Include="PlayerLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SendEmail.cs" />

@@ -60,4 +60,22 @@ namespace Comunication
             return sendEmail.SendNewEmail(to, affair, validationCode);
         }
     }
+
+    public partial class ImplementationServices : IFriendRequests
+    {
+        public int DeclienFriendRequests(Player player)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<string> GetFriendRequestsList()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int SendFriendRequests(Player player)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

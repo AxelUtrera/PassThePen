@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IAutentication.cs" />
+    <Compile Include="IFriendRequests.cs" />
     <Compile Include="IPlayerManagement.cs" />
     <Compile Include="ImplementationServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
