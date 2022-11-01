@@ -39,6 +39,8 @@ namespace PassThePen
 
         private void Button_InviteFriendImage_Button(object sender, RoutedEventArgs e)
         { 
+            //botones del centro para invitar a jugador.
+
             this.Close();
         }
     }
