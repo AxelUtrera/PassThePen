@@ -34,7 +34,7 @@
                            RenderTransformOrigin="0.609,1.917"
                            MouseLeftButtonDown="Button_Profile_Click" VerticalAlignment="Top"/>
 
-                    <Label Grid.Column="1" Content="{x:Static p:Resources.MainMenu_GameMenu_Label}" FontSize="35" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="DemiBold"></Label>
+                    <Label Grid.Column="1" Content="{x:Static p:Resources.MainMenu_GameMenu_Label}" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="DemiBold"></Label>
                 </Grid>
             </StackPanel>
 
@@ -48,10 +48,11 @@
 
                     <StackPanel Margin="0,30" Width="310" Grid.Column="0">
                         <StackPanel Orientation="Horizontal">
-                            <Label Content="{x:Static p:Resources.MainManu_FriendList_Label}" FontSize="20" FontWeight="bold"/>
-                            <Image Source="/Img/Icon_Search.png" Margin="115,0" Width="30" Cursor="Hand"/>
+                            <Label Content="{x:Static p:Resources.MainManu_FriendList_Label}" Margin="0,0,0,10" FontSize="24" FontWeight="bold"/>
+                            <Image Source="/Img/Icon_Search.png" Margin="90,0" Width="30" Cursor="Hand"/>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,2">
                             <Button Cursor="Hand" Width="140" Margin="0,0,0,5" Height="35" Foreground="Black" FontSize="18">
                                 <Button.Template >
                                     <ControlTemplate TargetType="{x:Type Button}" >
