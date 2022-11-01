@@ -65,11 +65,7 @@ namespace PassThePen
                 TextBox_Name.Text = playerObtained.name;
                 TextBox_Lastname.Text = playerObtained.lastname;
                 TextBox_Email.Text = playerObtained.email;
-<<<<<<< HEAD
                 //Image_ProfileImage.Source = LoadBitmapFromBytes(playerObtained.profileImage);
-=======
-                Image_ProfileImage.Source = LoadBitmapFromBytes(playerObtained.profileImage);
->>>>>>> fb2eeef1be78f48c34c475643f0ada0a88502bbd
             }
 
         }
