@@ -28,7 +28,6 @@ namespace PassThePen
         private void Button_login_Click(object sender, RoutedEventArgs e)
         {
             PassThePenService.AutenticationClient client = new PassThePenService.AutenticationClient();
-
             
             PassThePenService.Player player = new PassThePenService.Player()
             {
@@ -50,6 +49,7 @@ namespace PassThePen
             {
                 MessageBox.Show("Hubo un error en la validacion");
             }
+            client.Close();
         }
 
         private void Button_Register_Click(object sender, RoutedEventArgs e)

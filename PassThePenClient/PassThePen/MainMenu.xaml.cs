@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PassThePen.Properties;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace PassThePen
 {
@@ -39,7 +41,45 @@ namespace PassThePen
 
         private void Button_InviteFriendImage_Button(object sender, RoutedEventArgs e)
         { 
+            //botones del centro para invitar a jugador.
+
             this.Close();
         }
+
+        private void Button_FriendRequests_Click(object sender, RoutedEventArgs e)
+        {
+            label_ListFriends.Visibility = Visibility.Collapsed;
+            label_FriendRequests.Visibility = Visibility.Visible;
+            GenerateFriendRequestList();
+        }
+
+
+
+        private void Button_Friends_Click(object sender, RoutedEventArgs e)
+        {
+            label_FriendRequests.Visibility = Visibility.Collapsed;
+            label_ListFriends.Visibility = Visibility.Visible;
+            
+        }
+
+        private void Button_ConfirmRequests_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_DeclineRequests_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void GenerateFriendRequestList()
+        {
+            PassThePenService.FriendRequestsClient client = new PassThePenService.FriendRequestsClient();
+            ListBox_MainMenu.ItemsSource = client.GetFriendRequestsList(username);
+            Console.WriteLine(client.GetFriendRequestsList(username));
+            client.Close();
+        }
+
+
     }
 }

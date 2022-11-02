@@ -158,6 +158,9 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Connected Services\PassThePenService\PassThePen.PassThePenService.FriendRequest.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\PassThePenService\PassThePen.PassThePenService.Player.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -216,8 +219,14 @@
   <ItemGroup>
     <Resource Include="Img\Icon_SendMessage.png" />
   </ItemGroup>
-  <ItemGroup>  
+  <ItemGroup>
     <Resource Include="Img\Icon_AddUser.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Img\Icon_Confirm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Img\Icon_Decline.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Uno.SourceGenerationTasks.4.1.0\build\netstandard1.0\Uno.SourceGenerationTasks.targets" Condition="Exists('..\packages\Uno.SourceGenerationTasks.4.1.0\build\netstandard1.0\Uno.SourceGenerationTasks.targets')" />

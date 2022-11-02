@@ -45,14 +45,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IAutentication.cs" />
+    <Compile Include="IFriendRequests.cs" />
     <Compile Include="IPlayerManagement.cs" />
     <Compile Include="ImplementationServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
-      <Project>{C9124EFA-6E98-44A7-B487-CC9A6A95BD5C}</Project>
-      <Name>DataAccess</Name>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{7a4effcb-9055-4fa6-bf77-d5f6213f2670}</Project>
+      <Name>Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\Logic\Logic.csproj">
       <Project>{765123a4-a824-4b58-a6f7-d9148b0cc3aa}</Project>

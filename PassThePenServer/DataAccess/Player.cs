@@ -13,7 +13,7 @@ namespace DataAccess
     using System.Collections.Generic;
     using System.Runtime.Serialization;
 
-    [DataContract]
+    
     public partial class Player
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,23 +24,29 @@ namespace DataAccess
             this.Friends = new HashSet<Friends>();
             this.Game = new HashSet<Game>();
         }
-        [DataMember]    
+        
         public string username { get; set; }
-        [DataMember]
+       
         public string password { get; set; }
-        [DataMember]
+        
         public string name { get; set; }
-        [DataMember]
+        
         public string lastname { get; set; }
-        [DataMember]
+        
         public string email { get; set; }
-        [DataMember]
+        
         public byte[] profileImage { get; set; }
-    
+
+       
+       
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FriendRequest> FriendRequest { get; set; }
+
+        
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Friends> Friends { get; set; }
+
+       
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Game> Game { get; set; }
     }

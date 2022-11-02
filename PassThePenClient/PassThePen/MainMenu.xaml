@@ -53,7 +53,7 @@
                         </StackPanel>
                         
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,2">
-                            <Button Cursor="Hand" Width="140" Margin="0,0,0,5" Height="35" Foreground="Black" FontSize="18">
+                            <Button Cursor="Hand" Width="140" Margin="0,0,0,5" Height="35" Foreground="Black" FontSize="18" Click="Button_Friends_Click">
                                 <Button.Template >
                                     <ControlTemplate TargetType="{x:Type Button}" >
                                         <Border Background="Yellow" BorderBrush="Yellow" CornerRadius="7,7,7,7">
@@ -62,7 +62,7 @@
                                     </ControlTemplate>
                                 </Button.Template>
                             </Button>
-                            <Button Cursor="Hand" Margin="15,0,0,5" Width="150" Height="35" Foreground="#f3f3f3" FontSize="18">
+                            <Button Cursor="Hand" Margin="15,0,0,5" Width="150" Height="35" Foreground="#f3f3f3" FontSize="18" Click="Button_FriendRequests_Click">
                                 <Button.Template >
                                     <ControlTemplate TargetType="{x:Type Button}" >
                                         <Border Background="Coral" BorderBrush="YellowGreen"  CornerRadius="7,7,7,7">
@@ -73,9 +73,30 @@
                             </Button>
                         </StackPanel>
                         <Border Grid.Column="0" Width="305" Height="405"  BorderThickness="2" BorderBrush="Black" CornerRadius="10">
-                            <ListBox Margin="0" Height="400" Width="300" BorderBrush="Transparent">
+                            <StackPanel>
+                                <Label Name="label_ListFriends" Content="{x:Static p:Resources.MainMenu_Friends_Label}" HorizontalAlignment="Center" FontWeight="Bold" />
+                                <Label Name="label_FriendRequests" Content="{x:Static p:Resources.MainMenu_FriendsRequests_Label}" HorizontalAlignment="Center" FontWeight="Bold" Visibility="Collapsed"/>
+                                <ListBox Name="ListBox_MainMenu"  Margin="0" Height="373" Width="300" BorderBrush="Transparent" HorizontalAlignment="Stretch">
+                                    <ListBox.ItemTemplate >
+                                        <DataTemplate>
+                                            <Grid>
+                                                
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition/>
+                                                    <ColumnDefinition/>
+                                                </Grid.ColumnDefinitions>
 
-                            </ListBox>
+                                                <Label Grid.Column="0" Content="{Binding friendUsername}" Margin="5,0,0,0" HorizontalAlignment="Left" FontSize="18" Width="185"/>
+                                                <StackPanel Grid.Column="1" Orientation="Horizontal" >
+                                                    <Image Source="Img/Icon_Confirm.png" Width="30" MouseLeftButtonDown="Button_ConfirmRequests_Click" Cursor="Hand"/>
+                                                    <Image Source="Img/Icon_Decline.png" Width="30" HorizontalAlignment="Right" Margin="15,0,18,0" MouseLeftButtonDown="Button_DeclineRequests_Click" Cursor="Hand"/>
+                                                </StackPanel>
+                                                
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </StackPanel>
                         </Border>
                         <StackPanel Orientation="Horizontal" Margin="3">
                             <TextBox  Height="33" Width="200" Background="AliceBlue" BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" FontSize="18">

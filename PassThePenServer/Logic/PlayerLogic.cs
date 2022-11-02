@@ -11,7 +11,7 @@ namespace Logic
     public class PlayerLogic
     {
 
-        public  int AutenticatePlayerDB(Player player)
+        public  int AutenticatePlayerDB(Domain.Player player)
         {
             int userResult = 500;
             string passwordHash = Encription.ToSHA2Hash(player.password);
@@ -30,7 +30,7 @@ namespace Logic
             return userResult;
         }
 
-        public static int AddPlayerToDB(Player player)
+        public static int AddPlayerToDB(Domain.Player player)
         {
             //Tarea: Validar que no exista el usuario a agregar en la base de datos.
             int statusCode = 500;
@@ -72,13 +72,13 @@ namespace Logic
         }
 
 
-        public Player ObtainPlayerData(string username)
+        public Domain.Player ObtainPlayerData(string username)
         {
-            Player playerSend = null;
+            Domain.Player playerSend = null;
             using (var dataBaseContext = new passthepenEntities())
             {
                 Player playerObtained = dataBaseContext.Player.Find(username);
-                playerSend = new Player()
+                playerSend = new Domain.Player()
                 {
                     username = playerObtained.username,
                     name = playerObtained.name,
@@ -91,7 +91,7 @@ namespace Logic
         }
 
 
-        public int UpdateDataPlayer(String username, Player player)
+        public int UpdateDataPlayer(String username, Domain.Player player)
         {
             int stateCode = 500;
             using (var dataBaseContext = new passthepenEntities())

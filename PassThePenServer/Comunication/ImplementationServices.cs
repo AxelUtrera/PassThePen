@@ -1,4 +1,4 @@
-﻿using DataAccess;
+﻿using Domain;
 using Logic;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ namespace Comunication
 {
     public partial class ImplementationServices : IPlayerManagement
     {
-        public int AddPlayer(DataAccess.Player player)
+        public int AddPlayer(Player player)
         {
             return PlayerLogic.AddPlayerToDB(player);
         }
@@ -42,7 +42,7 @@ namespace Comunication
 
     public partial class ImplementationServices : IAutentication
     {
-        public int AutenticatePlayer(DataAccess.Player player)
+        public int AutenticatePlayer(Player player)
         {
             PlayerLogic playerLogic = new PlayerLogic();
             return playerLogic.AutenticatePlayerDB(player);
@@ -58,6 +58,26 @@ namespace Comunication
         {
             SendEmail sendEmail = new SendEmail();
             return sendEmail.SendNewEmail(to, affair, validationCode);
+        }
+    }
+
+    public partial class ImplementationServices : IFriendRequests
+    {
+       
+        public int DeclineFriendRequests(Player player)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<FriendRequest> GetFriendRequestsList(string user)
+        {
+            FriendRequestsLogic friendRequestsLogic = new FriendRequestsLogic();
+            return friendRequestsLogic.GetFriendRequestsOfPlayer(user);
+        }
+
+        public int SendFriendRequests(Player player)
+        {
+            throw new NotImplementedException();
         }
     }
 }

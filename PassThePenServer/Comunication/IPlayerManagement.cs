@@ -1,4 +1,4 @@
-﻿using DataAccess;
+﻿using Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +12,7 @@ namespace Comunication
     public interface IPlayerManagement
     {
         [OperationContract]
-        int AddPlayer(DataAccess.Player player);
+        int AddPlayer(Player player);
 
         [OperationContract]
         int UpdateDataPlayer(string username, Player player);

@@ -232,6 +232,24 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Amigos.
+        /// </summary>
+        public static string MainMenu_Friends_Label {
+            get {
+                return ResourceManager.GetString("MainMenu_Friends_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Solicitudes.
+        /// </summary>
+        public static string MainMenu_FriendsRequests_Label {
+            get {
+                return ResourceManager.GetString("MainMenu_FriendsRequests_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Menú de juego.
         /// </summary>
         public static string MainMenu_GameMenu_Label {

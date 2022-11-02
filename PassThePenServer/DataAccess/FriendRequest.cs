@@ -11,14 +11,20 @@ namespace DataAccess
 {
     using System;
     using System.Collections.Generic;
+    using System.Runtime.Serialization;
+
     
     public partial class FriendRequest
     {
+       
         public int idRequest { get; set; }
+       
         public string usernamePlayer { get; set; }
+        
         public string friendUsername { get; set; }
+        
         public string status { get; set; }
-    
+        
         public virtual Player Player { get; set; }
     }
 }
