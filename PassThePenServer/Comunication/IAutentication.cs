@@ -11,7 +11,7 @@ namespace Comunication
     public interface IAutentication
     {
         [OperationContract]
-        int AutenticatePlayer(DataAccess.Player player);
+        int AutenticatePlayer(Domain.Player player);
 
         [OperationContract]
         int AutenticateEmail(string email);

@@ -89,12 +89,11 @@
   </wsp:Policy>
   <wsdl:types>
     <xs:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-      <xs:import namespace="http://schemas.datacontract.org/2004/07/DataAccess" />
-      <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/Domain" />
       <xs:element name="AddPlayer">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/DataAccess" minOccurs="0" name="player" nillable="true" type="q1:Player" />
+            <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="player" nillable="true" type="q1:Player" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -109,7 +108,7 @@
         <xs:complexType>
           <xs:sequence>
             <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
-            <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/DataAccess" minOccurs="0" name="player" nillable="true" type="q2:Player" />
+            <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="player" nillable="true" type="q2:Player" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -130,7 +129,7 @@
       <xs:element name="GetDataPlayerResponse">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/DataAccess" minOccurs="0" name="GetDataPlayerResult" nillable="true" type="q3:Player" />
+            <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="GetDataPlayerResult" nillable="true" type="q3:Player" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -167,7 +166,7 @@
       <xs:element name="AutenticatePlayer">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/DataAccess" minOccurs="0" name="player" nillable="true" type="q4:Player" />
+            <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="player" nillable="true" type="q4:Player" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -210,20 +209,22 @@
       </xs:element>
       <xs:element name="GetFriendRequestsList">
         <xs:complexType>
-          <xs:sequence />
+          <xs:sequence>
+            <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+          </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="GetFriendRequestsListResponse">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetFriendRequestsListResult" nillable="true" type="q5:ArrayOfstring" />
+            <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="GetFriendRequestsListResult" nillable="true" type="q5:ArrayOfFriendRequest" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="SendFriendRequests">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/DataAccess" minOccurs="0" name="player" nillable="true" type="q6:Player" />
+            <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="player" nillable="true" type="q6:Player" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -234,17 +235,17 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element name="DeclienFriendRequests">
+      <xs:element name="DeclineFriendRequests">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/DataAccess" minOccurs="0" name="player" nillable="true" type="q7:Player" />
+            <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="player" nillable="true" type="q7:Player" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element name="DeclienFriendRequestsResponse">
+      <xs:element name="DeclineFriendRequestsResponse">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="DeclienFriendRequestsResult" type="xs:int" />
+            <xs:element minOccurs="0" name="DeclineFriendRequestsResult" type="xs:int" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -290,7 +291,7 @@
       <xs:attribute name="Id" type="xs:ID" />
       <xs:attribute name="Ref" type="xs:IDREF" />
     </xs:schema>
-    <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/DataAccess" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/DataAccess" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Domain" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Domain" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:complexType name="Player">
         <xs:sequence>
           <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
@@ -302,14 +303,21 @@
         </xs:sequence>
       </xs:complexType>
       <xs:element name="Player" nillable="true" type="tns:Player" />
-    </xs:schema>
-    <xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/Arrays" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-      <xs:complexType name="ArrayOfstring">
+      <xs:complexType name="ArrayOfFriendRequest">
         <xs:sequence>
-          <xs:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="FriendRequest" nillable="true" type="tns:FriendRequest" />
         </xs:sequence>
       </xs:complexType>
-      <xs:element name="ArrayOfstring" nillable="true" type="tns:ArrayOfstring" />
+      <xs:element name="ArrayOfFriendRequest" nillable="true" type="tns:ArrayOfFriendRequest" />
+      <xs:complexType name="FriendRequest">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="friendUsername" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="idRequest" type="xs:int" />
+          <xs:element minOccurs="0" name="status" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="usernamePlayer" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="FriendRequest" nillable="true" type="tns:FriendRequest" />
     </xs:schema>
   </wsdl:types>
   <wsdl:message name="IPlayerManagement_AddPlayer_InputMessage">
@@ -372,11 +380,11 @@
   <wsdl:message name="IFriendRequests_SendFriendRequests_OutputMessage">
     <wsdl:part name="parameters" element="tns:SendFriendRequestsResponse" />
   </wsdl:message>
-  <wsdl:message name="IFriendRequests_DeclienFriendRequests_InputMessage">
-    <wsdl:part name="parameters" element="tns:DeclienFriendRequests" />
+  <wsdl:message name="IFriendRequests_DeclineFriendRequests_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeclineFriendRequests" />
   </wsdl:message>
-  <wsdl:message name="IFriendRequests_DeclienFriendRequests_OutputMessage">
-    <wsdl:part name="parameters" element="tns:DeclienFriendRequestsResponse" />
+  <wsdl:message name="IFriendRequests_DeclineFriendRequests_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeclineFriendRequestsResponse" />
   </wsdl:message>
   <wsdl:portType name="IPlayerManagement">
     <wsdl:operation name="AddPlayer">
@@ -423,9 +431,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IFriendRequests/SendFriendRequests" message="tns:IFriendRequests_SendFriendRequests_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFriendRequests/SendFriendRequestsResponse" message="tns:IFriendRequests_SendFriendRequests_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="DeclienFriendRequests">
-      <wsdl:input wsaw:Action="http://tempuri.org/IFriendRequests/DeclienFriendRequests" message="tns:IFriendRequests_DeclienFriendRequests_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IFriendRequests/DeclienFriendRequestsResponse" message="tns:IFriendRequests_DeclienFriendRequests_OutputMessage" />
+    <wsdl:operation name="DeclineFriendRequests">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFriendRequests/DeclineFriendRequests" message="tns:IFriendRequests_DeclineFriendRequests_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFriendRequests/DeclineFriendRequestsResponse" message="tns:IFriendRequests_DeclineFriendRequests_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IPlayerManagement" type="tns:IPlayerManagement">
@@ -529,8 +537,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="DeclienFriendRequests">
-      <soap12:operation soapAction="http://tempuri.org/IFriendRequests/DeclienFriendRequests" style="document" />
+    <wsdl:operation name="DeclineFriendRequests">
+      <soap12:operation soapAction="http://tempuri.org/IFriendRequests/DeclineFriendRequests" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

@@ -13,18 +13,18 @@ namespace DataAccess
     using System.Collections.Generic;
     using System.Runtime.Serialization;
 
-    [DataContract]
+    
     public partial class FriendRequest
     {
-        [DataMember]
+       
         public int idRequest { get; set; }
-        [DataMember]
+       
         public string usernamePlayer { get; set; }
-        [DataMember]
+        
         public string friendUsername { get; set; }
-        [DataMember]
+        
         public string status { get; set; }
-        [DataMember]
+        
         public virtual Player Player { get; set; }
     }
 }

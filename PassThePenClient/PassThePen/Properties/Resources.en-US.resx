@@ -185,7 +185,15 @@
     <value>Requests</value>
     <comment>Used by: MainMenu</comment>
   </data>
+  <data name="MainMenu_FriendsRequests_Label" xml:space="preserve">
+    <value>Pending requests</value>
+    <comment>Used by: MainMenu</comment>
+  </data>
   <data name="MainMenu_Friends_Button" xml:space="preserve">
+    <value>Friends</value>
+    <comment>Used by: MainMenu</comment>
+  </data>
+  <data name="MainMenu_Friends_Label" xml:space="preserve">
     <value>Friends</value>
     <comment>Used by: MainMenu</comment>
   </data>

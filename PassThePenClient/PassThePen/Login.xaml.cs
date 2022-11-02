@@ -49,6 +49,7 @@ namespace PassThePen
             {
                 MessageBox.Show("Hubo un error en la validacion");
             }
+            client.Close();
         }
 
         private void Button_Register_Click(object sender, RoutedEventArgs e)

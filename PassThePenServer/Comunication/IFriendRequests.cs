@@ -1,4 +1,4 @@
-﻿using DataAccess;
+﻿using Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +14,7 @@ namespace Comunication
     public interface IFriendRequests
     {
         [OperationContract]
-        List<string> GetFriendRequestsList();
+        List<Domain.FriendRequest> GetFriendRequestsList(string username);
 
         [OperationContract]
         int SendFriendRequests(Player player);

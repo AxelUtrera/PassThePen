@@ -15,7 +15,7 @@ namespace PassThePen.PassThePenService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Player", Namespace="http://schemas.datacontract.org/2004/07/DataAccess")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Player", Namespace="http://schemas.datacontract.org/2004/07/Domain")]
     [System.SerializableAttribute()]
     public partial class Player : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -124,6 +124,99 @@ namespace PassThePen.PassThePenService {
                 if ((object.ReferenceEquals(this.usernameField, value) != true)) {
                     this.usernameField = value;
                     this.RaisePropertyChanged("username");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="FriendRequest", Namespace="http://schemas.datacontract.org/2004/07/Domain")]
+    [System.SerializableAttribute()]
+    public partial class FriendRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string friendUsernameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idRequestField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string statusField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string usernamePlayerField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string friendUsername {
+            get {
+                return this.friendUsernameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.friendUsernameField, value) != true)) {
+                    this.friendUsernameField = value;
+                    this.RaisePropertyChanged("friendUsername");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int idRequest {
+            get {
+                return this.idRequestField;
+            }
+            set {
+                if ((this.idRequestField.Equals(value) != true)) {
+                    this.idRequestField = value;
+                    this.RaisePropertyChanged("idRequest");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string status {
+            get {
+                return this.statusField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.statusField, value) != true)) {
+                    this.statusField = value;
+                    this.RaisePropertyChanged("status");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string usernamePlayer {
+            get {
+                return this.usernamePlayerField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.usernamePlayerField, value) != true)) {
+                    this.usernamePlayerField = value;
+                    this.RaisePropertyChanged("usernamePlayer");
                 }
             }
         }
@@ -321,10 +414,10 @@ namespace PassThePen.PassThePenService {
     public interface IFriendRequests {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendRequests/GetFriendRequestsList", ReplyAction="http://tempuri.org/IFriendRequests/GetFriendRequestsListResponse")]
-        string[] GetFriendRequestsList();
+        PassThePen.PassThePenService.FriendRequest[] GetFriendRequestsList(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendRequests/GetFriendRequestsList", ReplyAction="http://tempuri.org/IFriendRequests/GetFriendRequestsListResponse")]
-        System.Threading.Tasks.Task<string[]> GetFriendRequestsListAsync();
+        System.Threading.Tasks.Task<PassThePen.PassThePenService.FriendRequest[]> GetFriendRequestsListAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendRequests/SendFriendRequests", ReplyAction="http://tempuri.org/IFriendRequests/SendFriendRequestsResponse")]
         int SendFriendRequests(PassThePen.PassThePenService.Player player);
@@ -332,11 +425,11 @@ namespace PassThePen.PassThePenService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendRequests/SendFriendRequests", ReplyAction="http://tempuri.org/IFriendRequests/SendFriendRequestsResponse")]
         System.Threading.Tasks.Task<int> SendFriendRequestsAsync(PassThePen.PassThePenService.Player player);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendRequests/DeclienFriendRequests", ReplyAction="http://tempuri.org/IFriendRequests/DeclienFriendRequestsResponse")]
-        int DeclienFriendRequests(PassThePen.PassThePenService.Player player);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendRequests/DeclineFriendRequests", ReplyAction="http://tempuri.org/IFriendRequests/DeclineFriendRequestsResponse")]
+        int DeclineFriendRequests(PassThePen.PassThePenService.Player player);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendRequests/DeclienFriendRequests", ReplyAction="http://tempuri.org/IFriendRequests/DeclienFriendRequestsResponse")]
-        System.Threading.Tasks.Task<int> DeclienFriendRequestsAsync(PassThePen.PassThePenService.Player player);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendRequests/DeclineFriendRequests", ReplyAction="http://tempuri.org/IFriendRequests/DeclineFriendRequestsResponse")]
+        System.Threading.Tasks.Task<int> DeclineFriendRequestsAsync(PassThePen.PassThePenService.Player player);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -366,12 +459,12 @@ namespace PassThePen.PassThePenService {
                 base(binding, remoteAddress) {
         }
         
-        public string[] GetFriendRequestsList() {
-            return base.Channel.GetFriendRequestsList();
+        public PassThePen.PassThePenService.FriendRequest[] GetFriendRequestsList(string username) {
+            return base.Channel.GetFriendRequestsList(username);
         }
         
-        public System.Threading.Tasks.Task<string[]> GetFriendRequestsListAsync() {
-            return base.Channel.GetFriendRequestsListAsync();
+        public System.Threading.Tasks.Task<PassThePen.PassThePenService.FriendRequest[]> GetFriendRequestsListAsync(string username) {
+            return base.Channel.GetFriendRequestsListAsync(username);
         }
         
         public int SendFriendRequests(PassThePen.PassThePenService.Player player) {
@@ -382,12 +475,12 @@ namespace PassThePen.PassThePenService {
             return base.Channel.SendFriendRequestsAsync(player);
         }
         
-        public int DeclienFriendRequests(PassThePen.PassThePenService.Player player) {
-            return base.Channel.DeclienFriendRequests(player);
+        public int DeclineFriendRequests(PassThePen.PassThePenService.Player player) {
+            return base.Channel.DeclineFriendRequests(player);
         }
         
-        public System.Threading.Tasks.Task<int> DeclienFriendRequestsAsync(PassThePen.PassThePenService.Player player) {
-            return base.Channel.DeclienFriendRequestsAsync(player);
+        public System.Threading.Tasks.Task<int> DeclineFriendRequestsAsync(PassThePen.PassThePenService.Player player) {
+            return base.Channel.DeclineFriendRequestsAsync(player);
         }
     }
 }
