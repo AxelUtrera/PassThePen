@@ -37,7 +37,6 @@ namespace Logic
                 return friendRequestList;
             }
 
-           
         }
 
     }

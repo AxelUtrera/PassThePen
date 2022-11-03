@@ -35,7 +35,6 @@ namespace PassThePen
                 password = PasswordBox_PasswordUser.Password
             };
 
-            //200 = status code "OK"
             int playerValid = 200;
             int resultAutenticatePlayer = client.AutenticatePlayer(player);
            
