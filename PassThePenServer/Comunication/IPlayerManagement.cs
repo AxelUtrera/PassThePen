@@ -25,6 +25,9 @@ namespace Comunication
 
         [OperationContract]
         int UpdatePassword(string email, string password);
+
+        [OperationContract]
+        List<Friends> GetFriends(String username);
     }
             
       

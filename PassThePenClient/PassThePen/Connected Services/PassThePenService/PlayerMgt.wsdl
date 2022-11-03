@@ -163,10 +163,24 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
+      <xs:element name="GetFriends">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetFriendsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="GetFriendsResult" nillable="true" type="q4:ArrayOfFriends" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="AutenticatePlayer">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="player" nillable="true" type="q4:Player" />
+            <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="player" nillable="true" type="q5:Player" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -217,14 +231,14 @@
       <xs:element name="GetFriendRequestsListResponse">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="GetFriendRequestsListResult" nillable="true" type="q5:ArrayOfFriendRequest" />
+            <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="GetFriendRequestsListResult" nillable="true" type="q6:ArrayOfFriendRequest" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="SendFriendRequests">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="player" nillable="true" type="q6:Player" />
+            <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="player" nillable="true" type="q7:Player" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -238,7 +252,7 @@
       <xs:element name="DeclineFriendRequests">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="player" nillable="true" type="q7:Player" />
+            <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="player" nillable="true" type="q8:Player" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -303,6 +317,20 @@
         </xs:sequence>
       </xs:complexType>
       <xs:element name="Player" nillable="true" type="tns:Player" />
+      <xs:complexType name="ArrayOfFriends">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Friends" nillable="true" type="tns:Friends" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfFriends" nillable="true" type="tns:ArrayOfFriends" />
+      <xs:complexType name="Friends">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="friendUsername" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="idPlayerFriends" type="xs:int" />
+          <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="Friends" nillable="true" type="tns:Friends" />
       <xs:complexType name="ArrayOfFriendRequest">
         <xs:sequence>
           <xs:element minOccurs="0" maxOccurs="unbounded" name="FriendRequest" nillable="true" type="tns:FriendRequest" />
@@ -349,6 +377,12 @@
   </wsdl:message>
   <wsdl:message name="IPlayerManagement_UpdatePassword_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdatePasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPlayerManagement_GetFriends_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFriends" />
+  </wsdl:message>
+  <wsdl:message name="IPlayerManagement_GetFriends_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFriendsResponse" />
   </wsdl:message>
   <wsdl:message name="IAutentication_AutenticatePlayer_InputMessage">
     <wsdl:part name="parameters" element="tns:AutenticatePlayer" />
@@ -406,6 +440,10 @@
     <wsdl:operation name="UpdatePassword">
       <wsdl:input wsaw:Action="http://tempuri.org/IPlayerManagement/UpdatePassword" message="tns:IPlayerManagement_UpdatePassword_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPlayerManagement/UpdatePasswordResponse" message="tns:IPlayerManagement_UpdatePassword_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFriends">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerManagement/GetFriends" message="tns:IPlayerManagement_GetFriends_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerManagement/GetFriendsResponse" message="tns:IPlayerManagement_GetFriends_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IAutentication">
@@ -484,6 +522,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetFriends">
+      <soap12:operation soapAction="http://tempuri.org/IPlayerManagement/GetFriends" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="NetTcpBinding_IAutentication" type="tns:IAutentication">
     <wsp:PolicyReference URI="#NetTcpBinding_IAutentication_policy" />
@@ -553,7 +600,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>DESKTOP-PIQCHB4\J1000</Upn>
+          <Upn>DESKTOP-POD0G4T\DELL</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -562,7 +609,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>DESKTOP-PIQCHB4\J1000</Upn>
+          <Upn>DESKTOP-POD0G4T\DELL</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -571,7 +618,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>DESKTOP-PIQCHB4\J1000</Upn>
+          <Upn>DESKTOP-POD0G4T\DELL</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

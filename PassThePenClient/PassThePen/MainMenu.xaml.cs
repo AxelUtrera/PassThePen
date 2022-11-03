@@ -1,4 +1,5 @@
-﻿using PassThePen.Properties;
+﻿using PassThePen.PassThePenService;
+using PassThePen.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,7 @@ namespace PassThePen
         public MainMenu()
         {
             InitializeComponent();
+            RecoverListFriends();
         }
 
         private void Button_Profile_Click(object sender, RoutedEventArgs e)
@@ -80,6 +82,19 @@ namespace PassThePen
             client.Close();
         }
 
+        private void RecoverListFriends()
+        {
+            PassThePenService.PlayerManagementClient client = new PassThePenService.PlayerManagementClient();
+            Friends[] friends = client.GetFriends(username);
 
+            for(int index = 0; index < friends.Count(); index++)
+            {
+                ListBoxItem item = new ListBoxItem();
+                item.Content = friends[index].friendUsername;
+                item.Foreground = Brushes.Black;
+                ListBox_MainMenu.Items.Add(item);
+            }
+            client.Close();
+        }
     }
 }

@@ -38,6 +38,12 @@ namespace Comunication
             PlayerLogic playerLogic = new PlayerLogic();
             return playerLogic.UpdatePasswordEmail(SendEmail, password);
         }
+
+        public List<Friends> GetFriends(String username)
+        {
+            PlayerLogic playerLogic = new PlayerLogic();
+            return playerLogic.RecoverFriends(username);
+        }
     }
 
     public partial class ImplementationServices : IAutentication

@@ -161,6 +161,9 @@
     <None Include="Connected Services\PassThePenService\PassThePen.PassThePenService.FriendRequest.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\PassThePenService\PassThePen.PassThePenService.Friends.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\PassThePenService\PassThePen.PassThePenService.Player.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

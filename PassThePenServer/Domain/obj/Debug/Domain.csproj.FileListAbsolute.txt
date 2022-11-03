@@ -4,3 +4,9 @@ C:\Users\moron\OneDrive - Universidad Veracruzana\7mo semestre\tecnologias para 
 C:\Users\moron\OneDrive - Universidad Veracruzana\7mo semestre\tecnologias para la construccion\Proyecto final\PassThePenServer\Domain\obj\Debug\Domain.csproj.CoreCompileInputs.cache
 C:\Users\moron\OneDrive - Universidad Veracruzana\7mo semestre\tecnologias para la construccion\Proyecto final\PassThePenServer\Domain\obj\Debug\Domain.dll
 C:\Users\moron\OneDrive - Universidad Veracruzana\7mo semestre\tecnologias para la construccion\Proyecto final\PassThePenServer\Domain\obj\Debug\Domain.pdb
+C:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\Domain\bin\Debug\Domain.dll
+C:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\Domain\bin\Debug\Domain.pdb
+C:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\Domain\obj\Debug\Domain.csproj.AssemblyReference.cache
+C:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\Domain\obj\Debug\Domain.csproj.CoreCompileInputs.cache
+C:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\Domain\obj\Debug\Domain.dll
+C:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\Domain\obj\Debug\Domain.pdb
