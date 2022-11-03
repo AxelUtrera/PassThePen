@@ -42,7 +42,6 @@ namespace PassThePen
             if (resultAutenticatePlayer == playerValid)
             {
                 MainMenu.username = TextBox_Username.Text;
-                MessageBox.Show("La validacion fue exitosa");
                 InvokeMainMenu();
             }
             else

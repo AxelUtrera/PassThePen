@@ -10,6 +10,10 @@ PassThePenServer/DataAccess/obj
 PassThePenServer/DataAccess/bin
 PassThePenServer/Logic/obj
 PassThePenServer/Logic/bin
-
+PassThePenServer/Domain/obj/ 
+PassThePenServer/Domain/bin/
+PassThePenServer/PassThePenTest/obj/ 
+PassThePenServer/PassThePenTest/obj/ 
+PassThePenServer/TestResults
 
 
