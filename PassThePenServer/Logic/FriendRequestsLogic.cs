@@ -34,7 +34,6 @@ namespace Logic
 
                     friendRequestList.Add(friendRequest);
                 }
-
                 return friendRequestList;
             }
 

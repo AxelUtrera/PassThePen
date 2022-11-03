@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\Da
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{7A4EFFCB-9055-4FA6-BF77-D5F6213F2670}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PassThePenTest", "PassThePenTest\PassThePenTest.csproj", "{4A6878F5-6A29-48EE-A31E-7D3856A36C89}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{7A4EFFCB-9055-4FA6-BF77-D5F6213F2670}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A4EFFCB-9055-4FA6-BF77-D5F6213F2670}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A4EFFCB-9055-4FA6-BF77-D5F6213F2670}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A6878F5-6A29-48EE-A31E-7D3856A36C89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A6878F5-6A29-48EE-A31E-7D3856A36C89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A6878F5-6A29-48EE-A31E-7D3856A36C89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A6878F5-6A29-48EE-A31E-7D3856A36C89}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

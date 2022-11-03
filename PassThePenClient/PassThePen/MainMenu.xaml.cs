@@ -76,7 +76,6 @@ namespace PassThePen
         {
             PassThePenService.FriendRequestsClient client = new PassThePenService.FriendRequestsClient();
             ListBox_MainMenu.ItemsSource = client.GetFriendRequestsList(username);
-            Console.WriteLine(client.GetFriendRequestsList(username));
             client.Close();
         }
 
