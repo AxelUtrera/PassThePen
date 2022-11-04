@@ -18,5 +18,8 @@ namespace Domain
 
         [DataMember]
         public string friendUsername { get; set; }
+
+        [DataMember]
+        public bool status { get; set; }
     }
 }

@@ -162,6 +162,7 @@ namespace Logic
                         newFriend.idPlayerFriends = friends[index].idFriend;
                         newFriend.username = friends[index].usernamePlayer;
                         newFriend.friendUsername = friends[index].friendUsername;
+                        newFriend.status = false;
                         friendsList.Add(newFriend);
                     }
                 }
