@@ -1,7 +1,9 @@
-﻿using PassThePen.Properties;
+﻿using PassThePen.PassThePenService;
+using PassThePen.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,23 +21,29 @@ namespace PassThePen
     /// <summary>
     /// Lógica de interacción para MainMenu.xaml
     /// </summary>
-    public partial class MainMenu : Window
+    public partial class MainMenu : Window, PassThePenService.IPlayerConexionCallback
     {
         public static string username;
 
         public MainMenu()
         {
             InitializeComponent();
+            Connected();
+            GetFriends();
         }
 
         private void Button_Profile_Click(object sender, RoutedEventArgs e)
         {
             Profile profile = new Profile();
             profile.Show();
+            
         }
 
         private void Button_ExitGame_Click(object sender, RoutedEventArgs e)
         {
+            InstanceContext instanceContext = new InstanceContext(this);
+            PassThePenService.PlayerConexionClient client = new PlayerConexionClient(instanceContext);
+            client.Disconnect(username);
             this.Close();
         }
 
@@ -79,6 +87,40 @@ namespace PassThePen
             client.Close();
         }
 
+        private void Connected()
+        {
+            InstanceContext instanceContext = new InstanceContext(this);
+            PassThePenService.PlayerConexionClient client = new PlayerConexionClient(instanceContext);
+            client.Connect(username);
 
+            
+            
+        }
+
+        private void GetFriends()
+        {
+            PassThePenService.PlayerManagementClient client = new PlayerManagementClient();
+            client.GetFriends(username);
+            
+        }
+
+        public void PlayersCallBack(Friends[] friends)
+        {
+            for (int index = 0; index < friends.Count(); index++)
+            {
+                ListBoxItem item = new ListBoxItem();
+                if (friends[index].status)
+                {
+                    item.Content = friends[index].friendUsername;
+                    item.Foreground = Brushes.Green;
+                }
+                else
+                {
+                    item.Content = friends[index].friendUsername;
+                    item.Foreground = Brushes.Red;
+                }
+                ListBox_MainMenu.Items.Add(item);
+            }
+        }
     }
 }

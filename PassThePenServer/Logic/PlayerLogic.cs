@@ -144,6 +144,34 @@ namespace Logic
             }
             return result;
         }
-        
+
+        public List<Domain.Friends> RecoverFriends(string username)
+        {
+            List<Domain.Friends> friendsList = new List<Domain.Friends>();
+            using (var dataBaseContext = new passthepenEntities())
+            {
+                try
+                {
+                   var friends = (from Friends in dataBaseContext.Friends
+                                   where
+                                   Friends.usernamePlayer == username
+                                   select Friends).ToList();
+                    for(int index = 0; index < friends.Count(); index++)
+                    {
+                        Domain.Friends newFriend = new Domain.Friends();
+                        newFriend.idPlayerFriends = friends[index].idFriend;
+                        newFriend.username = friends[index].usernamePlayer;
+                        newFriend.friendUsername = friends[index].friendUsername;
+                        newFriend.status = false;
+                        friendsList.Add(newFriend);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                }
+            }
+            return friendsList;
+        }
     }
 }

@@ -152,8 +152,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Properties\Challenge.en-US.resx" />
-    <EmbeddedResource Include="Properties\Challenge.es-MX.resx" />
+    <EmbeddedResource Include="Properties\Deck.en-US.resx" />
     <EmbeddedResource Include="Properties\Resources.en-US.resx" />
     <EmbeddedResource Include="Properties\Resources.es-MX.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">

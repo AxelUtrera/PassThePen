@@ -3,11 +3,13 @@ using Logic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Comunication
 {
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
     public partial class ImplementationServices : IPlayerManagement
     {
         public int AddPlayer(Player player)
@@ -37,6 +39,19 @@ namespace Comunication
         {
             PlayerLogic playerLogic = new PlayerLogic();
             return playerLogic.UpdatePasswordEmail(SendEmail, password);
+        }
+
+        public void GetFriends(String username)
+        {
+            PlayerLogic playerLogic = new PlayerLogic();
+            List<Friends> friends = playerLogic.RecoverFriends(username);
+            Friends[] friendsArray = new Friends[friends.Count];
+            for(int index = 0; index < friends.Count; index++)
+            {
+                friendsArray[index] = friends[index];
+            }
+            
+            RecoverPlayers(friendsArray, username);
         }
     }
 
@@ -78,6 +93,58 @@ namespace Comunication
         public int SendFriendRequests(Player player)
         {
             throw new NotImplementedException();
+        }
+    }
+
+    public partial class ImplementationServices : IPlayerConexion
+    {
+        List<ConnectedUser> users = new List<ConnectedUser>();
+
+        public void Connect(string username)
+        {
+            ConnectedUser user = new ConnectedUser()
+            {
+                username = username,
+                operationContext = OperationContext.Current
+            };
+            
+            users.Add(user);
+        }
+
+        public void Disconnect(string username)
+        {
+            var user = users.FirstOrDefault(i => i.username == username);
+            if (user != null)
+            {
+                users.Remove(user);
+            }
+        }
+
+        public void RecoverPlayers(Friends[] friends, string username)
+        {   
+
+            
+            for(int index = 0; index < users.Count; index++)
+            {
+                for(int index2 = 0; index2 < friends.Length; index2++)
+                {
+                    if (! friends[index2].status)
+                    {
+                        if (users[index].username.Equals(friends[index2].friendUsername))
+                        {
+                            friends[index2].status = true;
+                        }
+                    }
+                }
+            }
+            for(int index = 0; index < users.Count; index++)
+            {
+                if (username.Equals(users[index].username))
+                {
+                    users[index].operationContext.GetCallbackChannel<IPlayersServicesCallBack>().PlayersCallBack(friends);
+                }   
+            }
+            
         }
     }
 }

@@ -87,6 +87,35 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IPlayerConexion_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xs:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:import namespace="http://schemas.datacontract.org/2004/07/Domain" />
@@ -161,6 +190,18 @@
           <xs:sequence>
             <xs:element minOccurs="0" name="UpdatePasswordResult" type="xs:int" />
           </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetFriends">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetFriendsResponse">
+        <xs:complexType>
+          <xs:sequence />
         </xs:complexType>
       </xs:element>
       <xs:element name="AutenticatePlayer">
@@ -249,6 +290,50 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
+      <xs:element name="Connect">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ConnectResponse">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Disconnect">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DisconnectResponse">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="RecoverPlayers">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="friends" nillable="true" type="q8:ArrayOfFriends" />
+            <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="RecoverPlayersResponse">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="PlayersCallBack">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="friends" nillable="true" type="q9:ArrayOfFriends" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
     </xs:schema>
     <xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:element name="anyType" nillable="true" type="xs:anyType" />
@@ -318,6 +403,21 @@
         </xs:sequence>
       </xs:complexType>
       <xs:element name="FriendRequest" nillable="true" type="tns:FriendRequest" />
+      <xs:complexType name="ArrayOfFriends">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Friends" nillable="true" type="tns:Friends" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfFriends" nillable="true" type="tns:ArrayOfFriends" />
+      <xs:complexType name="Friends">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="friendUsername" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="idPlayerFriends" type="xs:int" />
+          <xs:element minOccurs="0" name="status" type="xs:boolean" />
+          <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="Friends" nillable="true" type="tns:Friends" />
     </xs:schema>
   </wsdl:types>
   <wsdl:message name="IPlayerManagement_AddPlayer_InputMessage">
@@ -349,6 +449,12 @@
   </wsdl:message>
   <wsdl:message name="IPlayerManagement_UpdatePassword_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdatePasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPlayerManagement_GetFriends_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFriends" />
+  </wsdl:message>
+  <wsdl:message name="IPlayerManagement_GetFriends_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFriendsResponse" />
   </wsdl:message>
   <wsdl:message name="IAutentication_AutenticatePlayer_InputMessage">
     <wsdl:part name="parameters" element="tns:AutenticatePlayer" />
@@ -386,6 +492,27 @@
   <wsdl:message name="IFriendRequests_DeclineFriendRequests_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeclineFriendRequestsResponse" />
   </wsdl:message>
+  <wsdl:message name="IPlayerConexion_Connect_InputMessage">
+    <wsdl:part name="parameters" element="tns:Connect" />
+  </wsdl:message>
+  <wsdl:message name="IPlayerConexion_Connect_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ConnectResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPlayerConexion_Disconnect_InputMessage">
+    <wsdl:part name="parameters" element="tns:Disconnect" />
+  </wsdl:message>
+  <wsdl:message name="IPlayerConexion_Disconnect_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DisconnectResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPlayerConexion_RecoverPlayers_InputMessage">
+    <wsdl:part name="parameters" element="tns:RecoverPlayers" />
+  </wsdl:message>
+  <wsdl:message name="IPlayerConexion_RecoverPlayers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RecoverPlayersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPlayerConexion_PlayersCallBack_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PlayersCallBack" />
+  </wsdl:message>
   <wsdl:portType name="IPlayerManagement">
     <wsdl:operation name="AddPlayer">
       <wsdl:input wsaw:Action="http://tempuri.org/IPlayerManagement/AddPlayer" message="tns:IPlayerManagement_AddPlayer_InputMessage" />
@@ -406,6 +533,10 @@
     <wsdl:operation name="UpdatePassword">
       <wsdl:input wsaw:Action="http://tempuri.org/IPlayerManagement/UpdatePassword" message="tns:IPlayerManagement_UpdatePassword_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPlayerManagement/UpdatePasswordResponse" message="tns:IPlayerManagement_UpdatePassword_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFriends">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerManagement/GetFriends" message="tns:IPlayerManagement_GetFriends_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerManagement/GetFriendsResponse" message="tns:IPlayerManagement_GetFriends_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IAutentication">
@@ -434,6 +565,23 @@
     <wsdl:operation name="DeclineFriendRequests">
       <wsdl:input wsaw:Action="http://tempuri.org/IFriendRequests/DeclineFriendRequests" message="tns:IFriendRequests_DeclineFriendRequests_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFriendRequests/DeclineFriendRequestsResponse" message="tns:IFriendRequests_DeclineFriendRequests_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IPlayerConexion">
+    <wsdl:operation name="Connect">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerConexion/Connect" message="tns:IPlayerConexion_Connect_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerConexion/ConnectResponse" message="tns:IPlayerConexion_Connect_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Disconnect">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerConexion/Disconnect" message="tns:IPlayerConexion_Disconnect_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerConexion/DisconnectResponse" message="tns:IPlayerConexion_Disconnect_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RecoverPlayers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerConexion/RecoverPlayers" message="tns:IPlayerConexion_RecoverPlayers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerConexion/RecoverPlayersResponse" message="tns:IPlayerConexion_RecoverPlayers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PlayersCallBack">
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerConexion/PlayersCallBack" message="tns:IPlayerConexion_PlayersCallBack_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IPlayerManagement" type="tns:IPlayerManagement">
@@ -477,6 +625,15 @@
     </wsdl:operation>
     <wsdl:operation name="UpdatePassword">
       <soap12:operation soapAction="http://tempuri.org/IPlayerManagement/UpdatePassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFriends">
+      <soap12:operation soapAction="http://tempuri.org/IPlayerManagement/GetFriends" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -547,13 +704,50 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IPlayerConexion" type="tns:IPlayerConexion">
+    <wsp:PolicyReference URI="#NetTcpBinding_IPlayerConexion_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="Connect">
+      <soap12:operation soapAction="http://tempuri.org/IPlayerConexion/Connect" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Disconnect">
+      <soap12:operation soapAction="http://tempuri.org/IPlayerConexion/Disconnect" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecoverPlayers">
+      <soap12:operation soapAction="http://tempuri.org/IPlayerConexion/RecoverPlayers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlayersCallBack">
+      <soap12:operation soapAction="http://tempuri.org/IPlayerConexion/PlayersCallBack" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
   <wsdl:service name="ImplementationServices">
     <wsdl:port name="NetTcpBinding_IPlayerManagement" binding="tns:NetTcpBinding_IPlayerManagement">
       <soap12:address location="net.tcp://localhost:8081/PassThePen" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>DESKTOP-PIQCHB4\J1000</Upn>
+          <Upn>DESKTOP-POD0G4T\DELL</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -562,7 +756,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>DESKTOP-PIQCHB4\J1000</Upn>
+          <Upn>DESKTOP-POD0G4T\DELL</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
@@ -571,7 +765,16 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>DESKTOP-PIQCHB4\J1000</Upn>
+          <Upn>DESKTOP-POD0G4T\DELL</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IPlayerConexion" binding="tns:NetTcpBinding_IPlayerConexion">
+      <soap12:address location="net.tcp://localhost:8081/PassThePen" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>DESKTOP-POD0G4T\DELL</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
