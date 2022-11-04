@@ -67,7 +67,10 @@ namespace PassThePen
         {
             label_FriendRequests.Visibility = Visibility.Collapsed;
             label_ListFriends.Visibility = Visibility.Visible;
-            
+            ListBox_FriendsRequests.Visibility = Visibility.Collapsed;
+            ListBox_FriendList.Visibility = Visibility.Visible;
+
+
         }
 
         private void Button_ConfirmRequests_Click(object sender, RoutedEventArgs e)
@@ -82,8 +85,10 @@ namespace PassThePen
 
         private void GenerateFriendRequestList()
         {
+            ListBox_FriendList.Visibility = Visibility.Collapsed;
+            ListBox_FriendsRequests.Visibility = Visibility.Visible;
             PassThePenService.FriendRequestsClient client = new PassThePenService.FriendRequestsClient();
-            ListBox_MainMenu.ItemsSource = client.GetFriendRequestsList(username);
+            ListBox_FriendsRequests.ItemsSource = client.GetFriendRequestsList(username);
             client.Close();
         }
 
@@ -106,6 +111,8 @@ namespace PassThePen
 
         public void PlayersCallBack(Friends[] friends)
         {
+            
+            List<Friends> friendList = new List<Friends>();
             for (int index = 0; index < friends.Count(); index++)
             {
                 ListBoxItem item = new ListBoxItem();
@@ -119,8 +126,10 @@ namespace PassThePen
                     item.Content = friends[index].friendUsername;
                     item.Foreground = Brushes.Red;
                 }
-                ListBox_MainMenu.Items.Add(item);
+                friendList.Add(friends[index]);
+                
             }
+            ListBox_FriendList.ItemsSource = friendList;
         }
     }
 }

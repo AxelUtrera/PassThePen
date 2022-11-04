@@ -76,11 +76,31 @@
                             <StackPanel>
                                 <Label Name="label_ListFriends" Content="{x:Static p:Resources.MainMenu_Friends_Label}" HorizontalAlignment="Center" FontWeight="Bold" />
                                 <Label Name="label_FriendRequests" Content="{x:Static p:Resources.MainMenu_FriendsRequests_Label}" HorizontalAlignment="Center" FontWeight="Bold" Visibility="Collapsed"/>
-                                <ListBox Name="ListBox_MainMenu"  Margin="0" Height="373" Width="300" BorderBrush="Transparent" HorizontalAlignment="Stretch">
+                                <ListBox Name="ListBox_FriendList"  Margin="0" Height="373" Width="300" BorderBrush="Transparent" HorizontalAlignment="Stretch">
                                     <ListBox.ItemTemplate >
                                         <DataTemplate>
                                             <Grid>
-                                                
+
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition/>
+                                                    <ColumnDefinition/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <Label Grid.Column="0" Content="{Binding friendUsername}" Margin="5,0,0,0" HorizontalAlignment="Left" FontSize="18" Width="185"/>
+                                                <StackPanel Grid.Column="1" Orientation="Horizontal" >
+                                                    
+                                                    <Image Source="Img/Icon_Decline.png" Width="30" HorizontalAlignment="Right" Margin="15,0,18,0" MouseLeftButtonDown="Button_DeclineRequests_Click" Cursor="Hand"/>
+                                                </StackPanel>
+
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                                <ListBox Name="ListBox_FriendsRequests"  Margin="0" Height="373" Width="300" BorderBrush="Transparent" HorizontalAlignment="Stretch" Visibility="Collapsed">
+                                    <ListBox.ItemTemplate >
+                                        <DataTemplate>
+                                            <Grid>
+
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition/>
                                                     <ColumnDefinition/>
@@ -91,7 +111,7 @@
                                                     <Image Source="Img/Icon_Confirm.png" Width="30" MouseLeftButtonDown="Button_ConfirmRequests_Click" Cursor="Hand"/>
                                                     <Image Source="Img/Icon_Decline.png" Width="30" HorizontalAlignment="Right" Margin="15,0,18,0" MouseLeftButtonDown="Button_DeclineRequests_Click" Cursor="Hand"/>
                                                 </StackPanel>
-                                                
+
                                             </Grid>
                                         </DataTemplate>
                                     </ListBox.ItemTemplate>
