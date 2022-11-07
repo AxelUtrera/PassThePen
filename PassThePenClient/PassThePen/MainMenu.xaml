@@ -193,7 +193,7 @@
                         <ColumnDefinition></ColumnDefinition>
                         
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Cursor="Hand" Margin="110,0,0,30" Width="250" Height="50" Foreground="#f3f3f3" FontSize="23" HorizontalAlignment="Left">
+                    <Button Grid.Column="0" Cursor="Hand" Margin="110,0,0,30" Width="250" Height="50" Foreground="#f3f3f3" FontSize="23" HorizontalAlignment="Left" Click="Button_StartMatch_Click">
                         <Button.Template >
                             <ControlTemplate TargetType="{x:Type Button}" >
                                 <Border Background="Green" BorderBrush="Green"  CornerRadius="7,7,7,7">

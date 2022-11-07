@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChatLogic.cs" />
     <Compile Include="Encription.cs" />
     <Compile Include="FriendRequestsLogic.cs" />
     <Compile Include="PlayerLogic.cs" />

@@ -221,8 +221,16 @@
     <value>Score</value>
     <comment>Used by: Match</comment>
   </data>
+  <data name="Match_StartTurn_Button" xml:space="preserve">
+    <value>Start Turn</value>
+    <comment>Used by: Match</comment>
+  </data>
   <data name="Match_TimeRemaining_Label" xml:space="preserve">
     <value>Time Remaining</value>
+    <comment>Used by: Match</comment>
+  </data>
+  <data name="Match_Turn_Label" xml:space="preserve">
+    <value>Current Turn</value>
     <comment>Used by: Match</comment>
   </data>
   <data name="Profile_Cancel_Button" xml:space="preserve">

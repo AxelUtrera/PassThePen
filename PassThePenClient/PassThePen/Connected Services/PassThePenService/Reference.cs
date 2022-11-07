@@ -673,4 +673,148 @@ namespace PassThePen.PassThePenService {
             return base.Channel.RecoverPlayersAsync(friends, username);
         }
     }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PassThePenService.IMatchManagement", CallbackContract=typeof(PassThePen.PassThePenService.IMatchManagementCallback))]
+    public interface IMatchManagement {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/SendCard")]
+        void SendCard(string card);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/SendCard")]
+        System.Threading.Tasks.Task SendCardAsync(string card);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/SelectTurnTime")]
+        void SelectTurnTime();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/SelectTurnTime")]
+        System.Threading.Tasks.Task SelectTurnTimeAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/StartTurnSignal")]
+        void StartTurnSignal();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/StartTurnSignal")]
+        System.Threading.Tasks.Task StartTurnSignalAsync();
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IMatchManagementCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/DistributeCard")]
+        void DistributeCard(string card);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/DistributeTurnTime")]
+        void DistributeTurnTime(int turnTime);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/ReturnStartTurnSignal")]
+        void ReturnStartTurnSignal();
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IMatchManagementChannel : PassThePen.PassThePenService.IMatchManagement, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class MatchManagementClient : System.ServiceModel.DuplexClientBase<PassThePen.PassThePenService.IMatchManagement>, PassThePen.PassThePenService.IMatchManagement {
+        
+        public MatchManagementClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
+        }
+        
+        public MatchManagementClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
+        }
+        
+        public MatchManagementClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public MatchManagementClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public MatchManagementClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
+        }
+        
+        public void SendCard(string card) {
+            base.Channel.SendCard(card);
+        }
+        
+        public System.Threading.Tasks.Task SendCardAsync(string card) {
+            return base.Channel.SendCardAsync(card);
+        }
+        
+        public void SelectTurnTime() {
+            base.Channel.SelectTurnTime();
+        }
+        
+        public System.Threading.Tasks.Task SelectTurnTimeAsync() {
+            return base.Channel.SelectTurnTimeAsync();
+        }
+        
+        public void StartTurnSignal() {
+            base.Channel.StartTurnSignal();
+        }
+        
+        public System.Threading.Tasks.Task StartTurnSignalAsync() {
+            return base.Channel.StartTurnSignalAsync();
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PassThePenService.IChatServices", CallbackContract=typeof(PassThePen.PassThePenService.IChatServicesCallback))]
+    public interface IChatServices {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatServices/SendMessage")]
+        void SendMessage(string senderUsername, string message);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatServices/SendMessage")]
+        System.Threading.Tasks.Task SendMessageAsync(string senderUsername, string message);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IChatServicesCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatServices/MessageSend")]
+        void MessageSend(string message);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IChatServicesChannel : PassThePen.PassThePenService.IChatServices, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ChatServicesClient : System.ServiceModel.DuplexClientBase<PassThePen.PassThePenService.IChatServices>, PassThePen.PassThePenService.IChatServices {
+        
+        public ChatServicesClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
+        }
+        
+        public ChatServicesClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
+        }
+        
+        public ChatServicesClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public ChatServicesClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public ChatServicesClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
+        }
+        
+        public void SendMessage(string senderUsername, string message) {
+            base.Channel.SendMessage(senderUsername, message);
+        }
+        
+        public System.Threading.Tasks.Task SendMessageAsync(string senderUsername, string message) {
+            return base.Channel.SendMessageAsync(senderUsername, message);
+        }
+    }
 }

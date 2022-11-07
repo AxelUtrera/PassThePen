@@ -131,5 +131,11 @@ namespace PassThePen
             }
             ListBox_FriendList.ItemsSource = friendList;
         }
+
+        private void Button_StartMatch_Click(object sender, RoutedEventArgs e)
+        {
+            Match match = new Match();
+            match.Show();
+        }
     }
 }

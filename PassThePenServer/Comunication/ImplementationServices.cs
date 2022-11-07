@@ -147,4 +147,36 @@ namespace Comunication
             
         }
     }
+
+    public partial class ImplementationServices : IMatchManagement
+    {
+
+        public void SelectTurnTime()
+        {
+            int[] seconds = { 15, 20, 25, 30 };
+            Random random = new Random();
+            int time = seconds[random.Next(seconds.Length)];
+            OperationContext.Current.GetCallbackChannel<IMatchCallback>().DistributeTurnTime(time);
+        }
+
+        public void SendCard(string card)
+        {
+            OperationContext.Current.GetCallbackChannel<IMatchCallback>().DistributeCard(card);
+        }
+
+        public void StartTurnSignal()
+        {
+            OperationContext.Current.GetCallbackChannel<IMatchCallback>().ReturnStartTurnSignal();
+        }
+    }
+
+    public partial class ImplementationServices : IChatServices
+    {
+        public void SendMessage(string senderUsername, string message)
+        {
+            ChatLogic chatLogic = new ChatLogic();
+            string completeMessage = chatLogic.BuildMessage(senderUsername, message);
+            OperationContext.Current.GetCallbackChannel<IChatServiceCallback>().MessageSend(completeMessage);
+        }
+    }
 }

@@ -11,11 +11,11 @@
         Title="Match" Height="1080" Width="1920">
 
     <Grid>
-        
+
         <Rectangle HorizontalAlignment="Center" Height="120" Fill="LightGray" Stroke="LightGray" VerticalAlignment="Top" Width="1920"/>
         <Label Content="{x:Static p:Resources.Match_Score_Label}" HorizontalAlignment="Left" Margin="1680,30,0,0" VerticalAlignment="Top" FontSize="20"/>
         <Label Content="{x:Static p:Resources.Match_TimeRemaining_Label}" HorizontalAlignment="Center" Margin="0,30,0,0" VerticalAlignment="Top" FontSize="20"/>
-        <Label x:Name="Label_TimeRemaining" Content="X" HorizontalAlignment="Center" Margin="0,70,0,0" VerticalAlignment="Top" FontSize="30"/>
+        <Label x:Name="Label_TimeRemaining" Content="X" HorizontalAlignment="Left" Margin="940,61,0,0" VerticalAlignment="Top" FontSize="35"/>
         <Label Content="{x:Static p:Resources.Match_CurrentDraw_Label}" HorizontalAlignment="Left" Margin="171,30,0,0" VerticalAlignment="Top" FontSize="20"/>
         <Image HorizontalAlignment="Left" Height="36" Margin="1727,69,0,0" VerticalAlignment="Top" Width="34" Source="C:\Users\danie\Documents\Universidad\7mo Semestre\Tecnologias\PassThePen\PassThePenClient\PassThePen\Img\Icon_Score.png"/>
         <Label x:Name="Label_Score" Content="50" HorizontalAlignment="Left" Margin="1679,60,0,0" VerticalAlignment="Top" FontSize="30"/>
@@ -64,7 +64,6 @@
                 </InkCanvas.DefaultDrawingAttributes>
             </InkCanvas>
         </Border>
-        <TextBox FontSize="15" HorizontalAlignment="Left" Margin="1538,142,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="372" Height="828"/>
         <Button Cursor="Hand" Margin="842,156,1038,884" Width="40" Height="40" Foreground="White" FontSize="13" Click="Button_SetEraser_Click" Panel.ZIndex="1">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
@@ -110,15 +109,40 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <TextBox FontSize="15" HorizontalAlignment="Left" Margin="1538,990,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="302" Height="75"/>
-        <Button Cursor="Hand" HorizontalAlignment="Left" Margin="1845,990,0,0" VerticalAlignment="Top" Height="75" Width="65">
+        <Button Cursor="Hand" HorizontalAlignment="Left" Margin="1840,968,0,0" VerticalAlignment="Top" Height="88" Width="70" Click="Button_SendMessage_Click" IsDefault="True">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
-                    <Border Background="LightGray" BorderBrush="LightGray" CornerRadius="15,15,15,15">
+                    <Border Background="CornflowerBlue" BorderBrush="CornflowerBlue" CornerRadius="15,15,15,15">
                         <Image Source="C:\Users\danie\Documents\Universidad\7mo Semestre\Tecnologias\PassThePen\PassThePenClient\PassThePen\Img\Icon_SendMessage.png" Margin="5,0,5,0"></Image>
                     </Border>
                 </ControlTemplate>
             </Button.Template>
         </Button>
+        <ListBox x:Name="ListBox_ChatBox" BorderThickness="5" BorderBrush="Green" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="1534,142,10,130" FontSize="15" IsEnabled="True">
+            <ListBox.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"></Setter>
+                </Style>
+            </ListBox.Resources>
+        </ListBox>
+        <TextBox x:Name="TextBox_Message" BorderThickness="5" BorderBrush="Green" FontSize="15" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="298" Height="94" Margin="1531,968,0,0">
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"></Setter>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <Label Content="{x:Static p:Resources.Match_Turn_Label}" HorizontalAlignment="Left" Margin="136,746,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Content="X" HorizontalAlignment="Left" Margin="181,788,0,0" VerticalAlignment="Top" FontSize="30"/>
+        <Button x:Name="Button_StartTurn" HorizontalAlignment="Left" Cursor="Hand" Margin="97,894,0,0" Foreground="White" VerticalAlignment="Top" Height="72" Width="195" FontSize="20" Click="Button_StartTurn_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="Green" BorderBrush="Green" CornerRadius="15, 15, 15, 15">
+                        <ContentPresenter Content="{x:Static p:Resources.Match_StartTurn_Button}" HorizontalAlignment="Center" VerticalAlignment="Center"></ContentPresenter>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
     </Grid>
 </Window>
