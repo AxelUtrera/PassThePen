@@ -37,7 +37,7 @@
             <Label x:Name="label_Password" Margin="195,30 ,50,0" FontSize="15" Content="{x:Static p:Resources.Global_Label_Password}"/>
             <PasswordBox Name="PasswordBox_PasswordUser"  Margin="200,0" BorderBrush="Black" Height="20"/>
 
-            <Button Cursor="Hand" x:Name="Button_login" Margin="50,25,50,0" Width="200" Height="35" Foreground="#f3f3f3" FontSize="16" Click="Button_login_Click" >
+            <Button Cursor="Hand" x:Name="Button_login" Margin="50,25,50,0" Width="200" Height="35" Foreground="#f3f3f3" FontSize="16" Click="Button_login_Click" IsDefault="True">
                 <Button.Template >
                     <ControlTemplate TargetType="{x:Type Button}" >
                         <Border Background="Green" BorderBrush="Green"  CornerRadius="7,7,7,7">

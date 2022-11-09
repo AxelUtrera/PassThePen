@@ -123,7 +123,6 @@ namespace Comunication
         public void RecoverPlayers(Friends[] friends, string username)
         {   
 
-            
             for(int index = 0; index < users.Count; index++)
             {
                 for(int index2 = 0; index2 < friends.Length; index2++)
@@ -137,6 +136,7 @@ namespace Comunication
                     }
                 }
             }
+
             for(int index = 0; index < users.Count; index++)
             {
                 if (username.Equals(users[index].username))
