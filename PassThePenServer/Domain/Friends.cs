@@ -21,5 +21,11 @@ namespace Domain
 
         [DataMember]
         public bool status { get; set; }
+        
+        override
+        public string ToString()
+        {
+            return friendUsername;
+        }
     }
 }

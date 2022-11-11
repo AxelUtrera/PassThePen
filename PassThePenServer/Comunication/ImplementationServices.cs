@@ -41,7 +41,7 @@ namespace Comunication
             return playerLogic.UpdatePasswordEmail(SendEmail, password);
         }
 
-        public void GetFriends(String username)
+        public Friends[] GetFriends(String username)
         {
             PlayerLogic playerLogic = new PlayerLogic();
             List<Friends> friends = playerLogic.RecoverFriends(username);
@@ -50,8 +50,7 @@ namespace Comunication
             {
                 friendsArray[index] = friends[index];
             }
-            
-            RecoverPlayers(friendsArray, username);
+            return friendsArray;
         }
     }
 
@@ -120,33 +119,37 @@ namespace Comunication
             }
         }
 
-        public void RecoverPlayers(Friends[] friends, string username)
-        {   
-
-            
-            for(int index = 0; index < users.Count; index++)
+        public void RecoverOnlinePlayers(string username)
+        {
+            Friends[] friendsArray = GetFriends(username);
+            for (int index = 0; index < users.Count; index++)
             {
-                for(int index2 = 0; index2 < friends.Length; index2++)
+                for (int index2 = 0; index2 < friendsArray.Length; index2++)
                 {
-                    if (! friends[index2].status)
+                    if (!friendsArray[index2].status)
                     {
-                        if (users[index].username.Equals(friends[index2].friendUsername))
+                        if (users[index].username.Equals(friendsArray[index2].friendUsername))
                         {
-                            friends[index2].status = true;
+                            friendsArray[index2].status = true;
                         }
                     }
                 }
             }
+            SendOnlinePlayers(username, friendsArray);
+        }
+        
+        public void SendOnlinePlayers(string username, Friends[] friendsArray)
+        {
             for(int index = 0; index < users.Count; index++)
             {
                 if (username.Equals(users[index].username))
                 {
-                    users[index].operationContext.GetCallbackChannel<IPlayersServicesCallBack>().PlayersCallBack(friends);
+                    users[index].operationContext.GetCallbackChannel<IPlayersServicesCallBack>().PlayersCallBack(friendsArray);
                 }   
             }
             
+            }
         }
-    }
 
     public partial class ImplementationServices : IMatchManagement
     {

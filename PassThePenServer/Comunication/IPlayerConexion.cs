@@ -18,7 +18,10 @@ namespace Comunication
         void Disconnect(string username);
 
         [OperationContract]
-        void RecoverPlayers(Friends[] friends, string username);
+        void RecoverOnlinePlayers(string username);
+
+        [OperationContract]
+        void SendOnlinePlayers(string username, Friends[] friendsArray);
     }
 
     [ServiceContract]

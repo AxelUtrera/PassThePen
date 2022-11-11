@@ -140,99 +140,6 @@ namespace PassThePen.PassThePenService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="FriendRequest", Namespace="http://schemas.datacontract.org/2004/07/Domain")]
-    [System.SerializableAttribute()]
-    public partial class FriendRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string friendUsernameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int idRequestField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string statusField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string usernamePlayerField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string friendUsername {
-            get {
-                return this.friendUsernameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.friendUsernameField, value) != true)) {
-                    this.friendUsernameField = value;
-                    this.RaisePropertyChanged("friendUsername");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int idRequest {
-            get {
-                return this.idRequestField;
-            }
-            set {
-                if ((this.idRequestField.Equals(value) != true)) {
-                    this.idRequestField = value;
-                    this.RaisePropertyChanged("idRequest");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string status {
-            get {
-                return this.statusField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.statusField, value) != true)) {
-                    this.statusField = value;
-                    this.RaisePropertyChanged("status");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string usernamePlayer {
-            get {
-                return this.usernamePlayerField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.usernamePlayerField, value) != true)) {
-                    this.usernamePlayerField = value;
-                    this.RaisePropertyChanged("usernamePlayer");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Friends", Namespace="http://schemas.datacontract.org/2004/07/Domain")]
     [System.SerializableAttribute()]
     public partial class Friends : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -324,6 +231,99 @@ namespace PassThePen.PassThePenService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="FriendRequest", Namespace="http://schemas.datacontract.org/2004/07/Domain")]
+    [System.SerializableAttribute()]
+    public partial class FriendRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string friendUsernameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idRequestField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string statusField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string usernamePlayerField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string friendUsername {
+            get {
+                return this.friendUsernameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.friendUsernameField, value) != true)) {
+                    this.friendUsernameField = value;
+                    this.RaisePropertyChanged("friendUsername");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int idRequest {
+            get {
+                return this.idRequestField;
+            }
+            set {
+                if ((this.idRequestField.Equals(value) != true)) {
+                    this.idRequestField = value;
+                    this.RaisePropertyChanged("idRequest");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string status {
+            get {
+                return this.statusField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.statusField, value) != true)) {
+                    this.statusField = value;
+                    this.RaisePropertyChanged("status");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string usernamePlayer {
+            get {
+                return this.usernamePlayerField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.usernamePlayerField, value) != true)) {
+                    this.usernamePlayerField = value;
+                    this.RaisePropertyChanged("usernamePlayer");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PassThePenService.IPlayerManagement")]
     public interface IPlayerManagement {
@@ -359,10 +359,10 @@ namespace PassThePen.PassThePenService {
         System.Threading.Tasks.Task<int> UpdatePasswordAsync(string email, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManagement/GetFriends", ReplyAction="http://tempuri.org/IPlayerManagement/GetFriendsResponse")]
-        void GetFriends(string username);
+        PassThePen.PassThePenService.Friends[] GetFriends(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManagement/GetFriends", ReplyAction="http://tempuri.org/IPlayerManagement/GetFriendsResponse")]
-        System.Threading.Tasks.Task GetFriendsAsync(string username);
+        System.Threading.Tasks.Task<PassThePen.PassThePenService.Friends[]> GetFriendsAsync(string username);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -432,11 +432,11 @@ namespace PassThePen.PassThePenService {
             return base.Channel.UpdatePasswordAsync(email, password);
         }
         
-        public void GetFriends(string username) {
-            base.Channel.GetFriends(username);
+        public PassThePen.PassThePenService.Friends[] GetFriends(string username) {
+            return base.Channel.GetFriends(username);
         }
         
-        public System.Threading.Tasks.Task GetFriendsAsync(string username) {
+        public System.Threading.Tasks.Task<PassThePen.PassThePenService.Friends[]> GetFriendsAsync(string username) {
             return base.Channel.GetFriendsAsync(username);
         }
     }
@@ -607,11 +607,17 @@ namespace PassThePen.PassThePenService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConexion/Disconnect", ReplyAction="http://tempuri.org/IPlayerConexion/DisconnectResponse")]
         System.Threading.Tasks.Task DisconnectAsync(string username);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConexion/RecoverPlayers", ReplyAction="http://tempuri.org/IPlayerConexion/RecoverPlayersResponse")]
-        void RecoverPlayers(PassThePen.PassThePenService.Friends[] friends, string username);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConexion/RecoverOnlinePlayers", ReplyAction="http://tempuri.org/IPlayerConexion/RecoverOnlinePlayersResponse")]
+        void RecoverOnlinePlayers(string username);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConexion/RecoverPlayers", ReplyAction="http://tempuri.org/IPlayerConexion/RecoverPlayersResponse")]
-        System.Threading.Tasks.Task RecoverPlayersAsync(PassThePen.PassThePenService.Friends[] friends, string username);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConexion/RecoverOnlinePlayers", ReplyAction="http://tempuri.org/IPlayerConexion/RecoverOnlinePlayersResponse")]
+        System.Threading.Tasks.Task RecoverOnlinePlayersAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConexion/SendOnlinePlayers", ReplyAction="http://tempuri.org/IPlayerConexion/SendOnlinePlayersResponse")]
+        void SendOnlinePlayers(string username, PassThePen.PassThePenService.Friends[] friendsArray);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConexion/SendOnlinePlayers", ReplyAction="http://tempuri.org/IPlayerConexion/SendOnlinePlayersResponse")]
+        System.Threading.Tasks.Task SendOnlinePlayersAsync(string username, PassThePen.PassThePenService.Friends[] friendsArray);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -665,12 +671,20 @@ namespace PassThePen.PassThePenService {
             return base.Channel.DisconnectAsync(username);
         }
         
-        public void RecoverPlayers(PassThePen.PassThePenService.Friends[] friends, string username) {
-            base.Channel.RecoverPlayers(friends, username);
+        public void RecoverOnlinePlayers(string username) {
+            base.Channel.RecoverOnlinePlayers(username);
         }
         
-        public System.Threading.Tasks.Task RecoverPlayersAsync(PassThePen.PassThePenService.Friends[] friends, string username) {
-            return base.Channel.RecoverPlayersAsync(friends, username);
+        public System.Threading.Tasks.Task RecoverOnlinePlayersAsync(string username) {
+            return base.Channel.RecoverOnlinePlayersAsync(username);
+        }
+        
+        public void SendOnlinePlayers(string username, PassThePen.PassThePenService.Friends[] friendsArray) {
+            base.Channel.SendOnlinePlayers(username, friendsArray);
+        }
+        
+        public System.Threading.Tasks.Task SendOnlinePlayersAsync(string username, PassThePen.PassThePenService.Friends[] friendsArray) {
+            return base.Channel.SendOnlinePlayersAsync(username, friendsArray);
         }
     }
     
