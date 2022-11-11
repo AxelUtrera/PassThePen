@@ -51,29 +51,15 @@ namespace PassThePen
             listStrings.Clear();
             if (TextBox_FindFriend.Visibility == Visibility.Collapsed)
             {
-                PassThePenService.PlayerManagementClient client = new PassThePenService.PlayerManagementClient();
                 TextBox_FindFriend.Visibility = Visibility.Visible;
-                string[] friendsName = getFriendsName();
-                foreach (String str in friendsName)
-                {
-                    listStrings.Add(str);
-                }
+                friendList.ForEach(fri => listStrings.Add(fri.friendUsername));
             }
             else
             {
                 TextBox_FindFriend.Visibility = Visibility.Collapsed;
+                TextBox_FindFriend.Text = "";
             }
             
-        }
-
-        private string[] getFriendsName()
-        {
-            string[] friendsName = new string[friendList.Count()];
-            for(int index = 0; index < friendList.Count(); index++)
-            {
-                friendsName[index] = friendList[index].friendUsername;
-            }
-            return friendsName;
         }
        
         private void Button_ExitGame_Click(object sender, RoutedEventArgs e)
@@ -142,7 +128,7 @@ namespace PassThePen
         {
             InstanceContext instanceContext = new InstanceContext(this);
             PassThePenService.PlayerConexionClient client = new PlayerConexionClient(instanceContext);
-            client.RecoverOnlinePlayers(username);
+            client.SendOnlinePlayers(username);
         }
 
         public void PlayersCallBack(Friends[] friends)
@@ -165,13 +151,11 @@ namespace PassThePen
                 friendsEquals.Clear();
                 foreach (string str in listStrings)
                 {
-                    for(int index = 0; index < friendList.Count; index++)
-                    {
-                        if (str.StartsWith(TextBox_FindFriend.Text.Trim()) && str.Equals(friendList[index].friendUsername))
+                    
+                        if (str.StartsWith(TextBox_FindFriend.Text.Trim()))
                         {
-                            friendsEquals.Add(friendList[index]);
+                            friendsEquals.Add(friendList.Find(fri => fri.friendUsername.Contains(str)));
                         }
-                    }
                 }
                 ListBox_FriendList.ItemsSource = friendsEquals;
             }

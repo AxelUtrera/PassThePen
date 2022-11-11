@@ -45,12 +45,7 @@ namespace Comunication
         {
             PlayerLogic playerLogic = new PlayerLogic();
             List<Friends> friends = playerLogic.RecoverFriends(username);
-            Friends[] friendsArray = new Friends[friends.Count];
-            for(int index = 0; index < friends.Count; index++)
-            {
-                friendsArray[index] = friends[index];
-            }
-            return friendsArray;
+            return friends.ToArray();
         }
     }
 
@@ -106,7 +101,7 @@ namespace Comunication
                 username = username,
                 operationContext = OperationContext.Current
             };
-            
+
             users.Add(user);
         }
 
@@ -119,37 +114,14 @@ namespace Comunication
             }
         }
 
-        public void RecoverOnlinePlayers(string username)
+       
+
+        public void SendOnlinePlayers(string username)
         {
-            Friends[] friendsArray = GetFriends(username);
-            for (int index = 0; index < users.Count; index++)
-            {
-                for (int index2 = 0; index2 < friendsArray.Length; index2++)
-                {
-                    if (!friendsArray[index2].status)
-                    {
-                        if (users[index].username.Equals(friendsArray[index2].friendUsername))
-                        {
-                            friendsArray[index2].status = true;
-                        }
-                    }
-                }
-            }
-            SendOnlinePlayers(username, friendsArray);
+            Friends[] friends = GetFriends(username);
+            users.Find(us => us.username.Equals(username)).operationContext.GetCallbackChannel<IPlayersServicesCallBack>().PlayersCallBack(friends);
         }
-        
-        public void SendOnlinePlayers(string username, Friends[] friendsArray)
-        {
-            for(int index = 0; index < users.Count; index++)
-            {
-                if (username.Equals(users[index].username))
-                {
-                    users[index].operationContext.GetCallbackChannel<IPlayersServicesCallBack>().PlayersCallBack(friendsArray);
-                }   
-            }
-            
-            }
-        }
+    }
 
     public partial class ImplementationServices : IMatchManagement
     {

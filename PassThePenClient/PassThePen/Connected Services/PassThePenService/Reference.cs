@@ -154,9 +154,6 @@ namespace PassThePen.PassThePenService {
         private int idPlayerFriendsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool statusField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string usernameField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -191,19 +188,6 @@ namespace PassThePen.PassThePenService {
                 if ((this.idPlayerFriendsField.Equals(value) != true)) {
                     this.idPlayerFriendsField = value;
                     this.RaisePropertyChanged("idPlayerFriends");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool status {
-            get {
-                return this.statusField;
-            }
-            set {
-                if ((this.statusField.Equals(value) != true)) {
-                    this.statusField = value;
-                    this.RaisePropertyChanged("status");
                 }
             }
         }
@@ -607,17 +591,11 @@ namespace PassThePen.PassThePenService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConexion/Disconnect", ReplyAction="http://tempuri.org/IPlayerConexion/DisconnectResponse")]
         System.Threading.Tasks.Task DisconnectAsync(string username);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConexion/RecoverOnlinePlayers", ReplyAction="http://tempuri.org/IPlayerConexion/RecoverOnlinePlayersResponse")]
-        void RecoverOnlinePlayers(string username);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConexion/RecoverOnlinePlayers", ReplyAction="http://tempuri.org/IPlayerConexion/RecoverOnlinePlayersResponse")]
-        System.Threading.Tasks.Task RecoverOnlinePlayersAsync(string username);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConexion/SendOnlinePlayers", ReplyAction="http://tempuri.org/IPlayerConexion/SendOnlinePlayersResponse")]
+        void SendOnlinePlayers(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConexion/SendOnlinePlayers", ReplyAction="http://tempuri.org/IPlayerConexion/SendOnlinePlayersResponse")]
-        void SendOnlinePlayers(string username, PassThePen.PassThePenService.Friends[] friendsArray);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConexion/SendOnlinePlayers", ReplyAction="http://tempuri.org/IPlayerConexion/SendOnlinePlayersResponse")]
-        System.Threading.Tasks.Task SendOnlinePlayersAsync(string username, PassThePen.PassThePenService.Friends[] friendsArray);
+        System.Threading.Tasks.Task SendOnlinePlayersAsync(string username);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -671,20 +649,12 @@ namespace PassThePen.PassThePenService {
             return base.Channel.DisconnectAsync(username);
         }
         
-        public void RecoverOnlinePlayers(string username) {
-            base.Channel.RecoverOnlinePlayers(username);
+        public void SendOnlinePlayers(string username) {
+            base.Channel.SendOnlinePlayers(username);
         }
         
-        public System.Threading.Tasks.Task RecoverOnlinePlayersAsync(string username) {
-            return base.Channel.RecoverOnlinePlayersAsync(username);
-        }
-        
-        public void SendOnlinePlayers(string username, PassThePen.PassThePenService.Friends[] friendsArray) {
-            base.Channel.SendOnlinePlayers(username, friendsArray);
-        }
-        
-        public System.Threading.Tasks.Task SendOnlinePlayersAsync(string username, PassThePen.PassThePenService.Friends[] friendsArray) {
-            return base.Channel.SendOnlinePlayersAsync(username, friendsArray);
+        public System.Threading.Tasks.Task SendOnlinePlayersAsync(string username) {
+            return base.Channel.SendOnlinePlayersAsync(username);
         }
     }
     
