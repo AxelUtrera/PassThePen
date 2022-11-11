@@ -131,7 +131,7 @@
                                 <Button.Template >
                                     <ControlTemplate TargetType="{x:Type Button}" >
                                         <Border Background="Green" BorderBrush="Green"  CornerRadius="7,7,7,7">
-                                            <ContentPresenter Content="{x:Static p:Resources.Main_Add_Button}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            <ContentPresenter Content="{x:Static p:Resources.Main_Add_Button}" HorizontalAlignment="Left" Margin="15,0,0,0"/>
                                         </Border>
                                     </ControlTemplate>
                                 </Button.Template>
