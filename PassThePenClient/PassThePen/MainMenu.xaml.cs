@@ -131,5 +131,23 @@ namespace PassThePen
             }
             ListBox_FriendList.ItemsSource = friendList;
         }
+
+        private void Button_StartMatch_Click(object sender, RoutedEventArgs e)
+        {
+            Match match = new Match();
+            match.Show();
+        }
+
+        private void Button_DeleteFriend_Click(object sender, MouseButtonEventArgs e)
+        {
+
+            Image buttonDeleteFriend = (Image)sender;
+            StackPanel parent = (StackPanel)buttonDeleteFriend.Parent;
+            Friends friend = (Friends)parent.DataContext;
+            PassThePenService.PlayerManagementClient client = new PassThePenService.PlayerManagementClient();
+            client.DeleteFriend(friend);
+            client.GetFriends(username);
+            
+        }
     }
 }

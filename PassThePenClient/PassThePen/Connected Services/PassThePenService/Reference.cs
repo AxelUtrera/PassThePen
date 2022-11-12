@@ -140,99 +140,6 @@ namespace PassThePen.PassThePenService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="FriendRequest", Namespace="http://schemas.datacontract.org/2004/07/Domain")]
-    [System.SerializableAttribute()]
-    public partial class FriendRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string friendUsernameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int idRequestField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string statusField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string usernamePlayerField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string friendUsername {
-            get {
-                return this.friendUsernameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.friendUsernameField, value) != true)) {
-                    this.friendUsernameField = value;
-                    this.RaisePropertyChanged("friendUsername");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int idRequest {
-            get {
-                return this.idRequestField;
-            }
-            set {
-                if ((this.idRequestField.Equals(value) != true)) {
-                    this.idRequestField = value;
-                    this.RaisePropertyChanged("idRequest");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string status {
-            get {
-                return this.statusField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.statusField, value) != true)) {
-                    this.statusField = value;
-                    this.RaisePropertyChanged("status");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string usernamePlayer {
-            get {
-                return this.usernamePlayerField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.usernamePlayerField, value) != true)) {
-                    this.usernamePlayerField = value;
-                    this.RaisePropertyChanged("usernamePlayer");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Friends", Namespace="http://schemas.datacontract.org/2004/07/Domain")]
     [System.SerializableAttribute()]
     public partial class Friends : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -324,6 +231,99 @@ namespace PassThePen.PassThePenService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="FriendRequest", Namespace="http://schemas.datacontract.org/2004/07/Domain")]
+    [System.SerializableAttribute()]
+    public partial class FriendRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string friendUsernameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idRequestField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string statusField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string usernamePlayerField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string friendUsername {
+            get {
+                return this.friendUsernameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.friendUsernameField, value) != true)) {
+                    this.friendUsernameField = value;
+                    this.RaisePropertyChanged("friendUsername");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int idRequest {
+            get {
+                return this.idRequestField;
+            }
+            set {
+                if ((this.idRequestField.Equals(value) != true)) {
+                    this.idRequestField = value;
+                    this.RaisePropertyChanged("idRequest");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string status {
+            get {
+                return this.statusField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.statusField, value) != true)) {
+                    this.statusField = value;
+                    this.RaisePropertyChanged("status");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string usernamePlayer {
+            get {
+                return this.usernamePlayerField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.usernamePlayerField, value) != true)) {
+                    this.usernamePlayerField = value;
+                    this.RaisePropertyChanged("usernamePlayer");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PassThePenService.IPlayerManagement")]
     public interface IPlayerManagement {
@@ -363,6 +363,12 @@ namespace PassThePen.PassThePenService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManagement/GetFriends", ReplyAction="http://tempuri.org/IPlayerManagement/GetFriendsResponse")]
         System.Threading.Tasks.Task GetFriendsAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManagement/DeleteFriend", ReplyAction="http://tempuri.org/IPlayerManagement/DeleteFriendResponse")]
+        int DeleteFriend(PassThePen.PassThePenService.Friends friendToDelete);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManagement/DeleteFriend", ReplyAction="http://tempuri.org/IPlayerManagement/DeleteFriendResponse")]
+        System.Threading.Tasks.Task<int> DeleteFriendAsync(PassThePen.PassThePenService.Friends friendToDelete);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -438,6 +444,14 @@ namespace PassThePen.PassThePenService {
         
         public System.Threading.Tasks.Task GetFriendsAsync(string username) {
             return base.Channel.GetFriendsAsync(username);
+        }
+        
+        public int DeleteFriend(PassThePen.PassThePenService.Friends friendToDelete) {
+            return base.Channel.DeleteFriend(friendToDelete);
+        }
+        
+        public System.Threading.Tasks.Task<int> DeleteFriendAsync(PassThePen.PassThePenService.Friends friendToDelete) {
+            return base.Channel.DeleteFriendAsync(friendToDelete);
         }
     }
     
@@ -671,6 +685,150 @@ namespace PassThePen.PassThePenService {
         
         public System.Threading.Tasks.Task RecoverPlayersAsync(PassThePen.PassThePenService.Friends[] friends, string username) {
             return base.Channel.RecoverPlayersAsync(friends, username);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PassThePenService.IMatchManagement", CallbackContract=typeof(PassThePen.PassThePenService.IMatchManagementCallback))]
+    public interface IMatchManagement {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/SendCard")]
+        void SendCard(string card);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/SendCard")]
+        System.Threading.Tasks.Task SendCardAsync(string card);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/SelectTurnTime")]
+        void SelectTurnTime();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/SelectTurnTime")]
+        System.Threading.Tasks.Task SelectTurnTimeAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/StartTurnSignal")]
+        void StartTurnSignal();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/StartTurnSignal")]
+        System.Threading.Tasks.Task StartTurnSignalAsync();
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IMatchManagementCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/DistributeCard")]
+        void DistributeCard(string card);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/DistributeTurnTime")]
+        void DistributeTurnTime(int turnTime);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/ReturnStartTurnSignal")]
+        void ReturnStartTurnSignal();
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IMatchManagementChannel : PassThePen.PassThePenService.IMatchManagement, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class MatchManagementClient : System.ServiceModel.DuplexClientBase<PassThePen.PassThePenService.IMatchManagement>, PassThePen.PassThePenService.IMatchManagement {
+        
+        public MatchManagementClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
+        }
+        
+        public MatchManagementClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
+        }
+        
+        public MatchManagementClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public MatchManagementClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public MatchManagementClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
+        }
+        
+        public void SendCard(string card) {
+            base.Channel.SendCard(card);
+        }
+        
+        public System.Threading.Tasks.Task SendCardAsync(string card) {
+            return base.Channel.SendCardAsync(card);
+        }
+        
+        public void SelectTurnTime() {
+            base.Channel.SelectTurnTime();
+        }
+        
+        public System.Threading.Tasks.Task SelectTurnTimeAsync() {
+            return base.Channel.SelectTurnTimeAsync();
+        }
+        
+        public void StartTurnSignal() {
+            base.Channel.StartTurnSignal();
+        }
+        
+        public System.Threading.Tasks.Task StartTurnSignalAsync() {
+            return base.Channel.StartTurnSignalAsync();
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PassThePenService.IChatServices", CallbackContract=typeof(PassThePen.PassThePenService.IChatServicesCallback))]
+    public interface IChatServices {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatServices/SendMessage")]
+        void SendMessage(string senderUsername, string message);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatServices/SendMessage")]
+        System.Threading.Tasks.Task SendMessageAsync(string senderUsername, string message);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IChatServicesCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatServices/MessageSend")]
+        void MessageSend(string message);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IChatServicesChannel : PassThePen.PassThePenService.IChatServices, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ChatServicesClient : System.ServiceModel.DuplexClientBase<PassThePen.PassThePenService.IChatServices>, PassThePen.PassThePenService.IChatServices {
+        
+        public ChatServicesClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
+        }
+        
+        public ChatServicesClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
+        }
+        
+        public ChatServicesClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public ChatServicesClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public ChatServicesClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
+        }
+        
+        public void SendMessage(string senderUsername, string message) {
+            base.Channel.SendMessage(senderUsername, message);
+        }
+        
+        public System.Threading.Tasks.Task SendMessageAsync(string senderUsername, string message) {
+            return base.Channel.SendMessageAsync(senderUsername, message);
         }
     }
 }

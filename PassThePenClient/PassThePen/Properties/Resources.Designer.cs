@@ -295,11 +295,29 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Iniciar Turno.
+        /// </summary>
+        public static string Match_StartTurn_Button {
+            get {
+                return ResourceManager.GetString("Match_StartTurn_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Tiempo Restante.
         /// </summary>
         public static string Match_TimeRemaining_Label {
             get {
                 return ResourceManager.GetString("Match_TimeRemaining_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Turno Actual.
+        /// </summary>
+        public static string Match_Turn_Label {
+            get {
+                return ResourceManager.GetString("Match_Turn_Label", resourceCulture);
             }
         }
         

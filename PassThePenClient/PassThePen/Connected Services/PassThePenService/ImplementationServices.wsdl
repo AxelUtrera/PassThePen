@@ -4,27 +4,6 @@
     <wsp:ExactlyOne>
       <wsp:All>
         <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
-        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <wsp:Policy>
-            <sp:TransportToken>
-              <wsp:Policy>
-                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
-                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
-                </msf:WindowsTransportSecurity>
-              </wsp:Policy>
-            </sp:TransportToken>
-            <sp:AlgorithmSuite>
-              <wsp:Policy>
-                <sp:Basic256 />
-              </wsp:Policy>
-            </sp:AlgorithmSuite>
-            <sp:Layout>
-              <wsp:Policy>
-                <sp:Strict />
-              </wsp:Policy>
-            </sp:Layout>
-          </wsp:Policy>
-        </sp:TransportBinding>
         <wsaw:UsingAddressing />
       </wsp:All>
     </wsp:ExactlyOne>
@@ -33,27 +12,6 @@
     <wsp:ExactlyOne>
       <wsp:All>
         <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
-        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <wsp:Policy>
-            <sp:TransportToken>
-              <wsp:Policy>
-                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
-                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
-                </msf:WindowsTransportSecurity>
-              </wsp:Policy>
-            </sp:TransportToken>
-            <sp:AlgorithmSuite>
-              <wsp:Policy>
-                <sp:Basic256 />
-              </wsp:Policy>
-            </sp:AlgorithmSuite>
-            <sp:Layout>
-              <wsp:Policy>
-                <sp:Strict />
-              </wsp:Policy>
-            </sp:Layout>
-          </wsp:Policy>
-        </sp:TransportBinding>
         <wsaw:UsingAddressing />
       </wsp:All>
     </wsp:ExactlyOne>
@@ -62,27 +20,6 @@
     <wsp:ExactlyOne>
       <wsp:All>
         <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
-        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <wsp:Policy>
-            <sp:TransportToken>
-              <wsp:Policy>
-                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
-                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
-                </msf:WindowsTransportSecurity>
-              </wsp:Policy>
-            </sp:TransportToken>
-            <sp:AlgorithmSuite>
-              <wsp:Policy>
-                <sp:Basic256 />
-              </wsp:Policy>
-            </sp:AlgorithmSuite>
-            <sp:Layout>
-              <wsp:Policy>
-                <sp:Strict />
-              </wsp:Policy>
-            </sp:Layout>
-          </wsp:Policy>
-        </sp:TransportBinding>
         <wsaw:UsingAddressing />
       </wsp:All>
     </wsp:ExactlyOne>
@@ -91,27 +28,22 @@
     <wsp:ExactlyOne>
       <wsp:All>
         <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
-        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <wsp:Policy>
-            <sp:TransportToken>
-              <wsp:Policy>
-                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
-                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
-                </msf:WindowsTransportSecurity>
-              </wsp:Policy>
-            </sp:TransportToken>
-            <sp:AlgorithmSuite>
-              <wsp:Policy>
-                <sp:Basic256 />
-              </wsp:Policy>
-            </sp:AlgorithmSuite>
-            <sp:Layout>
-              <wsp:Policy>
-                <sp:Strict />
-              </wsp:Policy>
-            </sp:Layout>
-          </wsp:Policy>
-        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IMatchManagement_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IChatServices_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
         <wsaw:UsingAddressing />
       </wsp:All>
     </wsp:ExactlyOne>
@@ -204,10 +136,24 @@
           <xs:sequence />
         </xs:complexType>
       </xs:element>
+      <xs:element name="DeleteFriend">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="friendToDelete" nillable="true" type="q4:Friends" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DeleteFriendResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="DeleteFriendResult" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="AutenticatePlayer">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="player" nillable="true" type="q4:Player" />
+            <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="player" nillable="true" type="q5:Player" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -258,14 +204,14 @@
       <xs:element name="GetFriendRequestsListResponse">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="GetFriendRequestsListResult" nillable="true" type="q5:ArrayOfFriendRequest" />
+            <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="GetFriendRequestsListResult" nillable="true" type="q6:ArrayOfFriendRequest" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="SendFriendRequests">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="player" nillable="true" type="q6:Player" />
+            <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="player" nillable="true" type="q7:Player" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -279,7 +225,7 @@
       <xs:element name="DeclineFriendRequests">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="player" nillable="true" type="q7:Player" />
+            <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="player" nillable="true" type="q8:Player" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -317,7 +263,7 @@
       <xs:element name="RecoverPlayers">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="friends" nillable="true" type="q8:ArrayOfFriends" />
+            <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="friends" nillable="true" type="q9:ArrayOfFriends" />
             <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
           </xs:sequence>
         </xs:complexType>
@@ -330,7 +276,58 @@
       <xs:element name="PlayersCallBack">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="friends" nillable="true" type="q9:ArrayOfFriends" />
+            <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="friends" nillable="true" type="q10:ArrayOfFriends" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SendCard">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="card" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SelectTurnTime">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="StartTurnSignal">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DistributeCard">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="card" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DistributeTurnTime">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="turnTime" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ReturnStartTurnSignal">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SendMessage">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="senderUsername" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="message" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="MessageSend">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="message" nillable="true" type="xs:string" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -388,6 +385,15 @@
         </xs:sequence>
       </xs:complexType>
       <xs:element name="Player" nillable="true" type="tns:Player" />
+      <xs:complexType name="Friends">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="friendUsername" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="idPlayerFriends" type="xs:int" />
+          <xs:element minOccurs="0" name="status" type="xs:boolean" />
+          <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="Friends" nillable="true" type="tns:Friends" />
       <xs:complexType name="ArrayOfFriendRequest">
         <xs:sequence>
           <xs:element minOccurs="0" maxOccurs="unbounded" name="FriendRequest" nillable="true" type="tns:FriendRequest" />
@@ -409,15 +415,6 @@
         </xs:sequence>
       </xs:complexType>
       <xs:element name="ArrayOfFriends" nillable="true" type="tns:ArrayOfFriends" />
-      <xs:complexType name="Friends">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="friendUsername" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="idPlayerFriends" type="xs:int" />
-          <xs:element minOccurs="0" name="status" type="xs:boolean" />
-          <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
-        </xs:sequence>
-      </xs:complexType>
-      <xs:element name="Friends" nillable="true" type="tns:Friends" />
     </xs:schema>
   </wsdl:types>
   <wsdl:message name="IPlayerManagement_AddPlayer_InputMessage">
@@ -455,6 +452,12 @@
   </wsdl:message>
   <wsdl:message name="IPlayerManagement_GetFriends_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetFriendsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPlayerManagement_DeleteFriend_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteFriend" />
+  </wsdl:message>
+  <wsdl:message name="IPlayerManagement_DeleteFriend_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteFriendResponse" />
   </wsdl:message>
   <wsdl:message name="IAutentication_AutenticatePlayer_InputMessage">
     <wsdl:part name="parameters" element="tns:AutenticatePlayer" />
@@ -513,6 +516,30 @@
   <wsdl:message name="IPlayerConexion_PlayersCallBack_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:PlayersCallBack" />
   </wsdl:message>
+  <wsdl:message name="IMatchManagement_SendCard_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendCard" />
+  </wsdl:message>
+  <wsdl:message name="IMatchManagement_SelectTurnTime_InputMessage">
+    <wsdl:part name="parameters" element="tns:SelectTurnTime" />
+  </wsdl:message>
+  <wsdl:message name="IMatchManagement_StartTurnSignal_InputMessage">
+    <wsdl:part name="parameters" element="tns:StartTurnSignal" />
+  </wsdl:message>
+  <wsdl:message name="IMatchManagement_DistributeCard_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:DistributeCard" />
+  </wsdl:message>
+  <wsdl:message name="IMatchManagement_DistributeTurnTime_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:DistributeTurnTime" />
+  </wsdl:message>
+  <wsdl:message name="IMatchManagement_ReturnStartTurnSignal_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ReturnStartTurnSignal" />
+  </wsdl:message>
+  <wsdl:message name="IChatServices_SendMessage_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendMessage" />
+  </wsdl:message>
+  <wsdl:message name="IChatServices_MessageSend_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:MessageSend" />
+  </wsdl:message>
   <wsdl:portType name="IPlayerManagement">
     <wsdl:operation name="AddPlayer">
       <wsdl:input wsaw:Action="http://tempuri.org/IPlayerManagement/AddPlayer" message="tns:IPlayerManagement_AddPlayer_InputMessage" />
@@ -537,6 +564,10 @@
     <wsdl:operation name="GetFriends">
       <wsdl:input wsaw:Action="http://tempuri.org/IPlayerManagement/GetFriends" message="tns:IPlayerManagement_GetFriends_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPlayerManagement/GetFriendsResponse" message="tns:IPlayerManagement_GetFriends_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFriend">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerManagement/DeleteFriend" message="tns:IPlayerManagement_DeleteFriend_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerManagement/DeleteFriendResponse" message="tns:IPlayerManagement_DeleteFriend_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IAutentication">
@@ -582,6 +613,34 @@
     </wsdl:operation>
     <wsdl:operation name="PlayersCallBack">
       <wsdl:output wsaw:Action="http://tempuri.org/IPlayerConexion/PlayersCallBack" message="tns:IPlayerConexion_PlayersCallBack_OutputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IMatchManagement">
+    <wsdl:operation name="SendCard">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchManagement/SendCard" message="tns:IMatchManagement_SendCard_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectTurnTime">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchManagement/SelectTurnTime" message="tns:IMatchManagement_SelectTurnTime_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="StartTurnSignal">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchManagement/StartTurnSignal" message="tns:IMatchManagement_StartTurnSignal_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DistributeCard">
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchManagement/DistributeCard" message="tns:IMatchManagement_DistributeCard_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DistributeTurnTime">
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchManagement/DistributeTurnTime" message="tns:IMatchManagement_DistributeTurnTime_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReturnStartTurnSignal">
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchManagement/ReturnStartTurnSignal" message="tns:IMatchManagement_ReturnStartTurnSignal_OutputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IChatServices">
+    <wsdl:operation name="SendMessage">
+      <wsdl:input wsaw:Action="http://tempuri.org/IChatServices/SendMessage" message="tns:IChatServices_SendMessage_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MessageSend">
+      <wsdl:output wsaw:Action="http://tempuri.org/IChatServices/MessageSend" message="tns:IChatServices_MessageSend_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IPlayerManagement" type="tns:IPlayerManagement">
@@ -634,6 +693,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetFriends">
       <soap12:operation soapAction="http://tempuri.org/IPlayerManagement/GetFriends" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFriend">
+      <soap12:operation soapAction="http://tempuri.org/IPlayerManagement/DeleteFriend" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -741,41 +809,97 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IMatchManagement" type="tns:IMatchManagement">
+    <wsp:PolicyReference URI="#NetTcpBinding_IMatchManagement_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="SendCard">
+      <soap12:operation soapAction="http://tempuri.org/IMatchManagement/SendCard" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="SelectTurnTime">
+      <soap12:operation soapAction="http://tempuri.org/IMatchManagement/SelectTurnTime" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="StartTurnSignal">
+      <soap12:operation soapAction="http://tempuri.org/IMatchManagement/StartTurnSignal" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="DistributeCard">
+      <soap12:operation soapAction="http://tempuri.org/IMatchManagement/DistributeCard" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DistributeTurnTime">
+      <soap12:operation soapAction="http://tempuri.org/IMatchManagement/DistributeTurnTime" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReturnStartTurnSignal">
+      <soap12:operation soapAction="http://tempuri.org/IMatchManagement/ReturnStartTurnSignal" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IChatServices" type="tns:IChatServices">
+    <wsp:PolicyReference URI="#NetTcpBinding_IChatServices_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="SendMessage">
+      <soap12:operation soapAction="http://tempuri.org/IChatServices/SendMessage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="MessageSend">
+      <soap12:operation soapAction="http://tempuri.org/IChatServices/MessageSend" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
   <wsdl:service name="ImplementationServices">
     <wsdl:port name="NetTcpBinding_IPlayerManagement" binding="tns:NetTcpBinding_IPlayerManagement">
       <soap12:address location="net.tcp://localhost:8081/PassThePen" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
-        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>DESKTOP-PIQCHB4\J1000</Upn>
-        </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IAutentication" binding="tns:NetTcpBinding_IAutentication">
       <soap12:address location="net.tcp://localhost:8081/PassThePen" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
-        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>DESKTOP-PIQCHB4\J1000</Upn>
-        </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IFriendRequests" binding="tns:NetTcpBinding_IFriendRequests">
       <soap12:address location="net.tcp://localhost:8081/PassThePen" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
-        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>DESKTOP-PIQCHB4\J1000</Upn>
-        </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IPlayerConexion" binding="tns:NetTcpBinding_IPlayerConexion">
       <soap12:address location="net.tcp://localhost:8081/PassThePen" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
-        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>DESKTOP-PIQCHB4\J1000</Upn>
-        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IMatchManagement" binding="tns:NetTcpBinding_IMatchManagement">
+      <soap12:address location="net.tcp://localhost:8081/PassThePen" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IChatServices" binding="tns:NetTcpBinding_IChatServices">
+      <soap12:address location="net.tcp://localhost:8081/PassThePen" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

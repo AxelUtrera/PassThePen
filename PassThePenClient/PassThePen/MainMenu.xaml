@@ -89,7 +89,7 @@
                                                 <Label Grid.Column="0" Content="{Binding friendUsername}" Margin="5,0,0,0" HorizontalAlignment="Left" FontSize="18"/>
                                                 <StackPanel Grid.Column="1" Orientation="Horizontal" >
                                                     
-                                                    <Image Source="Img/Icon_Decline.png" Width="30" HorizontalAlignment="Right" Margin="0,0,10,0" MouseLeftButtonDown="Button_DeclineRequests_Click" Cursor="Hand"/>
+                                                    <Image Source="Img/Icon_Decline.png" Width="30" HorizontalAlignment="Right" Margin="0,0,10,0" MouseLeftButtonDown="Button_DeleteFriend_Click" Cursor="Hand"/>
                                                 </StackPanel>
 
                                             </Grid>
@@ -193,7 +193,7 @@
                         <ColumnDefinition></ColumnDefinition>
                         
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Cursor="Hand" Margin="110,0,0,30" Width="250" Height="50" Foreground="#f3f3f3" FontSize="23" HorizontalAlignment="Left">
+                    <Button Grid.Column="0" Cursor="Hand" Margin="110,0,0,30" Width="250" Height="50" Foreground="#f3f3f3" FontSize="23" HorizontalAlignment="Left" Click="Button_StartMatch_Click">
                         <Button.Template >
                             <ControlTemplate TargetType="{x:Type Button}" >
                                 <Border Background="Green" BorderBrush="Green"  CornerRadius="7,7,7,7">

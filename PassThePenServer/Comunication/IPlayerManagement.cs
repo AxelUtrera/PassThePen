@@ -28,6 +28,9 @@ namespace Comunication
 
         [OperationContract]
         void GetFriends(String username);
+
+        [OperationContract]
+        int DeleteFriend(Friends friendToDelete);
     }
             
       

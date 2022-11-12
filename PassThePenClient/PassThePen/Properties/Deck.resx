@@ -1,0 +1,420 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Card1" xml:space="preserve">
+    <value>Perro</value>
+  </data>
+  <data name="Card10" xml:space="preserve">
+    <value>Automovil</value>
+  </data>
+  <data name="Card100" xml:space="preserve">
+    <value>Reto</value>
+  </data>
+  <data name="Card11" xml:space="preserve">
+    <value>Motocicleta</value>
+  </data>
+  <data name="Card12" xml:space="preserve">
+    <value>Bicicleta</value>
+  </data>
+  <data name="Card13" xml:space="preserve">
+    <value>Autobus</value>
+  </data>
+  <data name="Card14" xml:space="preserve">
+    <value>Avión</value>
+  </data>
+  <data name="Card15" xml:space="preserve">
+    <value>Helicóptero</value>
+  </data>
+  <data name="Card16" xml:space="preserve">
+    <value>Arbol</value>
+  </data>
+  <data name="Card17" xml:space="preserve">
+    <value>Rosa</value>
+  </data>
+  <data name="Card18" xml:space="preserve">
+    <value>Reloj</value>
+  </data>
+  <data name="Card19" xml:space="preserve">
+    <value>Collar</value>
+  </data>
+  <data name="Card2" xml:space="preserve">
+    <value>Gato</value>
+  </data>
+  <data name="Card20" xml:space="preserve">
+    <value>Casa</value>
+  </data>
+  <data name="Card21" xml:space="preserve">
+    <value>Edificio</value>
+  </data>
+  <data name="Card22" xml:space="preserve">
+    <value>Vaca</value>
+  </data>
+  <data name="Card23" xml:space="preserve">
+    <value>Paraguas</value>
+  </data>
+  <data name="Card24" xml:space="preserve">
+    <value>Sillon</value>
+  </data>
+  <data name="Card25" xml:space="preserve">
+    <value>Llaves</value>
+  </data>
+  <data name="Card26" xml:space="preserve">
+    <value>Engranaje</value>
+  </data>
+  <data name="Card27" xml:space="preserve">
+    <value>Antena</value>
+  </data>
+  <data name="Card28" xml:space="preserve">
+    <value>Inyección</value>
+  </data>
+  <data name="Card29" xml:space="preserve">
+    <value>Doctor</value>
+  </data>
+  <data name="Card3" xml:space="preserve">
+    <value>Barco</value>
+  </data>
+  <data name="Card30" xml:space="preserve">
+    <value>Taladro</value>
+  </data>
+  <data name="Card31" xml:space="preserve">
+    <value>Martillo</value>
+  </data>
+  <data name="Card32" xml:space="preserve">
+    <value>Silla</value>
+  </data>
+  <data name="Card33" xml:space="preserve">
+    <value>Ratón</value>
+  </data>
+  <data name="Card34" xml:space="preserve">
+    <value>Ventilador</value>
+  </data>
+  <data name="Card35" xml:space="preserve">
+    <value>Parque</value>
+  </data>
+  <data name="Card36" xml:space="preserve">
+    <value>Amor</value>
+  </data>
+  <data name="Card37" xml:space="preserve">
+    <value>Microondas</value>
+  </data>
+  <data name="Card38" xml:space="preserve">
+    <value>Microscopio</value>
+  </data>
+  <data name="Card39" xml:space="preserve">
+    <value>Lago</value>
+  </data>
+  <data name="Card4" xml:space="preserve">
+    <value>Paloma</value>
+  </data>
+  <data name="Card40" xml:space="preserve">
+    <value>Playa</value>
+  </data>
+  <data name="Card41" xml:space="preserve">
+    <value>Ciudad</value>
+  </data>
+  <data name="Card42" xml:space="preserve">
+    <value>Estufa</value>
+  </data>
+  <data name="Card43" xml:space="preserve">
+    <value>Concierto</value>
+  </data>
+  <data name="Card44" xml:space="preserve">
+    <value>Leon</value>
+  </data>
+  <data name="Card45" xml:space="preserve">
+    <value>Elefante</value>
+  </data>
+  <data name="Card46" xml:space="preserve">
+    <value>Cocodrilo</value>
+  </data>
+  <data name="Card47" xml:space="preserve">
+    <value>Bateria</value>
+  </data>
+  <data name="Card48" xml:space="preserve">
+    <value>Guitarra</value>
+  </data>
+  <data name="Card49" xml:space="preserve">
+    <value>Saxofón</value>
+  </data>
+  <data name="Card5" xml:space="preserve">
+    <value>Pera</value>
+  </data>
+  <data name="Card50" xml:space="preserve">
+    <value>Lampara</value>
+  </data>
+  <data name="Card51" xml:space="preserve">
+    <value>Perezoso</value>
+  </data>
+  <data name="Card52" xml:space="preserve">
+    <value>Champiñones</value>
+  </data>
+  <data name="Card53" xml:space="preserve">
+    <value>Pollo</value>
+  </data>
+  <data name="Card54" xml:space="preserve">
+    <value>Planeta</value>
+  </data>
+  <data name="Card55" xml:space="preserve">
+    <value>Estrella</value>
+  </data>
+  <data name="Card56" xml:space="preserve">
+    <value>Cometa</value>
+  </data>
+  <data name="Card57" xml:space="preserve">
+    <value>Cadena</value>
+  </data>
+  <data name="Card58" xml:space="preserve">
+    <value>Puerto</value>
+  </data>
+  <data name="Card59" xml:space="preserve">
+    <value>Hamburguesa</value>
+  </data>
+  <data name="Card6" xml:space="preserve">
+    <value>Uvas</value>
+  </data>
+  <data name="Card60" xml:space="preserve">
+    <value>Velero</value>
+  </data>
+  <data name="Card61" xml:space="preserve">
+    <value>Libro</value>
+  </data>
+  <data name="Card62" xml:space="preserve">
+    <value>Manzana</value>
+  </data>
+  <data name="Card63" xml:space="preserve">
+    <value>Araña</value>
+  </data>
+  <data name="Card64" xml:space="preserve">
+    <value>Tanque</value>
+  </data>
+  <data name="Card65" xml:space="preserve">
+    <value>Ballena</value>
+  </data>
+  <data name="Card66" xml:space="preserve">
+    <value>Internet</value>
+  </data>
+  <data name="Card67" xml:space="preserve">
+    <value>Tortuga</value>
+  </data>
+  <data name="Card68" xml:space="preserve">
+    <value>Pirata</value>
+  </data>
+  <data name="Card69" xml:space="preserve">
+    <value>Soldado</value>
+  </data>
+  <data name="Card7" xml:space="preserve">
+    <value>Taza</value>
+  </data>
+  <data name="Card70" xml:space="preserve">
+    <value>Familia</value>
+  </data>
+  <data name="Card71" xml:space="preserve">
+    <value>Tigre</value>
+  </data>
+  <data name="Card72" xml:space="preserve">
+    <value>Cama</value>
+  </data>
+  <data name="Card73" xml:space="preserve">
+    <value>Teléfono</value>
+  </data>
+  <data name="Card74" xml:space="preserve">
+    <value>Lápida</value>
+  </data>
+  <data name="Card75" xml:space="preserve">
+    <value>Mecanico</value>
+  </data>
+  <data name="Card76" xml:space="preserve">
+    <value>Reto</value>
+  </data>
+  <data name="Card77" xml:space="preserve">
+    <value>Reto</value>
+  </data>
+  <data name="Card78" xml:space="preserve">
+    <value>Reto</value>
+  </data>
+  <data name="Card79" xml:space="preserve">
+    <value>Reto</value>
+  </data>
+  <data name="Card8" xml:space="preserve">
+    <value>Televisión</value>
+  </data>
+  <data name="Card80" xml:space="preserve">
+    <value>Reto</value>
+  </data>
+  <data name="Card81" xml:space="preserve">
+    <value>Reto</value>
+  </data>
+  <data name="Card82" xml:space="preserve">
+    <value>Reto</value>
+  </data>
+  <data name="Card83" xml:space="preserve">
+    <value>Reto</value>
+  </data>
+  <data name="Card84" xml:space="preserve">
+    <value>Reto</value>
+  </data>
+  <data name="Card85" xml:space="preserve">
+    <value>Reto</value>
+  </data>
+  <data name="Card86" xml:space="preserve">
+    <value>Reto</value>
+  </data>
+  <data name="Card87" xml:space="preserve">
+    <value>Reto</value>
+  </data>
+  <data name="Card88" xml:space="preserve">
+    <value>Reto</value>
+  </data>
+  <data name="Card89" xml:space="preserve">
+    <value>Reto</value>
+  </data>
+  <data name="Card9" xml:space="preserve">
+    <value>Computadora</value>
+  </data>
+  <data name="Card90" xml:space="preserve">
+    <value>Reto</value>
+  </data>
+  <data name="Card91" xml:space="preserve">
+    <value>Reto</value>
+  </data>
+  <data name="Card92" xml:space="preserve">
+    <value>Reto</value>
+  </data>
+  <data name="Card93" xml:space="preserve">
+    <value>Reto</value>
+  </data>
+  <data name="Card94" xml:space="preserve">
+    <value>Reto</value>
+  </data>
+  <data name="Card95" xml:space="preserve">
+    <value>Reto</value>
+  </data>
+  <data name="Card96" xml:space="preserve">
+    <value>Reto</value>
+  </data>
+  <data name="Card97" xml:space="preserve">
+    <value>Reto</value>
+  </data>
+  <data name="Card98" xml:space="preserve">
+    <value>Reto</value>
+  </data>
+  <data name="Card99" xml:space="preserve">
+    <value>Reto</value>
+  </data>
+</root>

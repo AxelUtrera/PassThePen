@@ -173,5 +173,27 @@ namespace Logic
             }
             return friendsList;
         }
+
+
+        public int DeleteFriend(Domain.Friends friend)
+        {
+            int operationResult = 500;
+
+            using (var context = new passthepenEntities())
+            {
+                var friendInDataBase = context.Friends.Where(u => u.idFriend == friend.idPlayerFriends).First();
+
+                if(friendInDataBase != null)
+                {
+                    context.Friends.Remove(friendInDataBase);
+                    context.SaveChanges();
+                    operationResult = 200;
+                }
+            }
+
+            return operationResult;
+        }
+
+      
     }
 }
