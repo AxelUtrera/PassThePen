@@ -154,9 +154,6 @@ namespace PassThePen.PassThePenService {
         private int idPlayerFriendsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool statusField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string usernameField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -191,19 +188,6 @@ namespace PassThePen.PassThePenService {
                 if ((this.idPlayerFriendsField.Equals(value) != true)) {
                     this.idPlayerFriendsField = value;
                     this.RaisePropertyChanged("idPlayerFriends");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool status {
-            get {
-                return this.statusField;
-            }
-            set {
-                if ((this.statusField.Equals(value) != true)) {
-                    this.statusField = value;
-                    this.RaisePropertyChanged("status");
                 }
             }
         }
@@ -359,16 +343,10 @@ namespace PassThePen.PassThePenService {
         System.Threading.Tasks.Task<int> UpdatePasswordAsync(string email, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManagement/GetFriends", ReplyAction="http://tempuri.org/IPlayerManagement/GetFriendsResponse")]
-        void GetFriends(string username);
+        PassThePen.PassThePenService.Friends[] GetFriends(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManagement/GetFriends", ReplyAction="http://tempuri.org/IPlayerManagement/GetFriendsResponse")]
-        System.Threading.Tasks.Task GetFriendsAsync(string username);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManagement/DeleteFriend", ReplyAction="http://tempuri.org/IPlayerManagement/DeleteFriendResponse")]
-        int DeleteFriend(PassThePen.PassThePenService.Friends friendToDelete);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManagement/DeleteFriend", ReplyAction="http://tempuri.org/IPlayerManagement/DeleteFriendResponse")]
-        System.Threading.Tasks.Task<int> DeleteFriendAsync(PassThePen.PassThePenService.Friends friendToDelete);
+        System.Threading.Tasks.Task<PassThePen.PassThePenService.Friends[]> GetFriendsAsync(string username);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -438,11 +416,11 @@ namespace PassThePen.PassThePenService {
             return base.Channel.UpdatePasswordAsync(email, password);
         }
         
-        public void GetFriends(string username) {
-            base.Channel.GetFriends(username);
+        public PassThePen.PassThePenService.Friends[] GetFriends(string username) {
+            return base.Channel.GetFriends(username);
         }
         
-        public System.Threading.Tasks.Task GetFriendsAsync(string username) {
+        public System.Threading.Tasks.Task<PassThePen.PassThePenService.Friends[]> GetFriendsAsync(string username) {
             return base.Channel.GetFriendsAsync(username);
         }
         
@@ -635,11 +613,11 @@ namespace PassThePen.PassThePenService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConexion/Disconnect", ReplyAction="http://tempuri.org/IPlayerConexion/DisconnectResponse")]
         System.Threading.Tasks.Task DisconnectAsync(string username);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConexion/RecoverPlayers", ReplyAction="http://tempuri.org/IPlayerConexion/RecoverPlayersResponse")]
-        void RecoverPlayers(PassThePen.PassThePenService.Friends[] friends, string username);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConexion/SendOnlinePlayers", ReplyAction="http://tempuri.org/IPlayerConexion/SendOnlinePlayersResponse")]
+        void SendOnlinePlayers(string username);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConexion/RecoverPlayers", ReplyAction="http://tempuri.org/IPlayerConexion/RecoverPlayersResponse")]
-        System.Threading.Tasks.Task RecoverPlayersAsync(PassThePen.PassThePenService.Friends[] friends, string username);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConexion/SendOnlinePlayers", ReplyAction="http://tempuri.org/IPlayerConexion/SendOnlinePlayersResponse")]
+        System.Threading.Tasks.Task SendOnlinePlayersAsync(string username);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -693,12 +671,12 @@ namespace PassThePen.PassThePenService {
             return base.Channel.DisconnectAsync(username);
         }
         
-        public void RecoverPlayers(PassThePen.PassThePenService.Friends[] friends, string username) {
-            base.Channel.RecoverPlayers(friends, username);
+        public void SendOnlinePlayers(string username) {
+            base.Channel.SendOnlinePlayers(username);
         }
         
-        public System.Threading.Tasks.Task RecoverPlayersAsync(PassThePen.PassThePenService.Friends[] friends, string username) {
-            return base.Channel.RecoverPlayersAsync(friends, username);
+        public System.Threading.Tasks.Task SendOnlinePlayersAsync(string username) {
+            return base.Channel.SendOnlinePlayersAsync(username);
         }
     }
     

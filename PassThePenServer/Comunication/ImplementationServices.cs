@@ -41,7 +41,7 @@ namespace Comunication
             return playerLogic.UpdatePasswordEmail(SendEmail, password);
         }
 
-        public void GetFriends(String username)
+        public Friends[] GetFriends(String username)
         {
             PlayerLogic playerLogic = new PlayerLogic();
             List<Friends> friends = playerLogic.RecoverFriends(username);
@@ -118,7 +118,7 @@ namespace Comunication
                 username = username,
                 operationContext = OperationContext.Current
             };
-            
+
             users.Add(user);
         }
 
