@@ -534,6 +534,18 @@ namespace PassThePen.PassThePenService {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PassThePenService.IFriendRequests")]
     public interface IFriendRequests {
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendRequests/AcceptFriendRequest", ReplyAction="http://tempuri.org/IFriendRequests/AcceptFriendRequestResponse")]
+        int AcceptFriendRequest(PassThePen.PassThePenService.FriendRequest friendRequest);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendRequests/AcceptFriendRequest", ReplyAction="http://tempuri.org/IFriendRequests/AcceptFriendRequestResponse")]
+        System.Threading.Tasks.Task<int> AcceptFriendRequestAsync(PassThePen.PassThePenService.FriendRequest friendRequest);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendRequests/DeclineFriendRequests", ReplyAction="http://tempuri.org/IFriendRequests/DeclineFriendRequestsResponse")]
+        int DeclineFriendRequests(PassThePen.PassThePenService.FriendRequest friendRequest);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendRequests/DeclineFriendRequests", ReplyAction="http://tempuri.org/IFriendRequests/DeclineFriendRequestsResponse")]
+        System.Threading.Tasks.Task<int> DeclineFriendRequestsAsync(PassThePen.PassThePenService.FriendRequest friendRequest);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendRequests/GetFriendRequestsList", ReplyAction="http://tempuri.org/IFriendRequests/GetFriendRequestsListResponse")]
         PassThePen.PassThePenService.FriendRequest[] GetFriendRequestsList(string username);
         
@@ -545,12 +557,6 @@ namespace PassThePen.PassThePenService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendRequests/SendFriendRequests", ReplyAction="http://tempuri.org/IFriendRequests/SendFriendRequestsResponse")]
         System.Threading.Tasks.Task<int> SendFriendRequestsAsync(PassThePen.PassThePenService.Player player);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendRequests/DeclineFriendRequests", ReplyAction="http://tempuri.org/IFriendRequests/DeclineFriendRequestsResponse")]
-        int DeclineFriendRequests(PassThePen.PassThePenService.Player player);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendRequests/DeclineFriendRequests", ReplyAction="http://tempuri.org/IFriendRequests/DeclineFriendRequestsResponse")]
-        System.Threading.Tasks.Task<int> DeclineFriendRequestsAsync(PassThePen.PassThePenService.Player player);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -580,6 +586,22 @@ namespace PassThePen.PassThePenService {
                 base(binding, remoteAddress) {
         }
         
+        public int AcceptFriendRequest(PassThePen.PassThePenService.FriendRequest friendRequest) {
+            return base.Channel.AcceptFriendRequest(friendRequest);
+        }
+        
+        public System.Threading.Tasks.Task<int> AcceptFriendRequestAsync(PassThePen.PassThePenService.FriendRequest friendRequest) {
+            return base.Channel.AcceptFriendRequestAsync(friendRequest);
+        }
+        
+        public int DeclineFriendRequests(PassThePen.PassThePenService.FriendRequest friendRequest) {
+            return base.Channel.DeclineFriendRequests(friendRequest);
+        }
+        
+        public System.Threading.Tasks.Task<int> DeclineFriendRequestsAsync(PassThePen.PassThePenService.FriendRequest friendRequest) {
+            return base.Channel.DeclineFriendRequestsAsync(friendRequest);
+        }
+        
         public PassThePen.PassThePenService.FriendRequest[] GetFriendRequestsList(string username) {
             return base.Channel.GetFriendRequestsList(username);
         }
@@ -594,14 +616,6 @@ namespace PassThePen.PassThePenService {
         
         public System.Threading.Tasks.Task<int> SendFriendRequestsAsync(PassThePen.PassThePenService.Player player) {
             return base.Channel.SendFriendRequestsAsync(player);
-        }
-        
-        public int DeclineFriendRequests(PassThePen.PassThePenService.Player player) {
-            return base.Channel.DeclineFriendRequests(player);
-        }
-        
-        public System.Threading.Tasks.Task<int> DeclineFriendRequestsAsync(PassThePen.PassThePenService.Player player) {
-            return base.Channel.DeclineFriendRequestsAsync(player);
         }
     }
     

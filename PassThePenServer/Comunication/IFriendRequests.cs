@@ -14,13 +14,16 @@ namespace Comunication
     public interface IFriendRequests
     {
         [OperationContract]
+        int AcceptFriendRequest(FriendRequest friendRequest);
+
+        [OperationContract]
+        int DeclineFriendRequests(FriendRequest friendRequest);
+
+        [OperationContract]
         List<Domain.FriendRequest> GetFriendRequestsList(string username);
 
         [OperationContract]
         int SendFriendRequests(Player player);
-
-        //operation contract insecure desicion...
-        [OperationContract]
-        int DeclineFriendRequests(Player player);
+       
     }
 }

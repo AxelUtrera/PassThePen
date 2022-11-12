@@ -36,7 +36,6 @@
     <Property Name="idRequest" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="usernamePlayer" Type="varchar" Nullable="false" MaxLength="20" />
     <Property Name="friendUsername" Type="varchar" Nullable="false" MaxLength="20" />
-    <Property Name="status" Type="varchar" Nullable="false" MaxLength="20" />
   </EntityType>
   <EntityType Name="Friends">
     <Key>
@@ -133,7 +132,6 @@
           <Property Name="idRequest" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="usernamePlayer" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="friendUsername" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Player" Relationship="Self.fk_usernamePlayer_FriendRequest" FromRole="FriendRequest" ToRole="Player" />
         </EntityType>
         <EntityType Name="Friends">
@@ -226,7 +224,6 @@
           <ScalarProperty Name="idRequest" ColumnName="idRequest" />
           <ScalarProperty Name="usernamePlayer" ColumnName="usernamePlayer" />
           <ScalarProperty Name="friendUsername" ColumnName="friendUsername" />
-          <ScalarProperty Name="status" ColumnName="status" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

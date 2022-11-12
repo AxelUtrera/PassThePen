@@ -84,16 +84,21 @@ namespace Comunication
 
     public partial class ImplementationServices : IFriendRequests
     {
-       
-        public int DeclineFriendRequests(Player player)
+        FriendRequestsLogic friendRequestLogic = new FriendRequestsLogic();
+
+        public int AcceptFriendRequest(FriendRequest friendRequest)
         {
-            throw new NotImplementedException();
+            return friendRequestLogic.AcceptFriendRequest(friendRequest);
+        }
+
+        public int DeclineFriendRequests(FriendRequest friendRequest)
+        {
+            return friendRequestLogic.DeleteFriendRequest(friendRequest);
         }
 
         public List<FriendRequest> GetFriendRequestsList(string user)
         {
-            FriendRequestsLogic friendRequestsLogic = new FriendRequestsLogic();
-            return friendRequestsLogic.GetFriendRequestsOfPlayer(user);
+            return friendRequestLogic.GetFriendRequestsOfPlayer(user);
         }
 
         public int SendFriendRequests(Player player)

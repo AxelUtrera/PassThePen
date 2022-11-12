@@ -59,7 +59,7 @@ namespace Logic
         public int AutenticateEmail(string email)
         {
             int emailResult = 500;
-            using (var dataBase = new DataAccess.passthepenEntities())
+            using (var dataBase = new passthepenEntities())
             {
                 var playerEmail = (from Player in dataBase.Player where
                                    Player.email.Equals(email) select Player).Count();
@@ -181,11 +181,13 @@ namespace Logic
 
             using (var context = new passthepenEntities())
             {
-                var friendInDataBase = context.Friends.Where(u => u.idFriend == friend.idPlayerFriends).First();
+                var friendToDeleted = context.Friends.Where(u => u.usernamePlayer.Equals(friend.username) && u.friendUsername.Equals(friend.friendUsername)).First();
+                var deletedToFriend = context.Friends.Where(u => u.usernamePlayer.Equals(friend.friendUsername) && u.friendUsername.Equals(friend.username)).First();
 
-                if(friendInDataBase != null)
+                if(friendToDeleted != null && deletedToFriend != null)
                 {
-                    context.Friends.Remove(friendInDataBase);
+                    context.Friends.Remove(friendToDeleted);
+                    context.Friends.Remove(deletedToFriend);
                     context.SaveChanges();
                     operationResult = 200;
                 }

@@ -75,19 +75,38 @@ namespace PassThePen
 
         private void Button_ConfirmRequests_Click(object sender, RoutedEventArgs e)
         {
-
+            FriendRequest friendRequests = GetFriendRequestOfListboxImageButton(sender);
+            FriendRequestsClient clientFriendRequest = new FriendRequestsClient();
+            PlayerManagementClient clientFriends = new PlayerManagementClient();
+            clientFriendRequest.AcceptFriendRequest(friendRequests);
+            GenerateFriendRequestList();
+            clientFriends.GetFriends(username);
+            clientFriendRequest.Close();
+            clientFriends.Close();
         }
 
         private void Button_DeclineRequests_Click(object sender, RoutedEventArgs e)
         {
+            PassThePenService.FriendRequestsClient client = new FriendRequestsClient();
+            FriendRequest friendRequests = GetFriendRequestOfListboxImageButton(sender);
+            client.DeclineFriendRequests(friendRequests);
+            GenerateFriendRequestList();
+            client.Close();
+        }
 
+        private FriendRequest GetFriendRequestOfListboxImageButton(object sender) 
+        {
+            Image buttonDeleteFriend = (Image)sender;
+            StackPanel parent = (StackPanel)buttonDeleteFriend.Parent;
+            FriendRequest friendRequest = (FriendRequest)parent.DataContext;
+            return friendRequest;
         }
 
         private void GenerateFriendRequestList()
         {
             ListBox_FriendList.Visibility = Visibility.Collapsed;
             ListBox_FriendsRequests.Visibility = Visibility.Visible;
-            PassThePenService.FriendRequestsClient client = new PassThePenService.FriendRequestsClient();
+            FriendRequestsClient client = new FriendRequestsClient();
             ListBox_FriendsRequests.ItemsSource = client.GetFriendRequestsList(username);
             client.Close();
         }
@@ -98,8 +117,6 @@ namespace PassThePen
             PassThePenService.PlayerConexionClient client = new PlayerConexionClient(instanceContext);
             client.Connect(username);
 
-            
-            
         }
 
         private void GetFriends()
@@ -108,6 +125,7 @@ namespace PassThePen
             client.GetFriends(username);
             
         }
+
 
         public void PlayersCallBack(Friends[] friends)
         {
@@ -140,14 +158,12 @@ namespace PassThePen
 
         private void Button_DeleteFriend_Click(object sender, MouseButtonEventArgs e)
         {
-
             Image buttonDeleteFriend = (Image)sender;
             StackPanel parent = (StackPanel)buttonDeleteFriend.Parent;
             Friends friend = (Friends)parent.DataContext;
             PassThePenService.PlayerManagementClient client = new PassThePenService.PlayerManagementClient();
             client.DeleteFriend(friend);
             client.GetFriends(username);
-            
         }
     }
 }
