@@ -23,7 +23,7 @@ namespace Comunication
         List<Domain.FriendRequest> GetFriendRequestsList(string username);
 
         [OperationContract]
-        int SendFriendRequests(Player player);
+        int SendFriendRequests(FriendRequest friendRequest);
        
     }
 }
