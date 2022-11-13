@@ -141,7 +141,7 @@
       <xs:element name="DeleteFriend">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="friendToDelete" nillable="true" type="q4:Friends" />
+            <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="friendToDelete" nillable="true" type="q5:Friends" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -155,7 +155,7 @@
       <xs:element name="AutenticatePlayer">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="player" nillable="true" type="q5:Player" />
+            <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="player" nillable="true" type="q6:Player" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -199,14 +199,13 @@
       <xs:element name="AcceptFriendRequest">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="friendRequest" nillable="true" type="q6:FriendRequest" />
+            <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="friendRequest" nillable="true" type="q7:FriendRequest" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="AcceptFriendRequestResponse">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="GetFriendRequestsListResult" nillable="true" type="q6:ArrayOfFriendRequest" />
             <xs:element minOccurs="0" name="AcceptFriendRequestResult" type="xs:int" />
           </xs:sequence>
         </xs:complexType>
@@ -214,8 +213,7 @@
       <xs:element name="DeclineFriendRequests">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="player" nillable="true" type="q7:Player" />
-            <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="friendRequest" nillable="true" type="q7:FriendRequest" />
+            <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="friendRequest" nillable="true" type="q8:FriendRequest" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -229,7 +227,6 @@
       <xs:element name="GetFriendRequestsList">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="player" nillable="true" type="q8:Player" />
             <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
           </xs:sequence>
         </xs:complexType>
@@ -237,14 +234,14 @@
       <xs:element name="GetFriendRequestsListResponse">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="GetFriendRequestsListResult" nillable="true" type="q8:ArrayOfFriendRequest" />
+            <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="GetFriendRequestsListResult" nillable="true" type="q9:ArrayOfFriendRequest" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="SendFriendRequests">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="player" nillable="true" type="q9:Player" />
+            <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="player" nillable="true" type="q10:Player" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -282,7 +279,6 @@
       <xs:element name="SendOnlinePlayers">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="friends" nillable="true" type="q10:ArrayOfFriends" />
             <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
           </xs:sequence>
         </xs:complexType>
@@ -418,16 +414,6 @@
         </xs:sequence>
       </xs:complexType>
       <xs:element name="Friends" nillable="true" type="tns:Friends" />
-      <xs:complexType name="ArrayOfFriendRequest">
-      <xs:complexType name="Friends">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="friendUsername" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="idPlayerFriends" type="xs:int" />
-          <xs:element minOccurs="0" name="status" type="xs:boolean" />
-          <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
-        </xs:sequence>
-      </xs:complexType>
-      <xs:element name="Friends" nillable="true" type="tns:Friends" />
       <xs:complexType name="FriendRequest">
         <xs:sequence>
           <xs:element minOccurs="0" name="friendUsername" nillable="true" type="xs:string" />
@@ -443,12 +429,6 @@
         </xs:sequence>
       </xs:complexType>
       <xs:element name="ArrayOfFriendRequest" nillable="true" type="tns:ArrayOfFriendRequest" />
-      <xs:complexType name="ArrayOfFriends">
-        <xs:sequence>
-          <xs:element minOccurs="0" maxOccurs="unbounded" name="Friends" nillable="true" type="tns:Friends" />
-        </xs:sequence>
-      </xs:complexType>
-      <xs:element name="ArrayOfFriends" nillable="true" type="tns:ArrayOfFriends" />
     </xs:schema>
   </wsdl:types>
   <wsdl:message name="IPlayerManagement_AddPlayer_InputMessage">

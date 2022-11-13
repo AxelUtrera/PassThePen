@@ -45,13 +45,7 @@ namespace Comunication
         {
             PlayerLogic playerLogic = new PlayerLogic();
             List<Friends> friends = playerLogic.RecoverFriends(username);
-            Friends[] friendsArray = new Friends[friends.Count];
-            for(int index = 0; index < friends.Count; index++)
-            {
-                friendsArray[index] = friends[index];
-            }
-            
-            RecoverPlayers(friendsArray, username);
+            return friends.ToArray();
         }
 
         public int DeleteFriend(Friends friend)
@@ -131,32 +125,13 @@ namespace Comunication
             }
         }
 
-        public void RecoverPlayers(Friends[] friends, string username)
-        {   
-
-            for(int index = 0; index < users.Count; index++)
-            {
-                for(int index2 = 0; index2 < friends.Length; index2++)
-                {
-                    if (! friends[index2].status)
-                    {
-                        if (users[index].username.Equals(friends[index2].friendUsername))
-                        {
-                            friends[index2].status = true;
-                        }
-                    }
-                }
-            }
-
-            for(int index = 0; index < users.Count; index++)
-            {
-                if (username.Equals(users[index].username))
-                {
-                    users[index].operationContext.GetCallbackChannel<IPlayersServicesCallBack>().PlayersCallBack(friends);
-                }   
-            }
-            
+       
+        public void SendOnlinePlayers(string username)
+        {
+            Friends[] friends = GetFriends(username);
+            users.Find(us => us.username.Equals(username)).operationContext.GetCallbackChannel<IPlayersServicesCallBack>().PlayersCallBack(friends);
         }
+        
     }
 
     public partial class ImplementationServices : IMatchManagement

@@ -83,14 +83,14 @@
                                             <Grid>
 
                                                 <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="245"/>
+                                                    <ColumnDefinition Width="220"/>
                                                     <ColumnDefinition/>
                                                 </Grid.ColumnDefinitions>
 
                                                 <Label Grid.Column="0" Content="{Binding friendUsername}" Margin="5,0,0,0" HorizontalAlignment="Left" FontSize="18"/>
                                                 <StackPanel Grid.Column="1" Orientation="Horizontal" >
 
-                                                    <Image  Source="Img/Icon_Decline.png" Width="30" HorizontalAlignment="Right" Margin="15,0,18,0" MouseLeftButtonDown="Button_DeclineRequests_Click" Cursor="Hand"/>
+                                                    <Image  Source="Img/Icon_Decline.png" Width="30" HorizontalAlignment="Right" Margin="15,0,18,0" MouseLeftButtonDown="Button_DeleteFriend_Click" Cursor="Hand"/>
                                                 </StackPanel>
 
                                             </Grid>

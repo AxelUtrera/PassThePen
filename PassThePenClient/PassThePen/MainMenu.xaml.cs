@@ -189,7 +189,9 @@ namespace PassThePen
             Friends friend = (Friends)parent.DataContext;
             PassThePenService.PlayerManagementClient client = new PassThePenService.PlayerManagementClient();
             client.DeleteFriend(friend);
-            client.GetFriends(username);
+            GetFriends();
         }
+
+     
     }
 }

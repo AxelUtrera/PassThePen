@@ -347,6 +347,12 @@ namespace PassThePen.PassThePenService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManagement/GetFriends", ReplyAction="http://tempuri.org/IPlayerManagement/GetFriendsResponse")]
         System.Threading.Tasks.Task<PassThePen.PassThePenService.Friends[]> GetFriendsAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManagement/DeleteFriend", ReplyAction="http://tempuri.org/IPlayerManagement/DeleteFriendResponse")]
+        int DeleteFriend(PassThePen.PassThePenService.Friends friendToDelete);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManagement/DeleteFriend", ReplyAction="http://tempuri.org/IPlayerManagement/DeleteFriendResponse")]
+        System.Threading.Tasks.Task<int> DeleteFriendAsync(PassThePen.PassThePenService.Friends friendToDelete);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
