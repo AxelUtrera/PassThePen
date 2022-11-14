@@ -29,7 +29,7 @@ namespace PassThePen
         {
             InitializeComponent();
             Connected();
-            GetFriends();
+            //GetFriends();
         }
 
         private void Button_Profile_Click(object sender, RoutedEventArgs e)

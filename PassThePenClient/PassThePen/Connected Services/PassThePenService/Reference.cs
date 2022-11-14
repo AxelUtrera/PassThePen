@@ -817,4 +817,59 @@ namespace PassThePen.PassThePenService {
             return base.Channel.SendMessageAsync(senderUsername, message);
         }
     }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PassThePenService.IDrawReviewService", CallbackContract=typeof(PassThePen.PassThePenService.IDrawReviewServiceCallback))]
+    public interface IDrawReviewService {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IDrawReviewService/SendDraws")]
+        void SendDraws(byte[] draw);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IDrawReviewService/SendDraws")]
+        System.Threading.Tasks.Task SendDrawsAsync(byte[] draw);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IDrawReviewServiceCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDrawReviewService/DistributeDraws", ReplyAction="http://tempuri.org/IDrawReviewService/DistributeDrawsResponse")]
+        void DistributeDraws(byte[] draw);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IDrawReviewServiceChannel : PassThePen.PassThePenService.IDrawReviewService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class DrawReviewServiceClient : System.ServiceModel.DuplexClientBase<PassThePen.PassThePenService.IDrawReviewService>, PassThePen.PassThePenService.IDrawReviewService {
+        
+        public DrawReviewServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
+        }
+        
+        public DrawReviewServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
+        }
+        
+        public DrawReviewServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public DrawReviewServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public DrawReviewServiceClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
+        }
+        
+        public void SendDraws(byte[] draw) {
+            base.Channel.SendDraws(draw);
+        }
+        
+        public System.Threading.Tasks.Task SendDrawsAsync(byte[] draw) {
+            return base.Channel.SendDrawsAsync(draw);
+        }
+    }
 }

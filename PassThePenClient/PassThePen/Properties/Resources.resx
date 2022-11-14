@@ -141,6 +141,10 @@
     <value>Guardar</value>
     <comment>Used by: Change Password</comment>
   </data>
+  <data name="DrawReview_Title_Label" xml:space="preserve">
+    <value>Califica los dibujos</value>
+    <comment>Used By: DrawReview</comment>
+  </data>
   <data name="Global_Email_Label" xml:space="preserve">
     <value>Correo </value>
     <comment>Used by: login</comment>
@@ -239,6 +243,10 @@
   </data>
   <data name="Profile_ChangePassword_Button" xml:space="preserve">
     <value>Cambiar Contraseña</value>
+    <comment>Used by: Profile</comment>
+  </data>
+  <data name="Profile_CurrentPassword_Label" xml:space="preserve">
+    <value>Contraseña actual</value>
     <comment>Used by: Profile</comment>
   </data>
   <data name="Profile_Email_Label" xml:space="preserve">

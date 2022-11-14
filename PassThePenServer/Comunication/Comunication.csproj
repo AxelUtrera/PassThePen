@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="IAutentication.cs" />
     <Compile Include="IChatService.cs" />
+    <Compile Include="IDrawReviewService.cs" />
     <Compile Include="IFriendRequests.cs" />
     <Compile Include="IMatchManagement.cs" />
     <Compile Include="IPlayerConexion.cs" />
