@@ -192,6 +192,14 @@ namespace PassThePen
             GetFriends();
         }
 
-     
+        private void Button_AddFriend_Click(object sender, RoutedEventArgs e)
+        {
+            PassThePenService.FriendRequestsClient client = new FriendRequestsClient();
+            FriendRequest friendRequest = new FriendRequest() {
+                usernamePlayer = Texbox_AddFriend.Text,
+                friendUsername = username
+            };
+            client.SendFriendRequests(friendRequest);
+        }
     }
 }

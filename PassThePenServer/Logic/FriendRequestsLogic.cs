@@ -85,13 +85,41 @@ namespace Logic
                         idRequest = request.idRequest,
                         usernamePlayer = request.usernamePlayer,
                         friendUsername = request.friendUsername,
-                        status = request.status
                     };
 
                     friendRequestList.Add(friendRequest);
                 }
                 return friendRequestList;
             }
+
+        }
+
+        public int SendFriendRequests(Domain.FriendRequest friendRequests)
+        {
+            int operationCode = 500;
+
+            DataAccess.FriendRequest dataAccesFriendRequests = ConvertToDataAccessFriendRequests(friendRequests);
+
+            using (var context = new passthepenEntities())
+            {
+                var friendRequestDataBase = context.FriendRequest.Add(dataAccesFriendRequests);
+                context.SaveChanges();
+
+                if (friendRequestDataBase != null)
+                {
+                    operationCode = 200;
+                }
+            }
+            return operationCode;
+        }
+
+        private DataAccess.FriendRequest ConvertToDataAccessFriendRequests(Domain.FriendRequest domainFriendRequests)
+        {
+            return  new DataAccess.FriendRequest()
+            {
+                usernamePlayer = domainFriendRequests.usernamePlayer,
+                friendUsername = domainFriendRequests.friendUsername,
+            };
 
         }
     }
