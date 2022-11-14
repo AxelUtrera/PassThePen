@@ -23,8 +23,6 @@ namespace DataAccess
         
         public string friendUsername { get; set; }
         
-        public string status { get; set; }
-        
         public virtual Player Player { get; set; }
     }
 }

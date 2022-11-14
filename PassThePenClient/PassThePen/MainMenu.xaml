@@ -120,18 +120,18 @@
                             </StackPanel>
                         </Border>
                         <StackPanel Orientation="Horizontal" Margin="3">
-                            <TextBox  Height="33" Width="200" Background="AliceBlue" BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" FontSize="18">
+                            <TextBox Name="Texbox_AddFriend" Height="33" Width="200" Background="AliceBlue" BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" FontSize="18">
                                 <TextBox.Resources>
                                     <Style TargetType="{x:Type Border}">
                                         <Setter Property="CornerRadius" Value="10"/>
                                     </Style>
                                 </TextBox.Resources>
                             </TextBox>
-                            <Button Cursor="Hand" Margin="10,0,0,0" Width="95" Height="33" Foreground="#f3f3f3" FontSize="18">
+                            <Button Cursor="Hand" Margin="10,0,0,0" Width="95" Height="33" Foreground="#f3f3f3" FontSize="18" Click="Button_AddFriend_Click">
                                 <Button.Template >
                                     <ControlTemplate TargetType="{x:Type Button}" >
                                         <Border Background="Green" BorderBrush="Green"  CornerRadius="7,7,7,7">
-                                            <ContentPresenter Content="{x:Static p:Resources.Main_Add_Button}" HorizontalAlignment="Left" Margin="15,0,0,0"/>
+                                            <ContentPresenter Content="{x:Static p:Resources.Main_Add_Button}" HorizontalAlignment="Left" Margin="15,3,0,0"/>
                                         </Border>
                                     </ControlTemplate>
                                 </Button.Template>

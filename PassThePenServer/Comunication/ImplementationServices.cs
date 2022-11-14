@@ -95,9 +95,9 @@ namespace Comunication
             return friendRequestLogic.GetFriendRequestsOfPlayer(user);
         }
 
-        public int SendFriendRequests(Player player)
+        public int SendFriendRequests(FriendRequest friendRequests)
         {
-            throw new NotImplementedException();
+            return friendRequestLogic.SendFriendRequests(friendRequests);
         }
     }
 

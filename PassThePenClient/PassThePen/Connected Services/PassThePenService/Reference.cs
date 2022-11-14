@@ -537,10 +537,10 @@ namespace PassThePen.PassThePenService {
         System.Threading.Tasks.Task<PassThePen.PassThePenService.FriendRequest[]> GetFriendRequestsListAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendRequests/SendFriendRequests", ReplyAction="http://tempuri.org/IFriendRequests/SendFriendRequestsResponse")]
-        int SendFriendRequests(PassThePen.PassThePenService.Player player);
+        int SendFriendRequests(PassThePen.PassThePenService.FriendRequest friendRequest);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendRequests/SendFriendRequests", ReplyAction="http://tempuri.org/IFriendRequests/SendFriendRequestsResponse")]
-        System.Threading.Tasks.Task<int> SendFriendRequestsAsync(PassThePen.PassThePenService.Player player);
+        System.Threading.Tasks.Task<int> SendFriendRequestsAsync(PassThePen.PassThePenService.FriendRequest friendRequest);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -594,12 +594,12 @@ namespace PassThePen.PassThePenService {
             return base.Channel.GetFriendRequestsListAsync(username);
         }
         
-        public int SendFriendRequests(PassThePen.PassThePenService.Player player) {
-            return base.Channel.SendFriendRequests(player);
+        public int SendFriendRequests(PassThePen.PassThePenService.FriendRequest friendRequest) {
+            return base.Channel.SendFriendRequests(friendRequest);
         }
         
-        public System.Threading.Tasks.Task<int> SendFriendRequestsAsync(PassThePen.PassThePenService.Player player) {
-            return base.Channel.SendFriendRequestsAsync(player);
+        public System.Threading.Tasks.Task<int> SendFriendRequestsAsync(PassThePen.PassThePenService.FriendRequest friendRequest) {
+            return base.Channel.SendFriendRequestsAsync(friendRequest);
         }
     }
     
