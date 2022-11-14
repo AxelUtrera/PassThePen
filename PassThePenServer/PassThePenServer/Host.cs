@@ -13,9 +13,17 @@ namespace PassThePenServer
         {
             using(ServiceHost host = new ServiceHost(typeof(Comunication.ImplementationServices)))
             {
-                host.Open();
-                Console.WriteLine("Server is up...");
-                Console.ReadLine();
+                try
+                {
+                    host.Open();
+                    Console.WriteLine("Server is up...");
+                    Console.ReadLine();
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine("Error al iniciar el servidor");
+                }
+
             }
             
         }

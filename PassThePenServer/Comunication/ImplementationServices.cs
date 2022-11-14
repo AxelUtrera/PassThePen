@@ -41,17 +41,17 @@ namespace Comunication
             return playerLogic.UpdatePasswordEmail(SendEmail, password);
         }
 
-        public void GetFriends(String username)
+        public Friends[] GetFriends(String username)
         {
             PlayerLogic playerLogic = new PlayerLogic();
             List<Friends> friends = playerLogic.RecoverFriends(username);
-            Friends[] friendsArray = new Friends[friends.Count];
-            for(int index = 0; index < friends.Count; index++)
-            {
-                friendsArray[index] = friends[index];
-            }
-            
-            RecoverPlayers(friendsArray, username);
+            return friends.ToArray();
+        }
+
+        public int DeleteFriend(Friends friend)
+        {
+            PlayerLogic playerLogic = new PlayerLogic();
+            return playerLogic.DeleteFriend(friend);
         }
     }
 
@@ -78,16 +78,21 @@ namespace Comunication
 
     public partial class ImplementationServices : IFriendRequests
     {
-       
-        public int DeclineFriendRequests(Player player)
+        FriendRequestsLogic friendRequestLogic = new FriendRequestsLogic();
+
+        public int AcceptFriendRequest(FriendRequest friendRequest)
         {
-            throw new NotImplementedException();
+            return friendRequestLogic.AcceptFriendRequest(friendRequest);
+        }
+
+        public int DeclineFriendRequests(FriendRequest friendRequest)
+        {
+            return friendRequestLogic.DeleteFriendRequest(friendRequest);
         }
 
         public List<FriendRequest> GetFriendRequestsList(string user)
         {
-            FriendRequestsLogic friendRequestsLogic = new FriendRequestsLogic();
-            return friendRequestsLogic.GetFriendRequestsOfPlayer(user);
+            return friendRequestLogic.GetFriendRequestsOfPlayer(user);
         }
 
         public int SendFriendRequests(Player player)
@@ -107,7 +112,7 @@ namespace Comunication
                 username = username,
                 operationContext = OperationContext.Current
             };
-            
+
             users.Add(user);
         }
 
@@ -120,32 +125,13 @@ namespace Comunication
             }
         }
 
-        public void RecoverPlayers(Friends[] friends, string username)
-        {   
-
-            
-            for(int index = 0; index < users.Count; index++)
-            {
-                for(int index2 = 0; index2 < friends.Length; index2++)
-                {
-                    if (! friends[index2].status)
-                    {
-                        if (users[index].username.Equals(friends[index2].friendUsername))
-                        {
-                            friends[index2].status = true;
-                        }
-                    }
-                }
-            }
-            for(int index = 0; index < users.Count; index++)
-            {
-                if (username.Equals(users[index].username))
-                {
-                    users[index].operationContext.GetCallbackChannel<IPlayersServicesCallBack>().PlayersCallBack(friends);
-                }   
-            }
-            
+       
+        public void SendOnlinePlayers(string username)
+        {
+            Friends[] friends = GetFriends(username);
+            users.Find(us => us.username.Equals(username)).operationContext.GetCallbackChannel<IPlayersServicesCallBack>().PlayersCallBack(friends);
         }
+        
     }
 
     public partial class ImplementationServices : IMatchManagement

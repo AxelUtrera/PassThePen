@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 10/19/2022 22:16:17
+-- Date Created: 11/12/2022 14:45:48
 -- Generated from EDMX file: C:\Users\moron\OneDrive - Universidad Veracruzana\7mo semestre\tecnologias para la construccion\Proyecto final\PassThePenServer\DataAccess\PassThePenModel.edmx
 -- --------------------------------------------------
 
@@ -58,8 +58,7 @@ GO
 CREATE TABLE [dbo].[FriendRequest] (
     [idRequest] int IDENTITY(1,1) NOT NULL,
     [usernamePlayer] varchar(20)  NOT NULL,
-    [friendUsername] varchar(20)  NOT NULL,
-    [status] varchar(20)  NOT NULL
+    [friendUsername] varchar(20)  NOT NULL
 );
 GO
 

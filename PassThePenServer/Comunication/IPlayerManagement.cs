@@ -27,7 +27,10 @@ namespace Comunication
         int UpdatePassword(string email, string password);
 
         [OperationContract]
-        void GetFriends(String username);
+        Friends[] GetFriends(String username);
+
+        [OperationContract]
+        int DeleteFriend(Friends friendToDelete);
     }
             
       

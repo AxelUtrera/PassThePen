@@ -59,7 +59,7 @@ namespace Logic
         public int AutenticateEmail(string email)
         {
             int emailResult = 500;
-            using (var dataBase = new DataAccess.passthepenEntities())
+            using (var dataBase = new passthepenEntities())
             {
                 var playerEmail = (from Player in dataBase.Player where
                                    Player.email.Equals(email) select Player).Count();
@@ -162,7 +162,6 @@ namespace Logic
                         newFriend.idPlayerFriends = friends[index].idFriend;
                         newFriend.username = friends[index].usernamePlayer;
                         newFriend.friendUsername = friends[index].friendUsername;
-                        newFriend.status = false;
                         friendsList.Add(newFriend);
                     }
                 }
@@ -173,5 +172,29 @@ namespace Logic
             }
             return friendsList;
         }
+
+
+        public int DeleteFriend(Domain.Friends friend)
+        {
+            int operationResult = 500;
+
+            using (var context = new passthepenEntities())
+            {
+                var friendToDeleted = context.Friends.Where(u => u.usernamePlayer.Equals(friend.username) && u.friendUsername.Equals(friend.friendUsername)).First();
+                var deletedToFriend = context.Friends.Where(u => u.usernamePlayer.Equals(friend.friendUsername) && u.friendUsername.Equals(friend.username)).First();
+
+                if(friendToDeleted != null && deletedToFriend != null)
+                {
+                    context.Friends.Remove(friendToDeleted);
+                    context.Friends.Remove(deletedToFriend);
+                    context.SaveChanges();
+                    operationResult = 200;
+                }
+            }
+
+            return operationResult;
+        }
+
+      
     }
 }

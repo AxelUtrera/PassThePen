@@ -141,13 +141,29 @@
       </xs:element>
       <xs:element name="GetFriendsResponse">
         <xs:complexType>
-          <xs:sequence />
+          <xs:sequence>
+            <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="GetFriendsResult" nillable="true" type="q4:ArrayOfFriends" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DeleteFriend">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="friendToDelete" nillable="true" type="q5:Friends" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DeleteFriendResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="DeleteFriendResult" type="xs:int" />
+          </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="AutenticatePlayer">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="player" nillable="true" type="q4:Player" />
+            <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="player" nillable="true" type="q6:Player" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -188,6 +204,34 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
+      <xs:element name="AcceptFriendRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="friendRequest" nillable="true" type="q7:FriendRequest" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AcceptFriendRequestResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="AcceptFriendRequestResult" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DeclineFriendRequests">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="friendRequest" nillable="true" type="q8:FriendRequest" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DeclineFriendRequestsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="DeclineFriendRequestsResult" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="GetFriendRequestsList">
         <xs:complexType>
           <xs:sequence>
@@ -198,14 +242,14 @@
       <xs:element name="GetFriendRequestsListResponse">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="GetFriendRequestsListResult" nillable="true" type="q5:ArrayOfFriendRequest" />
+            <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="GetFriendRequestsListResult" nillable="true" type="q9:ArrayOfFriendRequest" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="SendFriendRequests">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="player" nillable="true" type="q6:Player" />
+            <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="player" nillable="true" type="q10:Player" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -213,20 +257,6 @@
         <xs:complexType>
           <xs:sequence>
             <xs:element minOccurs="0" name="SendFriendRequestsResult" type="xs:int" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="DeclineFriendRequests">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="player" nillable="true" type="q7:Player" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="DeclineFriendRequestsResponse">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element minOccurs="0" name="DeclineFriendRequestsResult" type="xs:int" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -254,15 +284,14 @@
           <xs:sequence />
         </xs:complexType>
       </xs:element>
-      <xs:element name="RecoverPlayers">
+      <xs:element name="SendOnlinePlayers">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="friends" nillable="true" type="q8:ArrayOfFriends" />
             <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element name="RecoverPlayersResponse">
+      <xs:element name="SendOnlinePlayersResponse">
         <xs:complexType>
           <xs:sequence />
         </xs:complexType>
@@ -270,7 +299,7 @@
       <xs:element name="PlayersCallBack">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="friends" nillable="true" type="q9:ArrayOfFriends" />
+            <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="friends" nillable="true" type="q11:ArrayOfFriends" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -398,21 +427,6 @@
         </xs:sequence>
       </xs:complexType>
       <xs:element name="Player" nillable="true" type="tns:Player" />
-      <xs:complexType name="ArrayOfFriendRequest">
-        <xs:sequence>
-          <xs:element minOccurs="0" maxOccurs="unbounded" name="FriendRequest" nillable="true" type="tns:FriendRequest" />
-        </xs:sequence>
-      </xs:complexType>
-      <xs:element name="ArrayOfFriendRequest" nillable="true" type="tns:ArrayOfFriendRequest" />
-      <xs:complexType name="FriendRequest">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="friendUsername" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="idRequest" type="xs:int" />
-          <xs:element minOccurs="0" name="status" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="usernamePlayer" nillable="true" type="xs:string" />
-        </xs:sequence>
-      </xs:complexType>
-      <xs:element name="FriendRequest" nillable="true" type="tns:FriendRequest" />
       <xs:complexType name="ArrayOfFriends">
         <xs:sequence>
           <xs:element minOccurs="0" maxOccurs="unbounded" name="Friends" nillable="true" type="tns:Friends" />
@@ -423,11 +437,25 @@
         <xs:sequence>
           <xs:element minOccurs="0" name="friendUsername" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="idPlayerFriends" type="xs:int" />
-          <xs:element minOccurs="0" name="status" type="xs:boolean" />
           <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
         </xs:sequence>
       </xs:complexType>
       <xs:element name="Friends" nillable="true" type="tns:Friends" />
+      <xs:complexType name="FriendRequest">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="friendUsername" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="idRequest" type="xs:int" />
+          <xs:element minOccurs="0" name="status" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="usernamePlayer" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="FriendRequest" nillable="true" type="tns:FriendRequest" />
+      <xs:complexType name="ArrayOfFriendRequest">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="FriendRequest" nillable="true" type="tns:FriendRequest" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfFriendRequest" nillable="true" type="tns:ArrayOfFriendRequest" />
     </xs:schema>
   </wsdl:types>
   <wsdl:message name="IPlayerManagement_AddPlayer_InputMessage">
@@ -466,6 +494,12 @@
   <wsdl:message name="IPlayerManagement_GetFriends_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetFriendsResponse" />
   </wsdl:message>
+  <wsdl:message name="IPlayerManagement_DeleteFriend_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteFriend" />
+  </wsdl:message>
+  <wsdl:message name="IPlayerManagement_DeleteFriend_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteFriendResponse" />
+  </wsdl:message>
   <wsdl:message name="IAutentication_AutenticatePlayer_InputMessage">
     <wsdl:part name="parameters" element="tns:AutenticatePlayer" />
   </wsdl:message>
@@ -484,6 +518,18 @@
   <wsdl:message name="IAutentication_CodeEmail_OutputMessage">
     <wsdl:part name="parameters" element="tns:CodeEmailResponse" />
   </wsdl:message>
+  <wsdl:message name="IFriendRequests_AcceptFriendRequest_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptFriendRequest" />
+  </wsdl:message>
+  <wsdl:message name="IFriendRequests_AcceptFriendRequest_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptFriendRequestResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFriendRequests_DeclineFriendRequests_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeclineFriendRequests" />
+  </wsdl:message>
+  <wsdl:message name="IFriendRequests_DeclineFriendRequests_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeclineFriendRequestsResponse" />
+  </wsdl:message>
   <wsdl:message name="IFriendRequests_GetFriendRequestsList_InputMessage">
     <wsdl:part name="parameters" element="tns:GetFriendRequestsList" />
   </wsdl:message>
@@ -495,12 +541,6 @@
   </wsdl:message>
   <wsdl:message name="IFriendRequests_SendFriendRequests_OutputMessage">
     <wsdl:part name="parameters" element="tns:SendFriendRequestsResponse" />
-  </wsdl:message>
-  <wsdl:message name="IFriendRequests_DeclineFriendRequests_InputMessage">
-    <wsdl:part name="parameters" element="tns:DeclineFriendRequests" />
-  </wsdl:message>
-  <wsdl:message name="IFriendRequests_DeclineFriendRequests_OutputMessage">
-    <wsdl:part name="parameters" element="tns:DeclineFriendRequestsResponse" />
   </wsdl:message>
   <wsdl:message name="IPlayerConexion_Connect_InputMessage">
     <wsdl:part name="parameters" element="tns:Connect" />
@@ -514,11 +554,11 @@
   <wsdl:message name="IPlayerConexion_Disconnect_OutputMessage">
     <wsdl:part name="parameters" element="tns:DisconnectResponse" />
   </wsdl:message>
-  <wsdl:message name="IPlayerConexion_RecoverPlayers_InputMessage">
-    <wsdl:part name="parameters" element="tns:RecoverPlayers" />
+  <wsdl:message name="IPlayerConexion_SendOnlinePlayers_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendOnlinePlayers" />
   </wsdl:message>
-  <wsdl:message name="IPlayerConexion_RecoverPlayers_OutputMessage">
-    <wsdl:part name="parameters" element="tns:RecoverPlayersResponse" />
+  <wsdl:message name="IPlayerConexion_SendOnlinePlayers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendOnlinePlayersResponse" />
   </wsdl:message>
   <wsdl:message name="IPlayerConexion_PlayersCallBack_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:PlayersCallBack" />
@@ -581,6 +621,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IPlayerManagement/GetFriends" message="tns:IPlayerManagement_GetFriends_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPlayerManagement/GetFriendsResponse" message="tns:IPlayerManagement_GetFriends_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="DeleteFriend">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerManagement/DeleteFriend" message="tns:IPlayerManagement_DeleteFriend_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerManagement/DeleteFriendResponse" message="tns:IPlayerManagement_DeleteFriend_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IAutentication">
     <wsdl:operation name="AutenticatePlayer">
@@ -597,6 +641,14 @@
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IFriendRequests">
+    <wsdl:operation name="AcceptFriendRequest">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFriendRequests/AcceptFriendRequest" message="tns:IFriendRequests_AcceptFriendRequest_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFriendRequests/AcceptFriendRequestResponse" message="tns:IFriendRequests_AcceptFriendRequest_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeclineFriendRequests">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFriendRequests/DeclineFriendRequests" message="tns:IFriendRequests_DeclineFriendRequests_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFriendRequests/DeclineFriendRequestsResponse" message="tns:IFriendRequests_DeclineFriendRequests_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetFriendRequestsList">
       <wsdl:input wsaw:Action="http://tempuri.org/IFriendRequests/GetFriendRequestsList" message="tns:IFriendRequests_GetFriendRequestsList_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFriendRequests/GetFriendRequestsListResponse" message="tns:IFriendRequests_GetFriendRequestsList_OutputMessage" />
@@ -604,10 +656,6 @@
     <wsdl:operation name="SendFriendRequests">
       <wsdl:input wsaw:Action="http://tempuri.org/IFriendRequests/SendFriendRequests" message="tns:IFriendRequests_SendFriendRequests_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFriendRequests/SendFriendRequestsResponse" message="tns:IFriendRequests_SendFriendRequests_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="DeclineFriendRequests">
-      <wsdl:input wsaw:Action="http://tempuri.org/IFriendRequests/DeclineFriendRequests" message="tns:IFriendRequests_DeclineFriendRequests_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IFriendRequests/DeclineFriendRequestsResponse" message="tns:IFriendRequests_DeclineFriendRequests_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IPlayerConexion">
@@ -619,9 +667,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IPlayerConexion/Disconnect" message="tns:IPlayerConexion_Disconnect_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPlayerConexion/DisconnectResponse" message="tns:IPlayerConexion_Disconnect_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="RecoverPlayers">
-      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerConexion/RecoverPlayers" message="tns:IPlayerConexion_RecoverPlayers_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerConexion/RecoverPlayersResponse" message="tns:IPlayerConexion_RecoverPlayers_OutputMessage" />
+    <wsdl:operation name="SendOnlinePlayers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerConexion/SendOnlinePlayers" message="tns:IPlayerConexion_SendOnlinePlayers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerConexion/SendOnlinePlayersResponse" message="tns:IPlayerConexion_SendOnlinePlayers_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="PlayersCallBack">
       <wsdl:output wsaw:Action="http://tempuri.org/IPlayerConexion/PlayersCallBack" message="tns:IPlayerConexion_PlayersCallBack_OutputCallbackMessage" />
@@ -721,6 +769,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="DeleteFriend">
+      <soap12:operation soapAction="http://tempuri.org/IPlayerManagement/DeleteFriend" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="NetTcpBinding_IAutentication" type="tns:IAutentication">
     <wsp:PolicyReference URI="#NetTcpBinding_IAutentication_policy" />
@@ -756,6 +813,24 @@
   <wsdl:binding name="NetTcpBinding_IFriendRequests" type="tns:IFriendRequests">
     <wsp:PolicyReference URI="#NetTcpBinding_IFriendRequests_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="AcceptFriendRequest">
+      <soap12:operation soapAction="http://tempuri.org/IFriendRequests/AcceptFriendRequest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeclineFriendRequests">
+      <soap12:operation soapAction="http://tempuri.org/IFriendRequests/DeclineFriendRequests" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetFriendRequestsList">
       <soap12:operation soapAction="http://tempuri.org/IFriendRequests/GetFriendRequestsList" style="document" />
       <wsdl:input>
@@ -767,15 +842,6 @@
     </wsdl:operation>
     <wsdl:operation name="SendFriendRequests">
       <soap12:operation soapAction="http://tempuri.org/IFriendRequests/SendFriendRequests" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="DeclineFriendRequests">
-      <soap12:operation soapAction="http://tempuri.org/IFriendRequests/DeclineFriendRequests" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -805,8 +871,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="RecoverPlayers">
-      <soap12:operation soapAction="http://tempuri.org/IPlayerConexion/RecoverPlayers" style="document" />
+    <wsdl:operation name="SendOnlinePlayers">
+      <soap12:operation soapAction="http://tempuri.org/IPlayerConexion/SendOnlinePlayers" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
