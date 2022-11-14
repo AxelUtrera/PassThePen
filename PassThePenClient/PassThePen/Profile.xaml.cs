@@ -65,7 +65,7 @@ namespace PassThePen
                 TextBox_Name.Text = playerObtained.name;
                 TextBox_Lastname.Text = playerObtained.lastname;
                 TextBox_Email.Text = playerObtained.email;
-                //Image_ProfileImage.Source = LoadBitmapFromBytes(playerObtained.profileImage);
+                Image_ProfileImage.Source = ToImage(playerObtained.profileImage);
             }
 
         }
@@ -112,32 +112,29 @@ namespace PassThePen
 
         public static byte[] ImageToByte(BitmapImage imageSource)
         {
-            var encoder = new JpegBitmapEncoder();
+            byte[] data;
+            JpegBitmapEncoder encoder = new JpegBitmapEncoder();
             encoder.Frames.Add(BitmapFrame.Create(imageSource));
-
-            using (var ms = new MemoryStream())
+            using (MemoryStream ms = new MemoryStream())
             {
                 encoder.Save(ms);
-                return ms.ToArray();
+                data = ms.ToArray();
             }
+            return data;
         }
 
 
-        public static BitmapImage LoadBitmapFromBytes(byte[] bytes)
+        public BitmapImage ToImage(byte[] array)
         {
-            var image = new BitmapImage();
-            using (var stream = new MemoryStream(bytes))
+            using (var ms = new System.IO.MemoryStream(array))
             {
-                stream.Seek(0, SeekOrigin.Begin);
+                var image = new BitmapImage();
                 image.BeginInit();
-                image.StreamSource = stream;
-                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
                 image.CacheOption = BitmapCacheOption.OnLoad;
-                image.UriSource = null;
+                image.StreamSource = ms;
                 image.EndInit();
+                return image;
             }
-
-            return image;
         }
 
     }

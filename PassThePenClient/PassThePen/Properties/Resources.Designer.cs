@@ -115,6 +115,15 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Califica los dibujos.
+        /// </summary>
+        public static string DrawReview_Title_Label {
+            get {
+                return ResourceManager.GetString("DrawReview_Title_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Correo .
         /// </summary>
         public static string Global_Email_Label {
@@ -336,6 +345,15 @@ namespace PassThePen.Properties {
         public static string Profile_ChangePassword_Button {
             get {
                 return ResourceManager.GetString("Profile_ChangePassword_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Contraseña actual.
+        /// </summary>
+        public static string Profile_CurrentPassword_Label {
+            get {
+                return ResourceManager.GetString("Profile_CurrentPassword_Label", resourceCulture);
             }
         }
         

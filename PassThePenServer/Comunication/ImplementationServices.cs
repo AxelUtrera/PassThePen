@@ -165,4 +165,12 @@ namespace Comunication
             OperationContext.Current.GetCallbackChannel<IChatServiceCallback>().MessageSend(completeMessage);
         }
     }
+
+    public partial class ImplementationServices : IDrawReviewService
+    {
+        public void SendDraws(byte[] draw)
+        {
+            OperationContext.Current.GetCallbackChannel<IDrawReviewCallback>().DistributeDraws(draw);
+        }
+    }
 }

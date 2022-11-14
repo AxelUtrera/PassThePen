@@ -1,6 +1,7 @@
 ﻿using PassThePen.PassThePenService;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Resources;
@@ -24,7 +25,7 @@ namespace PassThePen
     /// <summary>
     /// Lógica de interacción para Match.xaml
     /// </summary>
-    public partial class Match : Window, IMatchManagementCallback, IChatServicesCallback
+    public partial class Match : Window, IMatchManagementCallback, IChatServicesCallback, IDrawReviewServiceCallback
     {
 
         DispatcherTimer timer = new DispatcherTimer();
@@ -96,7 +97,7 @@ namespace PassThePen
 
         public void DistributeCard(string card)
         {
-            MessageBox.Show(card);
+            //MessageBox.Show(card);
             Label_CurrentDraw.Content = card;
         }
 
@@ -108,8 +109,12 @@ namespace PassThePen
 
             string username = MainMenu.username;
             String message = TextBox_Message.Text;
-            TextBox_Message.Clear();
-            client.SendMessage(username, message);
+            if(message != "")
+            {
+                TextBox_Message.Clear();
+                client.SendMessage(username, message);
+            }
+
 
         }
 
@@ -128,9 +133,12 @@ namespace PassThePen
 
         private void StartTurn()
         {
-            ObtainCard();
-            ObtainTurnTime();
-            StartTurnTimer();
+            //ObtainCard();
+            //ObtainTurnTime();
+            //StartTurnTimer();
+            DrawReview.bytes = GetCanvasDraw();
+            DrawReview drawReview = new DrawReview();
+            drawReview.Show();
         }
 
         private void ObtainTurnTime()
@@ -157,6 +165,8 @@ namespace PassThePen
             if (selectedTime == 0)
             {
                 timer.Stop();
+                //SendDraw();
+                
             }
             Label_TimeRemaining.Content = selectedTime;
             selectedTime--;
@@ -165,6 +175,64 @@ namespace PassThePen
         public void ReturnStartTurnSignal()
         {
             StartTurn();
+        }
+
+        private byte[] GetCanvasDraw()
+        {
+            //get the dimensions of the ink control
+            int margin = (int) InkCanvas_DrawTable.Margin.Right;
+            int width = (int) InkCanvas_DrawTable.ActualWidth - margin;
+            int height = (int) InkCanvas_DrawTable.ActualHeight - margin;
+
+            //render ink to bitmap
+            RenderTargetBitmap rtb = new RenderTargetBitmap(width, height, 96d, 96d, PixelFormats.Default);
+            rtb.Render(InkCanvas_DrawTable);
+
+            //save the ink to a memory stream
+            BmpBitmapEncoder encoder = new BmpBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(rtb));
+            byte[] bitmapBytes;
+            using (MemoryStream ms = new MemoryStream())
+            {
+                encoder.Save(ms);
+
+                //get the bitmap bytes from the memory stream
+                ms.Position = 0;
+                bitmapBytes = ms.ToArray();
+            }
+            return bitmapBytes;
+        }
+
+
+
+        public BitmapImage ConvertByteToImage(byte[] array)
+        {
+            using (var ms = new System.IO.MemoryStream(array))
+            {
+                var image = new BitmapImage();
+                image.BeginInit();
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.StreamSource = ms;
+                image.EndInit();
+                return image;
+            }
+        }
+
+        private void SendDraw()
+        {
+            InstanceContext context = new InstanceContext(this);
+            PassThePenService.DrawReviewServiceClient client = new DrawReviewServiceClient(context);
+
+            Byte[] playerDraw = GetCanvasDraw();
+
+            client.SendDraws(playerDraw);
+            DrawReview drawReview = new DrawReview();
+            drawReview.Show();
+        }
+
+        public void DistributeDraws(byte[] draw)
+        {
+            DrawReview.bytes = draw;
         }
     }
 }

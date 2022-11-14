@@ -58,11 +58,13 @@
             </Canvas>
         </StackPanel>
         <Border BorderThickness="5" CornerRadius="10,10,10,10" BorderBrush="Black" Margin="380,142,405,15">
-            <InkCanvas x:Name="InkCanvas_DrawTable" x:FieldModifier="public" Background="White" Opacity="1" EditingMode="Ink" ForceCursor="True" Cursor="Pen" Margin="5,5,5,5" >
-                <InkCanvas.DefaultDrawingAttributes>
-                    <DrawingAttributes Color="Black" Width="5" Height="5" />
-                </InkCanvas.DefaultDrawingAttributes>
-            </InkCanvas>
+            <Grid>
+                <InkCanvas x:Name="InkCanvas_DrawTable" x:FieldModifier="public" Background="White" Opacity="1" EditingMode="Ink" ForceCursor="True" Cursor="Pen" Margin="5,5,5,5" >
+                    <InkCanvas.DefaultDrawingAttributes>
+                        <DrawingAttributes Color="Black" Width="5" Height="5" />
+                    </InkCanvas.DefaultDrawingAttributes>
+                </InkCanvas>
+            </Grid>
         </Border>
         <Button Cursor="Hand" Margin="842,156,1038,884" Width="40" Height="40" Foreground="White" FontSize="13" Click="Button_SetEraser_Click" Panel.ZIndex="1">
             <Button.Template>

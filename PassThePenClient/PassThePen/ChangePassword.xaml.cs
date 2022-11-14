@@ -33,32 +33,51 @@ namespace PassThePen
         private void Button_Change_Password_Click(object sender, RoutedEventArgs e)
         {
             PlayerManagementClient client = new PlayerManagementClient();
-            if (ValidatePassword())
+            string currentPassword = PasswordBox_CurrentPassword.Password;
+            if(AutenticatePassword(MainMenu.username, currentPassword) == 200)
             {
-                string password = PasswordBox_ConfirmPassword.Password;
-                if (client.UpdatePlayerPassword(MainMenu.username, password) == 200)
+                if (ValidatePassword())
                 {
-                    MessageBox.Show("Contraseña actualizada con exito", "", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                else
-                {
-                    MessageBox.Show("La contraseña no pudo ser actualizada", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                    string password = PasswordBox_ConfirmPassword.Password;
+                    if (client.UpdatePlayerPassword(MainMenu.username, password) == 200)
+                    {
+                        MessageBox.Show("Contraseña actualizada con exito", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("La contraseña no pudo ser actualizada", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
             }
+            else
+            {
+                MessageBox.Show("La contraseña actual es incorrecta", "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
         }
 
         private Boolean ValidatePassword()
         {
             Label_InvalidPasswords.Visibility = Visibility.Hidden;
             Boolean isValid = true;
+            string currentPassword = PasswordBox_CurrentPassword.Password;
             string newPassword = PasswordBox_NewPassword.Password;
             string confirmPassword = PasswordBox_ConfirmPassword.Password;
-            if (!newPassword.Equals(confirmPassword) || string.IsNullOrEmpty(newPassword) || string.IsNullOrEmpty(confirmPassword))
+            if (!newPassword.Equals(confirmPassword) || string.IsNullOrEmpty(newPassword) || string.IsNullOrEmpty(confirmPassword) || string.IsNullOrEmpty(currentPassword))
             {
                 Label_InvalidPasswords.Visibility = Visibility.Visible;
                 isValid = false;
             }
             return isValid;
+        }
+
+        private int AutenticatePassword (string username, string password)
+        {
+            int result = 500;
+            PassThePenService.Player player = new Player { username = username, password = password };
+            PassThePenService.AutenticationClient client = new PassThePenService.AutenticationClient();
+            result = client.AutenticatePlayer(player);
+            return result;
         }
     }
 }
