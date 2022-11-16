@@ -91,7 +91,7 @@ namespace PassThePen
         {
             Boolean result;
             String expresion;
-            expresion = "\\w+([-+.']\\w +)*@\\w+([-.]\\w +)*\\.\\w+([-.]\\w +)*";
+            expresion = "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$";
             if (Regex.IsMatch(email, expresion))
             {
                 if (Regex.Replace(email, expresion, String.Empty).Length == 0)
