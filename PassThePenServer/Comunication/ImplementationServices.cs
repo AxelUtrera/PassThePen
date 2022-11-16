@@ -158,6 +158,8 @@ namespace Comunication
 
     public partial class ImplementationServices : IChatServices
     {
+        public List<ConnectedUser> usersChat= new List<ConnectedUser>();
+
         public void SendMessage(string senderUsername, string message)
         {
             ChatLogic chatLogic = new ChatLogic();

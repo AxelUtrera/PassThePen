@@ -160,6 +160,15 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Inicia sesión como invitado.
+        /// </summary>
+        public static string Login_GuestClic_Label {
+            get {
+                return ResourceManager.GetString("Login_GuestClic_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Iniciar sesión.
         /// </summary>
         public static string Login_Login_Button {

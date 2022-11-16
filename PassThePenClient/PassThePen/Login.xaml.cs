@@ -72,5 +72,10 @@ namespace PassThePen
             MainMenu mainMenu = new MainMenu();
             mainMenu.Show();
         }
+
+        private void Button_LoginAsGuest_Click(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

@@ -55,6 +55,7 @@
 
             <Button Cursor="Hand" Content="{x:Static p:Resources.Login_Forgot_Password_Button}" Margin="0,15,0,0" Width="138" Height="18" Background="Transparent" BorderThickness="0" Foreground="OrangeRed" Click="Button_Forgot_Password_Click"/>
 
+            <Label Content="{x:Static p:Resources.Login_GuestClic_Label}" Cursor="Hand" Margin="0,40,0,0" Foreground="Blue" BorderBrush="Blue" BorderThickness="0,0,0,1"  HorizontalAlignment="Center" FontSize="14" MouseLeftButtonDown="Button_LoginAsGuest_Click"/>
 
         </StackPanel>
 
