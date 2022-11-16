@@ -1,6 +1,8 @@
-﻿using PassThePen.PassThePenService;
+﻿using Microsoft.Win32;
+using PassThePen.PassThePenService;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +25,7 @@ namespace PassThePen
         public Register()
         {
             InitializeComponent();
+            Image_RegisterPlayer.Source = new BitmapImage(new Uri("pack://application:,,,/Img/Image_DefaultProfileImage.png"));
         }
 
         private void Button_Register_Click(object sender, RoutedEventArgs e)
@@ -31,6 +34,7 @@ namespace PassThePen
 
             string password = PasswordBox_Password.Password;
             string repeatedPassword = PasswordBox_RepeatPassword.Password;
+            byte[] defaultProfileImage = ImageToByte(Image_RegisterPlayer.Source as BitmapImage);
 
             int statusCode = 500;
             int statusOK = 200; 
@@ -43,7 +47,8 @@ namespace PassThePen
                     username = TextBox_Username.Text,
                     name = TextBox_Name.Text,
                     lastname = TextBox_LastName.Text,
-                    password = PasswordBox_Password.Password
+                    password = PasswordBox_Password.Password,
+                    profileImage = defaultProfileImage
                 };
 
                 statusCode = client.AddPlayer(newPlayer);
@@ -64,6 +69,23 @@ namespace PassThePen
         private void Button_Exit_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        public byte[] ImageToByte(BitmapImage imageSource)
+        {
+            if(imageSource != null)
+            {
+                Console.WriteLine("no estoy nullo");
+            }
+            byte[] data;
+            JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(imageSource));
+            using (MemoryStream ms = new MemoryStream())
+            {
+                encoder.Save(ms);
+                data = ms.ToArray();
+            }
+            return data;
         }
     }
 }

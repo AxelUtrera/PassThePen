@@ -53,5 +53,6 @@
             </Button>
 
         </StackPanel>
+        <Image x:Name="Image_RegisterPlayer" Height="100" Width="100" Visibility="Hidden"/>
     </Grid>
 </Window>

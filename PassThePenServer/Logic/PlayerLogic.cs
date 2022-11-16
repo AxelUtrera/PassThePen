@@ -43,7 +43,8 @@ namespace Logic
                     username = player.username,
                     name = player.name,
                     lastname = player.lastname,
-                    password = Encription.ToSHA2Hash(player.password)
+                    password = Encription.ToSHA2Hash(player.password),
+                    profileImage = player.profileImage
                 });
                 dataBase.SaveChanges();
 
