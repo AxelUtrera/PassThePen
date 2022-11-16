@@ -28,8 +28,9 @@ namespace PassThePen
     public partial class MainMenu : Window, PassThePenService.IPlayerConexionCallback
     {
         public static string username;
-        List<string> listStrings = new List<string>();
-        List<Friends> friendList = new List<Friends>();
+        private List<string> listStrings = new List<string>();
+        private List<Friends> friendList = new List<Friends>();
+        private List<FriendRequest> friendRequests = new List<FriendRequest>();
 
         public MainMenu()
         {
@@ -49,10 +50,15 @@ namespace PassThePen
         private void Button_FindFriends_Click(object sender, RoutedEventArgs e)
         {
             listStrings.Clear();
-            if (TextBox_FindFriend.Visibility == Visibility.Collapsed)
+            if (TextBox_FindFriend.Visibility == Visibility.Collapsed && ListBox_FriendList.Visibility == Visibility.Visible) 
             {
                 TextBox_FindFriend.Visibility = Visibility.Visible;
                 friendList.ForEach(fri => listStrings.Add(fri.friendUsername));
+            }
+            else if (TextBox_FindFriend.Visibility == Visibility.Collapsed && ListBox_FriendsRequests.Visibility == Visibility.Visible)
+            {
+                TextBox_FindFriend.Visibility = Visibility.Visible;
+                friendRequests.ForEach(fri => listStrings.Add(fri.friendUsername));
             }
             else
             {
@@ -81,6 +87,8 @@ namespace PassThePen
         {
             label_ListFriends.Visibility = Visibility.Collapsed;
             label_FriendRequests.Visibility = Visibility.Visible;
+            TextBox_FindFriend.Visibility = Visibility.Collapsed;
+            TextBox_FindFriend.Text = "";
             GenerateFriendRequestList();
         }
 
@@ -92,6 +100,8 @@ namespace PassThePen
             label_ListFriends.Visibility = Visibility.Visible;
             ListBox_FriendsRequests.Visibility = Visibility.Collapsed;
             ListBox_FriendList.Visibility = Visibility.Visible;
+            TextBox_FindFriend.Visibility = Visibility.Collapsed;
+            TextBox_FindFriend.Text = "";
             GetFriends();
         }
 
@@ -129,7 +139,8 @@ namespace PassThePen
             ListBox_FriendList.Visibility = Visibility.Collapsed;
             ListBox_FriendsRequests.Visibility = Visibility.Visible;
             FriendRequestsClient client = new FriendRequestsClient();
-            ListBox_FriendsRequests.ItemsSource = client.GetFriendRequestsList(username);
+            friendRequests = client.GetFriendRequestsList(username).ToList();
+            ListBox_FriendsRequests.ItemsSource = friendRequests;
             client.Close();
         }
 
@@ -162,17 +173,52 @@ namespace PassThePen
 
         private void TextBox_FindFriend_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if(ListBox_FriendList.Visibility == Visibility.Visible)
+            {
+                Filter_Friend_List();
+            }
+            else if (ListBox_FriendsRequests.Visibility == Visibility.Visible)
+            {
+                Filter_Friends_Requests();  
+            }
+        }
+
+
+        private void Filter_Friends_Requests()
+        {
+            if (String.IsNullOrEmpty(TextBox_FindFriend.Text.Trim()) == false)
+            {
+                List<FriendRequest> friendsEquals = new List<FriendRequest>();
+                friendsEquals.Clear();
+                foreach (string str in listStrings)
+                {
+
+                    if (str.StartsWith(TextBox_FindFriend.Text.Trim()))
+                    {
+                        friendsEquals.Add(friendRequests.Find(fri => fri.friendUsername.Contains(str)));
+                    }
+                }
+                ListBox_FriendsRequests.ItemsSource = friendsEquals;
+            }
+            else if (TextBox_FindFriend.Text.Trim() == "")
+            {
+                ListBox_FriendsRequests.ItemsSource = friendRequests;
+            }
+        }
+
+        private void Filter_Friend_List()
+        {
             if (String.IsNullOrEmpty(TextBox_FindFriend.Text.Trim()) == false)
             {
                 List<Friends> friendsEquals = new List<Friends>();
                 friendsEquals.Clear();
                 foreach (string str in listStrings)
                 {
-                    
-                        if (str.StartsWith(TextBox_FindFriend.Text.Trim()))
-                        {
-                            friendsEquals.Add(friendList.Find(fri => fri.friendUsername.Contains(str)));
-                        }
+
+                    if (str.StartsWith(TextBox_FindFriend.Text.Trim()))
+                    {
+                        friendsEquals.Add(friendList.Find(fri => fri.friendUsername.Contains(str)));
+                    }
                 }
                 ListBox_FriendList.ItemsSource = friendsEquals;
             }
