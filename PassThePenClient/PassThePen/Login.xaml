@@ -58,7 +58,8 @@
             <Label Content="{x:Static p:Resources.Login_GuestClic_Label}" Cursor="Hand" Margin="0,40,0,0" Foreground="Blue" BorderBrush="Blue" BorderThickness="0,0,0,1"  HorizontalAlignment="Center" FontSize="14" MouseLeftButtonDown="Button_LoginAsGuest_Click"/>
 
         </StackPanel>
-
-
+        <Label Content="EN" Cursor="Hand" Margin="20,0,0,10" Foreground="White" BorderBrush="White" BorderThickness="0,0,0,1" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" MouseLeftButtonDown="Button_ChangeLanguageEN_Click"></Label>
+        <Label Content="|" Margin="45,0,0,5" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="25"></Label>
+        <Label Content="ES" Cursor="Hand" Margin="60,0,0,10" Foreground="White" BorderBrush="White" BorderThickness="0,0,0,1" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" MouseLeftButtonDown="Button_ChangeLanguageES_Click"></Label>
     </Grid>
 </Window>

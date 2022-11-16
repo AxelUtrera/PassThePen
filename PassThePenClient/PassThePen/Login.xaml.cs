@@ -1,7 +1,10 @@
-﻿using System;
+﻿using PassThePen.Properties;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -75,7 +78,36 @@ namespace PassThePen
 
         private void Button_LoginAsGuest_Click(object sender, MouseButtonEventArgs e)
         {
+            PassThePenService.AutenticationClient client = new PassThePenService.AutenticationClient();
 
+            PassThePenService.Player guestPlayer = new PassThePenService.Player()
+            {
+                username = "Guest",
+                password = "guest"
+            };
+
+            int autenticationValid = 200;
+            int resultAutentication = client.AutenticatePlayer(guestPlayer);
+
+            if(resultAutentication == autenticationValid)
+            {
+                MainMenu.username = "Guest";
+                InvokeMainMenu();
+            }
+        }
+
+        private void Button_ChangeLanguageEN_Click(object sender, MouseButtonEventArgs e)
+        {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
+            MessageBox.Show("The language is now English, login to visualize the changes", "", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void Button_ChangeLanguageES_Click(object sender, MouseButtonEventArgs e)
+        {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("es-MX");
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("es-MX");
+            MessageBox.Show("El lenguaje ahora es Español, inicie sesión para ver los cambios", "", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }

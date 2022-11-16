@@ -26,6 +26,7 @@ namespace PassThePen
         {
             InitializeComponent();
             SetDataPlayer();
+            ValidateGuestUser();
         }
 
         private void Button_SaveProfileChanges_Click(object sender, RoutedEventArgs e)
@@ -109,6 +110,18 @@ namespace PassThePen
             }
         }
 
+        private void ValidateGuestUser()
+        {
+            if (MainMenu.username.Equals("Guest"))
+            {
+                Button_SelectProfileImage.IsEnabled = false;
+                TextBox_Name.IsEnabled = false;
+                TextBox_Lastname.IsEnabled = false;
+                TextBox_Email.IsEnabled = false;
+                Button_ChangePassword.IsEnabled = false;
+                Button_SaveChanges.IsEnabled = false;
+            }
+        }
 
         public static byte[] ImageToByte(BitmapImage imageSource)
         {

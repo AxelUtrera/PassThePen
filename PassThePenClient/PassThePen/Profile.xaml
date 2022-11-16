@@ -20,7 +20,7 @@
         <TextBox x:Name="TextBox_Lastname" HorizontalAlignment="Center" Margin="0,332,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="420"/>
         <Label Content="{x:Static p:Resources.Profile_Email_Label}" HorizontalAlignment="Left" Margin="40,369,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="TextBox_Email" HorizontalAlignment="Center" Margin="0,395,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="420"/>
-        <Button Cursor="Hand" Margin="364,578,36,97" Width="100" Height="25" Foreground="White" FontSize="13" Click="Button_SaveProfileChanges_Click">
+        <Button x:Name="Button_SaveChanges" Cursor="Hand" Margin="364,578,36,97" Width="100" Height="25" Foreground="White" FontSize="13" Click="Button_SaveProfileChanges_Click">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border Background="Green" BorderBrush="Green" CornerRadius="7,7,7,7">
@@ -40,7 +40,7 @@
             </Button.Template>
         </Button>
 
-        <Button Cursor="Hand" Margin="40,578,310,97" Width="150" Height="25" Foreground="White" FontSize="13" Click="Button_ChangePassword_Click">
+        <Button x:Name="Button_ChangePassword" Cursor="Hand" Margin="40,578,310,97" Width="150" Height="25" Foreground="White" FontSize="13" Click="Button_ChangePassword_Click">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border Background="Green" BorderBrush="Green" CornerRadius="7,7,7,7">
@@ -49,7 +49,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button Cursor="Hand" Margin="302,140,158,520" Width="40" Height="40" Foreground="White" FontSize="13" Click="Button_Select_Image_Click" Panel.ZIndex="1">
+        <Button x:Name="Button_SelectProfileImage" Cursor="Hand" Margin="302,140,158,520" Width="40" Height="40" Foreground="White" FontSize="13" Click="Button_Select_Image_Click" Panel.ZIndex="1">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border Background="Gray" BorderBrush="Gray" CornerRadius="15,15,15,15">
