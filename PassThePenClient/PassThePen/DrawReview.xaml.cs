@@ -23,7 +23,7 @@ namespace PassThePen
         public DrawReview()
         {
             InitializeComponent();
-            DrawImage.Source = ConvertByteToImage(bytes);
+            Image_ReviewDraw.Source = ConvertByteToImage(bytes);
         }
 
         public BitmapImage ConvertByteToImage(byte[] array)
@@ -37,6 +37,12 @@ namespace PassThePen
                 image.EndInit();
                 return image;
             }
+        }
+
+        private void Button_SendReview_Click(object sender, RoutedEventArgs e)
+        {
+            int value = (int) Rating_DrawReview.Value;
+            MessageBox.Show("Puntuacion: " + value);
         }
     }
 }

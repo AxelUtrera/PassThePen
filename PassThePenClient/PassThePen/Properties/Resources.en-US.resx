@@ -161,6 +161,10 @@
     <value>Forgot your password?</value>
     <comment>Used by: login</comment>
   </data>
+  <data name="Login_GuestClic_Label" xml:space="preserve">
+    <value>Login as Guest</value>
+    <comment>Used by: Login</comment>
+  </data>
   <data name="Login_Login_Button" xml:space="preserve">
     <value>Log In</value>
     <comment>Used by: login</comment>
