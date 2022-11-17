@@ -29,7 +29,7 @@ namespace PassThePen
         {
             PassThePenService.AutenticationClient client = new PassThePenService.AutenticationClient();
             email = texBox_emailCode.Text;            
-            if (ValidateEmail(email) && client.AutenticateEmail(email) == 200)
+            if (ValidateFormat(email, "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$") && client.AutenticateEmail(email) == 200)
             {
                 Random randomNumber = new Random();
                 validationCode = randomNumber.Next(100000, 1000000);
@@ -87,14 +87,12 @@ namespace PassThePen
             }
         }
 
-        public static Boolean ValidateEmail(String email)
+        public Boolean ValidateFormat(String text, string expresion)
         {
             Boolean result;
-            String expresion;
-            expresion = "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$";
-            if (Regex.IsMatch(email, expresion))
+            if (Regex.IsMatch(text, expresion))
             {
-                if (Regex.Replace(email, expresion, String.Empty).Length == 0)
+                if (Regex.Replace(text, expresion, String.Empty).Length == 0)
                 {
                     result = true;
                 }
@@ -127,20 +125,29 @@ namespace PassThePen
             }
             else
             {
-                MessageBox.Show("Las contraseñas no son iguales");
+                MessageBox.Show("Error en las contraseñas favor de verificarlas");
             }
         }
 
-        public  Boolean ValidatePassword()
+        private  Boolean ValidatePassword()
         {
             Boolean result = true;
+            if (passwordBox_newPassword.Password.Equals("") || passwordBox_repitPassword.Password.Equals(""))
+            {
+                result = false;
+            }
             if (! passwordBox_newPassword.Password.Equals(passwordBox_repitPassword.Password))
             {
                 result = false;
             }
-
+            if (! ValidateFormat(passwordBox_newPassword.Password, "^(?=.*\\d)(?=.*[\\u0021-\\u002b\\u003c-\\u0040])(?=.*[A-Z])(?=.*[a-z])\\S{8,16}$"))
+            {
+                result = false;
+            }
             return result;
         }
+
+        
 
         private void Button_cancel_password_Click(object sender, RoutedEventArgs e)
         {
