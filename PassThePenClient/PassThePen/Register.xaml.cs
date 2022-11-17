@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -35,7 +36,7 @@ namespace PassThePen
             int statusCode = 500;
             int statusOK = 200; 
 
-            if (password.Equals(repeatedPassword))
+            if (password.Equals(repeatedPassword) && Validate_Fields(TexBox_Email.Text, password))
             {
                 Player newPlayer = new Player()
                 {
@@ -48,6 +49,10 @@ namespace PassThePen
 
                 statusCode = client.AddPlayer(newPlayer);
             }
+            else
+            {
+                MessageBox.Show("Campos invalidos favor de verificarlos");
+            }
             
             if (statusCode == statusOK)
             {
@@ -55,10 +60,33 @@ namespace PassThePen
             }
             else
             {
-                MessageBox.Show("Upss ocurrio un error");
+                MessageBox.Show("Upss ocurrio un error, no se ha podido registrar al Jugador");
             }
 
             
+        }
+
+        private bool Validate_Fields(string email, string password)
+        {
+            RecoverPassword recoverPassword = new RecoverPassword();
+            bool result = true;
+            if ( string.IsNullOrEmpty(TextBox_Name.Text) || string.IsNullOrEmpty(TextBox_LastName.Text))
+            {
+                result = false;
+            }
+            if (string.IsNullOrEmpty(TextBox_Username.Text) || string.IsNullOrEmpty(TexBox_Email.Text))
+            {
+                result = false;
+            }
+            if (! recoverPassword.ValidateFormat(email, "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"))
+            {
+                result = false;
+            }
+            if (! recoverPassword.ValidateFormat(password, "^(?=.*\\d)(?=.*[\\u0021-\\u002b\\u003c-\\u0040])(?=.*[A-Z])(?=.*[a-z])\\S{8,16}$"))
+            {
+                result = false;
+            }
+            return result;
         }
 
         private void Button_Exit_Click(object sender, RoutedEventArgs e)
