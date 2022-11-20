@@ -53,7 +53,7 @@ namespace PassThePen
             {
                 MessageBox.Show("La contraseña actual es incorrecta", "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            
+            client.Close();
         }
 
         private Boolean ValidatePassword()
@@ -82,6 +82,7 @@ namespace PassThePen
             PassThePenService.Player player = new Player { username = username, password = password };
             PassThePenService.AutenticationClient client = new PassThePenService.AutenticationClient();
             result = client.AutenticatePlayer(player);
+            client.Close();
             return result;
         }
     }

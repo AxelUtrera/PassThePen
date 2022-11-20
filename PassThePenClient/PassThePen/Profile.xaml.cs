@@ -53,6 +53,7 @@ namespace PassThePen
                     MessageBox.Show("No se pudo actualizar el perfil");
                 }
             }
+            client.Close();
         }
 
 
@@ -68,7 +69,7 @@ namespace PassThePen
                 TextBox_Email.Text = playerObtained.email;
                 Image_ProfileImage.Source = ToImage(playerObtained.profileImage);
             }
-
+            client.Close();
         }
 
 
@@ -87,6 +88,11 @@ namespace PassThePen
                 InvalidFields_Label.Visibility = Visibility.Visible; 
                 isValid = false;
             }
+            if (TextBox_Email.Text.Length > 100 || TextBox_Name.Text.Length > 50 || TextBox_Lastname.Text.Length > 50) { }
+            {
+                isValid = false;
+            }
+
             return isValid;
         }
 
