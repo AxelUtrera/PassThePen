@@ -36,7 +36,7 @@ namespace PassThePen
             int statusCode = 500;
             int statusOK = 200; 
 
-            if (password.Equals(repeatedPassword) && Validate_Fields(TexBox_Email.Text, password))
+            if (password.Equals(repeatedPassword) && ValidateFields(TexBox_Email.Text, password))
             {
                 Player newPlayer = new Player()
                 {
@@ -48,25 +48,26 @@ namespace PassThePen
                 };
 
                 statusCode = client.AddPlayer(newPlayer);
+                if (statusCode == statusOK)
+                {
+                    MessageBox.Show("Nuevo jugador registrado con éxito");
+                    Login login = new Login();
+                    login.Show();
+                    Close();
+                }
+                else
+                {
+                    MessageBox.Show("Upss ocurrio un error, no se ha podido registrar al Jugador");
+                }
             }
             else
             {
                 MessageBox.Show("Campos invalidos favor de verificarlos");
             }
-            
-            if (statusCode == statusOK)
-            {
-                MessageBox.Show("Nuevo jugador registrado con éxito");
-            }
-            else
-            {
-                MessageBox.Show("Upss ocurrio un error, no se ha podido registrar al Jugador");
-            }
-
-            
+            client.Close();
         }
 
-        private bool Validate_Fields(string email, string password)
+        private bool ValidateFields(string email, string password)
         {
             RecoverPassword recoverPassword = new RecoverPassword();
             bool result = true;
@@ -86,11 +87,32 @@ namespace PassThePen
             {
                 result = false;
             }
+            if (!ValidateLength())
+            {
+                result = false;
+            }
             return result;
         }
 
+        private bool ValidateLength()
+        {
+            bool result = true;
+            if (TextBox_Name.Text.Length > 20 || TextBox_Name.Text.Length > 50)
+            {
+                result = false;
+            }
+            if (TextBox_LastName.Text.Length > 50 || TexBox_Email.Text.Length > 100)
+            {
+                result = false;
+            }
+            return result;
+        }
+
+
         private void Button_Exit_Click(object sender, RoutedEventArgs e)
         {
+            Login login = new Login();
+            login.Show();
             Close();
         }
     }
