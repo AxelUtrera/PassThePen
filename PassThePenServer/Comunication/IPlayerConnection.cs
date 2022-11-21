@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Comunication
 {
     [ServiceContract(CallbackContract = typeof(IPlayersServicesCallBack))]
-    public interface IPlayerConexion
+    public interface IPlayerConnection
     {
         [OperationContract]
         void Connect(string username);
@@ -22,6 +22,9 @@ namespace Comunication
 
         [OperationContract]
         List<string> GetNameOnlinePlayers();
+
+        [OperationContract]
+        void SendMathInvitation(string invitingPlayer, string invitedPlayer);
     }
 
     [ServiceContract]
@@ -29,6 +32,10 @@ namespace Comunication
     {
         [OperationContract(IsOneWay = true)]
         void PlayersCallBack(Friends[] friends);
+
+
+        [OperationContract]
+        int NotifyMatchInvitation(string invitingPlayer);
     }
 }
 
