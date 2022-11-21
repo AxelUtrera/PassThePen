@@ -53,19 +53,24 @@ namespace PassThePen
             {
                 MessageBox.Show("La contraseña actual es incorrecta", "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            
+            client.Close();
         }
 
         private Boolean ValidatePassword()
         {
             Label_InvalidPasswords.Visibility = Visibility.Hidden;
             Boolean isValid = true;
+            RecoverPassword recoverPassword = new RecoverPassword();
             string currentPassword = PasswordBox_CurrentPassword.Password;
             string newPassword = PasswordBox_NewPassword.Password;
             string confirmPassword = PasswordBox_ConfirmPassword.Password;
             if (!newPassword.Equals(confirmPassword) || string.IsNullOrEmpty(newPassword) || string.IsNullOrEmpty(confirmPassword) || string.IsNullOrEmpty(currentPassword))
             {
                 Label_InvalidPasswords.Visibility = Visibility.Visible;
+                isValid = false;
+            }
+            if (! recoverPassword.ValidateFormat(newPassword, "^(?=.*\\d)(?=.*[\\u0021-\\u002b\\u003c-\\u0040])(?=.*[A-Z])(?=.*[a-z])\\S{8,16}$"))
+            {
                 isValid = false;
             }
             return isValid;
@@ -77,6 +82,7 @@ namespace PassThePen
             PassThePenService.Player player = new Player { username = username, password = password };
             PassThePenService.AutenticationClient client = new PassThePenService.AutenticationClient();
             result = client.AutenticatePlayer(player);
+            client.Close();
             return result;
         }
     }

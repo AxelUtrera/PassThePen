@@ -74,6 +74,8 @@ namespace PassThePen
             InstanceContext instanceContext = new InstanceContext(this);
             PassThePenService.PlayerConexionClient client = new PlayerConexionClient(instanceContext);
             client.Disconnect(username);
+            Login login = new Login();
+            login.Show();
             this.Close();
         }
 
@@ -181,22 +183,23 @@ namespace PassThePen
         {
             Match match = new Match();
             match.Show();
+            this.Close();
         }
 
         private void TextBox_FindFriend_TextChanged(object sender, TextChangedEventArgs e)
         {
             if(ListBox_FriendList.Visibility == Visibility.Visible)
             {
-                Filter_Friend_List();
+                FilterFriendList();
             }
             else if (ListBox_FriendsRequests.Visibility == Visibility.Visible)
             {
-                Filter_Friends_Requests();  
+                FilterFriendsRequests();  
             }
         }
 
 
-        private void Filter_Friends_Requests()
+        private void FilterFriendsRequests()
         {
             if (String.IsNullOrEmpty(TextBox_FindFriend.Text.Trim()) == false)
             {
@@ -218,7 +221,7 @@ namespace PassThePen
             }
         }
 
-        private void Filter_Friend_List()
+        private void FilterFriendList()
         {
             if (String.IsNullOrEmpty(TextBox_FindFriend.Text.Trim()) == false)
             {
@@ -258,6 +261,7 @@ namespace PassThePen
                 friendUsername = username
             };
             client.SendFriendRequests(friendRequest);
+            client.Close();
         }
 
         private void Button_InviteFriend_Click(object sender, MouseButtonEventArgs e)

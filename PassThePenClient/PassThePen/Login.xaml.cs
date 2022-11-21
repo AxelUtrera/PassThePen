@@ -37,32 +37,55 @@ namespace PassThePen
                 username = TextBox_Username.Text,
                 password = PasswordBox_PasswordUser.Password
             };
-
-            int playerValid = 200;
-            int resultAutenticatePlayer = client.AutenticatePlayer(player);
-           
-            if (resultAutenticatePlayer == playerValid)
+            if (ValidateInformation())
             {
-                MainMenu.username = TextBox_Username.Text;
-                InvokeMainMenu();
+                int playerValid = 200;
+                int resultAutenticatePlayer = client.AutenticatePlayer(player);
+
+                if (resultAutenticatePlayer == playerValid)
+                {
+                    MainMenu.username = TextBox_Username.Text;
+                    InvokeMainMenu();
+                    
+                }
+                else
+                {
+                    MessageBox.Show("Hubo un error en la validacion");
+                }
             }
             else
             {
-                MessageBox.Show("Hubo un error en la validacion");
+                MessageBox.Show("Datos invalidos: Favor de verificar los datos ingresados");
             }
-            
+            client.Close();
+        }
+
+        private bool ValidateInformation()
+        {
+            bool result = true;
+            if (string.IsNullOrEmpty(TextBox_Username.Text) && string.IsNullOrEmpty(PasswordBox_PasswordUser.Password))
+            {
+                return false;
+            }
+            if (TextBox_Username.Text.Length > 50 && PasswordBox_PasswordUser.Password.Length > 16)
+            {
+                return false;
+            }
+            return result;
         }
 
         private void Button_Register_Click(object sender, RoutedEventArgs e)
         {
             Register registerWindow = new Register();
-            registerWindow.ShowDialog();                 
+            registerWindow.ShowDialog();
+            Close();
         }
 
         private void Button_Forgot_Password_Click(object sender, RoutedEventArgs e)
         {
             RecoverPassword recover = new RecoverPassword();
             recover.Show();
+            Close();
         }
 
         private void Button_Exit_Click(object sender, RoutedEventArgs e)
@@ -74,6 +97,7 @@ namespace PassThePen
         {
             MainMenu mainMenu = new MainMenu();
             mainMenu.Show();
+            Close();
         }
 
         private void Button_LoginAsGuest_Click(object sender, MouseButtonEventArgs e)
@@ -94,6 +118,7 @@ namespace PassThePen
                 MainMenu.username = "Guest";
                 InvokeMainMenu();
             }
+            client.Close();
         }
 
         private void Button_ChangeLanguageEN_Click(object sender, MouseButtonEventArgs e)

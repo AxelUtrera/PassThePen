@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -35,7 +36,7 @@ namespace PassThePen
             int statusCode = 500;
             int statusOK = 200; 
 
-            if (password.Equals(repeatedPassword))
+            if (password.Equals(repeatedPassword) && ValidateFields(TexBox_Email.Text, password))
             {
                 Player newPlayer = new Player()
                 {
@@ -47,22 +48,71 @@ namespace PassThePen
                 };
 
                 statusCode = client.AddPlayer(newPlayer);
-            }
-            
-            if (statusCode == statusOK)
-            {
-                MessageBox.Show("Nuevo jugador registrado con éxito");
+                if (statusCode == statusOK)
+                {
+                    MessageBox.Show("Nuevo jugador registrado con éxito");
+                    Login login = new Login();
+                    login.Show();
+                    Close();
+                }
+                else
+                {
+                    MessageBox.Show("Upss ocurrio un error, no se ha podido registrar al Jugador");
+                }
             }
             else
             {
-                MessageBox.Show("Upss ocurrio un error");
+                MessageBox.Show("Campos invalidos favor de verificarlos");
             }
-
-            
+            client.Close();
         }
+
+        private bool ValidateFields(string email, string password)
+        {
+            RecoverPassword recoverPassword = new RecoverPassword();
+            bool result = true;
+            if ( string.IsNullOrEmpty(TextBox_Name.Text) || string.IsNullOrEmpty(TextBox_LastName.Text))
+            {
+                result = false;
+            }
+            if (string.IsNullOrEmpty(TextBox_Username.Text) || string.IsNullOrEmpty(TexBox_Email.Text))
+            {
+                result = false;
+            }
+            if (! recoverPassword.ValidateFormat(email, "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"))
+            {
+                result = false;
+            }
+            if (! recoverPassword.ValidateFormat(password, "^(?=.*\\d)(?=.*[\\u0021-\\u002b\\u003c-\\u0040])(?=.*[A-Z])(?=.*[a-z])\\S{8,16}$"))
+            {
+                result = false;
+            }
+            if (!ValidateLength())
+            {
+                result = false;
+            }
+            return result;
+        }
+
+        private bool ValidateLength()
+        {
+            bool result = true;
+            if (TextBox_Name.Text.Length > 20 || TextBox_Name.Text.Length > 50)
+            {
+                result = false;
+            }
+            if (TextBox_LastName.Text.Length > 50 || TexBox_Email.Text.Length > 100)
+            {
+                result = false;
+            }
+            return result;
+        }
+
 
         private void Button_Exit_Click(object sender, RoutedEventArgs e)
         {
+            Login login = new Login();
+            login.Show();
             Close();
         }
     }
