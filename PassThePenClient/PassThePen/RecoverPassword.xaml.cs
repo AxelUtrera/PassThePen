@@ -28,8 +28,8 @@ namespace PassThePen
         private void Button_Send_Click(object sender, RoutedEventArgs e)
         {
             PassThePenService.AutenticationClient client = new PassThePenService.AutenticationClient();
-            email = texBox_emailCode.Text;            
-            if (ValidateEmail(email) && client.AutenticateEmail(email) == 200)
+            email = TexBox_EmailCode.Text;            
+            if (ValidateFormat(email, "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$")  && TexBox_EmailCode.Text.Length <= 100 && client.AutenticateEmail(email) == 200)
             {
                 Random randomNumber = new Random();
                 validationCode = randomNumber.Next(100000, 1000000);
@@ -39,11 +39,11 @@ namespace PassThePen
                     if (client.CodeEmail(email, affair, validationCode) == 200)
                     {
                         MessageBox.Show("Código de validación enviado con exito");
-                        label_Email.Visibility = Visibility.Hidden;
-                        label_Code.Visibility = Visibility.Visible;
+                        Label_Email.Visibility = Visibility.Hidden;
+                        Label_Code.Visibility = Visibility.Visible;
                         Button_Valid.Visibility = Visibility.Visible;
                         Button_Send.Visibility = Visibility.Hidden;
-                        texBox_emailCode.Text = "";
+                        TexBox_EmailCode.Text = "";
 
                     }
                     else
@@ -60,26 +60,29 @@ namespace PassThePen
             {
                 MessageBox.Show("Email Invalido");
             }
+            client.Close();
         }
 
         private void Button_cancel_Click(object sender, RoutedEventArgs e)
         {
+            Login login = new Login();
+            login.Show();
             Close();
         }
 
         private void Button_Valid_Click(object sender, RoutedEventArgs e)
         {
-            if (Int32.Parse(texBox_emailCode.Text) == validationCode)
+            if (Int32.Parse(TexBox_EmailCode.Text) == validationCode)
             {
-                label_Email.Visibility = Visibility.Collapsed;
-                label_Code.Visibility = Visibility.Collapsed;
-                texBox_emailCode.Visibility = Visibility.Collapsed;
-                panel_Email.Visibility = Visibility.Collapsed;
-                label_NewPassword.Visibility = Visibility.Visible;
-                label_repitPassword.Visibility = Visibility.Visible;
-                passwordBox_newPassword.Visibility = Visibility.Visible;
-                passwordBox_repitPassword.Visibility = Visibility.Visible;
-                panel_Password.Visibility = Visibility.Visible;
+                Label_Email.Visibility = Visibility.Collapsed;
+                Label_Code.Visibility = Visibility.Collapsed;
+                TexBox_EmailCode.Visibility = Visibility.Collapsed;
+                Panel_Email.Visibility = Visibility.Collapsed;
+                Label_NewPassword.Visibility = Visibility.Visible;
+                Label_RepitPassword.Visibility = Visibility.Visible;
+                PasswordBox_NewPassword.Visibility = Visibility.Visible;
+                PasswordBox_RepitPassword.Visibility = Visibility.Visible;
+                Panel_Password.Visibility = Visibility.Visible;
             }
             else
             {
@@ -87,14 +90,12 @@ namespace PassThePen
             }
         }
 
-        public static Boolean ValidateEmail(String email)
+        public Boolean ValidateFormat(String text, string expresion)
         {
             Boolean result;
-            String expresion;
-            expresion = "\\w+([-+.']\\w +)*@\\w+([-.]\\w +)*\\.\\w+([-.]\\w +)*";
-            if (Regex.IsMatch(email, expresion))
+            if (Regex.IsMatch(text, expresion))
             {
-                if (Regex.Replace(email, expresion, String.Empty).Length == 0)
+                if (Regex.Replace(text, expresion, String.Empty).Length == 0)
                 {
                     result = true;
                 }
@@ -110,12 +111,14 @@ namespace PassThePen
             return result;
         }
 
+        
+
         private void Button_change_Click(object sender, RoutedEventArgs e)
         {
             PassThePenService.PlayerManagementClient client = new PassThePenService.PlayerManagementClient();
             if (ValidatePassword())
             {
-                if (client.UpdatePassword(email, passwordBox_newPassword.Password) == 200)
+                if (client.UpdatePassword(email, PasswordBox_NewPassword.Password) == 200)
                 {
                     MessageBox.Show("La contraseña ha sido cambiada con exito");
                     Close();
@@ -127,23 +130,35 @@ namespace PassThePen
             }
             else
             {
-                MessageBox.Show("Las contraseñas no son iguales");
+                MessageBox.Show("Error en las contraseñas favor de verificarlas");
             }
+            client.Close();
         }
 
-        public  Boolean ValidatePassword()
+        private  Boolean ValidatePassword()
         {
             Boolean result = true;
-            if (! passwordBox_newPassword.Password.Equals(passwordBox_repitPassword.Password))
+            if (PasswordBox_NewPassword.Password.Equals("") || PasswordBox_RepitPassword.Password.Equals(""))
             {
                 result = false;
             }
-
+            if (! PasswordBox_NewPassword.Password.Equals(PasswordBox_RepitPassword.Password))
+            {
+                result = false;
+            }
+            if (! ValidateFormat(PasswordBox_NewPassword.Password, "^(?=.*\\d)(?=.*[\\u0021-\\u002b\\u003c-\\u0040])(?=.*[A-Z])(?=.*[a-z])\\S{8,16}$"))
+            {
+                result = false;
+            }
             return result;
         }
 
+        
+
         private void Button_cancel_password_Click(object sender, RoutedEventArgs e)
         {
+            Login login = new Login();
+            login.Show();
             Close();
         }
     }
