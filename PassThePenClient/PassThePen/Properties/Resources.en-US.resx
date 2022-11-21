@@ -141,6 +141,10 @@
     <value>Save</value>
     <comment>Used by: Change Password</comment>
   </data>
+  <data name="DrawReview_Submit_Button" xml:space="preserve">
+    <value>Submit</value>
+    <comment>Used by: Draw Review</comment>
+  </data>
   <data name="DrawReview_Title_Label" xml:space="preserve">
     <value>Rate the drwaings</value>
     <comment>Used by: DrawReview</comment>

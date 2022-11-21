@@ -115,6 +115,15 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Calificar.
+        /// </summary>
+        public static string DrawReview_Submit_Button {
+            get {
+                return ResourceManager.GetString("DrawReview_Submit_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Califica los dibujos.
         /// </summary>
         public static string DrawReview_Title_Label {

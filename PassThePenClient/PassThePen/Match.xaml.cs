@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Reflection;
 using System.Resources;
@@ -97,7 +98,6 @@ namespace PassThePen
 
         public void DistributeCard(string card)
         {
-            //MessageBox.Show(card);
             Label_CurrentDraw.Content = card;
         }
 
@@ -136,9 +136,10 @@ namespace PassThePen
             //ObtainCard();
             //ObtainTurnTime();
             //StartTurnTimer();
-            DrawReview.bytes = GetCanvasDraw();
-            DrawReview drawReview = new DrawReview();
-            drawReview.Show();
+            //DrawReview.bytes = GetCanvasDraw();
+            //DrawReview drawReview = new DrawReview();
+            //drawReview.Show();
+            SendDraw();
         }
 
         private void ObtainTurnTime()
@@ -165,7 +166,7 @@ namespace PassThePen
             if (selectedTime == 0)
             {
                 timer.Stop();
-                //SendDraw();
+                SendDraw();
                 
             }
             Label_TimeRemaining.Content = selectedTime;
@@ -200,9 +201,9 @@ namespace PassThePen
                 ms.Position = 0;
                 bitmapBytes = ms.ToArray();
             }
+
             return bitmapBytes;
         }
-
 
 
         public BitmapImage ConvertByteToImage(byte[] array)
@@ -226,13 +227,13 @@ namespace PassThePen
             Byte[] playerDraw = GetCanvasDraw();
 
             client.SendDraws(playerDraw);
-            DrawReview drawReview = new DrawReview();
-            drawReview.Show();
         }
 
         public void DistributeDraws(byte[] draw)
         {
             DrawReview.bytes = draw;
+            DrawReview drawReview = new DrawReview();
+            drawReview.Show();            
         }
     }
 }

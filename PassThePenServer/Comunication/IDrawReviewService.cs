@@ -17,7 +17,7 @@ namespace Comunication
     [ServiceContract]
     public interface IDrawReviewCallback
     {
-        [OperationContract]
+        [OperationContract(IsOneWay = true)]
         void DistributeDraws(Byte[] draw);
     }
 }

@@ -141,6 +141,10 @@
     <value>Guardar</value>
     <comment>Used by: Change Password</comment>
   </data>
+  <data name="DrawReview_Submit_Button" xml:space="preserve">
+    <value>Calificar</value>
+    <comment>Used by: Draw Review</comment>
+  </data>
   <data name="DrawReview_Title_Label" xml:space="preserve">
     <value>Califica los dibujos</value>
     <comment>Used By: DrawReview</comment>

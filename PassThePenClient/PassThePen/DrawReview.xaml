@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PassThePen"
         xmlns:p ="clr-namespace:PassThePen.Properties"
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
-        xmlns:Controls="clr-namespace:System.Windows.Controls;assembly=DotNetProjects.Input.Toolkit" x:Class="PassThePen.DrawReview"
+        x:Class="PassThePen.DrawReview"
         mc:Ignorable="d"
         WindowStyle="None"
         WindowStartupLocation="CenterOwner"
@@ -15,12 +15,20 @@
         <Grid Margin="0,0,0,610" Background="LightGray">
             <Label Content="{x:Static p:Resources.DrawReview_Title_Label}" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
-        <Grid Margin="58,131,68,62" Background="AliceBlue">
+        <Grid Margin="0,0,0,0" Background="AliceBlue" Width="890" Height="500">
             <Border BorderBrush="Black" BorderThickness="2"></Border>
-            <Label x:Name="Label_PlayerReview" Content="Label" FontSize="15" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top"/>
-            <Image x:Name="Image_ReviewDraw" HorizontalAlignment="Center" Height="360" Margin="0,0,0,0" VerticalAlignment="Top" Width="800"/>
+            <Label x:Name="Label_PlayerReview" Content="Label" FontSize="25" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top"/>
+            <Image x:Name="Image_ReviewDraw" HorizontalAlignment="Center" Height="360" Margin="0,0,0,0" VerticalAlignment="Center" Width="800"/>
             <syncfusion:SfRating x:Name="Rating_DrawReview" ShowToolTip="False" Precision="Standard" HorizontalAlignment="Center" Height="30" ItemsCount="5" VerticalAlignment="Top" Width="150" Margin="0,455,0,0"/>
         </Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="816,643,0,0" VerticalAlignment="Top" Height="47" Width="115" Click="Button_SendReview_Click"/>
+        <Button HorizontalAlignment="Right" Margin="0,0,55,35" Foreground="White" VerticalAlignment="Bottom" Height="47" Width="115" Click="Button_SendReview_Click">
+            <Button.Template >
+                <ControlTemplate TargetType="{x:Type Button}" >
+                    <Border Background="Green" BorderBrush="Green"  CornerRadius="7,7,7,7">
+                        <ContentPresenter Content="{x:Static p:Resources.DrawReview_Submit_Button}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
     </Grid>
 </Window>

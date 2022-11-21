@@ -368,11 +368,6 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element name="DistributeDrawsResponse">
-        <xs:complexType>
-          <xs:sequence />
-        </xs:complexType>
-      </xs:element>
     </xs:schema>
     <xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:element name="anyType" nillable="true" type="xs:anyType" />
@@ -593,9 +588,6 @@
   <wsdl:message name="IDrawReviewService_DistributeDraws_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:DistributeDraws" />
   </wsdl:message>
-  <wsdl:message name="IDrawReviewService_DistributeDraws_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:DistributeDrawsResponse" />
-  </wsdl:message>
   <wsdl:portType name="IPlayerManagement">
     <wsdl:operation name="AddPlayer">
       <wsdl:input wsaw:Action="http://tempuri.org/IPlayerManagement/AddPlayer" message="tns:IPlayerManagement_AddPlayer_InputMessage" />
@@ -709,7 +701,6 @@
     </wsdl:operation>
     <wsdl:operation name="DistributeDraws">
       <wsdl:output wsaw:Action="http://tempuri.org/IDrawReviewService/DistributeDraws" message="tns:IDrawReviewService_DistributeDraws_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IDrawReviewService/DistributeDrawsResponse" message="tns:IDrawReviewService_DistributeDraws_InputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IPlayerManagement" type="tns:IPlayerManagement">
@@ -954,9 +945,6 @@
     </wsdl:operation>
     <wsdl:operation name="DistributeDraws">
       <soap12:operation soapAction="http://tempuri.org/IDrawReviewService/DistributeDraws" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

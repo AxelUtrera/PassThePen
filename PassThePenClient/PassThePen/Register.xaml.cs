@@ -73,10 +73,6 @@ namespace PassThePen
 
         public byte[] ImageToByte(BitmapImage imageSource)
         {
-            if(imageSource != null)
-            {
-                Console.WriteLine("no estoy nullo");
-            }
             byte[] data;
             JpegBitmapEncoder encoder = new JpegBitmapEncoder();
             encoder.Frames.Add(BitmapFrame.Create(imageSource));

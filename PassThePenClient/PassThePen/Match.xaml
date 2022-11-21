@@ -13,43 +13,43 @@
     <Grid>
 
         <Rectangle HorizontalAlignment="Center" Height="120" Fill="LightGray" Stroke="LightGray" VerticalAlignment="Top" Width="1920"/>
-        <Label Content="{x:Static p:Resources.Match_Score_Label}" HorizontalAlignment="Left" Margin="1680,30,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Content="{x:Static p:Resources.Match_Score_Label}" HorizontalAlignment="Right" Margin="0,30,150,0" VerticalAlignment="Top" FontSize="20"/>
         <Label Content="{x:Static p:Resources.Match_TimeRemaining_Label}" HorizontalAlignment="Center" Margin="0,30,0,0" VerticalAlignment="Top" FontSize="20"/>
-        <Label x:Name="Label_TimeRemaining" Content="X" HorizontalAlignment="Left" Margin="940,61,0,0" VerticalAlignment="Top" FontSize="35"/>
-        <Label Content="{x:Static p:Resources.Match_CurrentDraw_Label}" HorizontalAlignment="Left" Margin="171,30,0,0" VerticalAlignment="Top" FontSize="20"/>
-        <Image HorizontalAlignment="Left" Height="36" Margin="1727,69,0,0" VerticalAlignment="Top" Width="34" Source="C:\Users\danie\Documents\Universidad\7mo Semestre\Tecnologias\PassThePen\PassThePenClient\PassThePen\Img\Icon_Score.png"/>
-        <Label x:Name="Label_Score" Content="50" HorizontalAlignment="Left" Margin="1679,60,0,0" VerticalAlignment="Top" FontSize="30"/>
-        <Label x:Name="Label_CurrentDraw" Content="Draw" HorizontalAlignment="Left" Margin="197,66,0,0" VerticalAlignment="Top" FontSize="30"/>
-        <StackPanel Margin="36,142,1554,384" Background="LightGray">
-            <Canvas Margin="0,5" Height="102" Background="White" Width="316">
+        <Label x:Name="Label_TimeRemaining" Content="X" HorizontalAlignment="Center" Margin="0,60,0,0" VerticalAlignment="Top" FontSize="35"/>
+        <Label Content="{x:Static p:Resources.Match_CurrentDraw_Label}" HorizontalAlignment="Left" Margin="150,30,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Image HorizontalAlignment="Right" Height="36" Margin="0,65,150,0" VerticalAlignment="Top" Width="34" Source="C:\Users\danie\Documents\Universidad\7mo Semestre\Tecnologias\PassThePen\PassThePenClient\PassThePen\Img\Icon_Score.png"/>
+        <Label x:Name="Label_Score" Content="50" HorizontalAlignment="Right" Margin="0,60,190,0" VerticalAlignment="Top" FontSize="30"/>
+        <Label x:Name="Label_CurrentDraw" Content="Draw" HorizontalAlignment="Left" Margin="170,60,0,0" VerticalAlignment="Top" FontSize="30"/>
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="37,0,0,150" Background="LightGray">
+            <Canvas Margin="0,5" Height="102" Background="White" Width="310">
                 <Image Source="C:\Users\danie\Documents\Universidad\7mo Semestre\Tecnologias\PassThePen\PassThePenClient\PassThePen\Img\logo_Pass_the_pen.png" Height="75" Width="97" Canvas.Left="15" Canvas.Top="15"></Image>
                 <Label Content="ElSeniorDibujos" Canvas.Left="131" Canvas.Top="15" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <Label Content="{x:Static p:Resources.Match_ScorePlayer_Label}" Canvas.Left="133" Canvas.Top="50" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <Image Height="37" Canvas.Left="250" Canvas.Top="45" Width="43" Source="C:\Users\danie\Documents\Universidad\7mo Semestre\Tecnologias\PassThePen\PassThePenClient\PassThePen\Img\Icon_Score.png"/>
                 <Label Content="50" Canvas.Left="214" Canvas.Top="50" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             </Canvas>
-            <Canvas Margin="0,5" Height="100" Background="White" Width="316">
+            <Canvas Margin="0,5" Height="100" Background="White" Width="310">
                 <Image Source="C:\Users\danie\Documents\Universidad\7mo Semestre\Tecnologias\PassThePen\PassThePenClient\PassThePen\Img\logo_Pass_the_pen.png" Height="75" Width="97" Canvas.Left="15" Canvas.Top="15"></Image>
                 <Label Content="ElSeniorDibujos" Canvas.Left="131" Canvas.Top="15" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <Label Content="{x:Static p:Resources.Match_ScorePlayer_Label}" Canvas.Left="133" Canvas.Top="50" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <Image Height="37" Canvas.Left="250" Canvas.Top="45" Width="43" Source="C:\Users\danie\Documents\Universidad\7mo Semestre\Tecnologias\PassThePen\PassThePenClient\PassThePen\Img\Icon_Score.png"/>
                 <Label Content="50" Canvas.Left="214" Canvas.Top="50" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             </Canvas>
-            <Canvas  Margin="0,5" Height="100" Background="White" Width="316">
+            <Canvas  Margin="0,5" Height="100" Background="White" Width="310">
                 <Image Source="C:\Users\danie\Documents\Universidad\7mo Semestre\Tecnologias\PassThePen\PassThePenClient\PassThePen\Img\logo_Pass_the_pen.png" Height="75" Width="97" Canvas.Left="15" Canvas.Top="15"></Image>
                 <Label Content="ElSeniorDibujos" Canvas.Left="131" Canvas.Top="15" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <Label Content="{x:Static p:Resources.Match_ScorePlayer_Label}" Canvas.Left="133" Canvas.Top="50" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <Image Height="37" Canvas.Left="250" Canvas.Top="45" Width="43" Source="C:\Users\danie\Documents\Universidad\7mo Semestre\Tecnologias\PassThePen\PassThePenClient\PassThePen\Img\Icon_Score.png"/>
                 <Label Content="50" Canvas.Left="214" Canvas.Top="50" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             </Canvas>
-            <Canvas  Margin="0,5" Height="100" Background="White" Width="316">
+            <Canvas  Margin="0,5" Height="100" Background="White" Width="310">
                 <Image Source="C:\Users\danie\Documents\Universidad\7mo Semestre\Tecnologias\PassThePen\PassThePenClient\PassThePen\Img\logo_Pass_the_pen.png" Height="75" Width="97" Canvas.Left="15" Canvas.Top="15"></Image>
                 <Label Content="ElSeniorDibujos" Canvas.Left="131" Canvas.Top="15" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <Label Content="{x:Static p:Resources.Match_ScorePlayer_Label}" Canvas.Left="133" Canvas.Top="50" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <Image Height="37" Canvas.Left="250" Canvas.Top="45" Width="43" Source="C:\Users\danie\Documents\Universidad\7mo Semestre\Tecnologias\PassThePen\PassThePenClient\PassThePen\Img\Icon_Score.png"/>
                 <Label Content="50" Canvas.Left="214" Canvas.Top="50" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             </Canvas>
-            <Canvas Margin="0,5"  Height="100" Background="White" Width="316">
+            <Canvas Margin="0,5"  Height="100" Background="White" Width="310">
                 <Image Source="C:\Users\danie\Documents\Universidad\7mo Semestre\Tecnologias\PassThePen\PassThePenClient\PassThePen\Img\logo_Pass_the_pen.png" Height="75" Width="97" Canvas.Left="15" Canvas.Top="15"></Image>
                 <Label Content="ElSeniorDibujos" Canvas.Left="131" Canvas.Top="15" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <Label Content="{x:Static p:Resources.Match_ScorePlayer_Label}" Canvas.Left="133" Canvas.Top="50" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"/>
@@ -66,7 +66,7 @@
                 </InkCanvas>
             </Grid>
         </Border>
-        <Button Cursor="Hand" Margin="842,156,1038,884" Width="40" Height="40" Foreground="White" FontSize="13" Click="Button_SetEraser_Click" Panel.ZIndex="1">
+        <Button Cursor="Hand" Margin="0,160,185,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="40" Height="40" Foreground="White" FontSize="13" Click="Button_SetEraser_Click" Panel.ZIndex="1">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border Background="Gray" BorderBrush="Gray" CornerRadius="15,15,15,15">
@@ -75,7 +75,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button Cursor="Hand" Margin="892,156,988,884" Width="40" Height="40" Foreground="White" FontSize="13" Click="Button_SetColorGreen_Click" Panel.ZIndex="1">
+        <Button Cursor="Hand" Margin="0,160,90,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="40" Height="40" Foreground="White" FontSize="13" Click="Button_SetColorGreen_Click" Panel.ZIndex="1">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border Background="Green" BorderBrush="Green" CornerRadius="15,15,15,15">
@@ -84,7 +84,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button Cursor="Hand" Margin="940,156,940,884" Width="40" Height="40" Foreground="White" FontSize="13" Click="Button_SetColorBlue_Click" Panel.ZIndex="1">
+        <Button Cursor="Hand" Margin="0,160,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="40" Height="40" Foreground="White" FontSize="13" Click="Button_SetColorBlue_Click" Panel.ZIndex="1">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border Background="Blue" BorderBrush="Blue" CornerRadius="15,15,15,15">
@@ -93,7 +93,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button Cursor="Hand" Margin="988,156,892,884" Width="40" Height="40" Foreground="White" FontSize="13" Click="Button_SetColorRed_Click" Panel.ZIndex="1">
+        <Button Cursor="Hand" Margin="0,160,-90,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="40" Height="40" Foreground="White" FontSize="13" Click="Button_SetColorRed_Click" Panel.ZIndex="1">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border Background="Red" BorderBrush="Red" CornerRadius="15,15,15,15">
@@ -102,7 +102,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button Cursor="Hand" Margin="1036,156,844,884" Width="40" Height="40" Foreground="White" FontSize="13" Click="Button_SetColorBlack_Click" Panel.ZIndex="1">
+        <Button Cursor="Hand" Margin="0,160,-185,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="40" Height="40" Foreground="White" FontSize="13" Click="Button_SetColorBlack_Click" Panel.ZIndex="1">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border Background="Black" BorderBrush="Black" CornerRadius="15,15,15,15">
@@ -111,7 +111,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button Cursor="Hand" HorizontalAlignment="Left" Margin="1840,968,0,0" VerticalAlignment="Top" Height="88" Width="70" Click="Button_SendMessage_Click" IsDefault="True">
+        <Button Cursor="Hand" HorizontalAlignment="Right" Margin="0,0,10,25" VerticalAlignment="Bottom" Height="88" Width="70" Click="Button_SendMessage_Click" IsDefault="True">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border Background="CornflowerBlue" BorderBrush="CornflowerBlue" CornerRadius="15,15,15,15">
@@ -120,23 +120,23 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <ListBox x:Name="ListBox_ChatBox" BorderThickness="5" BorderBrush="Green" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="1534,142,10,130" FontSize="15" IsEnabled="True">
+        <ListBox x:Name="ListBox_ChatBox" BorderThickness="5" BorderBrush="Green" d:ItemsSource="{d:SampleData ItemCount=5}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,15,0" FontSize="15" IsEnabled="True" Height="790" Width="379">
             <ListBox.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="10"></Setter>
                 </Style>
             </ListBox.Resources>
         </ListBox>
-        <TextBox x:Name="TextBox_Message" BorderThickness="5" BorderBrush="Green" FontSize="15" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="298" Height="94" Margin="1531,968,0,0">
+        <TextBox x:Name="TextBox_Message" BorderThickness="5" BorderBrush="Green" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Bottom" TextWrapping="Wrap" Width="305" Height="94" Margin="0,0,90,20">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="10"></Setter>
                 </Style>
             </TextBox.Resources>
         </TextBox>
-        <Label Content="{x:Static p:Resources.Match_Turn_Label}" HorizontalAlignment="Left" Margin="136,746,0,0" VerticalAlignment="Top" FontSize="20"/>
-        <Label Content="X" HorizontalAlignment="Left" Margin="181,788,0,0" VerticalAlignment="Top" FontSize="30"/>
-        <Button x:Name="Button_StartTurn" HorizontalAlignment="Left" Cursor="Hand" Margin="97,894,0,0" Foreground="White" VerticalAlignment="Top" Height="72" Width="195" FontSize="20" Click="Button_StartTurn_Click">
+        <Label Content="{x:Static p:Resources.Match_Turn_Label}" HorizontalAlignment="Left" Margin="130,0,0,240" VerticalAlignment="Bottom" FontSize="20"/>
+        <Label Content="X" HorizontalAlignment="Left" Margin="180,0,0,200" VerticalAlignment="Bottom" FontSize="30"/>
+        <Button x:Name="Button_StartTurn" HorizontalAlignment="Left" Cursor="Hand" Margin="100,0,0,90" Foreground="White" VerticalAlignment="Bottom" Height="72" Width="195" FontSize="20" Click="Button_StartTurn_Click">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border Background="Green" BorderBrush="Green" CornerRadius="15, 15, 15, 15">

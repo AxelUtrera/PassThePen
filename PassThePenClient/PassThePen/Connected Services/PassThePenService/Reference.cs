@@ -844,7 +844,7 @@ namespace PassThePen.PassThePenService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IDrawReviewServiceCallback {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDrawReviewService/DistributeDraws", ReplyAction="http://tempuri.org/IDrawReviewService/DistributeDrawsResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IDrawReviewService/DistributeDraws")]
         void DistributeDraws(byte[] draw);
     }
     
