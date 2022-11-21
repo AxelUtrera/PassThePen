@@ -103,7 +103,7 @@ namespace Comunication
 
     public partial class ImplementationServices : IPlayerConexion
     {
-        List<ConnectedUser> users = new List<ConnectedUser>();
+        private List<ConnectedUser> users = new List<ConnectedUser>();
 
         public void Connect(string username)
         {
@@ -125,12 +125,24 @@ namespace Comunication
             }
         }
 
-       
+        public List<string> GetNameOnlinePlayers()
+        {
+            List<string> onlinePlayers = new List<string>();
+            foreach (ConnectedUser player in users)
+            {
+                onlinePlayers.Add(player.username);
+            }
+
+            return onlinePlayers;
+        }
+
         public void SendOnlinePlayers(string username)
         {
             Friends[] friends = GetFriends(username);
             users.Find(us => us.username.Equals(username)).operationContext.GetCallbackChannel<IPlayersServicesCallBack>().PlayersCallBack(friends);
         }
+
+        
         
     }
 

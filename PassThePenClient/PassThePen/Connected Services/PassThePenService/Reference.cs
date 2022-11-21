@@ -624,6 +624,12 @@ namespace PassThePen.PassThePenService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConexion/SendOnlinePlayers", ReplyAction="http://tempuri.org/IPlayerConexion/SendOnlinePlayersResponse")]
         System.Threading.Tasks.Task SendOnlinePlayersAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConexion/GetNameOnlinePlayers", ReplyAction="http://tempuri.org/IPlayerConexion/GetNameOnlinePlayersResponse")]
+        string[] GetNameOnlinePlayers();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConexion/GetNameOnlinePlayers", ReplyAction="http://tempuri.org/IPlayerConexion/GetNameOnlinePlayersResponse")]
+        System.Threading.Tasks.Task<string[]> GetNameOnlinePlayersAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -683,6 +689,14 @@ namespace PassThePen.PassThePenService {
         
         public System.Threading.Tasks.Task SendOnlinePlayersAsync(string username) {
             return base.Channel.SendOnlinePlayersAsync(username);
+        }
+        
+        public string[] GetNameOnlinePlayers() {
+            return base.Channel.GetNameOnlinePlayers();
+        }
+        
+        public System.Threading.Tasks.Task<string[]> GetNameOnlinePlayersAsync() {
+            return base.Channel.GetNameOnlinePlayersAsync();
         }
     }
     

@@ -19,6 +19,9 @@ namespace Comunication
 
         [OperationContract]
         void SendOnlinePlayers(string username);
+
+        [OperationContract]
+        List<string> GetNameOnlinePlayers();
     }
 
     [ServiceContract]

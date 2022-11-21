@@ -47,6 +47,7 @@ namespace PassThePen
             
         }
 
+
         private void Button_FindFriends_Click(object sender, RoutedEventArgs e)
         {
             listStrings.Clear();
@@ -76,12 +77,7 @@ namespace PassThePen
             this.Close();
         }
 
-        private void Button_InviteFriendImage_Button(object sender, RoutedEventArgs e)
-        { 
-            //botones del centro para invitar a jugador.
-
-            this.Close();
-        }
+        
 
         private void Button_FriendRequests_Click(object sender, RoutedEventArgs e)
         {
@@ -156,13 +152,29 @@ namespace PassThePen
         {
             InstanceContext instanceContext = new InstanceContext(this);
             PassThePenService.PlayerConexionClient client = new PlayerConexionClient(instanceContext);
-            client.SendOnlinePlayers(username);
+            client.SendOnlinePlayers(username);            
         }
 
         public void PlayersCallBack(Friends[] friends)
         {
+            InstanceContext instanceContext = new InstanceContext(this);
+            PassThePenService.PlayerConexionClient client = new PlayerConexionClient(instanceContext);
+            List<string> playersConected = client.GetNameOnlinePlayers().ToList();
             friendList = friends.ToList();
             ListBox_FriendList.ItemsSource = friendList;
+
+            /*
+            foreach (string playerConected in playersConected)
+            {
+                foreach (Friends listboxFriend in ListBox_FriendList.Items)
+                {
+                    if(listboxFriend.friendUsername.Equals(playerConected))
+                    {
+                       
+                    }
+                }
+            }
+            */
         }
 
         private void Button_StartMatch_Click(object sender, RoutedEventArgs e)
@@ -246,6 +258,11 @@ namespace PassThePen
                 friendUsername = username
             };
             client.SendFriendRequests(friendRequest);
+        }
+
+        private void Button_InviteFriend_Click(object sender, MouseButtonEventArgs e)
+        {
+            
         }
     }
 }
