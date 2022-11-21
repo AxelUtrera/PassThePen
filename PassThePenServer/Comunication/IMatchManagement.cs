@@ -31,5 +31,6 @@ namespace Comunication
 
         [OperationContract(IsOneWay = true)]
         void ReturnStartTurnSignal();
+
     }
 }

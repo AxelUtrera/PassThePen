@@ -101,9 +101,10 @@ namespace Comunication
         }
     }
 
-    public partial class ImplementationServices : IPlayerConexion
+    public partial class ImplementationServices : IPlayerConnection
     {
         private List<ConnectedUser> users = new List<ConnectedUser>();
+        private List<ConnectedUser> usersInGroup = new List<ConnectedUser>();
 
         public void Connect(string username)
         {
@@ -142,8 +143,16 @@ namespace Comunication
             users.Find(us => us.username.Equals(username)).operationContext.GetCallbackChannel<IPlayersServicesCallBack>().PlayersCallBack(friends);
         }
 
-        
-        
+        public void SendMathInvitation(string invitingPlayer, string invitedPlayer)
+        {
+            int operationOK = 200;
+            ConnectedUser userConnected = users.FirstOrDefault(user => user.username.Equals(invitedPlayer));
+            if (userConnected.operationContext.GetCallbackChannel<IPlayersServicesCallBack>().NotifyMatchInvitation(invitingPlayer) == operationOK)
+            {
+                usersInGroup.Add(userConnected);
+            }
+        }
+
     }
 
     public partial class ImplementationServices : IMatchManagement
@@ -157,11 +166,13 @@ namespace Comunication
             OperationContext.Current.GetCallbackChannel<IMatchCallback>().DistributeTurnTime(time);
         }
 
+
         public void SendCard(string card)
         {
             OperationContext.Current.GetCallbackChannel<IMatchCallback>().DistributeCard(card);
         }
 
+  
         public void StartTurnSignal()
         {
             OperationContext.Current.GetCallbackChannel<IMatchCallback>().ReturnStartTurnSignal();
