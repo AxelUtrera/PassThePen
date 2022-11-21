@@ -604,60 +604,75 @@ namespace PassThePen.PassThePenService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PassThePenService.IPlayerConexion", CallbackContract=typeof(PassThePen.PassThePenService.IPlayerConexionCallback))]
-    public interface IPlayerConexion {
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PassThePenService.IPlayerConnection", CallbackContract=typeof(PassThePen.PassThePenService.IPlayerConnectionCallback))]
+    public interface IPlayerConnection {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConexion/Connect", ReplyAction="http://tempuri.org/IPlayerConexion/ConnectResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/Connect", ReplyAction="http://tempuri.org/IPlayerConnection/ConnectResponse")]
         void Connect(string username);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConexion/Connect", ReplyAction="http://tempuri.org/IPlayerConexion/ConnectResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/Connect", ReplyAction="http://tempuri.org/IPlayerConnection/ConnectResponse")]
         System.Threading.Tasks.Task ConnectAsync(string username);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConexion/Disconnect", ReplyAction="http://tempuri.org/IPlayerConexion/DisconnectResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/Disconnect", ReplyAction="http://tempuri.org/IPlayerConnection/DisconnectResponse")]
         void Disconnect(string username);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConexion/Disconnect", ReplyAction="http://tempuri.org/IPlayerConexion/DisconnectResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/Disconnect", ReplyAction="http://tempuri.org/IPlayerConnection/DisconnectResponse")]
         System.Threading.Tasks.Task DisconnectAsync(string username);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConexion/SendOnlinePlayers", ReplyAction="http://tempuri.org/IPlayerConexion/SendOnlinePlayersResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/SendOnlinePlayers", ReplyAction="http://tempuri.org/IPlayerConnection/SendOnlinePlayersResponse")]
         void SendOnlinePlayers(string username);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConexion/SendOnlinePlayers", ReplyAction="http://tempuri.org/IPlayerConexion/SendOnlinePlayersResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/SendOnlinePlayers", ReplyAction="http://tempuri.org/IPlayerConnection/SendOnlinePlayersResponse")]
         System.Threading.Tasks.Task SendOnlinePlayersAsync(string username);
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IPlayerConexionCallback {
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPlayerConexion/PlayersCallBack")]
-        void PlayersCallBack(PassThePen.PassThePenService.Friends[] friends);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/GetNameOnlinePlayers", ReplyAction="http://tempuri.org/IPlayerConnection/GetNameOnlinePlayersResponse")]
+        string[] GetNameOnlinePlayers();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/GetNameOnlinePlayers", ReplyAction="http://tempuri.org/IPlayerConnection/GetNameOnlinePlayersResponse")]
+        System.Threading.Tasks.Task<string[]> GetNameOnlinePlayersAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/SendMathInvitation", ReplyAction="http://tempuri.org/IPlayerConnection/SendMathInvitationResponse")]
+        void SendMathInvitation(string invitingPlayer, string invitedPlayer);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/SendMathInvitation", ReplyAction="http://tempuri.org/IPlayerConnection/SendMathInvitationResponse")]
+        System.Threading.Tasks.Task SendMathInvitationAsync(string invitingPlayer, string invitedPlayer);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IPlayerConexionChannel : PassThePen.PassThePenService.IPlayerConexion, System.ServiceModel.IClientChannel {
+    public interface IPlayerConnectionCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPlayerConnection/PlayersCallBack")]
+        void PlayersCallBack(PassThePen.PassThePenService.Friends[] friends);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/NotifyMatchInvitation", ReplyAction="http://tempuri.org/IPlayerConnection/NotifyMatchInvitationResponse")]
+        int NotifyMatchInvitation(string invitingPlayer);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IPlayerConnectionChannel : PassThePen.PassThePenService.IPlayerConnection, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class PlayerConexionClient : System.ServiceModel.DuplexClientBase<PassThePen.PassThePenService.IPlayerConexion>, PassThePen.PassThePenService.IPlayerConexion {
+    public partial class PlayerConnectionClient : System.ServiceModel.DuplexClientBase<PassThePen.PassThePenService.IPlayerConnection>, PassThePen.PassThePenService.IPlayerConnection {
         
-        public PlayerConexionClient(System.ServiceModel.InstanceContext callbackInstance) : 
+        public PlayerConnectionClient(System.ServiceModel.InstanceContext callbackInstance) : 
                 base(callbackInstance) {
         }
         
-        public PlayerConexionClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+        public PlayerConnectionClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
                 base(callbackInstance, endpointConfigurationName) {
         }
         
-        public PlayerConexionClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+        public PlayerConnectionClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
                 base(callbackInstance, endpointConfigurationName, remoteAddress) {
         }
         
-        public PlayerConexionClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public PlayerConnectionClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(callbackInstance, endpointConfigurationName, remoteAddress) {
         }
         
-        public PlayerConexionClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public PlayerConnectionClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(callbackInstance, binding, remoteAddress) {
         }
         
@@ -683,6 +698,22 @@ namespace PassThePen.PassThePenService {
         
         public System.Threading.Tasks.Task SendOnlinePlayersAsync(string username) {
             return base.Channel.SendOnlinePlayersAsync(username);
+        }
+        
+        public string[] GetNameOnlinePlayers() {
+            return base.Channel.GetNameOnlinePlayers();
+        }
+        
+        public System.Threading.Tasks.Task<string[]> GetNameOnlinePlayersAsync() {
+            return base.Channel.GetNameOnlinePlayersAsync();
+        }
+        
+        public void SendMathInvitation(string invitingPlayer, string invitedPlayer) {
+            base.Channel.SendMathInvitation(invitingPlayer, invitedPlayer);
+        }
+        
+        public System.Threading.Tasks.Task SendMathInvitationAsync(string invitingPlayer, string invitedPlayer) {
+            return base.Channel.SendMathInvitationAsync(invitingPlayer, invitedPlayer);
         }
     }
     

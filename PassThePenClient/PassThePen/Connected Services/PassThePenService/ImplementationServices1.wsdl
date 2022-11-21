@@ -24,7 +24,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="NetTcpBinding_IPlayerConexion_policy">
+  <wsp:Policy wsu:Id="NetTcpBinding_IPlayerConnection_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
@@ -59,6 +59,7 @@
   <wsdl:types>
     <xs:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:import namespace="http://schemas.datacontract.org/2004/07/Domain" />
+      <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
       <xs:element name="AddPlayer">
         <xs:complexType>
           <xs:sequence>
@@ -296,10 +297,49 @@
           <xs:sequence />
         </xs:complexType>
       </xs:element>
+      <xs:element name="GetNameOnlinePlayers">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetNameOnlinePlayersResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetNameOnlinePlayersResult" nillable="true" type="q11:ArrayOfstring" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SendMathInvitation">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="invitingPlayer" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="invitedPlayer" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SendMathInvitationResponse">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
       <xs:element name="PlayersCallBack">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="friends" nillable="true" type="q11:ArrayOfFriends" />
+            <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="friends" nillable="true" type="q12:ArrayOfFriends" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="NotifyMatchInvitation">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="invitingPlayer" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="NotifyMatchInvitationResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="NotifyMatchInvitationResult" type="xs:int" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -452,6 +492,14 @@
       </xs:complexType>
       <xs:element name="ArrayOfFriendRequest" nillable="true" type="tns:ArrayOfFriendRequest" />
     </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/Arrays" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="ArrayOfstring">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfstring" nillable="true" type="tns:ArrayOfstring" />
+    </xs:schema>
   </wsdl:types>
   <wsdl:message name="IPlayerManagement_AddPlayer_InputMessage">
     <wsdl:part name="parameters" element="tns:AddPlayer" />
@@ -537,26 +585,44 @@
   <wsdl:message name="IFriendRequests_SendFriendRequests_OutputMessage">
     <wsdl:part name="parameters" element="tns:SendFriendRequestsResponse" />
   </wsdl:message>
-  <wsdl:message name="IPlayerConexion_Connect_InputMessage">
+  <wsdl:message name="IPlayerConnection_Connect_InputMessage">
     <wsdl:part name="parameters" element="tns:Connect" />
   </wsdl:message>
-  <wsdl:message name="IPlayerConexion_Connect_OutputMessage">
+  <wsdl:message name="IPlayerConnection_Connect_OutputMessage">
     <wsdl:part name="parameters" element="tns:ConnectResponse" />
   </wsdl:message>
-  <wsdl:message name="IPlayerConexion_Disconnect_InputMessage">
+  <wsdl:message name="IPlayerConnection_Disconnect_InputMessage">
     <wsdl:part name="parameters" element="tns:Disconnect" />
   </wsdl:message>
-  <wsdl:message name="IPlayerConexion_Disconnect_OutputMessage">
+  <wsdl:message name="IPlayerConnection_Disconnect_OutputMessage">
     <wsdl:part name="parameters" element="tns:DisconnectResponse" />
   </wsdl:message>
-  <wsdl:message name="IPlayerConexion_SendOnlinePlayers_InputMessage">
+  <wsdl:message name="IPlayerConnection_SendOnlinePlayers_InputMessage">
     <wsdl:part name="parameters" element="tns:SendOnlinePlayers" />
   </wsdl:message>
-  <wsdl:message name="IPlayerConexion_SendOnlinePlayers_OutputMessage">
+  <wsdl:message name="IPlayerConnection_SendOnlinePlayers_OutputMessage">
     <wsdl:part name="parameters" element="tns:SendOnlinePlayersResponse" />
   </wsdl:message>
-  <wsdl:message name="IPlayerConexion_PlayersCallBack_OutputCallbackMessage">
+  <wsdl:message name="IPlayerConnection_GetNameOnlinePlayers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetNameOnlinePlayers" />
+  </wsdl:message>
+  <wsdl:message name="IPlayerConnection_GetNameOnlinePlayers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetNameOnlinePlayersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPlayerConnection_SendMathInvitation_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendMathInvitation" />
+  </wsdl:message>
+  <wsdl:message name="IPlayerConnection_SendMathInvitation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendMathInvitationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPlayerConnection_PlayersCallBack_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:PlayersCallBack" />
+  </wsdl:message>
+  <wsdl:message name="IPlayerConnection_NotifyMatchInvitation_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotifyMatchInvitation" />
+  </wsdl:message>
+  <wsdl:message name="IPlayerConnection_NotifyMatchInvitation_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotifyMatchInvitationResponse" />
   </wsdl:message>
   <wsdl:message name="IMatchManagement_SendCard_InputMessage">
     <wsdl:part name="parameters" element="tns:SendCard" />
@@ -650,21 +716,33 @@
       <wsdl:output wsaw:Action="http://tempuri.org/IFriendRequests/SendFriendRequestsResponse" message="tns:IFriendRequests_SendFriendRequests_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:portType name="IPlayerConexion">
+  <wsdl:portType name="IPlayerConnection">
     <wsdl:operation name="Connect">
-      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerConexion/Connect" message="tns:IPlayerConexion_Connect_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerConexion/ConnectResponse" message="tns:IPlayerConexion_Connect_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerConnection/Connect" message="tns:IPlayerConnection_Connect_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerConnection/ConnectResponse" message="tns:IPlayerConnection_Connect_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="Disconnect">
-      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerConexion/Disconnect" message="tns:IPlayerConexion_Disconnect_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerConexion/DisconnectResponse" message="tns:IPlayerConexion_Disconnect_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerConnection/Disconnect" message="tns:IPlayerConnection_Disconnect_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerConnection/DisconnectResponse" message="tns:IPlayerConnection_Disconnect_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SendOnlinePlayers">
-      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerConexion/SendOnlinePlayers" message="tns:IPlayerConexion_SendOnlinePlayers_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerConexion/SendOnlinePlayersResponse" message="tns:IPlayerConexion_SendOnlinePlayers_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerConnection/SendOnlinePlayers" message="tns:IPlayerConnection_SendOnlinePlayers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerConnection/SendOnlinePlayersResponse" message="tns:IPlayerConnection_SendOnlinePlayers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNameOnlinePlayers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerConnection/GetNameOnlinePlayers" message="tns:IPlayerConnection_GetNameOnlinePlayers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerConnection/GetNameOnlinePlayersResponse" message="tns:IPlayerConnection_GetNameOnlinePlayers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendMathInvitation">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerConnection/SendMathInvitation" message="tns:IPlayerConnection_SendMathInvitation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerConnection/SendMathInvitationResponse" message="tns:IPlayerConnection_SendMathInvitation_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="PlayersCallBack">
-      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerConexion/PlayersCallBack" message="tns:IPlayerConexion_PlayersCallBack_OutputCallbackMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerConnection/PlayersCallBack" message="tns:IPlayerConnection_PlayersCallBack_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotifyMatchInvitation">
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerConnection/NotifyMatchInvitation" message="tns:IPlayerConnection_NotifyMatchInvitation_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerConnection/NotifyMatchInvitationResponse" message="tns:IPlayerConnection_NotifyMatchInvitation_InputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IMatchManagement">
@@ -841,11 +919,11 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
-  <wsdl:binding name="NetTcpBinding_IPlayerConexion" type="tns:IPlayerConexion">
-    <wsp:PolicyReference URI="#NetTcpBinding_IPlayerConexion_policy" />
+  <wsdl:binding name="NetTcpBinding_IPlayerConnection" type="tns:IPlayerConnection">
+    <wsp:PolicyReference URI="#NetTcpBinding_IPlayerConnection_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
     <wsdl:operation name="Connect">
-      <soap12:operation soapAction="http://tempuri.org/IPlayerConexion/Connect" style="document" />
+      <soap12:operation soapAction="http://tempuri.org/IPlayerConnection/Connect" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -854,7 +932,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="Disconnect">
-      <soap12:operation soapAction="http://tempuri.org/IPlayerConexion/Disconnect" style="document" />
+      <soap12:operation soapAction="http://tempuri.org/IPlayerConnection/Disconnect" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -863,7 +941,25 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="SendOnlinePlayers">
-      <soap12:operation soapAction="http://tempuri.org/IPlayerConexion/SendOnlinePlayers" style="document" />
+      <soap12:operation soapAction="http://tempuri.org/IPlayerConnection/SendOnlinePlayers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNameOnlinePlayers">
+      <soap12:operation soapAction="http://tempuri.org/IPlayerConnection/GetNameOnlinePlayers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMathInvitation">
+      <soap12:operation soapAction="http://tempuri.org/IPlayerConnection/SendMathInvitation" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -872,7 +968,16 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="PlayersCallBack">
-      <soap12:operation soapAction="http://tempuri.org/IPlayerConexion/PlayersCallBack" style="document" />
+      <soap12:operation soapAction="http://tempuri.org/IPlayerConnection/PlayersCallBack" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotifyMatchInvitation">
+      <soap12:operation soapAction="http://tempuri.org/IPlayerConnection/NotifyMatchInvitation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
@@ -969,7 +1074,7 @@
         <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
-    <wsdl:port name="NetTcpBinding_IPlayerConexion" binding="tns:NetTcpBinding_IPlayerConexion">
+    <wsdl:port name="NetTcpBinding_IPlayerConnection" binding="tns:NetTcpBinding_IPlayerConnection">
       <soap12:address location="net.tcp://localhost:8081/PassThePen" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>

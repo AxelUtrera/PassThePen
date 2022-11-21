@@ -49,7 +49,7 @@
     <Compile Include="IDrawReviewService.cs" />
     <Compile Include="IFriendRequests.cs" />
     <Compile Include="IMatchManagement.cs" />
-    <Compile Include="IPlayerConexion.cs" />
+    <Compile Include="IPlayerConnection.cs" />
     <Compile Include="IPlayerManagement.cs" />
     <Compile Include="ImplementationServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

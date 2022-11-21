@@ -83,20 +83,23 @@
                                             <Grid>
 
                                                 <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="220"/>
-                                                    <ColumnDefinition/>
+                                                    <ColumnDefinition Width="280"/>
                                                 </Grid.ColumnDefinitions>
 
-                                                <Label Grid.Column="0" Content="{Binding friendUsername}" Margin="5,0,0,0" HorizontalAlignment="Left" FontSize="18"/>
-                                                <StackPanel Grid.Column="1" Orientation="Horizontal" >
+                                                <StackPanel Grid.Column="0" Orientation="Horizontal" >
+                                                    <Image Visibility="Hidden" x:Name="Image_Online" Source="Img/Icon_OnlineStatus.png" Width="15" HorizontalAlignment="Right" Margin="10,0,18,0" MouseLeftButtonDown="Button_DeleteFriend_Click" Cursor="Hand"/>
 
-                                                    <Image  Source="Img/Icon_Decline.png" Width="30" HorizontalAlignment="Right" Margin="15,0,18,0" MouseLeftButtonDown="Button_DeleteFriend_Click" Cursor="Hand"/>
+                                                    <Label Grid.Column="0" Content="{Binding friendUsername}" Margin="0" Width="160" HorizontalAlignment="Left" FontSize="18"/>
+                                                    <Image x:Name="Image_Invite" Source="Img/Icon_InvitePlayer.png" Width="30" HorizontalAlignment="Right" Margin="0,0,15,0" MouseLeftButtonDown="Button_InviteFriend_Click" Cursor="Hand"/>
+
+                                                    <Image  Source="Img/Icon_Decline.png" Width="30" HorizontalAlignment="Right" Margin="0,0,15,0" MouseLeftButtonDown="Button_DeleteFriend_Click" Cursor="Hand"/>
                                                 </StackPanel>
 
                                             </Grid>
                                         </DataTemplate>
                                     </ListBox.ItemTemplate>
                                 </ListBox>
+                                
                                 <ListBox Name="ListBox_FriendsRequests"  Margin="0" Height="373" Width="300" BorderBrush="Transparent" HorizontalAlignment="Stretch" Visibility="Collapsed">
                                     <ListBox.ItemTemplate >
                                         <DataTemplate>
@@ -151,32 +154,23 @@
                                 <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
 
+
+                                                   
+
+                                             
+
+                            <Image Name="Image_InviteFiend1"  Source="Img/Icon_AddUser.png" Cursor="Hand" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Width="60" Height="60" ></Image>
+                            <Image Name="Image_InviteFiend2" Source="Img/Icon_AddUser.png" Cursor="Hand" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,15,50,0" Width="60" Height="60" ></Image>
+                            <Image Name="Image_InviteFiend3" Source="Img/Icon_AddUser.png" Cursor="Hand" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="50,15,0,0" Width="60" Height="60" ></Image>
+                            <Image Name="Image_InviteFiend4" Source="Img/Icon_AddUser.png" Cursor="Hand" Grid.Column="1" Width="60" Height="60" />
+                            <Image Name="Image_InviteFiend5" Source="Img/Icon_AddUser.png" Cursor="Hand" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="60" Height="60" ></Image>
                             
-                            <Button Cursor="Hand" Grid.Column="1" Width="60" Height="60" Background="Transparent" Click="Button_InviteFriendImage_Button" BorderThickness="0">
-                                <Image Source="Img/Icon_AddUser.png" Width="40"></Image>
-                            </Button>
-
-                            <Button Cursor="Hand" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="50,15,0,0" Width="60" Height="60" BorderThickness="0" Background="Transparent" Click="Button_InviteFriendImage_Button">
-                                <Image Source="Img/Icon_AddUser.png" Width="40"></Image>
-                            </Button>
-
-                            <Button Cursor="Hand" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,15,50,0" Width="60" Height="60" BorderThickness="0" Background="Transparent" Click="Button_InviteFriendImage_Button">
-                                <Image Source="Img/Icon_AddUser.png" Width="40"></Image>
-                            </Button>
-
-                            <Button Cursor="Hand" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Width="60" Height="60" BorderThickness="0" Background="Transparent" Click="Button_InviteFriendImage_Button">
-                                <Image Source="Img/Icon_AddUser.png" Width="40"></Image>
-                            </Button>
-
-                            <Button Cursor="Hand" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="60" Height="60" BorderThickness="0" Background="Transparent" Click="Button_InviteFriendImage_Button">
-                                <Image Source="Img/Icon_AddUser.png" Width="40"></Image>
-                            </Button>
 
                             <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
                                 <Border  Height="100" Width="100" BorderThickness="1" BorderBrush="Black" VerticalAlignment="Top" HorizontalAlignment="Center">
-                                    <Image x:Name="Image_ProfileImage"  Stretch="Fill" HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="100"/>
+                                    <Image Name="Image_ProfileImage"  Stretch="Fill" HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="100"/>
                                 </Border>
-                            </StackPanel>
+                            </StackPanel>   
                             
                             
 

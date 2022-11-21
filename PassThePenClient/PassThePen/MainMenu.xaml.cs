@@ -25,12 +25,24 @@ namespace PassThePen
     /// <summary>
     /// Lógica de interacción para MainMenu.xaml
     /// </summary>
-    public partial class MainMenu : Window, PassThePenService.IPlayerConexionCallback
+    public partial class MainMenu : Window, PassThePenService.IPlayerConnectionCallback
     {
         public static string username;
         private List<string> listStrings = new List<string>();
         private List<Friends> friendList = new List<Friends>();
         private List<FriendRequest> friendRequests = new List<FriendRequest>();
+
+        public int NotifyMatchInvitation(string invitingPlayer)
+        {
+            int operationResult = 500;
+            var response = MessageBox.Show(invitingPlayer, " te ha invitado a una partida ¿Deseas unirte? ", MessageBoxButton.YesNo);
+            if (response == MessageBoxResult.Yes)
+            {
+                MessageBox.Show("uniendote a partida");
+                operationResult = 200;
+            }
+            return operationResult;
+        }
 
         public MainMenu()
         {
@@ -46,6 +58,7 @@ namespace PassThePen
             profile.Show();
             
         }
+
 
         private void Button_FindFriends_Click(object sender, RoutedEventArgs e)
         {
@@ -71,17 +84,14 @@ namespace PassThePen
         private void Button_ExitGame_Click(object sender, RoutedEventArgs e)
         {
             InstanceContext instanceContext = new InstanceContext(this);
-            PassThePenService.PlayerConexionClient client = new PlayerConexionClient(instanceContext);
+            PassThePenService.PlayerConnectionClient client = new PlayerConnectionClient(instanceContext);
             client.Disconnect(username);
+            Login login = new Login();
+            login.Show();
             this.Close();
         }
 
-        private void Button_InviteFriendImage_Button(object sender, RoutedEventArgs e)
-        { 
-            //botones del centro para invitar a jugador.
-
-            this.Close();
-        }
+        
 
         private void Button_FriendRequests_Click(object sender, RoutedEventArgs e)
         {
@@ -147,7 +157,7 @@ namespace PassThePen
         private void Connected()
         {
             InstanceContext instanceContext = new InstanceContext(this);
-            PassThePenService.PlayerConexionClient client = new PlayerConexionClient(instanceContext);
+            PassThePenService.PlayerConnectionClient client = new PlayerConnectionClient(instanceContext);
             client.Connect(username);
 
         }
@@ -155,36 +165,53 @@ namespace PassThePen
         private void GetFriends()
         {
             InstanceContext instanceContext = new InstanceContext(this);
-            PassThePenService.PlayerConexionClient client = new PlayerConexionClient(instanceContext);
-            client.SendOnlinePlayers(username);
+            PassThePenService.PlayerConnectionClient client = new PlayerConnectionClient(instanceContext);
+            client.SendOnlinePlayers(username);            
         }
 
         public void PlayersCallBack(Friends[] friends)
         {
+            InstanceContext instanceContext = new InstanceContext(this);
+            PassThePenService.PlayerConnectionClient client = new PlayerConnectionClient(instanceContext);
+            List<string> playersConected = client.GetNameOnlinePlayers().ToList();
             friendList = friends.ToList();
             ListBox_FriendList.ItemsSource = friendList;
+
+            /*
+            foreach (string playerConected in playersConected)
+            {
+                foreach (Friends listboxFriend in ListBox_FriendList.Items)
+                {
+                    if(listboxFriend.friendUsername.Equals(playerConected))
+                    {
+                       
+                    }
+                }
+            }
+            */
         }
 
         private void Button_StartMatch_Click(object sender, RoutedEventArgs e)
         {
             Match match = new Match();
             match.Show();
+            this.Close();
         }
 
         private void TextBox_FindFriend_TextChanged(object sender, TextChangedEventArgs e)
         {
             if(ListBox_FriendList.Visibility == Visibility.Visible)
             {
-                Filter_Friend_List();
+                FilterFriendList();
             }
             else if (ListBox_FriendsRequests.Visibility == Visibility.Visible)
             {
-                Filter_Friends_Requests();  
+                FilterFriendsRequests();  
             }
         }
 
 
-        private void Filter_Friends_Requests()
+        private void FilterFriendsRequests()
         {
             if (String.IsNullOrEmpty(TextBox_FindFriend.Text.Trim()) == false)
             {
@@ -206,7 +233,7 @@ namespace PassThePen
             }
         }
 
-        private void Filter_Friend_List()
+        private void FilterFriendList()
         {
             if (String.IsNullOrEmpty(TextBox_FindFriend.Text.Trim()) == false)
             {
@@ -246,6 +273,20 @@ namespace PassThePen
                 friendUsername = username
             };
             client.SendFriendRequests(friendRequest);
+            client.Close();
         }
+
+        private void Button_InviteFriend_Click(object sender, MouseButtonEventArgs e)
+        {
+            InstanceContext context = new InstanceContext(this);
+            PassThePenService.PlayerConnectionClient client = new PassThePenService.PlayerConnectionClient(context);
+            Image buttonInviteFriend = (Image)sender;
+            StackPanel parent = (StackPanel)buttonInviteFriend.Parent;
+            Friends friend = (Friends)parent.DataContext;
+            client.SendMathInvitation(username, friend.friendUsername);
+
+        }
+
+
     }
 }
