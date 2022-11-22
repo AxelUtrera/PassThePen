@@ -17,7 +17,7 @@ namespace Comunication
         [OperationContract]
         void Disconnect(string username);
 
-        [OperationContract]
+        [OperationContract (IsOneWay = true)]
         void SendOnlinePlayers(string username);
 
         [OperationContract]

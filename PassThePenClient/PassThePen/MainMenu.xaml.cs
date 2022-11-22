@@ -124,8 +124,7 @@ namespace PassThePen
             clientFriendRequest.AcceptFriendRequest(friendRequests);
             GenerateFriendRequestList();
             clientFriends.GetFriends(username);
-            clientFriendRequest.Close();
-            clientFriends.Close();
+            
         }
 
         private void Button_DeclineRequests_Click(object sender, RoutedEventArgs e)
@@ -134,7 +133,7 @@ namespace PassThePen
             FriendRequest friendRequests = GetFriendRequestOfListboxImageButton(sender);
             client.DeclineFriendRequests(friendRequests);
             GenerateFriendRequestList();
-            client.Close();
+            
         }
 
         private FriendRequest GetFriendRequestOfListboxImageButton(object sender) 
@@ -152,7 +151,6 @@ namespace PassThePen
             FriendRequestsClient client = new FriendRequestsClient();
             friendRequests = client.GetFriendRequestsList(username).ToList();
             ListBox_FriendsRequests.ItemsSource = friendRequests;
-            client.Close();
         }
 
         private void Connected()
@@ -160,7 +158,6 @@ namespace PassThePen
             InstanceContext instanceContext = new InstanceContext(this);
             PassThePenService.PlayerConnectionClient client = new PlayerConnectionClient(instanceContext);
             client.Connect(username);
-            client.Close();
         }
 
         private void GetFriends()
@@ -168,7 +165,6 @@ namespace PassThePen
             InstanceContext instanceContext = new InstanceContext(this);
             PassThePenService.PlayerConnectionClient client = new PlayerConnectionClient(instanceContext);
             client.SendOnlinePlayers(username);
-            client.Close();
         }
 
         public void PlayersCallBack(Friends[] friends)
@@ -264,7 +260,6 @@ namespace PassThePen
                 friendUsername = username
             };
             client.SendFriendRequests(friendRequest);
-            client.Close();
         }
 
         private void Button_InviteFriend_Click(object sender, MouseButtonEventArgs e)
@@ -293,7 +288,7 @@ namespace PassThePen
             }
 
 
-            client.Close();
+            
         }
 
 

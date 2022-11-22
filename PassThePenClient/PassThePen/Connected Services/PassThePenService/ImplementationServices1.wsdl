@@ -292,11 +292,6 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element name="SendOnlinePlayersResponse">
-        <xs:complexType>
-          <xs:sequence />
-        </xs:complexType>
-      </xs:element>
       <xs:element name="GetNameOnlinePlayers">
         <xs:complexType>
           <xs:sequence />
@@ -628,9 +623,6 @@
   <wsdl:message name="IPlayerConnection_SendOnlinePlayers_InputMessage">
     <wsdl:part name="parameters" element="tns:SendOnlinePlayers" />
   </wsdl:message>
-  <wsdl:message name="IPlayerConnection_SendOnlinePlayers_OutputMessage">
-    <wsdl:part name="parameters" element="tns:SendOnlinePlayersResponse" />
-  </wsdl:message>
   <wsdl:message name="IPlayerConnection_GetNameOnlinePlayers_InputMessage">
     <wsdl:part name="parameters" element="tns:GetNameOnlinePlayers" />
   </wsdl:message>
@@ -767,7 +759,6 @@
     </wsdl:operation>
     <wsdl:operation name="SendOnlinePlayers">
       <wsdl:input wsaw:Action="http://tempuri.org/IPlayerConnection/SendOnlinePlayers" message="tns:IPlayerConnection_SendOnlinePlayers_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerConnection/SendOnlinePlayersResponse" message="tns:IPlayerConnection_SendOnlinePlayers_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetNameOnlinePlayers">
       <wsdl:input wsaw:Action="http://tempuri.org/IPlayerConnection/GetNameOnlinePlayers" message="tns:IPlayerConnection_GetNameOnlinePlayers_InputMessage" />
@@ -993,9 +984,6 @@
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetNameOnlinePlayers">
       <soap12:operation soapAction="http://tempuri.org/IPlayerConnection/GetNameOnlinePlayers" style="document" />
@@ -1123,45 +1111,45 @@
   </wsdl:binding>
   <wsdl:service name="ImplementationServices">
     <wsdl:port name="NetTcpBinding_IPlayerManagement" binding="tns:NetTcpBinding_IPlayerManagement">
-      <soap12:address location="net.tcp://localhost:8081/PassThePen" />
+      <soap12:address location="net.tcp://192.168.51.51:8081/PassThePen" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.51.51:8081/PassThePen</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IAutentication" binding="tns:NetTcpBinding_IAutentication">
-      <soap12:address location="net.tcp://localhost:8081/PassThePen" />
+      <soap12:address location="net.tcp://192.168.51.51:8081/PassThePen" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.51.51:8081/PassThePen</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IFriendRequests" binding="tns:NetTcpBinding_IFriendRequests">
-      <soap12:address location="net.tcp://localhost:8081/PassThePen" />
+      <soap12:address location="net.tcp://192.168.51.51:8081/PassThePen" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.51.51:8081/PassThePen</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IPlayerConnection" binding="tns:NetTcpBinding_IPlayerConnection">
-      <soap12:address location="net.tcp://localhost:8081/PassThePen" />
+      <soap12:address location="net.tcp://192.168.51.51:8081/PassThePen" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.51.51:8081/PassThePen</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IMatchManagement" binding="tns:NetTcpBinding_IMatchManagement">
-      <soap12:address location="net.tcp://localhost:8081/PassThePen" />
+      <soap12:address location="net.tcp://192.168.51.51:8081/PassThePen" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.51.51:8081/PassThePen</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IChatServices" binding="tns:NetTcpBinding_IChatServices">
-      <soap12:address location="net.tcp://localhost:8081/PassThePen" />
+      <soap12:address location="net.tcp://192.168.51.51:8081/PassThePen" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.51.51:8081/PassThePen</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IDrawReviewService" binding="tns:NetTcpBinding_IDrawReviewService">
-      <soap12:address location="net.tcp://localhost:8081/PassThePen" />
+      <soap12:address location="net.tcp://192.168.51.51:8081/PassThePen" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.51.51:8081/PassThePen</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

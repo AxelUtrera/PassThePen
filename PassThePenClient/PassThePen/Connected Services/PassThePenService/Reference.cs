@@ -619,10 +619,10 @@ namespace PassThePen.PassThePenService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/Disconnect", ReplyAction="http://tempuri.org/IPlayerConnection/DisconnectResponse")]
         System.Threading.Tasks.Task DisconnectAsync(string username);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/SendOnlinePlayers", ReplyAction="http://tempuri.org/IPlayerConnection/SendOnlinePlayersResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPlayerConnection/SendOnlinePlayers")]
         void SendOnlinePlayers(string username);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/SendOnlinePlayers", ReplyAction="http://tempuri.org/IPlayerConnection/SendOnlinePlayersResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPlayerConnection/SendOnlinePlayers")]
         System.Threading.Tasks.Task SendOnlinePlayersAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/GetNameOnlinePlayers", ReplyAction="http://tempuri.org/IPlayerConnection/GetNameOnlinePlayersResponse")]

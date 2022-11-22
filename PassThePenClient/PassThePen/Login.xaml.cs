@@ -57,7 +57,7 @@ namespace PassThePen
             {
                 MessageBox.Show("Datos invalidos: Favor de verificar los datos ingresados");
             }
-            client.Close();
+           
         }
 
         private bool ValidateInformation()
