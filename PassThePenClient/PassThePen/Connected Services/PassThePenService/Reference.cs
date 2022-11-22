@@ -636,6 +636,18 @@ namespace PassThePen.PassThePenService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/SendMathInvitation", ReplyAction="http://tempuri.org/IPlayerConnection/SendMathInvitationResponse")]
         System.Threading.Tasks.Task SendMathInvitationAsync(string invitingPlayer, string invitedPlayer);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/FindPlayerIsConected", ReplyAction="http://tempuri.org/IPlayerConnection/FindPlayerIsConectedResponse")]
+        int FindPlayerIsConected(string usernamePlayer);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/FindPlayerIsConected", ReplyAction="http://tempuri.org/IPlayerConnection/FindPlayerIsConectedResponse")]
+        System.Threading.Tasks.Task<int> FindPlayerIsConectedAsync(string usernamePlayer);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/FindPlayerInGroup", ReplyAction="http://tempuri.org/IPlayerConnection/FindPlayerInGroupResponse")]
+        int FindPlayerInGroup(string usernameToFind);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/FindPlayerInGroup", ReplyAction="http://tempuri.org/IPlayerConnection/FindPlayerInGroupResponse")]
+        System.Threading.Tasks.Task<int> FindPlayerInGroupAsync(string usernameToFind);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -714,6 +726,22 @@ namespace PassThePen.PassThePenService {
         
         public System.Threading.Tasks.Task SendMathInvitationAsync(string invitingPlayer, string invitedPlayer) {
             return base.Channel.SendMathInvitationAsync(invitingPlayer, invitedPlayer);
+        }
+        
+        public int FindPlayerIsConected(string usernamePlayer) {
+            return base.Channel.FindPlayerIsConected(usernamePlayer);
+        }
+        
+        public System.Threading.Tasks.Task<int> FindPlayerIsConectedAsync(string usernamePlayer) {
+            return base.Channel.FindPlayerIsConectedAsync(usernamePlayer);
+        }
+        
+        public int FindPlayerInGroup(string usernameToFind) {
+            return base.Channel.FindPlayerInGroup(usernameToFind);
+        }
+        
+        public System.Threading.Tasks.Task<int> FindPlayerInGroupAsync(string usernameToFind) {
+            return base.Channel.FindPlayerInGroupAsync(usernameToFind);
         }
     }
     

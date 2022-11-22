@@ -322,6 +322,34 @@
           <xs:sequence />
         </xs:complexType>
       </xs:element>
+      <xs:element name="FindPlayerIsConected">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="usernamePlayer" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="FindPlayerIsConectedResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="FindPlayerIsConectedResult" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="FindPlayerInGroup">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="usernameToFind" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="FindPlayerInGroupResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="FindPlayerInGroupResult" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="PlayersCallBack">
         <xs:complexType>
           <xs:sequence>
@@ -620,6 +648,18 @@
   <wsdl:message name="IPlayerConnection_SendMathInvitation_OutputMessage">
     <wsdl:part name="parameters" element="tns:SendMathInvitationResponse" />
   </wsdl:message>
+  <wsdl:message name="IPlayerConnection_FindPlayerIsConected_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindPlayerIsConected" />
+  </wsdl:message>
+  <wsdl:message name="IPlayerConnection_FindPlayerIsConected_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindPlayerIsConectedResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPlayerConnection_FindPlayerInGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindPlayerInGroup" />
+  </wsdl:message>
+  <wsdl:message name="IPlayerConnection_FindPlayerInGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindPlayerInGroupResponse" />
+  </wsdl:message>
   <wsdl:message name="IPlayerConnection_PlayersCallBack_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:PlayersCallBack" />
   </wsdl:message>
@@ -744,6 +784,14 @@
     <wsdl:operation name="SendMathInvitation">
       <wsdl:input wsaw:Action="http://tempuri.org/IPlayerConnection/SendMathInvitation" message="tns:IPlayerConnection_SendMathInvitation_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPlayerConnection/SendMathInvitationResponse" message="tns:IPlayerConnection_SendMathInvitation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindPlayerIsConected">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerConnection/FindPlayerIsConected" message="tns:IPlayerConnection_FindPlayerIsConected_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerConnection/FindPlayerIsConectedResponse" message="tns:IPlayerConnection_FindPlayerIsConected_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindPlayerInGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerConnection/FindPlayerInGroup" message="tns:IPlayerConnection_FindPlayerInGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerConnection/FindPlayerInGroupResponse" message="tns:IPlayerConnection_FindPlayerInGroup_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="PlayersCallBack">
       <wsdl:output wsaw:Action="http://tempuri.org/IPlayerConnection/PlayersCallBack" message="tns:IPlayerConnection_PlayersCallBack_OutputCallbackMessage" />
@@ -969,6 +1017,24 @@
     </wsdl:operation>
     <wsdl:operation name="SendMathInvitation">
       <soap12:operation soapAction="http://tempuri.org/IPlayerConnection/SendMathInvitation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindPlayerIsConected">
+      <soap12:operation soapAction="http://tempuri.org/IPlayerConnection/FindPlayerIsConected" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindPlayerInGroup">
+      <soap12:operation soapAction="http://tempuri.org/IPlayerConnection/FindPlayerInGroup" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

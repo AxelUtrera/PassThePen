@@ -35,10 +35,10 @@ namespace PassThePen
         public int NotifyMatchInvitation(string invitingPlayer)
         {
             int operationResult = 500;
-            var response = MessageBox.Show(invitingPlayer, " te ha invitado a una partida ¿Deseas unirte? ", MessageBoxButton.YesNo);
+            var response = MessageBox.Show( "acepta la invitacion para unirte a su grupo.",invitingPlayer + " te ha invitado a una partida ¿Deseas unirte? ", MessageBoxButton.YesNo);
             if (response == MessageBoxResult.Yes)
             {
-                MessageBox.Show("uniendote a partida");
+                MessageBox.Show("te has unido al grupo");
                 operationResult = 200;
             }
             return operationResult;
@@ -88,6 +88,7 @@ namespace PassThePen
             client.Disconnect(username);
             Login login = new Login();
             login.Show();
+            client.Close();
             this.Close();
         }
 
@@ -159,14 +160,15 @@ namespace PassThePen
             InstanceContext instanceContext = new InstanceContext(this);
             PassThePenService.PlayerConnectionClient client = new PlayerConnectionClient(instanceContext);
             client.Connect(username);
-
+            client.Close();
         }
 
         private void GetFriends()
         {
             InstanceContext instanceContext = new InstanceContext(this);
             PassThePenService.PlayerConnectionClient client = new PlayerConnectionClient(instanceContext);
-            client.SendOnlinePlayers(username);            
+            client.SendOnlinePlayers(username);
+            client.Close();
         }
 
         public void PlayersCallBack(Friends[] friends)
@@ -176,19 +178,7 @@ namespace PassThePen
             List<string> playersConected = client.GetNameOnlinePlayers().ToList();
             friendList = friends.ToList();
             ListBox_FriendList.ItemsSource = friendList;
-
-            /*
-            foreach (string playerConected in playersConected)
-            {
-                foreach (Friends listboxFriend in ListBox_FriendList.Items)
-                {
-                    if(listboxFriend.friendUsername.Equals(playerConected))
-                    {
-                       
-                    }
-                }
-            }
-            */
+            
         }
 
         private void Button_StartMatch_Click(object sender, RoutedEventArgs e)
@@ -263,6 +253,7 @@ namespace PassThePen
             PassThePenService.PlayerManagementClient client = new PassThePenService.PlayerManagementClient();
             client.DeleteFriend(friend);
             GetFriends();
+            client.Close();
         }
 
         private void Button_AddFriend_Click(object sender, RoutedEventArgs e)
@@ -283,8 +274,26 @@ namespace PassThePen
             Image buttonInviteFriend = (Image)sender;
             StackPanel parent = (StackPanel)buttonInviteFriend.Parent;
             Friends friend = (Friends)parent.DataContext;
-            client.SendMathInvitation(username, friend.friendUsername);
+            int statusPlayerIsNotInGroup = 404;
+            int playerIsConected = 200;
+            if (client.FindPlayerIsConected(friend.friendUsername) == playerIsConected)
+            {
+                if (client.FindPlayerInGroup(friend.friendUsername) == statusPlayerIsNotInGroup)
+                {
+                    client.SendMathInvitation(username, friend.friendUsername);
+                }
+                else
+                {
+                    MessageBox.Show("El jugador ya se encuentra en tu grupo no sea inbesil");
+                }
+            }
+            else
+            {
+                MessageBox.Show("El jugador no se encuentra conectado");
+            }
 
+
+            client.Close();
         }
 
 

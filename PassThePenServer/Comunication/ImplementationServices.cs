@@ -3,6 +3,7 @@ using Logic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
@@ -104,7 +105,7 @@ namespace Comunication
     public partial class ImplementationServices : IPlayerConnection
     {
         private List<ConnectedUser> users = new List<ConnectedUser>();
-        private List<ConnectedUser> usersInGroup = new List<ConnectedUser>();
+        private List<ConnectedUser> playersInGroup = new List<ConnectedUser>();
 
         public void Connect(string username)
         {
@@ -143,16 +144,51 @@ namespace Comunication
             users.Find(us => us.username.Equals(username)).operationContext.GetCallbackChannel<IPlayersServicesCallBack>().PlayersCallBack(friends);
         }
 
+
         public void SendMathInvitation(string invitingPlayer, string invitedPlayer)
-        {
+        {        
             int operationOK = 200;
+            int userNotFound = 404;
             ConnectedUser userConnected = users.FirstOrDefault(user => user.username.Equals(invitedPlayer));
+            ConnectedUser matchHost = users.FirstOrDefault(user => user.username.Equals(invitingPlayer));
+
             if (userConnected.operationContext.GetCallbackChannel<IPlayersServicesCallBack>().NotifyMatchInvitation(invitingPlayer) == operationOK)
             {
-                usersInGroup.Add(userConnected);
+                playersInGroup.Add(userConnected);
             }
+
+
+            if (FindPlayerInGroup(invitingPlayer) == userNotFound)
+            {
+                playersInGroup.Add(matchHost);
+            }
+
+            
         }
 
+        public int FindPlayerIsConected(string usernamePlayer)
+        {
+            int isConected = 200;
+            int userNotConected = 404;
+
+            if (users.FirstOrDefault(user => user.username.Equals(usernamePlayer)) == null)
+            {
+                isConected = userNotConected;    
+            }
+
+            return isConected;
+        }
+
+        public int FindPlayerInGroup(string usernameToFind)
+        {
+            int statusUser = 200;
+            int userNotFound = 404;
+            if (playersInGroup.FirstOrDefault(user => user.username.Equals(usernameToFind)) == null)
+            {
+                statusUser = userNotFound;
+            }
+            return statusUser;
+        }
     }
 
     public partial class ImplementationServices : IMatchManagement
