@@ -83,12 +83,17 @@ namespace PassThePen
                 InvalidFields_Label.Visibility = Visibility.Visible;
                 isValid = false;
             }
-            if (recoverPassword.ValidateFormat(TextBox_Email.Text, "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"))
+
+
+
+            //Arreglar esto por favor no funciona...
+            /*if (recoverPassword.ValidateFormat(TextBox_Email.Text, "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"))
             {
                 InvalidFields_Label.Visibility = Visibility.Visible; 
                 isValid = false;
-            }
-            if (TextBox_Email.Text.Length > 100 || TextBox_Name.Text.Length > 50 || TextBox_Lastname.Text.Length > 50) { }
+            }*/
+
+            if (TextBox_Email.Text.Length > 100 || TextBox_Name.Text.Length > 50 || TextBox_Lastname.Text.Length > 50)
             {
                 isValid = false;
             }

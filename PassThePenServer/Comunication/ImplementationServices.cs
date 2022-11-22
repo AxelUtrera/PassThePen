@@ -151,6 +151,13 @@ namespace Comunication
             int userNotFound = 404;
             ConnectedUser userConnected = users.FirstOrDefault(user => user.username.Equals(invitedPlayer));
             ConnectedUser matchHost = users.FirstOrDefault(user => user.username.Equals(invitingPlayer));
+            
+
+            if (FindPlayerInGroup(invitingPlayer) == userNotFound)
+            {
+                matchHost.hostState = true;
+                playersInGroup.Add(matchHost);
+            }
 
             if (userConnected.operationContext.GetCallbackChannel<IPlayersServicesCallBack>().NotifyMatchInvitation(invitingPlayer) == operationOK)
             {
@@ -158,12 +165,12 @@ namespace Comunication
             }
 
 
-            if (FindPlayerInGroup(invitingPlayer) == userNotFound)
-            {
-                playersInGroup.Add(matchHost);
-            }
-
             
+
+            foreach (ConnectedUser useConnected in playersInGroup)
+            {
+                Console.WriteLine(useConnected.username + "      " + useConnected.hostState);
+            }
         }
 
         public int FindPlayerIsConected(string usernamePlayer)

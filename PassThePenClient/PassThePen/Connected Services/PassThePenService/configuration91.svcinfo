@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="9.1" CheckSum="v9Lz/KitUu7odj8pA75ivGma2zUNFHrHLje2yeDgoBA=">
+<SavedWcfConfigurationInformation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="9.1" CheckSum="dXw1ScQcBM5wjvXwFOyNDBnnXXM8d3QHtbdiOT1ywO8=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="netTcpBinding" name="NetTcpBinding_IPlayerManagement">
       <properties>
@@ -829,10 +829,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="NetTcpBinding_IPlayerManagement" contract="PassThePenService.IPlayerManagement" bindingType="netTcpBinding" address="net.tcp://192.168.51.51:8081/PassThePen" bindingConfiguration="NetTcpBinding_IPlayerManagement">
+    <endpoint name="NetTcpBinding_IPlayerManagement" contract="PassThePenService.IPlayerManagement" bindingType="netTcpBinding" address="net.tcp://localhost:8081/PassThePen" bindingConfiguration="NetTcpBinding_IPlayerManagement">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>net.tcp://192.168.51.51:8081/PassThePen</serializedValue>
+          <serializedValue>net.tcp://localhost:8081/PassThePen</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -914,10 +914,10 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="NetTcpBinding_IAutentication" contract="PassThePenService.IAutentication" bindingType="netTcpBinding" address="net.tcp://192.168.51.51:8081/PassThePen" bindingConfiguration="NetTcpBinding_IAutentication">
+    <endpoint name="NetTcpBinding_IAutentication" contract="PassThePenService.IAutentication" bindingType="netTcpBinding" address="net.tcp://localhost:8081/PassThePen" bindingConfiguration="NetTcpBinding_IAutentication">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>net.tcp://192.168.51.51:8081/PassThePen</serializedValue>
+          <serializedValue>net.tcp://localhost:8081/PassThePen</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -999,10 +999,10 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="NetTcpBinding_IFriendRequests" contract="PassThePenService.IFriendRequests" bindingType="netTcpBinding" address="net.tcp://192.168.51.51:8081/PassThePen" bindingConfiguration="NetTcpBinding_IFriendRequests">
+    <endpoint name="NetTcpBinding_IFriendRequests" contract="PassThePenService.IFriendRequests" bindingType="netTcpBinding" address="net.tcp://localhost:8081/PassThePen" bindingConfiguration="NetTcpBinding_IFriendRequests">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>net.tcp://192.168.51.51:8081/PassThePen</serializedValue>
+          <serializedValue>net.tcp://localhost:8081/PassThePen</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -1084,10 +1084,10 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="NetTcpBinding_IPlayerConnection" contract="PassThePenService.IPlayerConnection" bindingType="netTcpBinding" address="net.tcp://192.168.51.51:8081/PassThePen" bindingConfiguration="NetTcpBinding_IPlayerConnection">
+    <endpoint name="NetTcpBinding_IPlayerConnection" contract="PassThePenService.IPlayerConnection" bindingType="netTcpBinding" address="net.tcp://localhost:8081/PassThePen" bindingConfiguration="NetTcpBinding_IPlayerConnection">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>net.tcp://192.168.51.51:8081/PassThePen</serializedValue>
+          <serializedValue>net.tcp://localhost:8081/PassThePen</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -1169,10 +1169,10 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="NetTcpBinding_IMatchManagement" contract="PassThePenService.IMatchManagement" bindingType="netTcpBinding" address="net.tcp://192.168.51.51:8081/PassThePen" bindingConfiguration="NetTcpBinding_IMatchManagement">
+    <endpoint name="NetTcpBinding_IMatchManagement" contract="PassThePenService.IMatchManagement" bindingType="netTcpBinding" address="net.tcp://localhost:8081/PassThePen" bindingConfiguration="NetTcpBinding_IMatchManagement">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>net.tcp://192.168.51.51:8081/PassThePen</serializedValue>
+          <serializedValue>net.tcp://localhost:8081/PassThePen</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -1254,10 +1254,10 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="NetTcpBinding_IChatServices" contract="PassThePenService.IChatServices" bindingType="netTcpBinding" address="net.tcp://192.168.51.51:8081/PassThePen" bindingConfiguration="NetTcpBinding_IChatServices">
+    <endpoint name="NetTcpBinding_IChatServices" contract="PassThePenService.IChatServices" bindingType="netTcpBinding" address="net.tcp://localhost:8081/PassThePen" bindingConfiguration="NetTcpBinding_IChatServices">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>net.tcp://192.168.51.51:8081/PassThePen</serializedValue>
+          <serializedValue>net.tcp://localhost:8081/PassThePen</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -1339,10 +1339,10 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="NetTcpBinding_IDrawReviewService" contract="PassThePenService.IDrawReviewService" bindingType="netTcpBinding" address="net.tcp://192.168.51.51:8081/PassThePen" bindingConfiguration="NetTcpBinding_IDrawReviewService">
+    <endpoint name="NetTcpBinding_IDrawReviewService" contract="PassThePenService.IDrawReviewService" bindingType="netTcpBinding" address="net.tcp://localhost:8081/PassThePen" bindingConfiguration="NetTcpBinding_IDrawReviewService">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>net.tcp://192.168.51.51:8081/PassThePen</serializedValue>
+          <serializedValue>net.tcp://localhost:8081/PassThePen</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

@@ -11,5 +11,6 @@ namespace Domain
     {
         public string username { get; set; }
         public OperationContext operationContext { get; set; }
+        public bool hostState { get;set; }
     }
 }
