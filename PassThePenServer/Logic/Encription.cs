@@ -19,7 +19,6 @@ namespace Logic
                 {
                     builder.Append(bytes[i].ToString("x2"));
                 }
-                Console.WriteLine(builder.ToString());
                 return builder.ToString();
             }
         }

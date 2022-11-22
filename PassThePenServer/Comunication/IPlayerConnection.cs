@@ -25,6 +25,12 @@ namespace Comunication
 
         [OperationContract]
         void SendMathInvitation(string invitingPlayer, string invitedPlayer);
+
+        [OperationContract]
+        int FindPlayerIsConected(string usernamePlayer);
+
+        [OperationContract]
+        int FindPlayerInGroup(string usernameToFind);
     }
 
     [ServiceContract]

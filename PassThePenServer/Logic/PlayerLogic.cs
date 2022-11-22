@@ -17,7 +17,6 @@ namespace Logic
             string passwordHash = Encription.ToSHA2Hash(player.password);
             using (var dataBase = new passthepenEntities())
             {
-                dataBase.Database.Log = Console.WriteLine;
                 var user = (from Player in dataBase.Player
                             where Player.username.Equals(player.username)
                             && Player.password.Equals(passwordHash)
@@ -36,7 +35,6 @@ namespace Logic
             int statusCode = 500;
             using (var dataBase = new passthepenEntities())
             {
-                dataBase.Database.Log = Console.WriteLine;
                 var newPlayer = dataBase.Player.Add(new Player()
                 {
                     email = player.email,
