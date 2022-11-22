@@ -133,13 +133,9 @@ namespace PassThePen
 
         private void StartTurn()
         {
-            //ObtainCard();
-            //ObtainTurnTime();
-            //StartTurnTimer();
-            //DrawReview.bytes = GetCanvasDraw();
-            //DrawReview drawReview = new DrawReview();
-            //drawReview.Show();
-            SendDraw();
+            ObtainCard();
+            ObtainTurnTime();
+            StartTurnTimer();
         }
 
         private void ObtainTurnTime()
