@@ -181,7 +181,6 @@ namespace Comunication
 
     public partial class ImplementationServices : IChatServices
     {
-        public List<ConnectedUser> usersChat= new List<ConnectedUser>();
 
         public void SendMessage(string senderUsername, string message)
         {
@@ -189,6 +188,7 @@ namespace Comunication
             string completeMessage = chatLogic.BuildMessage(senderUsername, message);
             OperationContext.Current.GetCallbackChannel<IChatServiceCallback>().MessageSend(completeMessage);
         }
+
     }
 
     public partial class ImplementationServices : IDrawReviewService
