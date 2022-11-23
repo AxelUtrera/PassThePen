@@ -31,6 +31,9 @@ namespace Comunication
 
         [OperationContract]
         int FindPlayerInGroup(string usernameToFind);
+
+        [OperationContract]
+        int GroupIsFull();
     }
 
     [ServiceContract]

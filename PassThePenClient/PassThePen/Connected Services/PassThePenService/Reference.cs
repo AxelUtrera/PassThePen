@@ -648,6 +648,12 @@ namespace PassThePen.PassThePenService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/FindPlayerInGroup", ReplyAction="http://tempuri.org/IPlayerConnection/FindPlayerInGroupResponse")]
         System.Threading.Tasks.Task<int> FindPlayerInGroupAsync(string usernameToFind);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/GroupIsFull", ReplyAction="http://tempuri.org/IPlayerConnection/GroupIsFullResponse")]
+        int GroupIsFull();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/GroupIsFull", ReplyAction="http://tempuri.org/IPlayerConnection/GroupIsFullResponse")]
+        System.Threading.Tasks.Task<int> GroupIsFullAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -742,6 +748,14 @@ namespace PassThePen.PassThePenService {
         
         public System.Threading.Tasks.Task<int> FindPlayerInGroupAsync(string usernameToFind) {
             return base.Channel.FindPlayerInGroupAsync(usernameToFind);
+        }
+        
+        public int GroupIsFull() {
+            return base.Channel.GroupIsFull();
+        }
+        
+        public System.Threading.Tasks.Task<int> GroupIsFullAsync() {
+            return base.Channel.GroupIsFullAsync();
         }
     }
     

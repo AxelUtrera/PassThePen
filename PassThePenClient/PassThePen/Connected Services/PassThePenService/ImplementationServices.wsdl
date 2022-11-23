@@ -345,6 +345,18 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
+      <xs:element name="GroupIsFull">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GroupIsFullResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="GroupIsFullResult" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="PlayersCallBack">
         <xs:complexType>
           <xs:sequence>
@@ -647,6 +659,12 @@
   <wsdl:message name="IPlayerConnection_FindPlayerInGroup_OutputMessage">
     <wsdl:part name="parameters" element="tns:FindPlayerInGroupResponse" />
   </wsdl:message>
+  <wsdl:message name="IPlayerConnection_GroupIsFull_InputMessage">
+    <wsdl:part name="parameters" element="tns:GroupIsFull" />
+  </wsdl:message>
+  <wsdl:message name="IPlayerConnection_GroupIsFull_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GroupIsFullResponse" />
+  </wsdl:message>
   <wsdl:message name="IPlayerConnection_PlayersCallBack_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:PlayersCallBack" />
   </wsdl:message>
@@ -775,6 +793,10 @@
     <wsdl:operation name="FindPlayerInGroup">
       <wsdl:input wsaw:Action="http://tempuri.org/IPlayerConnection/FindPlayerInGroup" message="tns:IPlayerConnection_FindPlayerInGroup_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPlayerConnection/FindPlayerInGroupResponse" message="tns:IPlayerConnection_FindPlayerInGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GroupIsFull">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerConnection/GroupIsFull" message="tns:IPlayerConnection_GroupIsFull_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerConnection/GroupIsFullResponse" message="tns:IPlayerConnection_GroupIsFull_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="PlayersCallBack">
       <wsdl:output wsaw:Action="http://tempuri.org/IPlayerConnection/PlayersCallBack" message="tns:IPlayerConnection_PlayersCallBack_OutputCallbackMessage" />
@@ -1014,6 +1036,15 @@
     </wsdl:operation>
     <wsdl:operation name="FindPlayerInGroup">
       <soap12:operation soapAction="http://tempuri.org/IPlayerConnection/FindPlayerInGroup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GroupIsFull">
+      <soap12:operation soapAction="http://tempuri.org/IPlayerConnection/GroupIsFull" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

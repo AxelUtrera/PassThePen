@@ -149,6 +149,7 @@ namespace Comunication
         {        
             int operationOK = 200;
             int userNotFound = 404;
+
             ConnectedUser userConnected = users.FirstOrDefault(user => user.username.Equals(invitedPlayer));
             ConnectedUser matchHost = users.FirstOrDefault(user => user.username.Equals(invitingPlayer));
             
@@ -164,13 +165,6 @@ namespace Comunication
                 playersInGroup.Add(userConnected);
             }
 
-
-            
-
-            foreach (ConnectedUser useConnected in playersInGroup)
-            {
-                Console.WriteLine(useConnected.username + "      " + useConnected.hostState);
-            }
         }
 
         public int FindPlayerIsConected(string usernamePlayer)
@@ -195,6 +189,17 @@ namespace Comunication
                 statusUser = userNotFound;
             }
             return statusUser;
+        }
+
+        public int GroupIsFull()
+        {
+            int statusCode = 500;
+
+            if (playersInGroup.Count() <= 6)
+            {
+                statusCode = 200;
+            }
+            return statusCode;
         }
     }
 

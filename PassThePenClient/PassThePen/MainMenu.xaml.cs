@@ -271,6 +271,9 @@ namespace PassThePen
             Friends friend = (Friends)parent.DataContext;
             int statusPlayerIsNotInGroup = 404;
             int playerIsConected = 200;
+            
+            //Refactorizar
+
             if (client.FindPlayerIsConected(friend.friendUsername) == playerIsConected)
             {
                 if (client.FindPlayerInGroup(friend.friendUsername) == statusPlayerIsNotInGroup)
@@ -286,9 +289,6 @@ namespace PassThePen
             {
                 MessageBox.Show("El jugador no se encuentra conectado");
             }
-
-
-            
         }
 
 
