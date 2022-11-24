@@ -19,10 +19,10 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:8082/?singleWsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://192.168.51.64:8082/?singleWsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="ImplementationServices.wsdl" MetadataType="Wsdl" ID="e2e04ef1-152b-4bca-ab21-80945a19e792" SourceId="1" SourceUrl="http://localhost:8082/?singleWsdl" />
+    <MetadataFile FileName="ImplementationServices11.wsdl" MetadataType="Wsdl" ID="2f6cc070-7523-449c-a738-e4b8efee3f5b" SourceId="1" SourceUrl="http://192.168.51.64:8082/?singleWsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

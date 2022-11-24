@@ -17,7 +17,7 @@ namespace Comunication
         [OperationContract]
         void Disconnect(string username);
 
-        [OperationContract (IsOneWay = true)]
+        [OperationContract(IsOneWay = true)]
         void SendOnlinePlayers(string username);
 
         [OperationContract]
@@ -31,6 +31,9 @@ namespace Comunication
 
         [OperationContract]
         int FindPlayerInGroup(string usernameToFind);
+
+        [OperationContract(IsOneWay = true)]
+        void StartMatch(string username);
     }
 
     [ServiceContract]
@@ -42,6 +45,9 @@ namespace Comunication
 
         [OperationContract]
         int NotifyMatchInvitation(string invitingPlayer);
+
+        [OperationContract(IsOneWay = true)]
+        void OpenMatchWindow();
     }
 }
 

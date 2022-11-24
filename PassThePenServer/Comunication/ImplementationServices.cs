@@ -196,6 +196,20 @@ namespace Comunication
             }
             return statusUser;
         }
+
+        public void StartMatch(string username)
+        {
+            foreach (ConnectedUser user in playersInGroup)
+            {
+                if (user.username.Equals(username) && user.hostState == true)
+                {
+                    foreach (ConnectedUser connectedUser in playersInGroup)
+                    {
+                        connectedUser.operationContext.GetCallbackChannel<IPlayersServicesCallBack>().OpenMatchWindow();
+                    }
+                }
+            }
+        }
     }
 
     public partial class ImplementationServices : IMatchManagement

@@ -648,6 +648,12 @@ namespace PassThePen.PassThePenService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/FindPlayerInGroup", ReplyAction="http://tempuri.org/IPlayerConnection/FindPlayerInGroupResponse")]
         System.Threading.Tasks.Task<int> FindPlayerInGroupAsync(string usernameToFind);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPlayerConnection/StartMatch")]
+        void StartMatch(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPlayerConnection/StartMatch")]
+        System.Threading.Tasks.Task StartMatchAsync(string username);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -658,6 +664,9 @@ namespace PassThePen.PassThePenService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/NotifyMatchInvitation", ReplyAction="http://tempuri.org/IPlayerConnection/NotifyMatchInvitationResponse")]
         int NotifyMatchInvitation(string invitingPlayer);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPlayerConnection/OpenMatchWindow")]
+        void OpenMatchWindow();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -742,6 +751,14 @@ namespace PassThePen.PassThePenService {
         
         public System.Threading.Tasks.Task<int> FindPlayerInGroupAsync(string usernameToFind) {
             return base.Channel.FindPlayerInGroupAsync(usernameToFind);
+        }
+        
+        public void StartMatch(string username) {
+            base.Channel.StartMatch(username);
+        }
+        
+        public System.Threading.Tasks.Task StartMatchAsync(string username) {
+            return base.Channel.StartMatchAsync(username);
         }
     }
     

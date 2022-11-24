@@ -345,6 +345,13 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
+      <xs:element name="StartMatch">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="PlayersCallBack">
         <xs:complexType>
           <xs:sequence>
@@ -364,6 +371,11 @@
           <xs:sequence>
             <xs:element minOccurs="0" name="NotifyMatchInvitationResult" type="xs:int" />
           </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="OpenMatchWindow">
+        <xs:complexType>
+          <xs:sequence />
         </xs:complexType>
       </xs:element>
       <xs:element name="SendCard">
@@ -647,6 +659,9 @@
   <wsdl:message name="IPlayerConnection_FindPlayerInGroup_OutputMessage">
     <wsdl:part name="parameters" element="tns:FindPlayerInGroupResponse" />
   </wsdl:message>
+  <wsdl:message name="IPlayerConnection_StartMatch_InputMessage">
+    <wsdl:part name="parameters" element="tns:StartMatch" />
+  </wsdl:message>
   <wsdl:message name="IPlayerConnection_PlayersCallBack_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:PlayersCallBack" />
   </wsdl:message>
@@ -655,6 +670,9 @@
   </wsdl:message>
   <wsdl:message name="IPlayerConnection_NotifyMatchInvitation_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotifyMatchInvitationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPlayerConnection_OpenMatchWindow_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:OpenMatchWindow" />
   </wsdl:message>
   <wsdl:message name="IMatchManagement_SendCard_InputMessage">
     <wsdl:part name="parameters" element="tns:SendCard" />
@@ -776,12 +794,18 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IPlayerConnection/FindPlayerInGroup" message="tns:IPlayerConnection_FindPlayerInGroup_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPlayerConnection/FindPlayerInGroupResponse" message="tns:IPlayerConnection_FindPlayerInGroup_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="StartMatch">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerConnection/StartMatch" message="tns:IPlayerConnection_StartMatch_InputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="PlayersCallBack">
       <wsdl:output wsaw:Action="http://tempuri.org/IPlayerConnection/PlayersCallBack" message="tns:IPlayerConnection_PlayersCallBack_OutputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation name="NotifyMatchInvitation">
       <wsdl:output wsaw:Action="http://tempuri.org/IPlayerConnection/NotifyMatchInvitation" message="tns:IPlayerConnection_NotifyMatchInvitation_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/IPlayerConnection/NotifyMatchInvitationResponse" message="tns:IPlayerConnection_NotifyMatchInvitation_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OpenMatchWindow">
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerConnection/OpenMatchWindow" message="tns:IPlayerConnection_OpenMatchWindow_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IMatchManagement">
@@ -1021,6 +1045,12 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="StartMatch">
+      <soap12:operation soapAction="http://tempuri.org/IPlayerConnection/StartMatch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
     <wsdl:operation name="PlayersCallBack">
       <soap12:operation soapAction="http://tempuri.org/IPlayerConnection/PlayersCallBack" style="document" />
       <wsdl:output>
@@ -1032,6 +1062,12 @@
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OpenMatchWindow">
+      <soap12:operation soapAction="http://tempuri.org/IPlayerConnection/OpenMatchWindow" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
@@ -1111,45 +1147,45 @@
   </wsdl:binding>
   <wsdl:service name="ImplementationServices">
     <wsdl:port name="NetTcpBinding_IPlayerManagement" binding="tns:NetTcpBinding_IPlayerManagement">
-      <soap12:address location="net.tcp://localhost:8081/PassThePen" />
+      <soap12:address location="net.tcp://192.168.51.64:8081/PassThePen" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.51.64:8081/PassThePen</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IAutentication" binding="tns:NetTcpBinding_IAutentication">
-      <soap12:address location="net.tcp://localhost:8081/PassThePen" />
+      <soap12:address location="net.tcp://192.168.51.64:8081/PassThePen" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.51.64:8081/PassThePen</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IFriendRequests" binding="tns:NetTcpBinding_IFriendRequests">
-      <soap12:address location="net.tcp://localhost:8081/PassThePen" />
+      <soap12:address location="net.tcp://192.168.51.64:8081/PassThePen" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.51.64:8081/PassThePen</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IPlayerConnection" binding="tns:NetTcpBinding_IPlayerConnection">
-      <soap12:address location="net.tcp://localhost:8081/PassThePen" />
+      <soap12:address location="net.tcp://192.168.51.64:8081/PassThePen" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.51.64:8081/PassThePen</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IMatchManagement" binding="tns:NetTcpBinding_IMatchManagement">
-      <soap12:address location="net.tcp://localhost:8081/PassThePen" />
+      <soap12:address location="net.tcp://192.168.51.64:8081/PassThePen" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.51.64:8081/PassThePen</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IChatServices" binding="tns:NetTcpBinding_IChatServices">
-      <soap12:address location="net.tcp://localhost:8081/PassThePen" />
+      <soap12:address location="net.tcp://192.168.51.64:8081/PassThePen" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.51.64:8081/PassThePen</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IDrawReviewService" binding="tns:NetTcpBinding_IDrawReviewService">
-      <soap12:address location="net.tcp://localhost:8081/PassThePen" />
+      <soap12:address location="net.tcp://192.168.51.64:8081/PassThePen" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.51.64:8081/PassThePen</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

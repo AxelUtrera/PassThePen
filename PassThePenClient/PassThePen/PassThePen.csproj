@@ -229,6 +229,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Connected Services\PassThePenService\ImplementationServices1.wsdl" />
+    <None Include="Connected Services\PassThePenService\ImplementationServices11.wsdl" />
     <None Include="Connected Services\PassThePenService\PassThePen.PassThePenService.FriendRequest.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

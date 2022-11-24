@@ -291,6 +291,11 @@ namespace PassThePen
             
         }
 
-
+        public void OpenMatchWindow()
+        {
+            Match match = new Match();
+            match.Show();
+            this.Close();
+        }
     }
 }
