@@ -14,7 +14,7 @@
     <Grid>
         <StackPanel>
             <StackPanel>
-                <Grid Height="150">
+                <Grid Height="100">
                     <Grid.ColumnDefinitions >
                         <ColumnDefinition Width="300"></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
@@ -22,37 +22,37 @@
                     </Grid.ColumnDefinitions>
 
 
-               
+
                     <Image HorizontalAlignment="Left" 
-                           Margin="50,30"
+                           Margin="207,25,0,0"
                            Width="50"
                            Height="50"
                            Source="Img/Icon_Setings.png" 
                            Name="Button_Settings" 
-                           Grid.Column="0" 
+                           Grid.Column="2" 
                            Cursor="Hand" 
                            RenderTransformOrigin="0.609,1.917"
                            MouseLeftButtonDown="Button_Profile_Click" VerticalAlignment="Top"/>
 
-                    <Label Grid.Column="1" Content="{x:Static p:Resources.MainMenu_GameMenu_Label}" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="DemiBold"></Label>
+                    <Label Grid.Column="1" Content="{x:Static p:Resources.MainMenu_GameMenu_Label}" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="DemiBold"></Label>
                 </Grid>
             </StackPanel>
 
             <StackPanel Margin="0,0,0,40">
-                <Grid>
+                <Grid Height="650">
                     <Grid.ColumnDefinitions >
                         <ColumnDefinition Width="400"></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition Width="400"></ColumnDefinition>
+                        <ColumnDefinition Width="295"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel Margin="0,30" Width="310" Grid.Column="0">
+                    <StackPanel Margin="45,30,45,30" Grid.Column="0">
                         <StackPanel Orientation="Horizontal">
                             <Label Content="{x:Static p:Resources.MainManu_FriendList_Label}" Margin="0,0,0,10" FontSize="24" FontWeight="bold"/>
                             <Image Name="Button_FindFriends" Source="/Img/Icon_Search.png" Margin="90,0" Width="30" Cursor="Hand" RenderTransformOrigin="0.5,0.711" MouseLeftButtonDown="Button_FindFriends_Click" />
                             <TextBox Name="TextBox_FindFriend" Margin="-390" Height="33" Width="250" Background="AliceBlue" BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" FontSize="18"  Visibility="Collapsed" TextChanged="TextBox_FindFriend_TextChanged"/>
                         </StackPanel>
-                        
+
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,2">
                             <Button Cursor="Hand" Width="140" Margin="0,0,0,5" Height="35" Foreground="Black" FontSize="18" Click="Button_Friends_Click">
                                 <Button.Template >
@@ -73,11 +73,11 @@
                                 </Button.Template>
                             </Button>
                         </StackPanel>
-                        <Border Grid.Column="0" Width="305" Height="405"  BorderThickness="2" BorderBrush="Black" CornerRadius="10">
+                        <Border Grid.Column="0" Width="305" Height="460"  BorderThickness="2" BorderBrush="Black" CornerRadius="10">
                             <StackPanel>
                                 <Label Name="label_ListFriends" Content="{x:Static p:Resources.MainMenu_Friends_Label}" HorizontalAlignment="Center" FontWeight="Bold" />
                                 <Label Name="label_FriendRequests" Content="{x:Static p:Resources.MainMenu_FriendsRequests_Label}" HorizontalAlignment="Center" FontWeight="Bold" Visibility="Collapsed"/>
-                                <ListBox x:Name="ListBox_FriendList" Height="373" Width="300" BorderBrush="Transparent">
+                                <ListBox x:Name="ListBox_FriendList" Height="425" Width="300" BorderBrush="Transparent">
                                     <ListBox.ItemTemplate >
                                         <DataTemplate>
                                             <Grid>
@@ -99,7 +99,7 @@
                                         </DataTemplate>
                                     </ListBox.ItemTemplate>
                                 </ListBox>
-                                
+
                                 <ListBox Name="ListBox_FriendsRequests"  Margin="0" Height="373" Width="300" BorderBrush="Transparent" HorizontalAlignment="Stretch" Visibility="Collapsed">
                                     <ListBox.ItemTemplate >
                                         <DataTemplate>
@@ -123,7 +123,7 @@
                             </StackPanel>
                         </Border>
                         <StackPanel Orientation="Horizontal" Margin="3">
-                            <TextBox Name="Texbox_AddFriend" Height="33" Width="200" Background="AliceBlue" BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" FontSize="18">
+                            <TextBox Name="Textbox_AddFriend" Height="33" Width="200" Background="AliceBlue" BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" FontSize="18">
                                 <TextBox.Resources>
                                     <Style TargetType="{x:Type Border}">
                                         <Setter Property="CornerRadius" Value="10"/>
@@ -141,8 +141,8 @@
                             </Button>
                         </StackPanel>
                     </StackPanel>
-                    <StackPanel Grid.Column="1" >
-                        <Grid Grid.Column="1" Height="550">
+                    <StackPanel Margin="90,30,0,0" Grid.Column="1" >
+                        <Grid Grid.Column="1" Height="596">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
@@ -154,25 +154,51 @@
                                 <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
 
-
-                                                   
-
-                                             
-
-                            <Image Name="Image_InviteFiend1"  Source="Img/Icon_AddUser.png" Cursor="Hand" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Width="60" Height="60" ></Image>
-                            <Image Name="Image_InviteFiend2" Source="Img/Icon_AddUser.png" Cursor="Hand" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,15,50,0" Width="60" Height="60" ></Image>
-                            <Image Name="Image_InviteFiend3" Source="Img/Icon_AddUser.png" Cursor="Hand" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="50,15,0,0" Width="60" Height="60" ></Image>
-                            <Image Name="Image_InviteFiend4" Source="Img/Icon_AddUser.png" Cursor="Hand" Grid.Column="1" Width="60" Height="60" />
-                            <Image Name="Image_InviteFiend5" Source="Img/Icon_AddUser.png" Cursor="Hand" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="60" Height="60" ></Image>
                             
-
-                            <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                <Border  Height="100" Width="100" BorderThickness="1" BorderBrush="Black" VerticalAlignment="Top" HorizontalAlignment="Center">
-                                    <Image Name="Image_ProfileImage"  Stretch="Fill" HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="100"/>
+                            <!--Principal player-->
+                            <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+                                <Border  Height="100" Width="100" BorderThickness="1" BorderBrush="Transparent" VerticalAlignment="Top" HorizontalAlignment="Center">
+                                    <Image Name="Image_ProfileImage"  Stretch="UniformToFill" HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="100"/>
                                 </Border>
-                            </StackPanel>   
-                            
-                            
+                                <Label Name="Label_PrincipalPlayer" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center"></Label>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="0" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                                <Border  Height="100" Width="100" BorderThickness="1" BorderBrush="Transparent" VerticalAlignment="Top" HorizontalAlignment="Center">
+                                    <Image Name="Image_InviteFiend1" Source="Img/Icon_AddUser.png" Stretch="UniformToFill" HorizontalAlignment="Center" Height="70" VerticalAlignment="Center" Width="70"/>
+                                </Border>
+                                <Label Name="Label_PlayerAdded1" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center"></Label>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <Border  Height="100" Width="100" BorderThickness="1" BorderBrush="Transparent" VerticalAlignment="Top" HorizontalAlignment="Center">
+                                    <Image Name="Image_InviteFiend2" Source="Img/Icon_AddUser.png" Stretch="UniformToFill" HorizontalAlignment="Center" Height="70" VerticalAlignment="Center" Width="70"/>
+                                </Border>
+                                <Label Name="Label_PlayerAdded2" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center"></Label>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <Border  Height="100" Width="100" BorderThickness="1" BorderBrush="Transparent" VerticalAlignment="Top" HorizontalAlignment="Center">
+                                    <Image Name="Image_InviteFiend3" Source="Img/Icon_AddUser.png" Stretch="UniformToFill" HorizontalAlignment="Center" Height="70" VerticalAlignment="Center" Width="70"/>
+                                </Border>
+                                <Label Name="Label_PlayerAdded3" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center"></Label>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <Border  Height="100" Width="100" BorderThickness="1" BorderBrush="Transparent" VerticalAlignment="Top" HorizontalAlignment="Center">
+                                    <Image Name="Image_InviteFiend4" Source="Img/Icon_AddUser.png" Stretch="UniformToFill" HorizontalAlignment="Center" Height="70" VerticalAlignment="Center" Width="70"/>
+                                </Border>
+                                <Label Name="Label_PlayerAdded4" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center"></Label>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="2" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                                <Border  Height="100" Width="100" BorderThickness="1" BorderBrush="Transparent" VerticalAlignment="Top" HorizontalAlignment="Center">
+                                    <Image Name="Image_InviteFiend5" Source="Img/Icon_AddUser.png"  Stretch="UniformToFill" HorizontalAlignment="Center" Height="70" VerticalAlignment="Center" Width="70"/>
+                                </Border>
+                                <Label Name="Label_PlayerAdded5" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center"></Label>
+                            </StackPanel>
+
+
 
 
                         </Grid>
@@ -180,36 +206,37 @@
                 </Grid>
 
             </StackPanel>
-             
-            
-                <Grid Margin="0,0,0,0" VerticalAlignment="Bottom">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        
-                    </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Cursor="Hand" Margin="110,0,0,30" Width="250" Height="50" Foreground="#f3f3f3" FontSize="23" HorizontalAlignment="Left" Click="Button_StartMatch_Click">
-                        <Button.Template >
-                            <ControlTemplate TargetType="{x:Type Button}" >
-                                <Border Background="Green" BorderBrush="Green"  CornerRadius="7,7,7,7">
-                                    <ContentPresenter Content="{x:Static p:Resources.MainMenu_Play_Button}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
 
-                    <Button Grid.Column="1" Cursor="Hand" Width="250" Height="50" Foreground="#f3f3f3" FontSize="23" HorizontalAlignment="Right" Margin="0,0,100,30" Click="Button_ExitGame_Click" >
-                        <Button.Template>
-                            <ControlTemplate TargetType="{x:Type Button}" >
-                                <Border Background="OrangeRed" BorderBrush="OrangeRed" CornerRadius="7,7,7,7">
-                                    <ContentPresenter Content="{x:Static p:Resources.MainMenu_ExitGame_Button}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
 
-                </Grid>
-                
+            <Grid Margin="0,0,0,0" VerticalAlignment="Bottom">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Cursor="Hand" Margin="110,0,0,30" Width="250" Height="50" Foreground="#f3f3f3" FontSize="23" HorizontalAlignment="Left" Click="Button_StartMatch_Click">
+                    <Button.Template >
+                        <ControlTemplate TargetType="{x:Type Button}" >
+                            <Border Background="Green" BorderBrush="Green"  CornerRadius="7,7,7,7">
+                                <ContentPresenter Content="{x:Static p:Resources.MainMenu_Play_Button}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <Button Grid.Column="1" Cursor="Hand" Width="250" Height="50" Foreground="#f3f3f3" FontSize="23" HorizontalAlignment="Right" Margin="0,0,100,30" Click="Button_ExitGame_Click" >
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}" >
+                            <Border Background="OrangeRed" BorderBrush="OrangeRed" CornerRadius="7,7,7,7">
+                                <ContentPresenter Content="{x:Static p:Resources.MainMenu_ExitGame_Button}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+            </Grid>
+
         </StackPanel>
+
     </Grid>
 </Window>

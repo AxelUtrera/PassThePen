@@ -32,6 +32,12 @@ namespace Comunication
         [OperationContract]
         int FindPlayerInGroup(string usernameToFind);
 
+        [OperationContract]
+        int GroupIsNotFull();
+
+        [OperationContract]
+        List<string> GetListUsernamesPlayersInGroup();
+
         [OperationContract(IsOneWay = true)]
         void StartMatch(string username);
     }

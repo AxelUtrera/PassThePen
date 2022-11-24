@@ -31,6 +31,9 @@ namespace Comunication
 
         [OperationContract]
         int DeleteFriend(Friends friendToDelete);
+
+        [OperationContract]
+        int FindPlayer(string username);
     }
             
       

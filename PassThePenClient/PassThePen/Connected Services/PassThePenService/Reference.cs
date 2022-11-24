@@ -353,6 +353,12 @@ namespace PassThePen.PassThePenService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManagement/DeleteFriend", ReplyAction="http://tempuri.org/IPlayerManagement/DeleteFriendResponse")]
         System.Threading.Tasks.Task<int> DeleteFriendAsync(PassThePen.PassThePenService.Friends friendToDelete);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManagement/FindPlayer", ReplyAction="http://tempuri.org/IPlayerManagement/FindPlayerResponse")]
+        int FindPlayer(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManagement/FindPlayer", ReplyAction="http://tempuri.org/IPlayerManagement/FindPlayerResponse")]
+        System.Threading.Tasks.Task<int> FindPlayerAsync(string username);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -436,6 +442,14 @@ namespace PassThePen.PassThePenService {
         
         public System.Threading.Tasks.Task<int> DeleteFriendAsync(PassThePen.PassThePenService.Friends friendToDelete) {
             return base.Channel.DeleteFriendAsync(friendToDelete);
+        }
+        
+        public int FindPlayer(string username) {
+            return base.Channel.FindPlayer(username);
+        }
+        
+        public System.Threading.Tasks.Task<int> FindPlayerAsync(string username) {
+            return base.Channel.FindPlayerAsync(username);
         }
     }
     
@@ -649,6 +663,18 @@ namespace PassThePen.PassThePenService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/FindPlayerInGroup", ReplyAction="http://tempuri.org/IPlayerConnection/FindPlayerInGroupResponse")]
         System.Threading.Tasks.Task<int> FindPlayerInGroupAsync(string usernameToFind);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/GroupIsNotFull", ReplyAction="http://tempuri.org/IPlayerConnection/GroupIsNotFullResponse")]
+        int GroupIsNotFull();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/GroupIsNotFull", ReplyAction="http://tempuri.org/IPlayerConnection/GroupIsNotFullResponse")]
+        System.Threading.Tasks.Task<int> GroupIsNotFullAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/GetListUsernamesPlayersInGroup", ReplyAction="http://tempuri.org/IPlayerConnection/GetListUsernamesPlayersInGroupResponse")]
+        string[] GetListUsernamesPlayersInGroup();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/GetListUsernamesPlayersInGroup", ReplyAction="http://tempuri.org/IPlayerConnection/GetListUsernamesPlayersInGroupResponse")]
+        System.Threading.Tasks.Task<string[]> GetListUsernamesPlayersInGroupAsync();
+        
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPlayerConnection/StartMatch")]
         void StartMatch(string username);
         
@@ -751,6 +777,22 @@ namespace PassThePen.PassThePenService {
         
         public System.Threading.Tasks.Task<int> FindPlayerInGroupAsync(string usernameToFind) {
             return base.Channel.FindPlayerInGroupAsync(usernameToFind);
+        }
+        
+        public int GroupIsNotFull() {
+            return base.Channel.GroupIsNotFull();
+        }
+        
+        public System.Threading.Tasks.Task<int> GroupIsNotFullAsync() {
+            return base.Channel.GroupIsNotFullAsync();
+        }
+        
+        public string[] GetListUsernamesPlayersInGroup() {
+            return base.Channel.GetListUsernamesPlayersInGroup();
+        }
+        
+        public System.Threading.Tasks.Task<string[]> GetListUsernamesPlayersInGroupAsync() {
+            return base.Channel.GetListUsernamesPlayersInGroupAsync();
         }
         
         public void StartMatch(string username) {

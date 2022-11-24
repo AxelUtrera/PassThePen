@@ -13,46 +13,47 @@ namespace Comunication
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
     public partial class ImplementationServices : IPlayerManagement
     {
+        PlayerLogic playerLogic = new PlayerLogic();
+
         public int AddPlayer(Player player)
         {
-            return PlayerLogic.AddPlayerToDB(player);
+            return playerLogic.AddPlayer(player);
         }
 
         public int UpdateDataPlayer(string username, Player player)
         {
-            PlayerLogic playerLogic = new PlayerLogic();
             return playerLogic.UpdateDataPlayer(username, player);
         }
 
         public Player GetDataPlayer(string username)
         {
-            PlayerLogic playerLogic = new PlayerLogic();
             return playerLogic.ObtainPlayerData(username);
         }
 
         public int UpdatePlayerPassword(string username, string password)
         {
-            PlayerLogic playerLogic = new PlayerLogic();
             return playerLogic.UpdatePassword(username, password);
         }
 
         public int UpdatePassword(string SendEmail, string password)
         {
-            PlayerLogic playerLogic = new PlayerLogic();
             return playerLogic.UpdatePasswordEmail(SendEmail, password);
         }
 
         public Friends[] GetFriends(String username)
         {
-            PlayerLogic playerLogic = new PlayerLogic();
             List<Friends> friends = playerLogic.RecoverFriends(username);
             return friends.ToArray();
         }
 
         public int DeleteFriend(Friends friend)
         {
-            PlayerLogic playerLogic = new PlayerLogic();
             return playerLogic.DeleteFriend(friend);
+        }
+
+        public int FindPlayer(string username)
+        {
+            return playerLogic.FindPlayer(username);
         }
     }
 
@@ -61,7 +62,7 @@ namespace Comunication
         public int AutenticatePlayer(Player player)
         {
             PlayerLogic playerLogic = new PlayerLogic();
-            return playerLogic.AutenticatePlayerDB(player);
+            return playerLogic.AutenticatePlayer(player);
         }
 
         public int AutenticateEmail(string email)
@@ -91,9 +92,9 @@ namespace Comunication
             return friendRequestLogic.DeleteFriendRequest(friendRequest);
         }
 
-        public List<FriendRequest> GetFriendRequestsList(string user)
+        public List<FriendRequest> GetFriendRequestsList(string player)
         {
-            return friendRequestLogic.GetFriendRequestsOfPlayer(user);
+            return friendRequestLogic.GetFriendRequestsOfPlayer(player);
         }
 
         public int SendFriendRequests(FriendRequest friendRequests)
@@ -149,6 +150,7 @@ namespace Comunication
         {        
             int operationOK = 200;
             int userNotFound = 404;
+
             ConnectedUser userConnected = users.FirstOrDefault(user => user.username.Equals(invitedPlayer));
             ConnectedUser matchHost = users.FirstOrDefault(user => user.username.Equals(invitingPlayer));
             
@@ -164,13 +166,6 @@ namespace Comunication
                 playersInGroup.Add(userConnected);
             }
 
-
-            
-
-            foreach (ConnectedUser useConnected in playersInGroup)
-            {
-                Console.WriteLine(useConnected.username + "      " + useConnected.hostState);
-            }
         }
 
         public int FindPlayerIsConected(string usernamePlayer)
@@ -195,6 +190,29 @@ namespace Comunication
                 statusUser = userNotFound;
             }
             return statusUser;
+        }
+
+        public int GroupIsNotFull()
+        {
+            int statusCode = 500;
+
+            if (playersInGroup.Count() <=  6)
+            {
+                statusCode = 200;
+            }
+            return statusCode;
+        }
+
+
+        public List<string> GetListUsernamesPlayersInGroup()
+        {
+            List<string> groupPlayers = new List<string>();
+
+            foreach (ConnectedUser playerConnected in playersInGroup)
+            {
+                groupPlayers.Add(playerConnected.username);
+            }
+            return groupPlayers;
         }
 
         public void StartMatch(string username)
@@ -222,7 +240,6 @@ namespace Comunication
             int time = seconds[random.Next(seconds.Length)];
             OperationContext.Current.GetCallbackChannel<IMatchCallback>().DistributeTurnTime(time);
         }
-
 
         public void SendCard(string card)
         {
