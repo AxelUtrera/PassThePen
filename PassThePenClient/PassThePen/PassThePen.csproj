@@ -98,6 +98,7 @@
     <Compile Include="DrawReview.xaml.cs">
       <DependentUpon>DrawReview.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ImageManager.cs" />
     <Compile Include="MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
@@ -228,7 +229,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Connected Services\PassThePenService\ImplementationServices.wsdl" />
+    <None Include="Connected Services\PassThePenService\ImplementationServices1.wsdl" />
     <None Include="Connected Services\PassThePenService\PassThePen.PassThePenService.FriendRequest.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

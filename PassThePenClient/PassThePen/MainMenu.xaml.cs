@@ -50,6 +50,7 @@ namespace PassThePen
             Connected();
             GetFriends();
             listStrings.Clear();
+            SetDataProfile();
         }
 
         private void Button_Profile_Click(object sender, RoutedEventArgs e)
@@ -254,12 +255,25 @@ namespace PassThePen
 
         private void Button_AddFriend_Click(object sender, RoutedEventArgs e)
         {
-            PassThePenService.FriendRequestsClient client = new FriendRequestsClient();
-            FriendRequest friendRequest = new FriendRequest() {
-                usernamePlayer = Texbox_AddFriend.Text,
-                friendUsername = username
-            };
-            client.SendFriendRequests(friendRequest);
+            PlayerManagementClient playerClient = new PlayerManagementClient();
+            int playerExist = 200;
+
+            if (playerClient.FindPlayer(Textbox_AddFriend.Text) == playerExist) 
+            {
+                PassThePenService.FriendRequestsClient client = new FriendRequestsClient();
+                FriendRequest friendRequest = new FriendRequest()
+                {
+                    usernamePlayer = Textbox_AddFriend.Text,
+                    friendUsername = username
+                };
+                client.SendFriendRequests(friendRequest);
+                MessageBox.Show("La solicitud de amistad fue enviada con exito");
+            }
+            else
+            {
+                MessageBox.Show("El usuario que intentas agregar no existe, intentalo nuevamente");
+            }
+            
         }
 
         private void Button_InviteFriend_Click(object sender, MouseButtonEventArgs e)
@@ -271,10 +285,11 @@ namespace PassThePen
             Friends friend = (Friends)parent.DataContext;
             int statusPlayerIsNotInGroup = 404;
             int playerIsConected = 200;
+            int groupIsNotFull = 200;
+
             
             //Refactorizar
-
-            if (client.FindPlayerIsConected(friend.friendUsername) == playerIsConected)
+            if (client.FindPlayerIsConected(friend.friendUsername) == playerIsConected && client.GroupIsNotFull() == groupIsNotFull)
             {
                 if (client.FindPlayerInGroup(friend.friendUsername) == statusPlayerIsNotInGroup)
                 {
@@ -289,6 +304,19 @@ namespace PassThePen
             {
                 MessageBox.Show("El jugador no se encuentra conectado");
             }
+
+            if (client.GroupIsNotFull() != groupIsNotFull)
+            {
+                MessageBox.Show("El grupo se encuentra lleno");
+            }
+        }
+
+        private void SetDataProfile()
+        {
+            PassThePenService.PlayerManagementClient client = new PassThePenService.PlayerManagementClient();
+            Player playerObtained = client.GetDataPlayer(username);
+            Image_ProfileImage.Source = ImageManager.ToImage(playerObtained.profileImage);
+            Label_PrincipalPlayer.Content = username;
         }
 
 

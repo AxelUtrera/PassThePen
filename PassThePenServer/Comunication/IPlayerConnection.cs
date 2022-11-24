@@ -33,7 +33,10 @@ namespace Comunication
         int FindPlayerInGroup(string usernameToFind);
 
         [OperationContract]
-        int GroupIsFull();
+        int GroupIsNotFull();
+
+        [OperationContract]
+        List<string> GetListUsernamesPlayersInGroup();
     }
 
     [ServiceContract]

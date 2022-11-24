@@ -22,7 +22,7 @@
     <MetadataSource Address="http://localhost:8082/?singleWsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="ImplementationServices.wsdl" MetadataType="Wsdl" ID="e2e04ef1-152b-4bca-ab21-80945a19e792" SourceId="1" SourceUrl="http://localhost:8082/?singleWsdl" />
+    <MetadataFile FileName="ImplementationServices.wsdl" MetadataType="Wsdl" ID="b51b854e-7ab5-4d8b-bbb8-2cb3147e3e3b" SourceId="1" SourceUrl="http://localhost:8082/?singleWsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

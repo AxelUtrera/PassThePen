@@ -67,7 +67,7 @@ namespace PassThePen
                 TextBox_Name.Text = playerObtained.name;
                 TextBox_Lastname.Text = playerObtained.lastname;
                 TextBox_Email.Text = playerObtained.email;
-                Image_ProfileImage.Source = ToImage(playerObtained.profileImage);
+                Image_ProfileImage.Source = ImageManager.ToImage(playerObtained.profileImage);
             }
             client.Close();
         }
@@ -154,18 +154,7 @@ namespace PassThePen
         }
 
 
-        public BitmapImage ToImage(byte[] array)
-        {
-            using (var ms = new System.IO.MemoryStream(array))
-            {
-                var image = new BitmapImage();
-                image.BeginInit();
-                image.CacheOption = BitmapCacheOption.OnLoad;
-                image.StreamSource = ms;
-                image.EndInit();
-                return image;
-            }
-        }
+        
 
     }
 }

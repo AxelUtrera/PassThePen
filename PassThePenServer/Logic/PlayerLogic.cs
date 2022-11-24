@@ -10,8 +10,8 @@ namespace Logic
 {
     public class PlayerLogic
     {
-
-        public  int AutenticatePlayerDB(Domain.Player player)
+        
+        public  int AutenticatePlayer(Domain.Player player)
         {
             int userResult = 500;
             string passwordHash = Encription.ToSHA2Hash(player.password);
@@ -29,7 +29,8 @@ namespace Logic
             return userResult;
         }
 
-        public static int AddPlayerToDB(Domain.Player player)
+
+        public int AddPlayer(Domain.Player player)
         {
             //Tarea: Validar que no exista el usuario a agregar en la base de datos.
             int statusCode = 500;
@@ -71,6 +72,23 @@ namespace Logic
         }
 
 
+        public int FindPlayer(string username)
+        {
+            int operationResult = 500;
+
+            using (var context = new passthepenEntities())
+            {
+                var userFound = context.Player.Find(username);
+
+                if(userFound != null)
+                {
+                    operationResult = 200;
+                }
+            }
+            return operationResult;
+        }
+
+
         public Domain.Player ObtainPlayerData(string username)
         {
             Domain.Player playerSend = null;
@@ -109,6 +127,7 @@ namespace Logic
             return stateCode;
         }
 
+
         public int UpdatePassword(string username, string password)
         {
             int stateCode = 500;
@@ -143,6 +162,7 @@ namespace Logic
             }
             return result;
         }
+
 
         public List<Domain.Friends> RecoverFriends(string username)
         {
