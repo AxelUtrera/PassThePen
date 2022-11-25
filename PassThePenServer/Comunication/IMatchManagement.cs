@@ -17,7 +17,10 @@ namespace Comunication
         void SelectTurnTime();
 
         [OperationContract(IsOneWay = true)]
-        void StartTurnSignal();
+        void StartTurnSignal(string username);
+
+        [OperationContract(IsOneWay = true)]
+        void SetMatchOperationContext(string username);
     }
 
     [ServiceContract]

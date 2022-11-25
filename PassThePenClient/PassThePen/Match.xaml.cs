@@ -31,15 +31,12 @@ namespace PassThePen
 
         DispatcherTimer timer = new DispatcherTimer();
         private int selectedTime;
-        private Boolean hostState = true;
 
         public Match()
         {
             InitializeComponent();
-            if (!hostState)
-            {
-                Button_StartTurn.IsEnabled = false;
-            }
+            SetChatOperationContext(MainMenu.username);
+            SetMatchOperationContext(MainMenu.username);
         }
 
         private void Button_SetEraser_Click(object sender, RoutedEventArgs e)
@@ -230,6 +227,20 @@ namespace PassThePen
             DrawReview.bytes = draw;
             DrawReview drawReview = new DrawReview();
             drawReview.Show();            
+        }
+
+        public void SetChatOperationContext(string username)
+        {
+            InstanceContext instanceContext = new InstanceContext(this);
+            PassThePenService.ChatServicesClient client = new PassThePenService.ChatServicesClient(instanceContext);
+            client.SetChatOperationContext(username);
+        }
+
+        public void SetMatchOperationContext(string username)
+        {
+            InstanceContext instanceContext = new InstanceContext(this);
+            PassThePenService.MatchManagementClient client = new PassThePenService.MatchManagementClient(instanceContext);
+            client.SetMatchOperationContext(username);
         }
     }
 }

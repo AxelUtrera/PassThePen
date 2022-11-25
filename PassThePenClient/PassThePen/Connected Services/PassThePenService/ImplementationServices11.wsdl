@@ -433,6 +433,13 @@
           <xs:sequence />
         </xs:complexType>
       </xs:element>
+      <xs:element name="SetMatchOperationContext">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="DistributeCard">
         <xs:complexType>
           <xs:sequence>
@@ -457,6 +464,13 @@
           <xs:sequence>
             <xs:element minOccurs="0" name="senderUsername" nillable="true" type="xs:string" />
             <xs:element minOccurs="0" name="message" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SetChatOperationContext">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -739,6 +753,9 @@
   <wsdl:message name="IMatchManagement_StartTurnSignal_InputMessage">
     <wsdl:part name="parameters" element="tns:StartTurnSignal" />
   </wsdl:message>
+  <wsdl:message name="IMatchManagement_SetMatchOperationContext_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetMatchOperationContext" />
+  </wsdl:message>
   <wsdl:message name="IMatchManagement_DistributeCard_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:DistributeCard" />
   </wsdl:message>
@@ -750,6 +767,9 @@
   </wsdl:message>
   <wsdl:message name="IChatServices_SendMessage_InputMessage">
     <wsdl:part name="parameters" element="tns:SendMessage" />
+  </wsdl:message>
+  <wsdl:message name="IChatServices_SetChatOperationContext_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetChatOperationContext" />
   </wsdl:message>
   <wsdl:message name="IChatServices_MessageSend_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:MessageSend" />
@@ -886,6 +906,9 @@
     <wsdl:operation name="StartTurnSignal">
       <wsdl:input wsaw:Action="http://tempuri.org/IMatchManagement/StartTurnSignal" message="tns:IMatchManagement_StartTurnSignal_InputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="SetMatchOperationContext">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchManagement/SetMatchOperationContext" message="tns:IMatchManagement_SetMatchOperationContext_InputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="DistributeCard">
       <wsdl:output wsaw:Action="http://tempuri.org/IMatchManagement/DistributeCard" message="tns:IMatchManagement_DistributeCard_OutputCallbackMessage" />
     </wsdl:operation>
@@ -899,6 +922,9 @@
   <wsdl:portType name="IChatServices">
     <wsdl:operation name="SendMessage">
       <wsdl:input wsaw:Action="http://tempuri.org/IChatServices/SendMessage" message="tns:IChatServices_SendMessage_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetChatOperationContext">
+      <wsdl:input wsaw:Action="http://tempuri.org/IChatServices/SetChatOperationContext" message="tns:IChatServices_SetChatOperationContext_InputMessage" />
     </wsdl:operation>
     <wsdl:operation name="MessageSend">
       <wsdl:output wsaw:Action="http://tempuri.org/IChatServices/MessageSend" message="tns:IChatServices_MessageSend_OutputCallbackMessage" />
@@ -1189,6 +1215,12 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
+    <wsdl:operation name="SetMatchOperationContext">
+      <soap12:operation soapAction="http://tempuri.org/IMatchManagement/SetMatchOperationContext" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
     <wsdl:operation name="DistributeCard">
       <soap12:operation soapAction="http://tempuri.org/IMatchManagement/DistributeCard" style="document" />
       <wsdl:output>
@@ -1213,6 +1245,12 @@
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
     <wsdl:operation name="SendMessage">
       <soap12:operation soapAction="http://tempuri.org/IChatServices/SendMessage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="SetChatOperationContext">
+      <soap12:operation soapAction="http://tempuri.org/IChatServices/SetChatOperationContext" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1242,45 +1280,45 @@
   </wsdl:binding>
   <wsdl:service name="ImplementationServices">
     <wsdl:port name="NetTcpBinding_IPlayerManagement" binding="tns:NetTcpBinding_IPlayerManagement">
-      <soap12:address location="net.tcp://192.168.51.64:8081/PassThePen" />
+      <soap12:address location="net.tcp://localhost:8081/PassThePen" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.51.64:8081/PassThePen</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IAutentication" binding="tns:NetTcpBinding_IAutentication">
-      <soap12:address location="net.tcp://192.168.51.64:8081/PassThePen" />
+      <soap12:address location="net.tcp://localhost:8081/PassThePen" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.51.64:8081/PassThePen</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IFriendRequests" binding="tns:NetTcpBinding_IFriendRequests">
-      <soap12:address location="net.tcp://192.168.51.64:8081/PassThePen" />
+      <soap12:address location="net.tcp://localhost:8081/PassThePen" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.51.64:8081/PassThePen</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IPlayerConnection" binding="tns:NetTcpBinding_IPlayerConnection">
-      <soap12:address location="net.tcp://192.168.51.64:8081/PassThePen" />
+      <soap12:address location="net.tcp://localhost:8081/PassThePen" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.51.64:8081/PassThePen</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IMatchManagement" binding="tns:NetTcpBinding_IMatchManagement">
-      <soap12:address location="net.tcp://192.168.51.64:8081/PassThePen" />
+      <soap12:address location="net.tcp://localhost:8081/PassThePen" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.51.64:8081/PassThePen</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IChatServices" binding="tns:NetTcpBinding_IChatServices">
-      <soap12:address location="net.tcp://192.168.51.64:8081/PassThePen" />
+      <soap12:address location="net.tcp://localhost:8081/PassThePen" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.51.64:8081/PassThePen</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IDrawReviewService" binding="tns:NetTcpBinding_IDrawReviewService">
-      <soap12:address location="net.tcp://192.168.51.64:8081/PassThePen" />
+      <soap12:address location="net.tcp://localhost:8081/PassThePen" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.51.64:8081/PassThePen</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

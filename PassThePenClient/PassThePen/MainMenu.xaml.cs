@@ -180,9 +180,9 @@ namespace PassThePen
 
         private void Button_StartMatch_Click(object sender, RoutedEventArgs e)
         {
-            Match match = new Match();
-            match.Show();
-            this.Close();
+            InstanceContext instanceContext = new InstanceContext(this);
+            PassThePenService.PlayerConnectionClient client = new PassThePenService.PlayerConnectionClient(instanceContext);
+            client.StartMatch(username);
         }
 
         private void TextBox_FindFriend_TextChanged(object sender, TextChangedEventArgs e)

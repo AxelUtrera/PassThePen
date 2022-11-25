@@ -103,10 +103,11 @@ namespace Comunication
         }
     }
 
+
     public partial class ImplementationServices : IPlayerConnection
     {
         private List<ConnectedUser> users = new List<ConnectedUser>();
-        private List<ConnectedUser> playersInGroup = new List<ConnectedUser>();
+        private static List<ConnectedUser> playersInGroup = new List<ConnectedUser>();
 
         public void Connect(string username)
         {
@@ -153,10 +154,10 @@ namespace Comunication
 
             ConnectedUser userConnected = users.FirstOrDefault(user => user.username.Equals(invitedPlayer));
             ConnectedUser matchHost = users.FirstOrDefault(user => user.username.Equals(invitingPlayer));
-            
 
             if (FindPlayerInGroup(invitingPlayer) == userNotFound)
             {
+        
                 matchHost.hostState = true;
                 playersInGroup.Add(matchHost);
             }
@@ -238,31 +239,72 @@ namespace Comunication
             int[] seconds = { 15, 20, 25, 30 };
             Random random = new Random();
             int time = seconds[random.Next(seconds.Length)];
-            OperationContext.Current.GetCallbackChannel<IMatchCallback>().DistributeTurnTime(time);
+            foreach(ConnectedUser user in playersInGroup)
+            {
+                user.matchContext.GetCallbackChannel<IMatchCallback>().DistributeTurnTime(time);
+            }
         }
 
         public void SendCard(string card)
         {
-            OperationContext.Current.GetCallbackChannel<IMatchCallback>().DistributeCard(card);
+            foreach(ConnectedUser user in playersInGroup)
+            {
+                user.matchContext.GetCallbackChannel<IMatchCallback>().DistributeCard(card);
+            }
         }
 
-  
-        public void StartTurnSignal()
+        public void SetMatchOperationContext(string username)
         {
-            OperationContext.Current.GetCallbackChannel<IMatchCallback>().ReturnStartTurnSignal();
+            foreach(ConnectedUser user in playersInGroup)
+            {
+                if (user.username.Equals(username))
+                {
+                    user.matchContext = OperationContext.Current;
+                }
+            }
         }
+
+        public void StartTurnSignal(string username)
+        {
+            foreach(ConnectedUser user in playersInGroup)
+            {
+                if (user.username.Equals(username) && user.hostState == true)
+                {
+                    foreach(ConnectedUser matchUser in playersInGroup)
+                    {
+                        matchUser.matchContext.GetCallbackChannel<IMatchCallback>().ReturnStartTurnSignal();
+                    }
+                }
+            }
+        }
+
+        
     }
 
     public partial class ImplementationServices : IChatServices
     {
-
         public void SendMessage(string senderUsername, string message)
         {
             ChatLogic chatLogic = new ChatLogic();
             string completeMessage = chatLogic.BuildMessage(senderUsername, message);
-            OperationContext.Current.GetCallbackChannel<IChatServiceCallback>().MessageSend(completeMessage);
+
+            foreach(ConnectedUser user in playersInGroup)
+            {
+                user.chatContext.GetCallbackChannel<IChatServiceCallback>().MessageSend(completeMessage);
+            }
+
         }
 
+        public void SetChatOperationContext(string username)
+        {
+            foreach(ConnectedUser user in playersInGroup)
+            {
+                if (user.username.Equals(username))
+                {
+                    user.chatContext = OperationContext.Current;
+                }
+            }
+        }
     }
 
     public partial class ImplementationServices : IDrawReviewService

@@ -12,6 +12,9 @@ namespace Comunication
     {
         [OperationContract(IsOneWay = true)]
         void SendMessage(string senderUsername, string message);
+
+        [OperationContract(IsOneWay = true)]
+        void SetChatOperationContext(string username);
     }
 
     [ServiceContract]

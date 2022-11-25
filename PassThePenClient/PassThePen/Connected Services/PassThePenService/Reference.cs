@@ -825,6 +825,12 @@ namespace PassThePen.PassThePenService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/StartTurnSignal")]
         System.Threading.Tasks.Task StartTurnSignalAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/SetMatchOperationContext")]
+        void SetMatchOperationContext(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/SetMatchOperationContext")]
+        System.Threading.Tasks.Task SetMatchOperationContextAsync(string username);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -891,6 +897,14 @@ namespace PassThePen.PassThePenService {
         public System.Threading.Tasks.Task StartTurnSignalAsync() {
             return base.Channel.StartTurnSignalAsync();
         }
+        
+        public void SetMatchOperationContext(string username) {
+            base.Channel.SetMatchOperationContext(username);
+        }
+        
+        public System.Threading.Tasks.Task SetMatchOperationContextAsync(string username) {
+            return base.Channel.SetMatchOperationContextAsync(username);
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -902,6 +916,12 @@ namespace PassThePen.PassThePenService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatServices/SendMessage")]
         System.Threading.Tasks.Task SendMessageAsync(string senderUsername, string message);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatServices/SetChatOperationContext")]
+        void SetChatOperationContext(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatServices/SetChatOperationContext")]
+        System.Threading.Tasks.Task SetChatOperationContextAsync(string username);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -945,6 +965,14 @@ namespace PassThePen.PassThePenService {
         
         public System.Threading.Tasks.Task SendMessageAsync(string senderUsername, string message) {
             return base.Channel.SendMessageAsync(senderUsername, message);
+        }
+        
+        public void SetChatOperationContext(string username) {
+            base.Channel.SetChatOperationContext(username);
+        }
+        
+        public System.Threading.Tasks.Task SetChatOperationContextAsync(string username) {
+            return base.Channel.SetChatOperationContextAsync(username);
         }
     }
     

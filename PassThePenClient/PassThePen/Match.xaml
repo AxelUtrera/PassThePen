@@ -17,12 +17,12 @@
         <Label Content="{x:Static p:Resources.Match_TimeRemaining_Label}" HorizontalAlignment="Center" Margin="0,30,0,0" VerticalAlignment="Top" FontSize="20"/>
         <Label x:Name="Label_TimeRemaining" Content="X" HorizontalAlignment="Center" Margin="0,60,0,0" VerticalAlignment="Top" FontSize="35"/>
         <Label Content="{x:Static p:Resources.Match_CurrentDraw_Label}" HorizontalAlignment="Left" Margin="150,30,0,0" VerticalAlignment="Top" FontSize="20"/>
-        <Image HorizontalAlignment="Right" Height="36" Margin="0,65,150,0" VerticalAlignment="Top" Width="34" Source="C:\Users\danie\Documents\Universidad\7mo Semestre\Tecnologias\PassThePen\PassThePenClient\PassThePen\Img\Icon_Score.png"/>
+        <Image HorizontalAlignment="Right" Height="36" Margin="0,65,150,0" VerticalAlignment="Top" Width="34" Source="Img\Icon_Score.png"/>
         <Label x:Name="Label_Score" Content="50" HorizontalAlignment="Right" Margin="0,60,190,0" VerticalAlignment="Top" FontSize="30"/>
         <Label x:Name="Label_CurrentDraw" Content="Draw" HorizontalAlignment="Left" Margin="170,60,0,0" VerticalAlignment="Top" FontSize="30"/>
         <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="37,0,0,150" Background="LightGray">
             <Canvas Margin="0,5" Height="102" Background="White" Width="310">
-                <Image Source="C:\Users\danie\Documents\Universidad\7mo Semestre\Tecnologias\PassThePen\PassThePenClient\PassThePen\Img\logo_Pass_the_pen.png" Height="75" Width="97" Canvas.Left="15" Canvas.Top="15"></Image>
+                <Image Source="Img\logo_Pass_the_pen.png" Height="75" Width="97" Canvas.Left="15" Canvas.Top="15"></Image>
                 <Label Content="ElSeniorDibujos" Canvas.Left="131" Canvas.Top="15" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <Label Content="{x:Static p:Resources.Match_ScorePlayer_Label}" Canvas.Left="133" Canvas.Top="50" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <Image Height="37" Canvas.Left="250" Canvas.Top="45" Width="43" Source="C:\Users\danie\Documents\Universidad\7mo Semestre\Tecnologias\PassThePen\PassThePenClient\PassThePen\Img\Icon_Score.png"/>
@@ -70,7 +70,7 @@
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border Background="Gray" BorderBrush="Gray" CornerRadius="15,15,15,15">
-                        <Image Source="C:\Users\danie\Documents\Universidad\7mo Semestre\Tecnologias\PassThePen\PassThePenClient\PassThePen\Img\Icon_Eraser.png" Margin="5,0,5,0"></Image>
+                        <Image Source="Img\Icon_Eraser.png" Margin="5,0,5,0"></Image>
                     </Border>
                 </ControlTemplate>
             </Button.Template>
@@ -79,7 +79,7 @@
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border Background="Green" BorderBrush="Green" CornerRadius="15,15,15,15">
-                        <Image Source="C:\Users\danie\Documents\Universidad\7mo Semestre\Tecnologias\PassThePen\PassThePenClient\PassThePen\Img\Icon_Pencil.png" Margin="5,0,5,0"></Image>
+                        <Image Source="Img\Icon_Pencil.png" Margin="5,0,5,0"></Image>
                     </Border>
                 </ControlTemplate>
             </Button.Template>
@@ -88,7 +88,7 @@
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border Background="Blue" BorderBrush="Blue" CornerRadius="15,15,15,15">
-                        <Image Source="C:\Users\danie\Documents\Universidad\7mo Semestre\Tecnologias\PassThePen\PassThePenClient\PassThePen\Img\Icon_Pencil.png" Margin="5,0,5,0"></Image>
+                        <Image Source="Img\Icon_Pencil.png" Margin="5,0,5,0"></Image>
                     </Border>
                 </ControlTemplate>
             </Button.Template>
@@ -106,7 +106,7 @@
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border Background="Black" BorderBrush="Black" CornerRadius="15,15,15,15">
-                        <Image Source="C:\Users\danie\Documents\Universidad\7mo Semestre\Tecnologias\PassThePen\PassThePenClient\PassThePen\Img\Icon_Pencil.png" Margin="5,0,5,0"></Image>
+                        <Image Source="Img\Icon_Pencil.png" Margin="5,0,5,0"></Image>
                     </Border>
                 </ControlTemplate>
             </Button.Template>
@@ -115,7 +115,7 @@
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border Background="CornflowerBlue" BorderBrush="CornflowerBlue" CornerRadius="15,15,15,15">
-                        <Image Source="C:\Users\danie\Documents\Universidad\7mo Semestre\Tecnologias\PassThePen\PassThePenClient\PassThePen\Img\Icon_SendMessage.png" Margin="5,0,5,0"></Image>
+                        <Image Source="Img\Icon_SendMessage.png" Margin="5,0,5,0"></Image>
                     </Border>
                 </ControlTemplate>
             </Button.Template>
