@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
+using System.Security.Cryptography;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
@@ -233,6 +234,7 @@ namespace Comunication
 
     public partial class ImplementationServices : IMatchManagement
     {
+        private int turnNumber = 0;
 
         public void SelectTurnTime()
         {
@@ -272,7 +274,8 @@ namespace Comunication
                 {
                     foreach(ConnectedUser matchUser in playersInGroup)
                     {
-                        matchUser.matchContext.GetCallbackChannel<IMatchCallback>().ReturnStartTurnSignal();
+                        turnNumber++;
+                        matchUser.matchContext.GetCallbackChannel<IMatchCallback>().ReturnStartTurnSignal(turnNumber);
                     }
                 }
             }
@@ -309,9 +312,19 @@ namespace Comunication
 
     public partial class ImplementationServices : IDrawReviewService
     {
+        List<byte[]> playersDraws = new List<byte[]>();
+
         public void SendDraws(byte[] draw)
         {
-            OperationContext.Current.GetCallbackChannel<IDrawReviewCallback>().DistributeDraws(draw);
+            playersDraws.Add(draw);
+
+            if(playersDraws.Count > 1)
+            {
+                foreach(ConnectedUser user in playersInGroup)
+                {
+                    user.drawContext.GetCallbackChannel<IDrawReviewCallback>().DistributeDraws(playersDraws);
+                }
+            }
         }
     }
 }

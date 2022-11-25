@@ -33,7 +33,7 @@ namespace Comunication
         void DistributeTurnTime(int turnTime);
 
         [OperationContract(IsOneWay = true)]
-        void ReturnStartTurnSignal();
+        void ReturnStartTurnSignal(int turnNumber);
 
     }
 }

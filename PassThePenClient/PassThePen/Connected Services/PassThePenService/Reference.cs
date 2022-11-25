@@ -821,10 +821,10 @@ namespace PassThePen.PassThePenService {
         System.Threading.Tasks.Task SelectTurnTimeAsync();
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/StartTurnSignal")]
-        void StartTurnSignal();
+        void StartTurnSignal(string username);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/StartTurnSignal")]
-        System.Threading.Tasks.Task StartTurnSignalAsync();
+        System.Threading.Tasks.Task StartTurnSignalAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/SetMatchOperationContext")]
         void SetMatchOperationContext(string username);
@@ -843,7 +843,7 @@ namespace PassThePen.PassThePenService {
         void DistributeTurnTime(int turnTime);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/ReturnStartTurnSignal")]
-        void ReturnStartTurnSignal();
+        void ReturnStartTurnSignal(int turnNumber);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -890,12 +890,12 @@ namespace PassThePen.PassThePenService {
             return base.Channel.SelectTurnTimeAsync();
         }
         
-        public void StartTurnSignal() {
-            base.Channel.StartTurnSignal();
+        public void StartTurnSignal(string username) {
+            base.Channel.StartTurnSignal(username);
         }
         
-        public System.Threading.Tasks.Task StartTurnSignalAsync() {
-            return base.Channel.StartTurnSignalAsync();
+        public System.Threading.Tasks.Task StartTurnSignalAsync(string username) {
+            return base.Channel.StartTurnSignalAsync(username);
         }
         
         public void SetMatchOperationContext(string username) {

@@ -125,7 +125,8 @@ namespace PassThePen
         {
             InstanceContext instanceContext = new InstanceContext(this);
             PassThePenService.MatchManagementClient client = new MatchManagementClient(instanceContext);
-            client.StartTurnSignal();
+            MainMenu main = new MainMenu();
+            client.StartTurnSignal(MainMenu.username);
         }
 
         private void StartTurn()
@@ -166,8 +167,9 @@ namespace PassThePen
             selectedTime--;
         }
 
-        public void ReturnStartTurnSignal()
+        public void ReturnStartTurnSignal(int turnNumber)
         {
+            Label_TurnNumber.Content = turnNumber;
             StartTurn();
         }
 

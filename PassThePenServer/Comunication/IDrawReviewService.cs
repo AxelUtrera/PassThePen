@@ -11,13 +11,13 @@ namespace Comunication
     public interface IDrawReviewService
     {
         [OperationContract(IsOneWay = true)]
-        void SendDraws(Byte[] draw);
+        void SendDraws(byte[] draw);
     }
 
     [ServiceContract]
     public interface IDrawReviewCallback
     {
         [OperationContract(IsOneWay = true)]
-        void DistributeDraws(Byte[] draw);
+        void DistributeDraws(List<byte[]> playersDraws);
     }
 }
