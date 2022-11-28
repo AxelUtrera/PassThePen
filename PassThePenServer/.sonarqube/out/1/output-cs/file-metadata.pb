@@ -1,0 +1,10 @@
+b
+WC:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\DataAccess\FriendRequest.csutf-8\
+QC:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\DataAccess\Friends.csutf-8Y
+NC:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\DataAccess\Game.csutf-8c
+XC:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\DataAccess\Model1.Context.csutf-8[
+PC:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\DataAccess\Model1.csutf-8m
+bC:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\DataAccess\PassThePenModel.Designer.csutf-8[
+PC:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\DataAccess\Player.csutf-8j
+aC:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\DataAccess\Properties\AssemblyInfo.csutf-8ç
+ÅC:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\DataAccess\obj\Debug\.NETFramework,Version=v4.8.AssemblyAttributes.csutf-8

@@ -1,0 +1,5 @@
+﻿C:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\Domain\ConnectedUser.cs
+C:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\Domain\FriendRequest.cs
+C:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\Domain\Friends.cs
+C:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\Domain\Player.cs
+C:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\Domain\Properties\AssemblyInfo.cs

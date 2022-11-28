@@ -36,9 +36,9 @@ namespace Comunication
             return playerLogic.UpdatePassword(username, password);
         }
 
-        public int UpdatePassword(string SendEmail, string password)
+        public int UpdatePassword(string email, string password)
         {
-            return playerLogic.UpdatePasswordEmail(SendEmail, password);
+            return playerLogic.UpdatePasswordEmail(email, password);
         }
 
         public Friends[] GetFriends(String username)
@@ -47,9 +47,9 @@ namespace Comunication
             return friends.ToArray();
         }
 
-        public int DeleteFriend(Friends friend)
+        public int DeleteFriend(Friends friendToDelete)
         {
-            return playerLogic.DeleteFriend(friend);
+            return playerLogic.DeleteFriend(friendToDelete);
         }
 
         public int FindPlayer(string username)
@@ -62,14 +62,14 @@ namespace Comunication
     {
         public int AutenticatePlayer(Player player)
         {
-            PlayerLogic playerLogic = new PlayerLogic();
-            return playerLogic.AutenticatePlayer(player);
+            PlayerLogic newPlayerLogic = new PlayerLogic();
+            return newPlayerLogic.AutenticatePlayer(player);
         }
 
         public int AutenticateEmail(string email)
         {
-            PlayerLogic playerLogic = new PlayerLogic();
-            return playerLogic.AutenticateEmail(email);
+            PlayerLogic playerNewLogic = new PlayerLogic();
+            return playerNewLogic.AutenticateEmail(email);
         }
 
         public int CodeEmail(string to, String affair, int validationCode)
@@ -93,14 +93,14 @@ namespace Comunication
             return friendRequestLogic.DeleteFriendRequest(friendRequest);
         }
 
-        public List<FriendRequest> GetFriendRequestsList(string player)
+        public List<FriendRequest> GetFriendRequestsList(string username)
         {
-            return friendRequestLogic.GetFriendRequestsOfPlayer(player);
+            return friendRequestLogic.GetFriendRequestsOfPlayer(username);
         }
 
-        public int SendFriendRequests(FriendRequest friendRequests)
+        public int SendFriendRequests(FriendRequest friendRequest)
         {
-            return friendRequestLogic.SendFriendRequests(friendRequests);
+            return friendRequestLogic.SendFriendRequests(friendRequest);
         }
     }
 
@@ -149,24 +149,33 @@ namespace Comunication
 
 
         public void SendMathInvitation(string invitingPlayer, string invitedPlayer)
-        {        
+        {
             int operationOK = 200;
             int userNotFound = 404;
 
             ConnectedUser userConnected = users.FirstOrDefault(user => user.username.Equals(invitedPlayer));
             ConnectedUser matchHost = users.FirstOrDefault(user => user.username.Equals(invitingPlayer));
 
-            if (FindPlayerInGroup(invitingPlayer) == userNotFound)
+            if (userConnected != null)
             {
-        
-                matchHost.hostState = true;
-                playersInGroup.Add(matchHost);
+                if (FindPlayerInGroup(invitingPlayer) == userNotFound)
+                {
+                    if (matchHost != null)
+                    {
+                        matchHost.hostState = true;
+                    }
+
+                    playersInGroup.Add(matchHost);
+                }
+
+
+                if (userConnected.operationContext.GetCallbackChannel<IPlayersServicesCallBack>().NotifyMatchInvitation(invitingPlayer) == operationOK)
+                {
+                    playersInGroup.Add(userConnected);
+                }
             }
 
-            if (userConnected.operationContext.GetCallbackChannel<IPlayersServicesCallBack>().NotifyMatchInvitation(invitingPlayer) == operationOK)
-            {
-                playersInGroup.Add(userConnected);
-            }
+
 
         }
 
@@ -177,7 +186,7 @@ namespace Comunication
 
             if (users.FirstOrDefault(user => user.username.Equals(usernamePlayer)) == null)
             {
-                isConected = userNotConected;    
+                isConected = userNotConected;
             }
 
             return isConected;
@@ -198,7 +207,7 @@ namespace Comunication
         {
             int statusCode = 500;
 
-            if (playersInGroup.Count() <=  6)
+            if (playersInGroup.Count <= 6)
             {
                 statusCode = 200;
             }
@@ -221,7 +230,7 @@ namespace Comunication
         {
             foreach (ConnectedUser user in playersInGroup)
             {
-                if (user.username.Equals(username) && user.hostState == true)
+                if (user.username.Equals(username) && user.hostState)
                 {
                     foreach (ConnectedUser connectedUser in playersInGroup)
                     {
@@ -241,7 +250,7 @@ namespace Comunication
             int[] seconds = { 15, 20, 25, 30 };
             Random random = new Random();
             int time = seconds[random.Next(seconds.Length)];
-            foreach(ConnectedUser user in playersInGroup)
+            foreach (ConnectedUser user in playersInGroup)
             {
                 user.matchContext.GetCallbackChannel<IMatchCallback>().DistributeTurnTime(time);
             }
@@ -249,7 +258,7 @@ namespace Comunication
 
         public void SendCard(string card)
         {
-            foreach(ConnectedUser user in playersInGroup)
+            foreach (ConnectedUser user in playersInGroup)
             {
                 user.matchContext.GetCallbackChannel<IMatchCallback>().DistributeCard(card);
             }
@@ -257,7 +266,8 @@ namespace Comunication
 
         public void SetMatchOperationContext(string username)
         {
-            foreach(ConnectedUser user in playersInGroup)
+
+            foreach (ConnectedUser user in playersInGroup)
             {
                 if (user.username.Equals(username))
                 {
@@ -268,11 +278,11 @@ namespace Comunication
 
         public void StartTurnSignal(string username)
         {
-            foreach(ConnectedUser user in playersInGroup)
+            foreach (ConnectedUser user in playersInGroup)
             {
-                if (user.username.Equals(username) && user.hostState == true)
+                if (user.username.Equals(username) && user.hostState)
                 {
-                    foreach(ConnectedUser matchUser in playersInGroup)
+                    foreach (ConnectedUser matchUser in playersInGroup)
                     {
                         turnNumber++;
                         matchUser.matchContext.GetCallbackChannel<IMatchCallback>().ReturnStartTurnSignal(turnNumber);
@@ -281,7 +291,7 @@ namespace Comunication
             }
         }
 
-        
+
     }
 
     public partial class ImplementationServices : IChatServices
@@ -291,7 +301,7 @@ namespace Comunication
             ChatLogic chatLogic = new ChatLogic();
             string completeMessage = chatLogic.BuildMessage(senderUsername, message);
 
-            foreach(ConnectedUser user in playersInGroup)
+            foreach (ConnectedUser user in playersInGroup)
             {
                 user.chatContext.GetCallbackChannel<IChatServiceCallback>().MessageSend(completeMessage);
             }
@@ -300,7 +310,7 @@ namespace Comunication
 
         public void SetChatOperationContext(string username)
         {
-            foreach(ConnectedUser user in playersInGroup)
+            foreach (ConnectedUser user in playersInGroup)
             {
                 if (user.username.Equals(username))
                 {
@@ -318,13 +328,14 @@ namespace Comunication
         {
             playersDraws.Add(draw);
 
-            if(playersDraws.Count > 1)
+            if (playersDraws.Count > 1)
             {
-                foreach(ConnectedUser user in playersInGroup)
+                foreach (ConnectedUser user in playersInGroup)
                 {
                     user.drawContext.GetCallbackChannel<IDrawReviewCallback>().DistributeDraws(playersDraws);
                 }
             }
         }
     }
+
 }
