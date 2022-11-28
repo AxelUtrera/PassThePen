@@ -27,6 +27,9 @@ namespace Comunication
         void SendMathInvitation(string invitingPlayer, string invitedPlayer);
 
         [OperationContract]
+        void LeaveGroup(string usernamePlayer);
+
+        [OperationContract]
         int FindPlayerIsConected(string usernamePlayer);
 
         [OperationContract]
@@ -36,7 +39,7 @@ namespace Comunication
         int GroupIsNotFull();
 
         [OperationContract]
-        List<string> GetListUsernamesPlayersInGroup();
+        List<Player> GetListPlayersInGroup();
 
         [OperationContract(IsOneWay = true)]
         void StartMatch(string username);
@@ -46,8 +49,13 @@ namespace Comunication
     public interface IPlayersServicesCallBack
     {
         [OperationContract(IsOneWay = true)]
-        void PlayersCallBack(Friends[] friends);
+        void RechargeFriends(Friends[] friends);
 
+        [OperationContract (IsOneWay = true)]
+        void VisualizeButtonLeaveGroup();
+
+        [OperationContract(IsOneWay = true)]
+        void GetDataPlayersInGoup();
 
         [OperationContract]
         int NotifyMatchInvitation(string invitingPlayer);

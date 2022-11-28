@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.ServiceModel;
+using System.ServiceModel.Configuration;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -142,7 +143,7 @@ namespace Comunication
         public void SendOnlinePlayers(string username)
         {
             Friends[] friends = GetFriends(username);
-            users.Find(us => us.username.Equals(username)).operationContext.GetCallbackChannel<IPlayersServicesCallBack>().PlayersCallBack(friends);
+            users.Find(us => us.username.Equals(username)).operationContext.GetCallbackChannel<IPlayersServicesCallBack>().RechargeFriends(friends);
         }
 
 
@@ -153,19 +154,39 @@ namespace Comunication
 
             ConnectedUser userConnected = users.FirstOrDefault(user => user.username.Equals(invitedPlayer));
             ConnectedUser matchHost = users.FirstOrDefault(user => user.username.Equals(invitingPlayer));
-            
 
-            if (FindPlayerInGroup(invitingPlayer) == userNotFound)
-            {
-                matchHost.hostState = true;
-                playersInGroup.Add(matchHost);
+            if (playersInGroup.Count <= 6)
+            {                          
+                if (FindPlayerInGroup(invitingPlayer) == userNotFound)
+                {
+                    matchHost.hostState = true;
+                    playersInGroup.Add(matchHost);
+                }
+
+                if (userConnected.operationContext.GetCallbackChannel<IPlayersServicesCallBack>().NotifyMatchInvitation(invitingPlayer) == operationOK)
+                {
+                    playersInGroup.Add(userConnected);
+                    foreach (ConnectedUser playerInGroup in playersInGroup)
+                    {
+                        playerInGroup.operationContext.GetCallbackChannel<IPlayersServicesCallBack>().GetDataPlayersInGoup();
+                        playerInGroup.operationContext.GetCallbackChannel<IPlayersServicesCallBack>().VisualizeButtonLeaveGroup();
+                    }
+                }
             }
+        }
 
-            if (userConnected.operationContext.GetCallbackChannel<IPlayersServicesCallBack>().NotifyMatchInvitation(invitingPlayer) == operationOK)
+
+        public void LeaveGroup(string usernamePlayer)
+        {
+            var player = playersInGroup.FirstOrDefault(i => i.username == usernamePlayer);
+            if (player != null)
             {
-                playersInGroup.Add(userConnected);
-            }
-
+                playersInGroup.Remove(player);
+                foreach (ConnectedUser playerInGroup in playersInGroup)
+                {
+                    playerInGroup.operationContext.GetCallbackChannel<IPlayersServicesCallBack>().GetDataPlayersInGoup();
+                }
+            }            
         }
 
         public int FindPlayerIsConected(string usernamePlayer)
@@ -204,16 +225,28 @@ namespace Comunication
         }
 
 
-        public List<string> GetListUsernamesPlayersInGroup()
+        public List<Player> GetListPlayersInGroup()
         {
-            List<string> groupPlayers = new List<string>();
+            PlayerLogic playerLogic  = new PlayerLogic();
+            List<Player> groupPlayers = new List<Player>();
 
-            foreach (ConnectedUser playerConnected in playersInGroup)
+            foreach (ConnectedUser playerInGroup in playersInGroup)
             {
-                groupPlayers.Add(playerConnected.username);
+                Player dataPlayer = playerLogic.ObtainPlayerData(playerInGroup.username);
+
+                if (dataPlayer != null)
+                {
+                    groupPlayers.Add(dataPlayer);
+                }
+            }
+           
+            foreach (Player player in groupPlayers)
+            {
+                Console.WriteLine(player.username);
             }
             return groupPlayers;
         }
+
 
         public void StartMatch(string username)
         {

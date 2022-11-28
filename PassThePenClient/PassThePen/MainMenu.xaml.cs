@@ -19,6 +19,7 @@ using System.Xml.Linq;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Xml.Serialization;
+using System.Security.Policy;
 
 namespace PassThePen
 {
@@ -35,7 +36,7 @@ namespace PassThePen
         public int NotifyMatchInvitation(string invitingPlayer)
         {
             int operationResult = 500;
-            var response = MessageBox.Show( "acepta la invitacion para unirte a su grupo.",invitingPlayer + " te ha invitado a una partida ¿Deseas unirte? ", MessageBoxButton.YesNo);
+            var response = MessageBox.Show("acepta la invitacion para unirte a su grupo.", invitingPlayer + " te ha invitado a una partida ¿Deseas unirte? ", MessageBoxButton.YesNo);
             if (response == MessageBoxResult.Yes)
             {
                 MessageBox.Show("te has unido al grupo");
@@ -44,6 +45,27 @@ namespace PassThePen
             return operationResult;
         }
 
+        public void VisualizeButtonLeaveGroup()
+        {
+            Button_ExitGame.Visibility = Visibility.Collapsed;
+            Button_LeaveGroup.Visibility = Visibility.Visible;
+        }
+
+        public void GetDataPlayersInGoup()
+        {
+            InstanceContext instanceContext = new InstanceContext(this);
+            PassThePenService.PlayerConnectionClient client = new PlayerConnectionClient(instanceContext);
+            List<Player> listGroupPlayers = RemoveOwnerPlayerOfListPlayersInGroup(client.GetListPlayersInGroup().ToList());
+            if (listGroupPlayers.Count == 0)
+            {
+                Button_LeaveGroup.Visibility = Visibility.Collapsed;
+                Button_ExitGame.Visibility = Visibility.Visible;
+            }
+            PlacePlayersInGroup(listGroupPlayers); 
+        }
+
+
+       
         public MainMenu()
         {
             InitializeComponent();
@@ -57,14 +79,14 @@ namespace PassThePen
         {
             Profile profile = new Profile();
             profile.Show();
-            
+
         }
 
 
         private void Button_FindFriends_Click(object sender, RoutedEventArgs e)
         {
             listStrings.Clear();
-            if (TextBox_FindFriend.Visibility == Visibility.Collapsed && ListBox_FriendList.Visibility == Visibility.Visible) 
+            if (TextBox_FindFriend.Visibility == Visibility.Collapsed && ListBox_FriendList.Visibility == Visibility.Visible)
             {
                 TextBox_FindFriend.Visibility = Visibility.Visible;
                 friendList.ForEach(fri => listStrings.Add(fri.friendUsername));
@@ -79,9 +101,9 @@ namespace PassThePen
                 TextBox_FindFriend.Visibility = Visibility.Collapsed;
                 TextBox_FindFriend.Text = "";
             }
-            
+
         }
-       
+
         private void Button_ExitGame_Click(object sender, RoutedEventArgs e)
         {
             InstanceContext instanceContext = new InstanceContext(this);
@@ -93,7 +115,7 @@ namespace PassThePen
             this.Close();
         }
 
-        
+
 
         private void Button_FriendRequests_Click(object sender, RoutedEventArgs e)
         {
@@ -124,8 +146,8 @@ namespace PassThePen
             PlayerManagementClient clientFriends = new PlayerManagementClient();
             clientFriendRequest.AcceptFriendRequest(friendRequests);
             GenerateFriendRequestList();
-            clientFriends.GetFriends(username);
-            
+            ListBox_FriendList.ItemsSource = clientFriends.GetFriends(username);
+
         }
 
         private void Button_DeclineRequests_Click(object sender, RoutedEventArgs e)
@@ -134,10 +156,10 @@ namespace PassThePen
             FriendRequest friendRequests = GetFriendRequestOfListboxImageButton(sender);
             client.DeclineFriendRequests(friendRequests);
             GenerateFriendRequestList();
-            
+
         }
 
-        private FriendRequest GetFriendRequestOfListboxImageButton(object sender) 
+        private FriendRequest GetFriendRequestOfListboxImageButton(object sender)
         {
             Image buttonDeleteFriend = (Image)sender;
             StackPanel parent = (StackPanel)buttonDeleteFriend.Parent;
@@ -168,32 +190,28 @@ namespace PassThePen
             client.SendOnlinePlayers(username);
         }
 
-        public void PlayersCallBack(Friends[] friends)
+        public void RechargeFriends(Friends[] friends)
         {
-            InstanceContext instanceContext = new InstanceContext(this);
-            PassThePenService.PlayerConnectionClient client = new PlayerConnectionClient(instanceContext);
-            List<string> playersConected = client.GetNameOnlinePlayers().ToList();
             friendList = friends.ToList();
             ListBox_FriendList.ItemsSource = friendList;
-            
         }
 
         private void Button_StartMatch_Click(object sender, RoutedEventArgs e)
         {
-            Match match = new Match();
-            match.Show();
-            this.Close();
+            InstanceContext context = new InstanceContext(this);
+            PassThePenService.PlayerConnectionClient client = new PassThePenService.PlayerConnectionClient(context);
+            client.StartMatch(username);
         }
 
         private void TextBox_FindFriend_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if(ListBox_FriendList.Visibility == Visibility.Visible)
+            if (ListBox_FriendList.Visibility == Visibility.Visible)
             {
                 FilterFriendList();
             }
             else if (ListBox_FriendsRequests.Visibility == Visibility.Visible)
             {
-                FilterFriendsRequests();  
+                FilterFriendsRequests();
             }
         }
 
@@ -258,7 +276,7 @@ namespace PassThePen
             PlayerManagementClient playerClient = new PlayerManagementClient();
             int playerExist = 200;
 
-            if (playerClient.FindPlayer(Textbox_AddFriend.Text) == playerExist) 
+            if (playerClient.FindPlayer(Textbox_AddFriend.Text) == playerExist)
             {
                 PassThePenService.FriendRequestsClient client = new FriendRequestsClient();
                 FriendRequest friendRequest = new FriendRequest()
@@ -273,7 +291,7 @@ namespace PassThePen
             {
                 MessageBox.Show("El usuario que intentas agregar no existe, intentalo nuevamente");
             }
-            
+
         }
 
         private void Button_InviteFriend_Click(object sender, MouseButtonEventArgs e)
@@ -287,7 +305,7 @@ namespace PassThePen
             int playerIsConected = 200;
             int groupIsNotFull = 200;
 
-            
+
             //Refactorizar
             if (client.FindPlayerIsConected(friend.friendUsername) == playerIsConected && client.GroupIsNotFull() == groupIsNotFull)
             {
@@ -297,7 +315,7 @@ namespace PassThePen
                 }
                 else
                 {
-                    MessageBox.Show("El jugador ya se encuentra en tu grupo no sea inbesil");
+                    MessageBox.Show("El jugador ya se encuentra en tu grupo");
                 }
             }
             else
@@ -324,6 +342,98 @@ namespace PassThePen
             Match match = new Match();
             match.Show();
             this.Close();
+        }
+
+        private void PlacePlayersInGroup(List<Player> listPlayers)
+        {
+
+            
+            switch (listPlayers.Count)
+            {
+                case 0:Image_InviteFiend1.Source = new BitmapImage(new Uri("pack://application:,,,/Img/Icon_AddUser.png"));
+                    Label_PlayerAdded1.Content = null;
+                    Image_InviteFiend2.Source = new BitmapImage(new Uri("pack://application:,,,/Img/Icon_AddUser.png"));
+                    Label_PlayerAdded2.Content = null;
+                    Image_InviteFiend3.Source = new BitmapImage(new Uri("pack://application:,,,/Img/Icon_AddUser.png")); 
+                    Label_PlayerAdded3.Content = null;
+                    Image_InviteFiend4.Source = new BitmapImage(new Uri("pack://application:,,,/Img/Icon_AddUser.png")); 
+                    Label_PlayerAdded4.Content = null;
+                    Image_InviteFiend5.Source = new BitmapImage(new Uri("pack://application:,,,/Img/Icon_AddUser.png")); 
+                    Label_PlayerAdded5.Content = null;
+                    break;
+                    
+                case 1:
+                    Image_InviteFiend1.Source = ImageManager.ToImage(listPlayers.ElementAt(0).profileImage);
+                    Label_PlayerAdded1.Content = listPlayers.ElementAt(0).username;
+                    break;
+
+                case 2:
+                    Image_InviteFiend1.Source = ImageManager.ToImage(listPlayers.ElementAt(0).profileImage);
+                    Label_PlayerAdded1.Content = listPlayers.ElementAt(0).username;
+                    Image_InviteFiend2.Source = ImageManager.ToImage(listPlayers.ElementAt(1).profileImage);
+                    Label_PlayerAdded2.Content = listPlayers.ElementAt(1).username;
+                    break;
+
+                case 3:
+                    Image_InviteFiend1.Source = ImageManager.ToImage(listPlayers.ElementAt(0).profileImage);
+                    Label_PlayerAdded1.Content = listPlayers.ElementAt(0).username;
+                    Image_InviteFiend2.Source = ImageManager.ToImage(listPlayers.ElementAt(1).profileImage);
+                    Label_PlayerAdded2.Content = listPlayers.ElementAt(1).username;
+                    Image_InviteFiend3.Source = ImageManager.ToImage(listPlayers.ElementAt(2).profileImage);
+                    Label_PlayerAdded3.Content = listPlayers.ElementAt(2).username;
+                    break;
+
+                case 4:
+                    Image_InviteFiend1.Source = ImageManager.ToImage(listPlayers.ElementAt(0).profileImage);
+                    Label_PlayerAdded1.Content = listPlayers.ElementAt(0).username;
+                    Image_InviteFiend2.Source = ImageManager.ToImage(listPlayers.ElementAt(1).profileImage);
+                    Label_PlayerAdded2.Content = listPlayers.ElementAt(1).username;
+                    Image_InviteFiend3.Source = ImageManager.ToImage(listPlayers.ElementAt(2).profileImage);
+                    Label_PlayerAdded3.Content = listPlayers.ElementAt(2).username;
+                    Image_InviteFiend4.Source = ImageManager.ToImage(listPlayers.ElementAt(3).profileImage);
+                    Label_PlayerAdded4.Content = listPlayers.ElementAt(3).username;
+                    break;
+
+                case 5:
+                    Image_InviteFiend1.Source = ImageManager.ToImage(listPlayers.ElementAt(0).profileImage);
+                    Label_PlayerAdded1.Content = listPlayers.ElementAt(0).username;
+                    Image_InviteFiend2.Source = ImageManager.ToImage(listPlayers.ElementAt(1).profileImage);
+                    Label_PlayerAdded2.Content = listPlayers.ElementAt(1).username;
+                    Image_InviteFiend3.Source = ImageManager.ToImage(listPlayers.ElementAt(2).profileImage);
+                    Label_PlayerAdded3.Content = listPlayers.ElementAt(2).username;
+                    Image_InviteFiend4.Source = ImageManager.ToImage(listPlayers.ElementAt(3).profileImage);
+                    Label_PlayerAdded4.Content = listPlayers.ElementAt(3).username;
+                    Image_InviteFiend5.Source = ImageManager.ToImage(listPlayers.ElementAt(4).profileImage);
+                    Label_PlayerAdded5.Content = listPlayers.ElementAt(4).username;
+                    break;
+            }
+        }
+
+        private List<Player> RemoveOwnerPlayerOfListPlayersInGroup(List<Player> playersInGroup)
+        {
+            Player playerFound = playersInGroup.FirstOrDefault(player => player.username.Equals(username));
+
+            if (playerFound != null)
+            {
+                playersInGroup.Remove(playerFound);
+            }
+
+            return playersInGroup;
+        }
+
+        private void Button_ExitGroup_Click(object sender, RoutedEventArgs e)
+        {
+            InstanceContext context = new InstanceContext(this);
+            PassThePenService.PlayerConnectionClient client = new PassThePenService.PlayerConnectionClient(context);
+            var response = MessageBox.Show("Aviso", "¿Esta seguro de abandonar el grupo?", MessageBoxButton.YesNo);
+            if (response == MessageBoxResult.Yes)
+            {
+                Button_LeaveGroup.Visibility = Visibility.Collapsed;
+                Button_ExitGame.Visibility = Visibility.Visible;
+                client.LeaveGroup(username);
+                PlacePlayersInGroup(new List<Player>());
+            }
+            
         }
     }
 }

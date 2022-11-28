@@ -193,6 +193,10 @@
     <value>Salir del juego</value>
     <comment>Used by: MainMenu</comment>
   </data>
+  <data name="MainMenu_ExitGroup_Button" xml:space="preserve">
+    <value>Salir del grupo</value>
+    <comment>Used by: MainMenu</comment>
+  </data>
   <data name="MainMenu_FriendRequests_Button" xml:space="preserve">
     <value>Solicitudes</value>
     <comment>Used by: MainMenu</comment>

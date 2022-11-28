@@ -651,6 +651,12 @@ namespace PassThePen.PassThePenService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/SendMathInvitation", ReplyAction="http://tempuri.org/IPlayerConnection/SendMathInvitationResponse")]
         System.Threading.Tasks.Task SendMathInvitationAsync(string invitingPlayer, string invitedPlayer);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/LeaveGroup", ReplyAction="http://tempuri.org/IPlayerConnection/LeaveGroupResponse")]
+        void LeaveGroup(string usernamePlayer);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/LeaveGroup", ReplyAction="http://tempuri.org/IPlayerConnection/LeaveGroupResponse")]
+        System.Threading.Tasks.Task LeaveGroupAsync(string usernamePlayer);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/FindPlayerIsConected", ReplyAction="http://tempuri.org/IPlayerConnection/FindPlayerIsConectedResponse")]
         int FindPlayerIsConected(string usernamePlayer);
         
@@ -669,11 +675,11 @@ namespace PassThePen.PassThePenService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/GroupIsNotFull", ReplyAction="http://tempuri.org/IPlayerConnection/GroupIsNotFullResponse")]
         System.Threading.Tasks.Task<int> GroupIsNotFullAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/GetListUsernamesPlayersInGroup", ReplyAction="http://tempuri.org/IPlayerConnection/GetListUsernamesPlayersInGroupResponse")]
-        string[] GetListUsernamesPlayersInGroup();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/GetListPlayersInGroup", ReplyAction="http://tempuri.org/IPlayerConnection/GetListPlayersInGroupResponse")]
+        PassThePen.PassThePenService.Player[] GetListPlayersInGroup();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/GetListUsernamesPlayersInGroup", ReplyAction="http://tempuri.org/IPlayerConnection/GetListUsernamesPlayersInGroupResponse")]
-        System.Threading.Tasks.Task<string[]> GetListUsernamesPlayersInGroupAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/GetListPlayersInGroup", ReplyAction="http://tempuri.org/IPlayerConnection/GetListPlayersInGroupResponse")]
+        System.Threading.Tasks.Task<PassThePen.PassThePenService.Player[]> GetListPlayersInGroupAsync();
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPlayerConnection/StartMatch")]
         void StartMatch(string username);
@@ -685,8 +691,14 @@ namespace PassThePen.PassThePenService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IPlayerConnectionCallback {
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPlayerConnection/PlayersCallBack")]
-        void PlayersCallBack(PassThePen.PassThePenService.Friends[] friends);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPlayerConnection/RechargeFriends")]
+        void RechargeFriends(PassThePen.PassThePenService.Friends[] friends);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPlayerConnection/VisualizeButtonLeaveGroup")]
+        void VisualizeButtonLeaveGroup();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPlayerConnection/GetDataPlayersInGoup")]
+        void GetDataPlayersInGoup();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/NotifyMatchInvitation", ReplyAction="http://tempuri.org/IPlayerConnection/NotifyMatchInvitationResponse")]
         int NotifyMatchInvitation(string invitingPlayer);
@@ -763,6 +775,14 @@ namespace PassThePen.PassThePenService {
             return base.Channel.SendMathInvitationAsync(invitingPlayer, invitedPlayer);
         }
         
+        public void LeaveGroup(string usernamePlayer) {
+            base.Channel.LeaveGroup(usernamePlayer);
+        }
+        
+        public System.Threading.Tasks.Task LeaveGroupAsync(string usernamePlayer) {
+            return base.Channel.LeaveGroupAsync(usernamePlayer);
+        }
+        
         public int FindPlayerIsConected(string usernamePlayer) {
             return base.Channel.FindPlayerIsConected(usernamePlayer);
         }
@@ -787,12 +807,12 @@ namespace PassThePen.PassThePenService {
             return base.Channel.GroupIsNotFullAsync();
         }
         
-        public string[] GetListUsernamesPlayersInGroup() {
-            return base.Channel.GetListUsernamesPlayersInGroup();
+        public PassThePen.PassThePenService.Player[] GetListPlayersInGroup() {
+            return base.Channel.GetListPlayersInGroup();
         }
         
-        public System.Threading.Tasks.Task<string[]> GetListUsernamesPlayersInGroupAsync() {
-            return base.Channel.GetListUsernamesPlayersInGroupAsync();
+        public System.Threading.Tasks.Task<PassThePen.PassThePenService.Player[]> GetListPlayersInGroupAsync() {
+            return base.Channel.GetListPlayersInGroupAsync();
         }
         
         public void StartMatch(string username) {
