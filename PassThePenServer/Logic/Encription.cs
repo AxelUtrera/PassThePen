@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Logic
 {
-    public class Encription
+    public static class Encription
     {
         public static string ToSHA2Hash(String input)
         {

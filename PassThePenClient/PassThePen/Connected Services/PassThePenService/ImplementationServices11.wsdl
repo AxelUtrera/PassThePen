@@ -495,7 +495,7 @@
       <xs:element name="DistributeDraws">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="draw" nillable="true" type="xs:base64Binary" />
+            <xs:element xmlns:q14="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="playersDraws" nillable="true" type="q14:ArrayOfbase64Binary" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -590,6 +590,12 @@
         </xs:sequence>
       </xs:complexType>
       <xs:element name="ArrayOfstring" nillable="true" type="tns:ArrayOfstring" />
+      <xs:complexType name="ArrayOfbase64Binary">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="base64Binary" nillable="true" type="xs:base64Binary" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfbase64Binary" nillable="true" type="tns:ArrayOfbase64Binary" />
     </xs:schema>
   </wsdl:types>
   <wsdl:message name="IPlayerManagement_AddPlayer_InputMessage">

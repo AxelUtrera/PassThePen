@@ -63,7 +63,7 @@ namespace PassThePen
             client.Close();
         }
 
-        private void Button_cancel_Click(object sender, RoutedEventArgs e)
+        private void Button_Cancel_Click(object sender, RoutedEventArgs e)
         {
             Login login = new Login();
             login.Show();
@@ -155,11 +155,6 @@ namespace PassThePen
 
         
 
-        private void Button_cancel_password_Click(object sender, RoutedEventArgs e)
-        {
-            Login login = new Login();
-            login.Show();
-            Close();
-        }
+        
     }
 }

@@ -7,7 +7,7 @@ using System.Windows.Media.Imaging;
 
 namespace PassThePen
 {
-    public class ImageManager
+    public static class ImageManager
     {
         public static BitmapImage ToImage(byte[] array)
         {

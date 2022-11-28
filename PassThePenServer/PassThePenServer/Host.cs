@@ -7,23 +7,15 @@ using System.Threading.Tasks;
 
 namespace PassThePenServer
 {
-    internal class Host
+    internal static class Host
     {
         static void Main(string[] args)
         {
             using(ServiceHost host = new ServiceHost(typeof(Comunication.ImplementationServices)))
             {
-                try
-                {
                     host.Open();
                     Console.WriteLine("Server is up...");
                     Console.ReadLine();
-                }
-                catch(Exception e)
-                {
-                    Console.WriteLine("Error al iniciar el servidor");
-                }
-
             }
             
         }

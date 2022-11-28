@@ -1,0 +1,29 @@
+Product projects
+---------------------------------------
+C:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\Domain\Domain.csproj
+C:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\DataAccess\DataAccess.csproj
+C:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\Logic\Logic.csproj
+C:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\Comunication\Comunication.csproj
+C:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\PassThePenServer\PassThePenServer.csproj
+
+
+Test projects
+---------------------------------------
+C:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\PassThePenTest\PassThePenTest.csproj
+
+
+Invalid projects
+---------------------------------------
+{none}
+
+
+Skipped projects
+---------------------------------------
+{none}
+
+
+Excluded projects
+---------------------------------------
+{none}
+
+

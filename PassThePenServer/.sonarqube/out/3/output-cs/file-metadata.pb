@@ -1,0 +1,11 @@
+c
+ZC:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\Comunication\IAutentication.csutf-8a
+XC:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\Comunication\IChatService.csutf-8g
+^C:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\Comunication\IDrawReviewService.csutf-8d
+[C:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\Comunication\IFriendRequests.csutf-8e
+\C:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\Comunication\IMatchManagement.csutf-8f
+]C:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\Comunication\IPlayerConnection.csutf-8f
+]C:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\Comunication\IPlayerManagement.csutf-8k
+bC:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\Comunication\ImplementationServices.csutf-8l
+cC:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\Comunication\Properties\AssemblyInfo.csutf-8è
+ÉC:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\Comunication\obj\Debug\.NETFramework,Version=v4.8.AssemblyAttributes.csutf-8

@@ -19,12 +19,16 @@ namespace PassThePen
     /// </summary>
     public partial class DrawReview : Window
     {
-        public static byte[] bytes;
+        public static byte[] bytes { get; set; }
+
+
         public DrawReview()
         {
             InitializeComponent();
             Image_ReviewDraw.Source = ConvertByteToImage(bytes);
         }
+
+
 
         public BitmapImage ConvertByteToImage(byte[] array)
         {
@@ -41,7 +45,7 @@ namespace PassThePen
 
         private void Button_SendReview_Click(object sender, RoutedEventArgs e)
         {
-            int value = (int) Rating_DrawReview.Value;
+            int value = (int)Rating_DrawReview.Value;
             MessageBox.Show("Puntuacion: " + value);
         }
     }

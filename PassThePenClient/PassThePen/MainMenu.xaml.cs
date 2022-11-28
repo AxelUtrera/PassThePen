@@ -27,15 +27,15 @@ namespace PassThePen
     /// </summary>
     public partial class MainMenu : Window, PassThePenService.IPlayerConnectionCallback
     {
-        public static string username;
-        private List<string> listStrings = new List<string>();
+        public static string username { set; get; }
+        private List<string> listUsernameStrings = new List<string>();
         private List<Friends> friendList = new List<Friends>();
         private List<FriendRequest> friendRequests = new List<FriendRequest>();
 
         public int NotifyMatchInvitation(string invitingPlayer)
         {
             int operationResult = 500;
-            var response = MessageBox.Show( "acepta la invitacion para unirte a su grupo.",invitingPlayer + " te ha invitado a una partida ¿Deseas unirte? ", MessageBoxButton.YesNo);
+            var response = MessageBox.Show("acepta la invitacion para unirte a su grupo.", invitingPlayer + " te ha invitado a una partida ¿Deseas unirte? ", MessageBoxButton.YesNo);
             if (response == MessageBoxResult.Yes)
             {
                 MessageBox.Show("te has unido al grupo");
@@ -49,7 +49,7 @@ namespace PassThePen
             InitializeComponent();
             Connected();
             GetFriends();
-            listStrings.Clear();
+            listUsernameStrings.Clear();
             SetDataProfile();
         }
 
@@ -57,31 +57,31 @@ namespace PassThePen
         {
             Profile profile = new Profile();
             profile.Show();
-            
+
         }
 
 
         private void Button_FindFriends_Click(object sender, RoutedEventArgs e)
         {
-            listStrings.Clear();
-            if (TextBox_FindFriend.Visibility == Visibility.Collapsed && ListBox_FriendList.Visibility == Visibility.Visible) 
+            listUsernameStrings.Clear();
+            if (TextBox_FindFriend.Visibility == Visibility.Collapsed && ListBox_FriendList.Visibility == Visibility.Visible)
             {
                 TextBox_FindFriend.Visibility = Visibility.Visible;
-                friendList.ForEach(fri => listStrings.Add(fri.friendUsername));
+                friendList.ForEach(fri => listUsernameStrings.Add(fri.friendUsername));
             }
             else if (TextBox_FindFriend.Visibility == Visibility.Collapsed && ListBox_FriendsRequests.Visibility == Visibility.Visible)
             {
                 TextBox_FindFriend.Visibility = Visibility.Visible;
-                friendRequests.ForEach(fri => listStrings.Add(fri.friendUsername));
+                friendRequests.ForEach(fri => listUsernameStrings.Add(fri.friendUsername));
             }
             else
             {
                 TextBox_FindFriend.Visibility = Visibility.Collapsed;
                 TextBox_FindFriend.Text = "";
             }
-            
+
         }
-       
+
         private void Button_ExitGame_Click(object sender, RoutedEventArgs e)
         {
             InstanceContext instanceContext = new InstanceContext(this);
@@ -93,7 +93,7 @@ namespace PassThePen
             this.Close();
         }
 
-        
+
 
         private void Button_FriendRequests_Click(object sender, RoutedEventArgs e)
         {
@@ -119,25 +119,25 @@ namespace PassThePen
 
         private void Button_ConfirmRequests_Click(object sender, RoutedEventArgs e)
         {
-            FriendRequest friendRequests = GetFriendRequestOfListboxImageButton(sender);
+            FriendRequest newFriendRequests = GetFriendRequestOfListboxImageButton(sender);
             FriendRequestsClient clientFriendRequest = new FriendRequestsClient();
             PlayerManagementClient clientFriends = new PlayerManagementClient();
-            clientFriendRequest.AcceptFriendRequest(friendRequests);
+            clientFriendRequest.AcceptFriendRequest(newFriendRequests);
             GenerateFriendRequestList();
             clientFriends.GetFriends(username);
-            
+
         }
 
         private void Button_DeclineRequests_Click(object sender, RoutedEventArgs e)
         {
             PassThePenService.FriendRequestsClient client = new FriendRequestsClient();
-            FriendRequest friendRequests = GetFriendRequestOfListboxImageButton(sender);
-            client.DeclineFriendRequests(friendRequests);
+            FriendRequest newFriendRequests = GetFriendRequestOfListboxImageButton(sender);
+            client.DeclineFriendRequests(newFriendRequests);
             GenerateFriendRequestList();
-            
+
         }
 
-        private FriendRequest GetFriendRequestOfListboxImageButton(object sender) 
+        private FriendRequest GetFriendRequestOfListboxImageButton(object sender)
         {
             Image buttonDeleteFriend = (Image)sender;
             StackPanel parent = (StackPanel)buttonDeleteFriend.Parent;
@@ -170,12 +170,9 @@ namespace PassThePen
 
         public void PlayersCallBack(Friends[] friends)
         {
-            InstanceContext instanceContext = new InstanceContext(this);
-            PassThePenService.PlayerConnectionClient client = new PlayerConnectionClient(instanceContext);
-            List<string> playersConected = client.GetNameOnlinePlayers().ToList();
             friendList = friends.ToList();
             ListBox_FriendList.ItemsSource = friendList;
-            
+
         }
 
         private void Button_StartMatch_Click(object sender, RoutedEventArgs e)
@@ -187,24 +184,23 @@ namespace PassThePen
 
         private void TextBox_FindFriend_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if(ListBox_FriendList.Visibility == Visibility.Visible)
+            if (ListBox_FriendList.Visibility == Visibility.Visible)
             {
                 FilterFriendList();
             }
             else if (ListBox_FriendsRequests.Visibility == Visibility.Visible)
             {
-                FilterFriendsRequests();  
+                FilterFriendsRequests();
             }
         }
 
 
         private void FilterFriendsRequests()
         {
-            if (String.IsNullOrEmpty(TextBox_FindFriend.Text.Trim()) == false)
+            if (!String.IsNullOrEmpty(TextBox_FindFriend.Text.Trim()))
             {
                 List<FriendRequest> friendsEquals = new List<FriendRequest>();
-                friendsEquals.Clear();
-                foreach (string str in listStrings)
+                foreach (string str in listUsernameStrings)
                 {
 
                     if (str.StartsWith(TextBox_FindFriend.Text.Trim()))
@@ -222,11 +218,10 @@ namespace PassThePen
 
         private void FilterFriendList()
         {
-            if (String.IsNullOrEmpty(TextBox_FindFriend.Text.Trim()) == false)
+            if (!String.IsNullOrEmpty(TextBox_FindFriend.Text.Trim()))
             {
                 List<Friends> friendsEquals = new List<Friends>();
-                friendsEquals.Clear();
-                foreach (string str in listStrings)
+                foreach (string str in listUsernameStrings)
                 {
 
                     if (str.StartsWith(TextBox_FindFriend.Text.Trim()))
@@ -258,7 +253,7 @@ namespace PassThePen
             PlayerManagementClient playerClient = new PlayerManagementClient();
             int playerExist = 200;
 
-            if (playerClient.FindPlayer(Textbox_AddFriend.Text) == playerExist) 
+            if (playerClient.FindPlayer(Textbox_AddFriend.Text) == playerExist)
             {
                 PassThePenService.FriendRequestsClient client = new FriendRequestsClient();
                 FriendRequest friendRequest = new FriendRequest()
@@ -273,7 +268,7 @@ namespace PassThePen
             {
                 MessageBox.Show("El usuario que intentas agregar no existe, intentalo nuevamente");
             }
-            
+
         }
 
         private void Button_InviteFriend_Click(object sender, MouseButtonEventArgs e)
@@ -287,7 +282,7 @@ namespace PassThePen
             int playerIsConected = 200;
             int groupIsNotFull = 200;
 
-            
+
             //Refactorizar
             if (client.FindPlayerIsConected(friend.friendUsername) == playerIsConected && client.GroupIsNotFull() == groupIsNotFull)
             {

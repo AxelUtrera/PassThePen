@@ -34,7 +34,7 @@ namespace PassThePen
         {
             PlayerManagementClient client = new PlayerManagementClient();
             string currentPassword = PasswordBox_CurrentPassword.Password;
-            if(AutenticatePassword(MainMenu.username, currentPassword) == 200)
+            if (AutenticatePassword(MainMenu.username, currentPassword) == 200)
             {
                 if (ValidatePassword())
                 {
@@ -60,25 +60,42 @@ namespace PassThePen
         {
             Label_InvalidPasswords.Visibility = Visibility.Hidden;
             Boolean isValid = true;
-            RecoverPassword recoverPassword = new RecoverPassword();
             string currentPassword = PasswordBox_CurrentPassword.Password;
             string newPassword = PasswordBox_NewPassword.Password;
             string confirmPassword = PasswordBox_ConfirmPassword.Password;
-            if (!newPassword.Equals(confirmPassword) || string.IsNullOrEmpty(newPassword) || string.IsNullOrEmpty(confirmPassword) || string.IsNullOrEmpty(currentPassword))
+            if (!newPassword.Equals(confirmPassword))
             {
                 Label_InvalidPasswords.Visibility = Visibility.Visible;
                 isValid = false;
             }
-            if (! recoverPassword.ValidateFormat(newPassword, "^(?=.*\\d)(?=.*[\\u0021-\\u002b\\u003c-\\u0040])(?=.*[A-Z])(?=.*[a-z])\\S{8,16}$"))
+
+            if (string.IsNullOrEmpty(newPassword))
+            {
+                Label_InvalidPasswords.Visibility = Visibility.Visible;
+                isValid = false;
+            }
+
+            if (string.IsNullOrEmpty(confirmPassword))
+            {
+                Label_InvalidPasswords.Visibility = Visibility.Visible;
+                isValid = false;
+            }
+
+            if (string.IsNullOrEmpty(currentPassword))
+            {
+                Label_InvalidPasswords.Visibility = Visibility.Visible;
+                isValid = false;
+            }
+            if (!Validation.ValidateFormat(newPassword, "^(?=.*\\d)(?=.*[\\u0021-\\u002b\\u003c-\\u0040])(?=.*[A-Z])(?=.*[a-z])\\S{8,16}$"))
             {
                 isValid = false;
             }
             return isValid;
         }
 
-        private int AutenticatePassword (string username, string password)
+        private int AutenticatePassword(string username, string password)
         {
-            int result = 500;
+            int result;
             PassThePenService.Player player = new Player { username = username, password = password };
             PassThePenService.AutenticationClient client = new PassThePenService.AutenticationClient();
             result = client.AutenticatePlayer(player);

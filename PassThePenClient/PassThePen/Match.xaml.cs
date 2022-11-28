@@ -125,7 +125,6 @@ namespace PassThePen
         {
             InstanceContext instanceContext = new InstanceContext(this);
             PassThePenService.MatchManagementClient client = new MatchManagementClient(instanceContext);
-            MainMenu main = new MainMenu();
             client.StartTurnSignal(MainMenu.username);
         }
 
@@ -243,6 +242,11 @@ namespace PassThePen
             InstanceContext instanceContext = new InstanceContext(this);
             PassThePenService.MatchManagementClient client = new PassThePenService.MatchManagementClient(instanceContext);
             client.SetMatchOperationContext(username);
+        }
+
+        public void DistributeDraws(byte[][] playersDraws)
+        {
+            throw new NotImplementedException();
         }
     }
 }
