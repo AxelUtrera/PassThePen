@@ -1,8 +1,0 @@
-﻿C:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\Logic\ChatLogic.cs
-C:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\Logic\Encription.cs
-C:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\Logic\FriendRequestsLogic.cs
-C:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\Logic\PlayerLogic.cs
-C:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\Logic\Properties\AssemblyInfo.cs
-C:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\Logic\SendEmail.cs
-C:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\Logic\App.config
-C:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\Logic\packages.config
