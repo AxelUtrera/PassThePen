@@ -1,1 +1,0 @@
-Roslyn version: 4.4.0.0Language version: CSharp7_3!Concurrent execution: enabled¤ŸFile 'C:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\Logic\obj\Debug\.NETFramework,Version=v4.8.AssemblyAttributes.cs' was recognized as generated

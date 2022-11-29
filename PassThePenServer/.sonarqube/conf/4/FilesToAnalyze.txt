@@ -1,3 +1,0 @@
-﻿C:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\PassThePenServer\Host.cs
-C:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\PassThePenServer\Properties\AssemblyInfo.cs
-C:\Users\DELL\Documents\GitFlow\PassThePen\PassThePenServer\PassThePenServer\App.config
