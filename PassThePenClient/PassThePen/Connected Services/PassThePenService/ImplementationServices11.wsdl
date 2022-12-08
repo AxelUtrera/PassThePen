@@ -442,6 +442,36 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
+      <xs:element name="SendDraws">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="draw" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetPlayersScore">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetPlayersScoreResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q14="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetPlayersScoreResult" nillable="true" type="q14:ArrayOfKeyValueOfstringint" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ObtainMatchWinner">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ObtainMatchWinnerResponse">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
       <xs:element name="DistributeCard">
         <xs:complexType>
           <xs:sequence>
@@ -460,6 +490,20 @@
         <xs:complexType>
           <xs:sequence>
             <xs:element minOccurs="0" name="turnNumber" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DistributeDraws">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q15="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="playersDraw" nillable="true" type="q15:ArrayOfKeyValueOfstringbase64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="NotifyWinner">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="winner" nillable="true" type="xs:string" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -485,18 +529,28 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element name="SendDraws">
+      <xs:element name="SetDrawReviewContext">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="draw" nillable="true" type="xs:base64Binary" />
+            <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element name="DistributeDraws">
+      <xs:element name="SetDrawReviewContextResponse">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AddPlayerScore">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q14="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="playersDraws" nillable="true" type="q14:ArrayOfbase64Binary" />
+            <xs:element xmlns:q16="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="playerScore" nillable="true" type="q16:ArrayOfKeyValueOfstringint" />
           </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AddPlayerScoreResponse">
+        <xs:complexType>
+          <xs:sequence />
         </xs:complexType>
       </xs:element>
     </xs:schema>
@@ -590,12 +644,42 @@
         </xs:sequence>
       </xs:complexType>
       <xs:element name="ArrayOfstring" nillable="true" type="tns:ArrayOfstring" />
-      <xs:complexType name="ArrayOfbase64Binary">
+      <xs:complexType name="ArrayOfKeyValueOfstringint">
+        <xs:annotation>
+          <xs:appinfo>
+            <IsDictionary xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsDictionary>
+          </xs:appinfo>
+        </xs:annotation>
         <xs:sequence>
-          <xs:element minOccurs="0" maxOccurs="unbounded" name="base64Binary" nillable="true" type="xs:base64Binary" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="KeyValueOfstringint">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Key" nillable="true" type="xs:string" />
+                <xs:element name="Value" type="xs:int" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
         </xs:sequence>
       </xs:complexType>
-      <xs:element name="ArrayOfbase64Binary" nillable="true" type="tns:ArrayOfbase64Binary" />
+      <xs:element name="ArrayOfKeyValueOfstringint" nillable="true" type="tns:ArrayOfKeyValueOfstringint" />
+      <xs:complexType name="ArrayOfKeyValueOfstringbase64Binary">
+        <xs:annotation>
+          <xs:appinfo>
+            <IsDictionary xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsDictionary>
+          </xs:appinfo>
+        </xs:annotation>
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="KeyValueOfstringbase64Binary">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Key" nillable="true" type="xs:string" />
+                <xs:element name="Value" nillable="true" type="xs:base64Binary" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfKeyValueOfstringbase64Binary" nillable="true" type="tns:ArrayOfKeyValueOfstringbase64Binary" />
     </xs:schema>
   </wsdl:types>
   <wsdl:message name="IPlayerManagement_AddPlayer_InputMessage">
@@ -766,6 +850,21 @@
   <wsdl:message name="IMatchManagement_SetMatchOperationContext_InputMessage">
     <wsdl:part name="parameters" element="tns:SetMatchOperationContext" />
   </wsdl:message>
+  <wsdl:message name="IMatchManagement_SendDraws_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendDraws" />
+  </wsdl:message>
+  <wsdl:message name="IMatchManagement_GetPlayersScore_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayersScore" />
+  </wsdl:message>
+  <wsdl:message name="IMatchManagement_GetPlayersScore_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayersScoreResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMatchManagement_ObtainMatchWinner_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtainMatchWinner" />
+  </wsdl:message>
+  <wsdl:message name="IMatchManagement_ObtainMatchWinner_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtainMatchWinnerResponse" />
+  </wsdl:message>
   <wsdl:message name="IMatchManagement_DistributeCard_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:DistributeCard" />
   </wsdl:message>
@@ -774,6 +873,12 @@
   </wsdl:message>
   <wsdl:message name="IMatchManagement_ReturnStartTurnSignal_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ReturnStartTurnSignal" />
+  </wsdl:message>
+  <wsdl:message name="IMatchManagement_DistributeDraws_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:DistributeDraws" />
+  </wsdl:message>
+  <wsdl:message name="IMatchManagement_NotifyWinner_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotifyWinner" />
   </wsdl:message>
   <wsdl:message name="IChatServices_SendMessage_InputMessage">
     <wsdl:part name="parameters" element="tns:SendMessage" />
@@ -784,11 +889,17 @@
   <wsdl:message name="IChatServices_MessageSend_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:MessageSend" />
   </wsdl:message>
-  <wsdl:message name="IDrawReviewService_SendDraws_InputMessage">
-    <wsdl:part name="parameters" element="tns:SendDraws" />
+  <wsdl:message name="IDrawReviewService_SetDrawReviewContext_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetDrawReviewContext" />
   </wsdl:message>
-  <wsdl:message name="IDrawReviewService_DistributeDraws_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:DistributeDraws" />
+  <wsdl:message name="IDrawReviewService_SetDrawReviewContext_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetDrawReviewContextResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDrawReviewService_AddPlayerScore_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddPlayerScore" />
+  </wsdl:message>
+  <wsdl:message name="IDrawReviewService_AddPlayerScore_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddPlayerScoreResponse" />
   </wsdl:message>
   <wsdl:portType name="IPlayerManagement">
     <wsdl:operation name="AddPlayer">
@@ -919,6 +1030,17 @@
     <wsdl:operation name="SetMatchOperationContext">
       <wsdl:input wsaw:Action="http://tempuri.org/IMatchManagement/SetMatchOperationContext" message="tns:IMatchManagement_SetMatchOperationContext_InputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="SendDraws">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchManagement/SendDraws" message="tns:IMatchManagement_SendDraws_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPlayersScore">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchManagement/GetPlayersScore" message="tns:IMatchManagement_GetPlayersScore_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchManagement/GetPlayersScoreResponse" message="tns:IMatchManagement_GetPlayersScore_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtainMatchWinner">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchManagement/ObtainMatchWinner" message="tns:IMatchManagement_ObtainMatchWinner_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchManagement/ObtainMatchWinnerResponse" message="tns:IMatchManagement_ObtainMatchWinner_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="DistributeCard">
       <wsdl:output wsaw:Action="http://tempuri.org/IMatchManagement/DistributeCard" message="tns:IMatchManagement_DistributeCard_OutputCallbackMessage" />
     </wsdl:operation>
@@ -927,6 +1049,12 @@
     </wsdl:operation>
     <wsdl:operation name="ReturnStartTurnSignal">
       <wsdl:output wsaw:Action="http://tempuri.org/IMatchManagement/ReturnStartTurnSignal" message="tns:IMatchManagement_ReturnStartTurnSignal_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DistributeDraws">
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchManagement/DistributeDraws" message="tns:IMatchManagement_DistributeDraws_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotifyWinner">
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchManagement/NotifyWinner" message="tns:IMatchManagement_NotifyWinner_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IChatServices">
@@ -941,11 +1069,13 @@
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IDrawReviewService">
-    <wsdl:operation name="SendDraws">
-      <wsdl:input wsaw:Action="http://tempuri.org/IDrawReviewService/SendDraws" message="tns:IDrawReviewService_SendDraws_InputMessage" />
+    <wsdl:operation name="SetDrawReviewContext">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDrawReviewService/SetDrawReviewContext" message="tns:IDrawReviewService_SetDrawReviewContext_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDrawReviewService/SetDrawReviewContextResponse" message="tns:IDrawReviewService_SetDrawReviewContext_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="DistributeDraws">
-      <wsdl:output wsaw:Action="http://tempuri.org/IDrawReviewService/DistributeDraws" message="tns:IDrawReviewService_DistributeDraws_OutputCallbackMessage" />
+    <wsdl:operation name="AddPlayerScore">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDrawReviewService/AddPlayerScore" message="tns:IDrawReviewService_AddPlayerScore_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDrawReviewService/AddPlayerScoreResponse" message="tns:IDrawReviewService_AddPlayerScore_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IPlayerManagement" type="tns:IPlayerManagement">
@@ -1231,6 +1361,30 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
+    <wsdl:operation name="SendDraws">
+      <soap12:operation soapAction="http://tempuri.org/IMatchManagement/SendDraws" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlayersScore">
+      <soap12:operation soapAction="http://tempuri.org/IMatchManagement/GetPlayersScore" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtainMatchWinner">
+      <soap12:operation soapAction="http://tempuri.org/IMatchManagement/ObtainMatchWinner" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="DistributeCard">
       <soap12:operation soapAction="http://tempuri.org/IMatchManagement/DistributeCard" style="document" />
       <wsdl:output>
@@ -1245,6 +1399,18 @@
     </wsdl:operation>
     <wsdl:operation name="ReturnStartTurnSignal">
       <soap12:operation soapAction="http://tempuri.org/IMatchManagement/ReturnStartTurnSignal" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DistributeDraws">
+      <soap12:operation soapAction="http://tempuri.org/IMatchManagement/DistributeDraws" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotifyWinner">
+      <soap12:operation soapAction="http://tempuri.org/IMatchManagement/NotifyWinner" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
@@ -1275,14 +1441,20 @@
   <wsdl:binding name="NetTcpBinding_IDrawReviewService" type="tns:IDrawReviewService">
     <wsp:PolicyReference URI="#NetTcpBinding_IDrawReviewService_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
-    <wsdl:operation name="SendDraws">
-      <soap12:operation soapAction="http://tempuri.org/IDrawReviewService/SendDraws" style="document" />
+    <wsdl:operation name="SetDrawReviewContext">
+      <soap12:operation soapAction="http://tempuri.org/IDrawReviewService/SetDrawReviewContext" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="DistributeDraws">
-      <soap12:operation soapAction="http://tempuri.org/IDrawReviewService/DistributeDraws" style="document" />
+    <wsdl:operation name="AddPlayerScore">
+      <soap12:operation soapAction="http://tempuri.org/IDrawReviewService/AddPlayerScore" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

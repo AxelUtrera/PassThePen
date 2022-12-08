@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,13 +20,17 @@ namespace PassThePen
     /// </summary>
     public partial class DrawReview : Window
     {
-        public static byte[] bytes { get; set; }
+        public static Dictionary<string, byte[]> playersDraw { get; set; }
+        private Dictionary<string, int> playersScore = new Dictionary<string, int>();
+        private int drawCount = 0;
 
 
         public DrawReview()
         {
             InitializeComponent();
-            Image_ReviewDraw.Source = ConvertByteToImage(bytes);
+            SetPlayersDraw();
+            Console.WriteLine(playersDraw.Count());
+            SetDrawReviewContext(MainMenu.username);
         }
 
 
@@ -43,10 +48,42 @@ namespace PassThePen
             }
         }
 
+
         private void Button_SendReview_Click(object sender, RoutedEventArgs e)
         {
-            int value = (int)Rating_DrawReview.Value;
-            MessageBox.Show("Puntuacion: " + value);
+            string username = Label_PlayerReview.Content.ToString();
+            int score = (int)Rating_DrawReview.Value;
+            playersScore.Add(username, score);
+            if(drawCount < playersDraw.Count()-1)
+            {
+                drawCount++;
+                SetPlayersDraw();
+            }
+            else
+            {
+                AddPlayerScore(playersScore);
+                this.Close();
+            }
+        }
+
+
+        private void SetPlayersDraw()
+        {
+            Label_PlayerReview.Content = playersDraw.ElementAt(drawCount).Key;
+            Image_ReviewDraw.Source = ConvertByteToImage(playersDraw.ElementAt(drawCount).Value);
+            Rating_DrawReview.Value = 0;
+        }
+
+        private void SetDrawReviewContext(String username)
+        {
+            PassThePenService.DrawReviewServiceClient client = new PassThePenService.DrawReviewServiceClient();
+            client.SetDrawReviewContext(username);
+        }
+
+        public void AddPlayerScore(Dictionary<string, int> playerScore)
+        {
+            PassThePenService.DrawReviewServiceClient client = new PassThePenService.DrawReviewServiceClient();
+            client.AddPlayerScore(playerScore);
         }
     }
 }

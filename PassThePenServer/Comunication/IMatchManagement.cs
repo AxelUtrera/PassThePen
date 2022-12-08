@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
@@ -21,6 +22,15 @@ namespace Comunication
 
         [OperationContract(IsOneWay = true)]
         void SetMatchOperationContext(string username);
+
+        [OperationContract(IsOneWay = true)]
+        void SendDraws(string username, byte[] draw);
+
+        [OperationContract]
+        Dictionary<string, int> GetPlayersScore();
+
+        [OperationContract]
+        void ObtainMatchWinner();
     }
 
     [ServiceContract]
@@ -35,5 +45,10 @@ namespace Comunication
         [OperationContract(IsOneWay = true)]
         void ReturnStartTurnSignal(int turnNumber);
 
+        [OperationContract(IsOneWay = true)]
+        void DistributeDraws(Dictionary<string, byte[]> playersDraw);
+
+        [OperationContract(IsOneWay = true)]
+        void NotifyWinner(string winner);
     }
 }

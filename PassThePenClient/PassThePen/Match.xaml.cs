@@ -26,17 +26,20 @@ namespace PassThePen
     /// <summary>
     /// Lógica de interacción para Match.xaml
     /// </summary>
-    public partial class Match : Window, IMatchManagementCallback, IChatServicesCallback, IDrawReviewServiceCallback
+    public partial class Match : Window, IMatchManagementCallback, IChatServicesCallback
     {
 
         DispatcherTimer timer = new DispatcherTimer();
         private int selectedTime;
+        Dictionary<string, int> playerScore;
+
 
         public Match()
         {
             InitializeComponent();
             SetChatOperationContext(MainMenu.username);
             SetMatchOperationContext(MainMenu.username);
+            SetPlayersScoreTable();
         }
 
         private void Button_SetEraser_Click(object sender, RoutedEventArgs e)
@@ -130,6 +133,8 @@ namespace PassThePen
 
         private void StartTurn()
         {
+            SetPlayersScoreTable();
+            InkCanvas_DrawTable.Strokes.Clear();
             ObtainCard();
             ObtainTurnTime();
             StartTurnTimer();
@@ -150,6 +155,7 @@ namespace PassThePen
         private void StartTurnTimer()
         {
             timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick -= Timer_Tick;
             timer.Tick += Timer_Tick;
             timer.Start();
         }
@@ -166,11 +172,13 @@ namespace PassThePen
             selectedTime--;
         }
 
+
         public void ReturnStartTurnSignal(int turnNumber)
         {
             Label_TurnNumber.Content = turnNumber;
             StartTurn();
         }
+
 
         private byte[] GetCanvasDraw()
         {
@@ -216,19 +224,13 @@ namespace PassThePen
         private void SendDraw()
         {
             InstanceContext context = new InstanceContext(this);
-            PassThePenService.DrawReviewServiceClient client = new DrawReviewServiceClient(context);
+            PassThePenService.MatchManagementClient client = new MatchManagementClient(context);
 
             Byte[] playerDraw = GetCanvasDraw();
 
-            client.SendDraws(playerDraw);
+            client.SendDraws(MainMenu.username, playerDraw);
         }
 
-        public void DistributeDraws(byte[] draw)
-        {
-            DrawReview.bytes = draw;
-            DrawReview drawReview = new DrawReview();
-            drawReview.Show();            
-        }
 
         public void SetChatOperationContext(string username)
         {
@@ -244,9 +246,38 @@ namespace PassThePen
             client.SetMatchOperationContext(username);
         }
 
-        public void DistributeDraws(byte[][] playersDraws)
+        public void DistributeDraws(Dictionary<string, byte[]> playersDraw)
         {
-            throw new NotImplementedException();
+            DrawReview.playersDraw = playersDraw;
+            DrawReview drawReview = new DrawReview();
+            drawReview.Show();
+        }
+
+        public void SetPlayersScoreTable()
+        {
+            InstanceContext context = new InstanceContext(this);
+            PassThePenService.MatchManagementClient client = new PassThePenService.MatchManagementClient(context);
+            playerScore = client.GetPlayersScore();
+
+            ListBox_PlayersInGame.Items.Clear();
+            foreach(KeyValuePair<string, int> player in playerScore)
+            {
+                if (player.Key.Equals(MainMenu.username))
+                {
+                    Label_Score.Content = player.Value;
+                }
+                else
+                {
+                    ListBox_PlayersInGame.Items.Add(player.Key + "  Score: " + player.Value);
+                }
+            }
+        }
+
+        public void NotifyWinner(string winner)
+        {
+            MessageBox.Show("El ganador de la partida es: " + winner, "", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("La partida ha terminado, regresando al menu principal", "", MessageBoxButton.OK, MessageBoxImage.Information);
+            this.Close();
         }
     }
 }

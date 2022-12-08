@@ -115,7 +115,8 @@ namespace Comunication
             ConnectedUser user = new ConnectedUser()
             {
                 username = username,
-                operationContext = OperationContext.Current
+                operationContext = OperationContext.Current,
+                score = 0
             };
 
             users.Add(user);
@@ -256,6 +257,7 @@ namespace Comunication
             }
         }
 
+
         public void SendCard(string card)
         {
             foreach (ConnectedUser user in playersInGroup)
@@ -263,6 +265,7 @@ namespace Comunication
                 user.matchContext.GetCallbackChannel<IMatchCallback>().DistributeCard(card);
             }
         }
+
 
         public void SetMatchOperationContext(string username)
         {
@@ -276,23 +279,75 @@ namespace Comunication
             }
         }
 
+
         public void StartTurnSignal(string username)
         {
             foreach (ConnectedUser user in playersInGroup)
             {
                 if (user.username.Equals(username) && user.hostState)
                 {
-                    foreach (ConnectedUser matchUser in playersInGroup)
+                    turnNumber++;
+                    if(turnNumber == 11)
                     {
-                        turnNumber++;
-                        matchUser.matchContext.GetCallbackChannel<IMatchCallback>().ReturnStartTurnSignal(turnNumber);
+                        ObtainMatchWinner();
                     }
+                    else
+                    {
+                        foreach (ConnectedUser matchUser in playersInGroup)
+                        {
+                            matchUser.matchContext.GetCallbackChannel<IMatchCallback>().ReturnStartTurnSignal(turnNumber);
+                        }
+                    }
+                    
                 }
             }
         }
 
 
+        public void SendDraws(string username, byte[] draw)
+        {
+            playersDraws.Add(username, draw);
+
+            if (playersDraws.Count() == playersInGroup.Count())
+            {
+                foreach (ConnectedUser player in playersInGroup)
+                {
+                    player.matchContext.GetCallbackChannel<IMatchCallback>().DistributeDraws(playersDraws);
+                }
+            }
+
+        }
+
+
+        public Dictionary<string, int> GetPlayersScore()
+        {
+            Dictionary<string, int> playersScore = new Dictionary<string, int>();
+            foreach(ConnectedUser user in playersInGroup)
+            {
+                playersScore.Add(user.username, user.score);
+            }
+            return playersScore;
+        }
+
+
+        public void ObtainMatchWinner()
+        {
+            int maxScore = playersInGroup.Max(s => s.score);
+            ConnectedUser winner = playersInGroup.Where(w => w.score == maxScore).FirstOrDefault();
+
+            MatchLogic matchLogic = new MatchLogic();
+            int result = matchLogic.AddMatchWinner(winner.username);
+
+            if(result == 200)
+            {
+                foreach(ConnectedUser user in playersInGroup)
+                {
+                    user.matchContext.GetCallbackChannel<IMatchCallback>().NotifyWinner(winner.username);
+                }
+            }
+        }
     }
+
 
     public partial class ImplementationServices : IChatServices
     {
@@ -308,6 +363,7 @@ namespace Comunication
 
         }
 
+
         public void SetChatOperationContext(string username)
         {
             foreach (ConnectedUser user in playersInGroup)
@@ -322,17 +378,30 @@ namespace Comunication
 
     public partial class ImplementationServices : IDrawReviewService
     {
-        List<byte[]> playersDraws = new List<byte[]>();
+        Dictionary<string, byte[]> playersDraws = new Dictionary<string, byte[]>();
 
-        public void SendDraws(byte[] draw)
+        public void AddPlayerScore(Dictionary<string, int> playerScore)
         {
-            playersDraws.Add(draw);
-
-            if (playersDraws.Count > 1)
+            foreach(ConnectedUser player in playersInGroup)
             {
-                foreach (ConnectedUser user in playersInGroup)
+                player.score += playerScore.FirstOrDefault(x => x.Key == player.username).Value;
+            }
+
+            foreach(ConnectedUser connectedUser in playersInGroup)
+            {
+                Console.WriteLine(connectedUser.username + "---" + connectedUser.score);
+            }
+        }
+
+
+        
+        public void SetDrawReviewContext(string username)
+        {
+            foreach(ConnectedUser player in playersInGroup)
+            {
+                if (player.username.Equals(username))
                 {
-                    user.drawContext.GetCallbackChannel<IDrawReviewCallback>().DistributeDraws(playersDraws);
+                    player.drawContext = OperationContext.Current;
                 }
             }
         }
