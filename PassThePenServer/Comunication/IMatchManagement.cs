@@ -31,6 +31,12 @@ namespace Comunication
 
         [OperationContract]
         void ObtainMatchWinner();
+
+        [OperationContract]
+        Boolean GetHostState(string username);
+
+        [OperationContract(IsOneWay = true)]
+        void RemoveMatchPlayer(string username);
     }
 
     [ServiceContract]
@@ -50,5 +56,11 @@ namespace Comunication
 
         [OperationContract(IsOneWay = true)]
         void NotifyWinner(string winner);
+
+        [OperationContract(IsOneWay = true)]
+        void UpdateMatchPlayers();
+
+        [OperationContract(IsOneWay = true)]
+        void CloseMatchWindow();
     }
 }

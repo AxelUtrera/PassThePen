@@ -110,6 +110,22 @@
             </Button.Template>
         </Button>
         <ListBox x:Name="ListBox_PlayersInGame" BorderThickness="5" BorderBrush="Green" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="14,0,0,50" Height="380" Width="350">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="320"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0" Orientation="Horizontal">
+                            <Label Grid.Column="0" Content="{Binding Key}" Margin="0" Width="160" HorizontalAlignment="Left" FontSize="22"></Label>
+                            <Image Source="Img/Icon_Score.png" Width="30" HorizontalAlignment="Right"></Image>
+                            <Label Grid.Column="0" Content="{Binding Value}" Margin="0" Width="50" HorizontalContentAlignment="Right" FontSize="22" ></Label>
+                            <Image Name="Image_RemovePlayer" Source="Img/Icon_RemovePlayer.png" Width="30" Margin="50,0,0,0" Cursor="Hand" MouseLeftButtonDown="Button_Remove_Match_Player_Click" HorizontalAlignment="Right"></Image>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
             <ListBox.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="10"></Setter>
@@ -117,5 +133,14 @@
             </ListBox.Resources>
         </ListBox>
 
+        <Button Cursor="Hand" Margin="0,10,10,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="30" Height="30" Foreground="White" FontSize="13" Click="Button_Leave_Match_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="OrangeRed" BorderBrush="OrangeRed" CornerRadius="15,15,15,15">
+                        <ContentPresenter Content="X" HorizontalAlignment="Center" VerticalAlignment="Center"></ContentPresenter>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
     </Grid>
 </Window>

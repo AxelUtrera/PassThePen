@@ -76,12 +76,9 @@ namespace PassThePen
 
         private void Button_Register_Click(object sender, RoutedEventArgs e)
         {
-            //Register registerWindow = new Register();
-            //registerWindow.ShowDialog();
-            //Close();
-            Match match = new Match();
-            match.Show();
-
+            Register registerWindow = new Register();
+            registerWindow.ShowDialog();
+            Close();
         }
 
         private void Button_Forgot_Password_Click(object sender, RoutedEventArgs e)

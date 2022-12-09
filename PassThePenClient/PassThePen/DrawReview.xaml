@@ -9,7 +9,7 @@
         x:Class="PassThePen.DrawReview"
         mc:Ignorable="d"
         WindowStyle="None"
-        WindowStartupLocation="CenterOwner"
+        WindowStartupLocation="CenterScreen"
         Title="DrawPunctuation" Height="700" Width="1000">
     <Grid>
         <Grid Margin="0,0,0,610" Background="LightGray">

@@ -318,7 +318,9 @@ namespace PassThePen
         {
             Match match = new Match();
             match.Show();
-            this.Close();
+            Close();
         }
+
+        
     }
 }

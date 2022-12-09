@@ -245,6 +245,8 @@ namespace Comunication
     public partial class ImplementationServices : IMatchManagement
     {
         private int turnNumber = 0;
+        Dictionary<string, byte[]> playersDraws = new Dictionary<string, byte[]>();
+
 
         public void SelectTurnTime()
         {
@@ -282,23 +284,16 @@ namespace Comunication
 
         public void StartTurnSignal(string username)
         {
-            foreach (ConnectedUser user in playersInGroup)
+            turnNumber++;
+            if (turnNumber == 11)
             {
-                if (user.username.Equals(username) && user.hostState)
+                ObtainMatchWinner();
+            }
+            else
+            {
+                foreach (ConnectedUser matchUser in playersInGroup)
                 {
-                    turnNumber++;
-                    if(turnNumber == 11)
-                    {
-                        ObtainMatchWinner();
-                    }
-                    else
-                    {
-                        foreach (ConnectedUser matchUser in playersInGroup)
-                        {
-                            matchUser.matchContext.GetCallbackChannel<IMatchCallback>().ReturnStartTurnSignal(turnNumber);
-                        }
-                    }
-                    
+                    matchUser.matchContext.GetCallbackChannel<IMatchCallback>().ReturnStartTurnSignal(turnNumber);
                 }
             }
         }
@@ -306,6 +301,7 @@ namespace Comunication
 
         public void SendDraws(string username, byte[] draw)
         {
+            
             playersDraws.Add(username, draw);
 
             if (playersDraws.Count() == playersInGroup.Count())
@@ -314,7 +310,9 @@ namespace Comunication
                 {
                     player.matchContext.GetCallbackChannel<IMatchCallback>().DistributeDraws(playersDraws);
                 }
+                playersDraws.Clear();
             }
+            
 
         }
 
@@ -344,6 +342,27 @@ namespace Comunication
                 {
                     user.matchContext.GetCallbackChannel<IMatchCallback>().NotifyWinner(winner.username);
                 }
+            }
+        }
+
+
+        public bool GetHostState(string username)
+        {
+            ConnectedUser user = playersInGroup.Where(w => w.username == username).FirstOrDefault();
+            return user.hostState;
+        }
+
+
+        public void RemoveMatchPlayer(string username)
+        {
+
+            ConnectedUser removedPlayer = playersInGroup.Where(u => u.username == username).FirstOrDefault();
+            removedPlayer.matchContext.GetCallbackChannel<IMatchCallback>().CloseMatchWindow();
+            playersInGroup.Remove(removedPlayer);
+
+            foreach (ConnectedUser user in playersInGroup)
+            {
+                user.matchContext.GetCallbackChannel<IMatchCallback>().UpdateMatchPlayers();
             }
         }
     }
@@ -378,18 +397,11 @@ namespace Comunication
 
     public partial class ImplementationServices : IDrawReviewService
     {
-        Dictionary<string, byte[]> playersDraws = new Dictionary<string, byte[]>();
-
         public void AddPlayerScore(Dictionary<string, int> playerScore)
         {
             foreach(ConnectedUser player in playersInGroup)
             {
                 player.score += playerScore.FirstOrDefault(x => x.Key == player.username).Value;
-            }
-
-            foreach(ConnectedUser connectedUser in playersInGroup)
-            {
-                Console.WriteLine(connectedUser.username + "---" + connectedUser.score);
             }
         }
 

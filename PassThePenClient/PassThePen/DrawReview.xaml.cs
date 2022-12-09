@@ -29,7 +29,6 @@ namespace PassThePen
         {
             InitializeComponent();
             SetPlayersDraw();
-            Console.WriteLine(playersDraw.Count());
             SetDrawReviewContext(MainMenu.username);
         }
 

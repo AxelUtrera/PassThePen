@@ -849,6 +849,18 @@ namespace PassThePen.PassThePenService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManagement/ObtainMatchWinner", ReplyAction="http://tempuri.org/IMatchManagement/ObtainMatchWinnerResponse")]
         System.Threading.Tasks.Task ObtainMatchWinnerAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManagement/GetHostState", ReplyAction="http://tempuri.org/IMatchManagement/GetHostStateResponse")]
+        bool GetHostState(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManagement/GetHostState", ReplyAction="http://tempuri.org/IMatchManagement/GetHostStateResponse")]
+        System.Threading.Tasks.Task<bool> GetHostStateAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/RemoveMatchPlayer")]
+        void RemoveMatchPlayer(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/RemoveMatchPlayer")]
+        System.Threading.Tasks.Task RemoveMatchPlayerAsync(string username);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -868,6 +880,12 @@ namespace PassThePen.PassThePenService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/NotifyWinner")]
         void NotifyWinner(string winner);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/UpdateMatchPlayers")]
+        void UpdateMatchPlayers();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/CloseMatchWindow")]
+        void CloseMatchWindow();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -952,6 +970,22 @@ namespace PassThePen.PassThePenService {
         
         public System.Threading.Tasks.Task ObtainMatchWinnerAsync() {
             return base.Channel.ObtainMatchWinnerAsync();
+        }
+        
+        public bool GetHostState(string username) {
+            return base.Channel.GetHostState(username);
+        }
+        
+        public System.Threading.Tasks.Task<bool> GetHostStateAsync(string username) {
+            return base.Channel.GetHostStateAsync(username);
+        }
+        
+        public void RemoveMatchPlayer(string username) {
+            base.Channel.RemoveMatchPlayer(username);
+        }
+        
+        public System.Threading.Tasks.Task RemoveMatchPlayerAsync(string username) {
+            return base.Channel.RemoveMatchPlayerAsync(username);
         }
     }
     
