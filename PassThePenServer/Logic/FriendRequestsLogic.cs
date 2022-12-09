@@ -25,23 +25,23 @@ namespace Logic
                     usernamePlayer = friendRequest.usernamePlayer,
                     friendUsername = friendRequest.friendUsername
                 });
-                
-                var registerFriendPlayerToApplicant = context.Friends.Add(new DataAccess.Friends()
+
+                context.Friends.Add(new DataAccess.Friends()
                 {
                     usernamePlayer = friendRequest.friendUsername,
                     friendUsername = friendRequest.usernamePlayer
                 });
-                
+
                 context.SaveChanges();
 
                 int statusFriendRequest = DeleteFriendRequest(friendRequest);
 
-                if (registerFriendApplicantToPlayer != null && registerFriendApplicantToPlayer != null && statusFriendRequest == 200)
+                if (registerFriendApplicantToPlayer != null && statusFriendRequest == 200)
                 {
                     operationResult = 200;
                 }
 
-                
+
             }
 
             return operationResult;
@@ -115,7 +115,7 @@ namespace Logic
 
         private DataAccess.FriendRequest ConvertToDataAccessFriendRequests(Domain.FriendRequest domainFriendRequests)
         {
-            return  new DataAccess.FriendRequest()
+            return new DataAccess.FriendRequest()
             {
                 usernamePlayer = domainFriendRequests.usernamePlayer,
                 friendUsername = domainFriendRequests.friendUsername,

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
+using System.Security.Cryptography;
 using System.ServiceModel;
 using System.ServiceModel.Configuration;
 using System.Text;
@@ -36,9 +37,9 @@ namespace Comunication
             return playerLogic.UpdatePassword(username, password);
         }
 
-        public int UpdatePassword(string SendEmail, string password)
+        public int UpdatePassword(string email, string password)
         {
-            return playerLogic.UpdatePasswordEmail(SendEmail, password);
+            return playerLogic.UpdatePasswordEmail(email, password);
         }
 
         public Friends[] GetFriends(String username)
@@ -47,9 +48,9 @@ namespace Comunication
             return friends.ToArray();
         }
 
-        public int DeleteFriend(Friends friend)
+        public int DeleteFriend(Friends friendToDelete)
         {
-            return playerLogic.DeleteFriend(friend);
+            return playerLogic.DeleteFriend(friendToDelete);
         }
 
         public int FindPlayer(string username)
@@ -62,14 +63,14 @@ namespace Comunication
     {
         public int AutenticatePlayer(Player player)
         {
-            PlayerLogic playerLogic = new PlayerLogic();
-            return playerLogic.AutenticatePlayer(player);
+            PlayerLogic newPlayerLogic = new PlayerLogic();
+            return newPlayerLogic.AutenticatePlayer(player);
         }
 
         public int AutenticateEmail(string email)
         {
-            PlayerLogic playerLogic = new PlayerLogic();
-            return playerLogic.AutenticateEmail(email);
+            PlayerLogic playerNewLogic = new PlayerLogic();
+            return playerNewLogic.AutenticateEmail(email);
         }
 
         public int CodeEmail(string to, String affair, int validationCode)
@@ -93,28 +94,30 @@ namespace Comunication
             return friendRequestLogic.DeleteFriendRequest(friendRequest);
         }
 
-        public List<FriendRequest> GetFriendRequestsList(string player)
+        public List<FriendRequest> GetFriendRequestsList(string username)
         {
-            return friendRequestLogic.GetFriendRequestsOfPlayer(player);
+            return friendRequestLogic.GetFriendRequestsOfPlayer(username);
         }
 
-        public int SendFriendRequests(FriendRequest friendRequests)
+        public int SendFriendRequests(FriendRequest friendRequest)
         {
-            return friendRequestLogic.SendFriendRequests(friendRequests);
+            return friendRequestLogic.SendFriendRequests(friendRequest);
         }
     }
+
 
     public partial class ImplementationServices : IPlayerConnection
     {
         private List<ConnectedUser> users = new List<ConnectedUser>();
-        private List<ConnectedUser> playersInGroup = new List<ConnectedUser>();
+        private static List<ConnectedUser> playersInGroup = new List<ConnectedUser>();
 
         public void Connect(string username)
         {
             ConnectedUser user = new ConnectedUser()
             {
                 username = username,
-                operationContext = OperationContext.Current
+                operationContext = OperationContext.Current,
+                score = 0
             };
 
             users.Add(user);
@@ -225,7 +228,7 @@ namespace Comunication
 
             if (users.FirstOrDefault(user => user.username.Equals(usernamePlayer)) == null)
             {
-                isConected = userNotConected;    
+                isConected = userNotConected;
             }
 
             return isConected;
@@ -248,7 +251,7 @@ namespace Comunication
         {
             int statusCode = 500;
 
-            if (playersInGroup.Count() <=  6)
+            if (playersInGroup.Count <= 6)
             {
                 statusCode = 200;
             }
@@ -285,7 +288,7 @@ namespace Comunication
         {
             foreach (ConnectedUser user in playersInGroup)
             {
-                if (user.username.Equals(username) && user.hostState == true)
+                if (user.username.Equals(username) && user.hostState)
                 {
                     foreach (ConnectedUser connectedUser in playersInGroup)
                     {
@@ -300,25 +303,126 @@ namespace Comunication
 
     public partial class ImplementationServices : IMatchManagement
     {
+        private int turnNumber = 0;
+        Dictionary<string, byte[]> playersDraws = new Dictionary<string, byte[]>();
+
 
         public void SelectTurnTime()
         {
             int[] seconds = { 15, 20, 25, 30 };
             Random random = new Random();
             int time = seconds[random.Next(seconds.Length)];
-            OperationContext.Current.GetCallbackChannel<IMatchCallback>().DistributeTurnTime(time);
+            foreach (ConnectedUser user in playersInGroup)
+            {
+                user.matchContext.GetCallbackChannel<IMatchCallback>().DistributeTurnTime(time);
+            }
         }
 
 
         public void SendCard(string card)
         {
-            OperationContext.Current.GetCallbackChannel<IMatchCallback>().DistributeCard(card);
+            foreach (ConnectedUser user in playersInGroup)
+            {
+                user.matchContext.GetCallbackChannel<IMatchCallback>().DistributeCard(card);
+            }
         }
 
-  
-        public void StartTurnSignal()
+
+        public void SetMatchOperationContext(string username)
         {
-            OperationContext.Current.GetCallbackChannel<IMatchCallback>().ReturnStartTurnSignal();
+
+            foreach (ConnectedUser user in playersInGroup)
+            {
+                if (user.username.Equals(username))
+                {
+                    user.matchContext = OperationContext.Current;
+                }
+            }
+        }
+
+
+        public void StartTurnSignal(string username)
+        {
+            turnNumber++;
+            if (turnNumber == 11)
+            {
+                ObtainMatchWinner();
+            }
+            else
+            {
+                foreach (ConnectedUser matchUser in playersInGroup)
+                {
+                    matchUser.matchContext.GetCallbackChannel<IMatchCallback>().ReturnStartTurnSignal(turnNumber);
+                }
+            }
+        }
+
+
+        public void SendDraws(string username, byte[] draw)
+        {
+            
+            playersDraws.Add(username, draw);
+
+            if (playersDraws.Count() == playersInGroup.Count())
+            {
+                foreach (ConnectedUser player in playersInGroup)
+                {
+                    player.matchContext.GetCallbackChannel<IMatchCallback>().DistributeDraws(playersDraws);
+                }
+                playersDraws.Clear();
+            }
+            
+
+        }
+
+
+        public Dictionary<string, int> GetPlayersScore()
+        {
+            Dictionary<string, int> playersScore = new Dictionary<string, int>();
+            foreach(ConnectedUser user in playersInGroup)
+            {
+                playersScore.Add(user.username, user.score);
+            }
+            return playersScore;
+        }
+
+
+        public void ObtainMatchWinner()
+        {
+            int maxScore = playersInGroup.Max(s => s.score);
+            ConnectedUser winner = playersInGroup.Where(w => w.score == maxScore).FirstOrDefault();
+
+            MatchLogic matchLogic = new MatchLogic();
+            int result = matchLogic.AddMatchWinner(winner.username);
+
+            if(result == 200)
+            {
+                foreach(ConnectedUser user in playersInGroup)
+                {
+                    user.matchContext.GetCallbackChannel<IMatchCallback>().NotifyWinner(winner.username);
+                }
+            }
+        }
+
+
+        public bool GetHostState(string username)
+        {
+            ConnectedUser user = playersInGroup.Where(w => w.username == username).FirstOrDefault();
+            return user.hostState;
+        }
+
+
+        public void RemoveMatchPlayer(string username)
+        {
+
+            ConnectedUser removedPlayer = playersInGroup.Where(u => u.username == username).FirstOrDefault();
+            removedPlayer.matchContext.GetCallbackChannel<IMatchCallback>().CloseMatchWindow();
+            playersInGroup.Remove(removedPlayer);
+
+            foreach (ConnectedUser user in playersInGroup)
+            {
+                user.matchContext.GetCallbackChannel<IMatchCallback>().UpdateMatchPlayers();
+            }
         }
     }
 
@@ -326,23 +430,55 @@ namespace Comunication
 
     public partial class ImplementationServices : IChatServices
     {
-
         public void SendMessage(string senderUsername, string message)
         {
             ChatLogic chatLogic = new ChatLogic();
             string completeMessage = chatLogic.BuildMessage(senderUsername, message);
-            OperationContext.Current.GetCallbackChannel<IChatServiceCallback>().MessageSend(completeMessage);
+
+            foreach (ConnectedUser user in playersInGroup)
+            {
+                user.chatContext.GetCallbackChannel<IChatServiceCallback>().MessageSend(completeMessage);
+            }
+
         }
 
+
+
+
+        public void SetChatOperationContext(string username)
+        {
+            foreach (ConnectedUser user in playersInGroup)
+            {
+                if (user.username.Equals(username))
+                {
+                    user.chatContext = OperationContext.Current;
+                }
+            }
+        }
     }
-
-
 
     public partial class ImplementationServices : IDrawReviewService
     {
-        public void SendDraws(byte[] draw)
+        public void AddPlayerScore(Dictionary<string, int> playerScore)
         {
-            OperationContext.Current.GetCallbackChannel<IDrawReviewCallback>().DistributeDraws(draw);
+            foreach(ConnectedUser player in playersInGroup)
+            {
+                player.score += playerScore.FirstOrDefault(x => x.Key == player.username).Value;
+            }
+        }
+
+
+        
+        public void SetDrawReviewContext(string username)
+        {
+            foreach(ConnectedUser player in playersInGroup)
+            {
+                if (player.username.Equals(username))
+                {
+                    player.drawContext = OperationContext.Current;
+                }
+            }
         }
     }
+
 }

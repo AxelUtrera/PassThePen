@@ -10,8 +10,8 @@ namespace Logic
 {
     public class PlayerLogic
     {
-        
-        public  int AutenticatePlayer(Domain.Player player)
+
+        public int AutenticatePlayer(Domain.Player player)
         {
             int userResult = 500;
             string passwordHash = Encription.ToSHA2Hash(player.password);
@@ -61,9 +61,11 @@ namespace Logic
             int emailResult = 500;
             using (var dataBase = new passthepenEntities())
             {
-                var playerEmail = (from Player in dataBase.Player where
-                                   Player.email.Equals(email) select Player).Count();
-                if(playerEmail > 0)
+                var playerEmail = (from Player in dataBase.Player
+                                   where
+                                   Player.email.Equals(email)
+                                   select Player).Count();
+                if (playerEmail > 0)
                 {
                     emailResult = 200;
                 }
@@ -80,7 +82,7 @@ namespace Logic
             {
                 var userFound = context.Player.Find(username);
 
-                if(userFound != null)
+                if (userFound != null)
                 {
                     operationResult = 200;
                 }
@@ -171,11 +173,11 @@ namespace Logic
             {
                 try
                 {
-                   var friends = (from Friends in dataBaseContext.Friends
+                    var friends = (from Friends in dataBaseContext.Friends
                                    where
                                    Friends.usernamePlayer == username
                                    select Friends).ToList();
-                    for(int index = 0; index < friends.Count(); index++)
+                    for (int index = 0; index < friends.Count; index++)
                     {
                         Domain.Friends newFriend = new Domain.Friends();
                         newFriend.idPlayerFriends = friends[index].idFriend;
@@ -202,7 +204,7 @@ namespace Logic
                 var friendToDeleted = context.Friends.Where(u => u.usernamePlayer.Equals(friend.username) && u.friendUsername.Equals(friend.friendUsername)).First();
                 var deletedToFriend = context.Friends.Where(u => u.usernamePlayer.Equals(friend.friendUsername) && u.friendUsername.Equals(friend.username)).First();
 
-                if(friendToDeleted != null && deletedToFriend != null)
+                if (friendToDeleted != null && deletedToFriend != null)
                 {
                     context.Friends.Remove(friendToDeleted);
                     context.Friends.Remove(deletedToFriend);
@@ -214,6 +216,6 @@ namespace Logic
             return operationResult;
         }
 
-      
+
     }
 }

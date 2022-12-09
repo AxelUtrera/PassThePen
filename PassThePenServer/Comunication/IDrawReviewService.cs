@@ -7,17 +7,15 @@ using System.Threading.Tasks;
 
 namespace Comunication
 {
-    [ServiceContract(CallbackContract = typeof(IDrawReviewCallback))]
+    [ServiceContract]
     public interface IDrawReviewService
     {
-        [OperationContract(IsOneWay = true)]
-        void SendDraws(Byte[] draw);
+        
+        [OperationContract]
+        void SetDrawReviewContext(string username);
+
+        [OperationContract]
+        void AddPlayerScore(Dictionary<string, int> playerScore);
     }
 
-    [ServiceContract]
-    public interface IDrawReviewCallback
-    {
-        [OperationContract(IsOneWay = true)]
-        void DistributeDraws(Byte[] draw);
-    }
 }

@@ -28,8 +28,8 @@ namespace PassThePen
     /// </summary>
     public partial class MainMenu : Window, PassThePenService.IPlayerConnectionCallback
     {
-        public static string username;
-        private List<string> listStrings = new List<string>();
+        public static string username { set; get; }
+        private List<string> listUsernameStrings = new List<string>();
         private List<Friends> friendList = new List<Friends>();
         private List<FriendRequest> friendRequests = new List<FriendRequest>();
 
@@ -89,7 +89,7 @@ namespace PassThePen
             InitializeComponent();
             Connected();
             GetFriends();
-            listStrings.Clear();
+            listUsernameStrings.Clear();
             SetDataProfile();
         }
 
@@ -104,16 +104,16 @@ namespace PassThePen
 
         private void Button_FindFriends_Click(object sender, RoutedEventArgs e)
         {
-            listStrings.Clear();
+            listUsernameStrings.Clear();
             if (TextBox_FindFriend.Visibility == Visibility.Collapsed && ListBox_FriendList.Visibility == Visibility.Visible)
             {
                 TextBox_FindFriend.Visibility = Visibility.Visible;
-                friendList.ForEach(fri => listStrings.Add(fri.friendUsername));
+                friendList.ForEach(fri => listUsernameStrings.Add(fri.friendUsername));
             }
             else if (TextBox_FindFriend.Visibility == Visibility.Collapsed && ListBox_FriendsRequests.Visibility == Visibility.Visible)
             {
                 TextBox_FindFriend.Visibility = Visibility.Visible;
-                friendRequests.ForEach(fri => listStrings.Add(fri.friendUsername));
+                friendRequests.ForEach(fri => listUsernameStrings.Add(fri.friendUsername));
             }
             else
             {
@@ -161,10 +161,10 @@ namespace PassThePen
 
         private void Button_ConfirmRequests_Click(object sender, RoutedEventArgs e)
         {
-            FriendRequest friendRequests = GetFriendRequestOfListboxImageButton(sender);
+            FriendRequest newFriendRequests = GetFriendRequestOfListboxImageButton(sender);
             FriendRequestsClient clientFriendRequest = new FriendRequestsClient();
             PlayerManagementClient clientFriends = new PlayerManagementClient();
-            clientFriendRequest.AcceptFriendRequest(friendRequests);
+            clientFriendRequest.AcceptFriendRequest(newFriendRequests);
             GenerateFriendRequestList();
             ListBox_FriendList.ItemsSource = clientFriends.GetFriends(username);
 
@@ -174,8 +174,8 @@ namespace PassThePen
         private void Button_DeclineRequests_Click(object sender, RoutedEventArgs e)
         {
             PassThePenService.FriendRequestsClient client = new FriendRequestsClient();
-            FriendRequest friendRequests = GetFriendRequestOfListboxImageButton(sender);
-            client.DeclineFriendRequests(friendRequests);
+            FriendRequest newFriendRequests = GetFriendRequestOfListboxImageButton(sender);
+            client.DeclineFriendRequests(newFriendRequests);
             GenerateFriendRequestList();
 
         }
@@ -217,6 +217,9 @@ namespace PassThePen
 
         public void RechargeFriends(Friends[] friends)
         {
+            InstanceContext instanceContext = new InstanceContext(this);
+            PassThePenService.PlayerConnectionClient client = new PlayerConnectionClient(instanceContext);
+            List<string> playersConected = client.GetNameOnlinePlayers().ToList();
             friendList = friends.ToList();
             ListBox_FriendList.ItemsSource = friendList;
         }
@@ -245,11 +248,10 @@ namespace PassThePen
 
         private void FilterFriendsRequests()
         {
-            if (String.IsNullOrEmpty(TextBox_FindFriend.Text.Trim()) == false)
+            if (!String.IsNullOrEmpty(TextBox_FindFriend.Text.Trim()))
             {
                 List<FriendRequest> friendsEquals = new List<FriendRequest>();
-                friendsEquals.Clear();
-                foreach (string str in listStrings)
+                foreach (string str in listUsernameStrings)
                 {
 
                     if (str.StartsWith(TextBox_FindFriend.Text.Trim()))
@@ -268,11 +270,10 @@ namespace PassThePen
 
         private void FilterFriendList()
         {
-            if (String.IsNullOrEmpty(TextBox_FindFriend.Text.Trim()) == false)
+            if (!String.IsNullOrEmpty(TextBox_FindFriend.Text.Trim()))
             {
                 List<Friends> friendsEquals = new List<Friends>();
-                friendsEquals.Clear();
-                foreach (string str in listStrings)
+                foreach (string str in listUsernameStrings)
                 {
 
                     if (str.StartsWith(TextBox_FindFriend.Text.Trim()))
@@ -374,7 +375,7 @@ namespace PassThePen
         {
             Match match = new Match();
             match.Show();
-            this.Close();
+            Close();
         }
 
 

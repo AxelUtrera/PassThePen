@@ -37,8 +37,8 @@ namespace PassThePen
             string repeatedPassword = PasswordBox_RepeatPassword.Password;
             byte[] defaultProfileImage = ImageToByte(Image_RegisterPlayer.Source as BitmapImage);
 
-            int statusCode = 500;
-            int statusOK = 200; 
+            int statusCode;
+            int statusOK = 200;
 
             if (password.Equals(repeatedPassword) && ValidateFields(TexBox_Email.Text, password))
             {
@@ -74,9 +74,8 @@ namespace PassThePen
 
         private bool ValidateFields(string email, string password)
         {
-            RecoverPassword recoverPassword = new RecoverPassword();
             bool result = true;
-            if ( string.IsNullOrEmpty(TextBox_Name.Text) || string.IsNullOrEmpty(TextBox_LastName.Text))
+            if (string.IsNullOrEmpty(TextBox_Name.Text) || string.IsNullOrEmpty(TextBox_LastName.Text))
             {
                 result = false;
             }
@@ -84,14 +83,14 @@ namespace PassThePen
             {
                 result = false;
             }
-            if (! recoverPassword.ValidateFormat(email, "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"))
+            if (!Validation.ValidateFormat(email, "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"))
             {
                 result = false;
             }
-            /*if (! recoverPassword.ValidateFormat(password, "^(?=.*\\d)(?=.*[\\u0021-\\u002b\\u003c-\\u0040])(?=.*[A-Z])(?=.*[a-z])\\S{8,16}$"))
+            if (!Validation.ValidateFormat(password, "^(?=.*\\d)(?=.*[\\u0021-\\u002b\\u003c-\\u0040])(?=.*[A-Z])(?=.*[a-z])\\S{8,16}$"))
             {
                 result = false;
-            }*/
+            }
             if (!ValidateLength())
             {
                 result = false;
@@ -102,7 +101,7 @@ namespace PassThePen
         private bool ValidateLength()
         {
             bool result = true;
-            if (TextBox_Name.Text.Length > 20 || TextBox_Name.Text.Length > 50)
+            if (TextBox_Username.Text.Length > 20 || TextBox_Name.Text.Length > 50)
             {
                 result = false;
             }

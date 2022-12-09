@@ -75,7 +75,6 @@ namespace PassThePen
 
         private Boolean ValidateInformation()
         {
-            RecoverPassword recoverPassword = new RecoverPassword();
             InvalidFields_Label.Visibility = Visibility.Hidden;
             Boolean isValid = true;
             if (TextBox_Email.Text.Equals("") || TextBox_Name.Text.Equals("") || TextBox_Lastname.Text.Equals(""))
@@ -86,12 +85,11 @@ namespace PassThePen
 
 
 
-            //Arreglar esto por favor no funciona...
-            /*if (recoverPassword.ValidateFormat(TextBox_Email.Text, "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"))
+            if (!Validation.ValidateFormat(TextBox_Email.Text, "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"))
             {
-                InvalidFields_Label.Visibility = Visibility.Visible; 
+                InvalidFields_Label.Visibility = Visibility.Visible;
                 isValid = false;
-            }*/
+            }
 
             if (TextBox_Email.Text.Length > 100 || TextBox_Name.Text.Length > 50 || TextBox_Lastname.Text.Length > 50)
             {
@@ -154,7 +152,7 @@ namespace PassThePen
         }
 
 
-        
+
 
     }
 }
