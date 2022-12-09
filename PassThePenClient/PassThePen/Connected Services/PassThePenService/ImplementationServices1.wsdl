@@ -438,6 +438,11 @@
           <xs:sequence />
         </xs:complexType>
       </xs:element>
+      <xs:element name="OpenExitHostMessage">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
       <xs:element name="SendCard">
         <xs:complexType>
           <xs:sequence>
@@ -770,6 +775,9 @@
   <wsdl:message name="IPlayerConnection_OpenMatchWindow_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:OpenMatchWindow" />
   </wsdl:message>
+  <wsdl:message name="IPlayerConnection_OpenExitHostMessage_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:OpenExitHostMessage" />
+  </wsdl:message>
   <wsdl:message name="IMatchManagement_SendCard_InputMessage">
     <wsdl:part name="parameters" element="tns:SendCard" />
   </wsdl:message>
@@ -924,6 +932,9 @@
     </wsdl:operation>
     <wsdl:operation name="OpenMatchWindow">
       <wsdl:output wsaw:Action="http://tempuri.org/IPlayerConnection/OpenMatchWindow" message="tns:IPlayerConnection_OpenMatchWindow_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OpenExitHostMessage">
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerConnection/OpenExitHostMessage" message="tns:IPlayerConnection_OpenExitHostMessage_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IMatchManagement">
@@ -1234,6 +1245,12 @@
     </wsdl:operation>
     <wsdl:operation name="OpenMatchWindow">
       <soap12:operation soapAction="http://tempuri.org/IPlayerConnection/OpenMatchWindow" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OpenExitHostMessage">
+      <soap12:operation soapAction="http://tempuri.org/IPlayerConnection/OpenExitHostMessage" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

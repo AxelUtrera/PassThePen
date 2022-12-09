@@ -23,7 +23,7 @@ namespace Comunication
         [OperationContract]
         List<string> GetNameOnlinePlayers();
 
-        [OperationContract]
+        [OperationContract()]
         void SendMathInvitation(string invitingPlayer, string invitedPlayer);
 
         [OperationContract]
@@ -62,6 +62,9 @@ namespace Comunication
 
         [OperationContract(IsOneWay = true)]
         void OpenMatchWindow();
+
+        [OperationContract(IsOneWay = true)]
+        void OpenExitHostMessage();
     }
 }
 

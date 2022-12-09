@@ -45,27 +45,45 @@ namespace PassThePen
             return operationResult;
         }
 
+
         public void VisualizeButtonLeaveGroup()
         {
             Button_ExitGame.Visibility = Visibility.Collapsed;
             Button_LeaveGroup.Visibility = Visibility.Visible;
         }
 
+
         public void GetDataPlayersInGoup()
         {
             InstanceContext instanceContext = new InstanceContext(this);
             PassThePenService.PlayerConnectionClient client = new PlayerConnectionClient(instanceContext);
-            List<Player> listGroupPlayers = RemoveOwnerPlayerOfListPlayersInGroup(client.GetListPlayersInGroup().ToList());
+            List<Player> listGroupPlayers = client.GetListPlayersInGroup().ToList();
+            int minimumPlayersInGroup = 2;
+
+
+            if (listGroupPlayers.Count >= minimumPlayersInGroup)
+            {
+                RemoveOwnerPlayerOfListPlayersInGroup(listGroupPlayers);
+            }
+
             if (listGroupPlayers.Count == 0)
             {
                 Button_LeaveGroup.Visibility = Visibility.Collapsed;
                 Button_ExitGame.Visibility = Visibility.Visible;
             }
-            PlacePlayersInGroup(listGroupPlayers); 
+
+            PlacePlayersInGroup(new List<Player>());
+            PlacePlayersInGroup(listGroupPlayers);
         }
 
 
-       
+        public void OpenExitHostMessage()
+        {
+            GetDataPlayersInGoup();
+            MessageBox.Show(username, "El host ha abandonado la partida :(");
+        }
+
+
         public MainMenu()
         {
             InitializeComponent();
@@ -74,6 +92,7 @@ namespace PassThePen
             listStrings.Clear();
             SetDataProfile();
         }
+
 
         private void Button_Profile_Click(object sender, RoutedEventArgs e)
         {
@@ -104,6 +123,7 @@ namespace PassThePen
 
         }
 
+
         private void Button_ExitGame_Click(object sender, RoutedEventArgs e)
         {
             InstanceContext instanceContext = new InstanceContext(this);
@@ -113,8 +133,8 @@ namespace PassThePen
             login.Show();
             client.Close();
             this.Close();
-        }
 
+        }
 
 
         private void Button_FriendRequests_Click(object sender, RoutedEventArgs e)
@@ -127,7 +147,6 @@ namespace PassThePen
         }
 
 
-
         private void Button_Friends_Click(object sender, RoutedEventArgs e)
         {
             label_FriendRequests.Visibility = Visibility.Collapsed;
@@ -138,6 +157,7 @@ namespace PassThePen
             TextBox_FindFriend.Text = "";
             GetFriends();
         }
+    
 
         private void Button_ConfirmRequests_Click(object sender, RoutedEventArgs e)
         {
@@ -150,6 +170,7 @@ namespace PassThePen
 
         }
 
+
         private void Button_DeclineRequests_Click(object sender, RoutedEventArgs e)
         {
             PassThePenService.FriendRequestsClient client = new FriendRequestsClient();
@@ -159,6 +180,7 @@ namespace PassThePen
 
         }
 
+
         private FriendRequest GetFriendRequestOfListboxImageButton(object sender)
         {
             Image buttonDeleteFriend = (Image)sender;
@@ -166,6 +188,7 @@ namespace PassThePen
             FriendRequest friendRequest = (FriendRequest)parent.DataContext;
             return friendRequest;
         }
+
 
         private void GenerateFriendRequestList()
         {
@@ -183,6 +206,7 @@ namespace PassThePen
             client.Connect(username);
         }
 
+
         private void GetFriends()
         {
             InstanceContext instanceContext = new InstanceContext(this);
@@ -190,11 +214,13 @@ namespace PassThePen
             client.SendOnlinePlayers(username);
         }
 
+
         public void RechargeFriends(Friends[] friends)
         {
             friendList = friends.ToList();
             ListBox_FriendList.ItemsSource = friendList;
         }
+        
 
         private void Button_StartMatch_Click(object sender, RoutedEventArgs e)
         {
@@ -202,6 +228,7 @@ namespace PassThePen
             PassThePenService.PlayerConnectionClient client = new PassThePenService.PlayerConnectionClient(context);
             client.StartMatch(username);
         }
+
 
         private void TextBox_FindFriend_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -238,6 +265,7 @@ namespace PassThePen
             }
         }
 
+
         private void FilterFriendList()
         {
             if (String.IsNullOrEmpty(TextBox_FindFriend.Text.Trim()) == false)
@@ -260,6 +288,7 @@ namespace PassThePen
             }
         }
 
+
         private void Button_DeleteFriend_Click(object sender, MouseButtonEventArgs e)
         {
             Image buttonDeleteFriend = (Image)sender;
@@ -270,6 +299,7 @@ namespace PassThePen
             GetFriends();
             client.Close();
         }
+
 
         private void Button_AddFriend_Click(object sender, RoutedEventArgs e)
         {
@@ -294,6 +324,7 @@ namespace PassThePen
 
         }
 
+
         private void Button_InviteFriend_Click(object sender, MouseButtonEventArgs e)
         {
             InstanceContext context = new InstanceContext(this);
@@ -315,7 +346,7 @@ namespace PassThePen
                 }
                 else
                 {
-                    MessageBox.Show("El jugador ya se encuentra en tu grupo");
+                    MessageBox.Show("El jugador ya se encuentra en un grupo");
                 }
             }
             else
@@ -329,6 +360,7 @@ namespace PassThePen
             }
         }
 
+
         private void SetDataProfile()
         {
             PassThePenService.PlayerManagementClient client = new PassThePenService.PlayerManagementClient();
@@ -337,6 +369,7 @@ namespace PassThePen
             Label_PrincipalPlayer.Content = username;
         }
 
+
         public void OpenMatchWindow()
         {
             Match match = new Match();
@@ -344,24 +377,26 @@ namespace PassThePen
             this.Close();
         }
 
+
         private void PlacePlayersInGroup(List<Player> listPlayers)
         {
 
             
             switch (listPlayers.Count)
             {
-                case 0:Image_InviteFiend1.Source = new BitmapImage(new Uri("pack://application:,,,/Img/Icon_AddUser.png"));
+                case 0:
+                    Image_InviteFiend1.Source = new BitmapImage(new Uri("pack://application:,,,/Img/Icon_AddUser.png"));
                     Label_PlayerAdded1.Content = null;
                     Image_InviteFiend2.Source = new BitmapImage(new Uri("pack://application:,,,/Img/Icon_AddUser.png"));
                     Label_PlayerAdded2.Content = null;
-                    Image_InviteFiend3.Source = new BitmapImage(new Uri("pack://application:,,,/Img/Icon_AddUser.png")); 
+                    Image_InviteFiend3.Source = new BitmapImage(new Uri("pack://application:,,,/Img/Icon_AddUser.png"));
                     Label_PlayerAdded3.Content = null;
-                    Image_InviteFiend4.Source = new BitmapImage(new Uri("pack://application:,,,/Img/Icon_AddUser.png")); 
+                    Image_InviteFiend4.Source = new BitmapImage(new Uri("pack://application:,,,/Img/Icon_AddUser.png"));
                     Label_PlayerAdded4.Content = null;
-                    Image_InviteFiend5.Source = new BitmapImage(new Uri("pack://application:,,,/Img/Icon_AddUser.png")); 
+                    Image_InviteFiend5.Source = new BitmapImage(new Uri("pack://application:,,,/Img/Icon_AddUser.png"));
                     Label_PlayerAdded5.Content = null;
                     break;
-                    
+
                 case 1:
                     Image_InviteFiend1.Source = ImageManager.ToImage(listPlayers.ElementAt(0).profileImage);
                     Label_PlayerAdded1.Content = listPlayers.ElementAt(0).username;
@@ -406,8 +441,11 @@ namespace PassThePen
                     Image_InviteFiend5.Source = ImageManager.ToImage(listPlayers.ElementAt(4).profileImage);
                     Label_PlayerAdded5.Content = listPlayers.ElementAt(4).username;
                     break;
+
+                
             }
         }
+
 
         private List<Player> RemoveOwnerPlayerOfListPlayersInGroup(List<Player> playersInGroup)
         {
@@ -420,6 +458,7 @@ namespace PassThePen
 
             return playersInGroup;
         }
+
 
         private void Button_ExitGroup_Click(object sender, RoutedEventArgs e)
         {

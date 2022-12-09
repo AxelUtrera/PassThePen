@@ -120,6 +120,7 @@ namespace Comunication
             users.Add(user);
         }
 
+
         public void Disconnect(string username)
         {
             var user = users.FirstOrDefault(i => i.username == username);
@@ -128,6 +129,7 @@ namespace Comunication
                 users.Remove(user);
             }
         }
+
 
         public List<string> GetNameOnlinePlayers()
         {
@@ -140,6 +142,7 @@ namespace Comunication
             return onlinePlayers;
         }
 
+
         public void SendOnlinePlayers(string username)
         {
             Friends[] friends = GetFriends(username);
@@ -149,22 +152,23 @@ namespace Comunication
 
         public void SendMathInvitation(string invitingPlayer, string invitedPlayer)
         {        
-            int operationOK = 200;
+            int invitationAcepted = 200;
             int userNotFound = 404;
+            int groupFull = 6;
 
             ConnectedUser userConnected = users.FirstOrDefault(user => user.username.Equals(invitedPlayer));
             ConnectedUser matchHost = users.FirstOrDefault(user => user.username.Equals(invitingPlayer));
 
-            if (playersInGroup.Count <= 6)
+            if (playersInGroup.Count <= groupFull)
             {                          
-                if (FindPlayerInGroup(invitingPlayer) == userNotFound)
+                if (userConnected.operationContext.GetCallbackChannel<IPlayersServicesCallBack>().NotifyMatchInvitation(invitingPlayer) == invitationAcepted)
                 {
-                    matchHost.hostState = true;
-                    playersInGroup.Add(matchHost);
-                }
+                    if (FindPlayerInGroup(invitingPlayer) == userNotFound)
+                    {
+                        matchHost.hostState = true;
+                        playersInGroup.Add(matchHost);
+                    }
 
-                if (userConnected.operationContext.GetCallbackChannel<IPlayersServicesCallBack>().NotifyMatchInvitation(invitingPlayer) == operationOK)
-                {
                     playersInGroup.Add(userConnected);
                     foreach (ConnectedUser playerInGroup in playersInGroup)
                     {
@@ -178,16 +182,41 @@ namespace Comunication
 
         public void LeaveGroup(string usernamePlayer)
         {
-            var player = playersInGroup.FirstOrDefault(i => i.username == usernamePlayer);
+            ConnectedUser player = playersInGroup.FirstOrDefault(i => i.username == usernamePlayer);
             if (player != null)
             {
+                if (player.hostState)
+                {
+                    LeaveHost(player);
+                }
+
                 playersInGroup.Remove(player);
                 foreach (ConnectedUser playerInGroup in playersInGroup)
                 {
                     playerInGroup.operationContext.GetCallbackChannel<IPlayersServicesCallBack>().GetDataPlayersInGoup();
                 }
-            }            
+            }
+
+            if (playersInGroup.Count == 1)
+            {
+                playersInGroup.Clear(); 
+            }
         }
+
+        private void LeaveHost(ConnectedUser host)
+        {
+
+            playersInGroup.Remove(host);
+
+            foreach (ConnectedUser usersInGroup in playersInGroup)
+            {
+                usersInGroup.operationContext.GetCallbackChannel<IPlayersServicesCallBack>().OpenExitHostMessage();
+            }
+
+            playersInGroup.Clear();
+            
+        }
+
 
         public int FindPlayerIsConected(string usernamePlayer)
         {
@@ -202,6 +231,7 @@ namespace Comunication
             return isConected;
         }
 
+
         public int FindPlayerInGroup(string usernameToFind)
         {
             int statusUser = 200;
@@ -212,6 +242,7 @@ namespace Comunication
             }
             return statusUser;
         }
+
 
         public int GroupIsNotFull()
         {
@@ -239,10 +270,12 @@ namespace Comunication
                     groupPlayers.Add(dataPlayer);
                 }
             }
-           
+
+            int i = 0;
             foreach (Player player in groupPlayers)
             {
-                Console.WriteLine(player.username);
+                i++;
+                Console.WriteLine(i +" "+ player.username);
             }
             return groupPlayers;
         }
@@ -263,6 +296,8 @@ namespace Comunication
         }
     }
 
+
+
     public partial class ImplementationServices : IMatchManagement
     {
 
@@ -273,6 +308,7 @@ namespace Comunication
             int time = seconds[random.Next(seconds.Length)];
             OperationContext.Current.GetCallbackChannel<IMatchCallback>().DistributeTurnTime(time);
         }
+
 
         public void SendCard(string card)
         {
@@ -286,6 +322,8 @@ namespace Comunication
         }
     }
 
+
+
     public partial class ImplementationServices : IChatServices
     {
 
@@ -297,6 +335,8 @@ namespace Comunication
         }
 
     }
+
+
 
     public partial class ImplementationServices : IDrawReviewService
     {
