@@ -6,20 +6,22 @@ using System.Threading.Tasks;
 using System.Net.Mail;
 using System.Net;
 using DataAccess;
+using System.Configuration;
 
 namespace Logic
 {
     public class SendEmail
     {
-        public const string from = "PassThePen@outlook.com";
-        public const string displayName = "Pass The Pen";
-        public const string body = "Your validation code is: ";
+        private const string displayName = "Pass The Pen";
+        private const string body = "Your validation code is: ";
 
         public int SendNewEmail(String to, String affair, int validationCode)
         {
             int result = 200;
             try
             {
+                string from = ConfigurationManager.AppSettings.Get("Email");
+                string password = ConfigurationManager.AppSettings.Get("Password");
                 MailMessage mailMessage = new MailMessage();
                 mailMessage.From = new MailAddress(from , displayName);
                 mailMessage.To.Add(to);
@@ -29,7 +31,7 @@ namespace Logic
                 mailMessage.IsBodyHtml = true;
 
                 SmtpClient client = new SmtpClient("smtp.office365.com", 587);
-                client.Credentials = new NetworkCredential(from, "bOnmEge89tBd56d");
+                client.Credentials = new NetworkCredential(from, password);
                 client.EnableSsl = true;
                 client.Send(mailMessage);
             }

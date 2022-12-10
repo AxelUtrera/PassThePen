@@ -77,27 +77,27 @@ namespace PassThePen
         private void Button_Register_Click(object sender, RoutedEventArgs e)
         {
             Register registerWindow = new Register();
-            registerWindow.ShowDialog();
-            Close();
+            registerWindow.Show();
+            this.Close();
         }
 
         private void Button_Forgot_Password_Click(object sender, RoutedEventArgs e)
         {
             RecoverPassword recover = new RecoverPassword();
             recover.Show();
-            Close();
+            this.Close();
         }
 
         private void Button_Exit_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            this.Close();
         }
         
         private void InvokeMainMenu()
         {
             MainMenu mainMenu = new MainMenu();
             mainMenu.Show();
-            Close();
+            this.Close();
         }
 
         private void Button_LoginAsGuest_Click(object sender, MouseButtonEventArgs e)

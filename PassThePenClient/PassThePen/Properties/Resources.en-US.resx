@@ -149,13 +149,43 @@
     <value>Rate the drwaings</value>
     <comment>Used by: DrawReview</comment>
   </data>
+  <data name="Global_Cancel_Button" xml:space="preserve">
+    <value>Cancel</value>
+    <comment>Used by: Recover Password, Register</comment>
+  </data>
   <data name="Global_Email_Label" xml:space="preserve">
     <value>Email</value>
     <comment>Used by: login</comment>
   </data>
+  <data name="Global_Error_Email_Label" xml:space="preserve">
+    <value>Please check the format of your email</value>
+  </data>
+  <data name="Global_Error_Name_Label" xml:space="preserve">
+    <value>Number of characters exceeded. Maximum number: 50</value>
+  </data>
+  <data name="Global_Error_Password_Label" xml:space="preserve">
+    <value>Must contain: *, +, @, #, $, %. A capital letter and a number. Length between 8-16.</value>
+  </data>
+  <data name="Global_Error_Repit_Password" xml:space="preserve">
+    <value>Passwords are not the same</value>
+  </data>
+  <data name="Global_Error_Username_Label" xml:space="preserve">
+    <value>Number of characters exceeded. Maximum number: 20</value>
+  </data>
+  <data name="Global_Error__LastName_Label" xml:space="preserve">
+    <value>Number of characters exceeded. Maximum number: 50</value>
+  </data>
   <data name="Global_Label_Password" xml:space="preserve">
     <value>Password</value>
     <comment>Used by: login, Register</comment>
+  </data>
+  <data name="Global_Resend_Button" xml:space="preserve">
+    <value>Resend</value>
+    <comment>Used by: Register, Recover Password</comment>
+  </data>
+  <data name="Global_Send_Button" xml:space="preserve">
+    <value>Send</value>
+    <comment>Used by: Recover Password, Register</comment>
   </data>
   <data name="Global_Username_Label" xml:space="preserve">
     <value>Username</value>
@@ -281,10 +311,6 @@
     <value>Username</value>
     <comment>Used by: Profile</comment>
   </data>
-  <data name="RecoverPassword_Cancel_Button" xml:space="preserve">
-    <value>Cancel</value>
-    <comment>Used by: Recover Password</comment>
-  </data>
   <data name="RecoverPassword_Change_Button" xml:space="preserve">
     <value>Change</value>
     <comment>Used by: Recover Password</comment>
@@ -299,10 +325,6 @@
   </data>
   <data name="RecoverPassword_RepitPassword_Label" xml:space="preserve">
     <value>Retype your password</value>
-    <comment>Used by: Recover Password</comment>
-  </data>
-  <data name="RecoverPassword_Send_Button" xml:space="preserve">
-    <value>Send</value>
     <comment>Used by: Recover Password</comment>
   </data>
   <data name="RecoverPassword_Title_Label" xml:space="preserve">
