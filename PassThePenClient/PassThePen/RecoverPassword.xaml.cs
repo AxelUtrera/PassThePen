@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -18,8 +20,10 @@ namespace PassThePen
     
     public partial class RecoverPassword : Window
     {
+        ResourceManager messageResource = new ResourceManager("PassThePen.Properties.Resources", Assembly.GetExecutingAssembly());
         private int validationCode;
         private String email;
+
         public RecoverPassword()
         {
             InitializeComponent();
@@ -33,12 +37,12 @@ namespace PassThePen
             {
                 Random randomNumber = new Random();
                 validationCode = randomNumber.Next(100000, 1000000);
-                String affair = "Validation Code";
+                String affair = messageResource.GetString("RecoverPassword_ValidationCodeTitle_Message");
                 try 
                 {
                     if (client.CodeEmail(email, affair, validationCode) == 200)
                     {
-                        MessageBox.Show("Código de validación enviado con exito");
+                        MessageBox.Show(messageResource.GetString("RecoverPassword_ValidationCodeSend_Message"));
                         Label_Email.Visibility = Visibility.Hidden;
                         Label_Code.Visibility = Visibility.Visible;
                         Button_Valid.Visibility = Visibility.Visible;
@@ -48,17 +52,17 @@ namespace PassThePen
                     }
                     else
                     {
-                        MessageBox.Show("No se pudo enviar el codigo");
+                        MessageBox.Show(messageResource.GetString("RecoverPassword_ValidationCodeSendError_Message"));
                     }
                 }
                 catch (TimeoutException)
                 {
-                    MessageBox.Show("Tiempo de espera excedido, favor de intentar más tarde");
+                    MessageBox.Show(messageResource.GetString("RecoverPassword_Timeout_Message"));
                 }
             }
             else
             {
-                MessageBox.Show("Email Invalido");
+                MessageBox.Show(messageResource.GetString("RecoverPassword_InvalidEmail_Message"));
             }
             client.Close();
         }
@@ -86,7 +90,7 @@ namespace PassThePen
             }
             else
             {
-                MessageBox.Show("Codigo incorrecto");
+                MessageBox.Show(messageResource.GetString("RecoverPassword_IncorrectCode_Message"));
             }
         }
 
@@ -120,17 +124,17 @@ namespace PassThePen
             {
                 if (client.UpdatePassword(email, PasswordBox_NewPassword.Password) == 200)
                 {
-                    MessageBox.Show("La contraseña ha sido cambiada con exito");
+                    MessageBox.Show(messageResource.GetString("RecoverPassword_PasswordUpdated_Message"));
                     Close();
                 }
                 else
                 {
-                    MessageBox.Show("La contraseña no ha podido cambiar");
+                    MessageBox.Show(messageResource.GetString("RecoverPassword_PasswordNotUpdated_Message"));
                 }
             }
             else
             {
-                MessageBox.Show("Error en las contraseñas favor de verificarlas");
+                MessageBox.Show(messageResource.GetString("RecoverPassword_UnmatchedPassword_Message"));
             }
             client.Close();
         }

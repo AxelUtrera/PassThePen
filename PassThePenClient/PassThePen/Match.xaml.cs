@@ -28,7 +28,7 @@ namespace PassThePen
     /// </summary>
     public partial class Match : Window, IMatchManagementCallback, IChatServicesCallback
     {
-
+        ResourceManager messageResource = new ResourceManager("PassThePen.Properties.Resources", Assembly.GetExecutingAssembly());
         DispatcherTimer timer = new DispatcherTimer();
         private int selectedTime;
         Dictionary<string, int> playerScore;
@@ -85,14 +85,22 @@ namespace PassThePen
 
         private void ObtainCard()
         {
+            string card;
             InstanceContext instanceContext = new InstanceContext(this);
             PassThePenService.MatchManagementClient client = new PassThePenService.MatchManagementClient(instanceContext);
 
             var random = new Random();
             int numberCard = random.Next(1, 100);
 
-            ResourceManager resource = new ResourceManager("PassThePen.Properties.Deck", Assembly.GetExecutingAssembly());
-            string card = resource.GetString("Card" + numberCard);
+            ResourceManager cardResource = new ResourceManager("PassThePen.Properties.Deck", Assembly.GetExecutingAssembly());
+            card = cardResource.GetString("Card" + numberCard);
+
+            if(card.Equals("Reto") || card.Equals("Challenge"))
+            {
+                int challengeNumber = random.Next(1, 10);
+                ResourceManager challengeResource = new ResourceManager("PassThePen.Properties.Challenge", Assembly.GetExecutingAssembly());
+                card = challengeResource.GetString("Challenge" + challengeNumber);
+            }
 
             client.SendCard(card);
 
@@ -100,7 +108,7 @@ namespace PassThePen
 
         public void DistributeCard(string card)
         {
-            Label_CurrentDraw.Content = card;
+            Label_CurrentDraw.Text = card;
         }
 
 
@@ -136,7 +144,7 @@ namespace PassThePen
             }
             else
             {
-                MessageBox.Show("Solo el host puede iniciar el turno", "", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(messageResource.GetString("Match_NotHostTurn_Message"), "", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             
         }
@@ -280,14 +288,23 @@ namespace PassThePen
 
         public void NotifyWinner(string winner)
         {
-            MessageBox.Show("El ganador de la partida es: " + winner, "", MessageBoxButton.OK, MessageBoxImage.Information);
-            MessageBox.Show("La partida ha terminado, regresando al menu principal", "", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(messageResource.GetString("Mach_MatchWinner_Message") + winner, "", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(messageResource.GetString("Match_MatchOver_Message"), "", MessageBoxButton.OK, MessageBoxImage.Information);
             OpenMainMenu();
         }
 
 
         private void OpenMainMenu()
         {
+            timer.Stop();
+            foreach (Window window in App.Current.Windows)
+
+            {
+                if (!window.IsActive)
+                {
+                    window.Show();
+                }
+            }
             Close();
         }
 
@@ -296,7 +313,7 @@ namespace PassThePen
         {
             if (hostState)
             {
-                var confirmationButton = MessageBox.Show("¿Expulsar jugador?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                var confirmationButton = MessageBox.Show(messageResource.GetString("Match_RemovePlayer_Message"), "", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (confirmationButton == MessageBoxResult.Yes)
                 {
                     Image buttonRemovePlayer = (Image)sender;
@@ -310,7 +327,7 @@ namespace PassThePen
             }
             else
             {
-                MessageBox.Show("Usted no puede sacar a nadie calmese, prro");
+                MessageBox.Show(messageResource.GetString("Match_NotHostRemove_Message"));
             }
             
         }
@@ -325,7 +342,15 @@ namespace PassThePen
 
         private void Button_Leave_Match_Click(object sender, RoutedEventArgs e)
         {
-            
+            var confirmationButton = MessageBox.Show(messageResource.GetString("Match_LeaveMatch_Message"), "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if(confirmationButton == MessageBoxResult.Yes)
+            {
+                InstanceContext context = new InstanceContext(this);
+                PassThePenService.MatchManagementClient client = new PassThePenService.MatchManagementClient(context);
+
+                client.LeaveMatch(username);
+            }
         }
 
         public void UpdateMatchPlayers()

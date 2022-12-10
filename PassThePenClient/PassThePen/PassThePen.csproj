@@ -36,6 +36,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Img\logo-pass-the-pen.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Syncfusion.Licensing, Version=20.3460.0.56, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
       <HintPath>..\packages\Syncfusion.Licensing.20.3.0.56\lib\net46\Syncfusion.Licensing.dll</HintPath>
@@ -315,6 +318,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Img\Icon_RemovePlayer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Img\logo-pass-the-pen.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Uno.SourceGenerationTasks.4.1.0\build\netstandard1.0\Uno.SourceGenerationTasks.targets" Condition="Exists('..\packages\Uno.SourceGenerationTasks.4.1.0\build\netstandard1.0\Uno.SourceGenerationTasks.targets')" />

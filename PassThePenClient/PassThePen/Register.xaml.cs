@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +25,8 @@ namespace PassThePen
     /// </summary>
     public partial class Register : Window
     {
+        ResourceManager messageResource = new ResourceManager("PassThePen.Properties.Resources", Assembly.GetExecutingAssembly());
+
         public Register()
         {
             InitializeComponent();
@@ -55,19 +59,19 @@ namespace PassThePen
                 statusCode = client.AddPlayer(newPlayer);
                 if (statusCode == statusOK)
                 {
-                    MessageBox.Show("Nuevo jugador registrado con éxito");
+                    MessageBox.Show(messageResource.GetString("Register_SuccessfulRegister_Message"));
                     Login login = new Login();
                     login.Show();
                     Close();
                 }
                 else
                 {
-                    MessageBox.Show("Upss ocurrio un error, no se ha podido registrar al Jugador");
+                    MessageBox.Show(messageResource.GetString("Register_ErrorRegister_Message"));
                 }
             }
             else
             {
-                MessageBox.Show("Campos invalidos favor de verificarlos");
+                MessageBox.Show(messageResource.GetString("Register_InvalidFields_Message"));
             }
             client.Close();
         }

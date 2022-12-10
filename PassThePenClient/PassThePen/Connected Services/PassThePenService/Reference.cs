@@ -884,6 +884,12 @@ namespace PassThePen.PassThePenService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/RemoveMatchPlayer")]
         System.Threading.Tasks.Task RemoveMatchPlayerAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/LeaveMatch")]
+        void LeaveMatch(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/LeaveMatch")]
+        System.Threading.Tasks.Task LeaveMatchAsync(string username);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1009,6 +1015,14 @@ namespace PassThePen.PassThePenService {
         
         public System.Threading.Tasks.Task RemoveMatchPlayerAsync(string username) {
             return base.Channel.RemoveMatchPlayerAsync(username);
+        }
+        
+        public void LeaveMatch(string username) {
+            base.Channel.LeaveMatch(username);
+        }
+        
+        public System.Threading.Tasks.Task LeaveMatchAsync(string username) {
+            return base.Channel.LeaveMatchAsync(username);
         }
     }
     

@@ -121,9 +121,6 @@
     <value>Draw with your non-dominant hand</value>
   </data>
   <data name="Challenge10" xml:space="preserve">
-    <value>Draw your favorite fictional character</value>
-  </data>
-  <data name="Challenge11" xml:space="preserve">
     <value>Draw your portrait</value>
   </data>
   <data name="Challenge2" xml:space="preserve">
@@ -139,15 +136,15 @@
     <value>Draw your crush</value>
   </data>
   <data name="Challenge6" xml:space="preserve">
-    <value>Draw the opposite of what is requested</value>
-  </data>
-  <data name="Challenge7" xml:space="preserve">
     <value>Draw only with dots</value>
   </data>
-  <data name="Challenge8" xml:space="preserve">
+  <data name="Challenge7" xml:space="preserve">
     <value>Draw with a single stroke</value>
   </data>
-  <data name="Challenge9" xml:space="preserve">
+  <data name="Challenge8" xml:space="preserve">
     <value>Draw as small as you can</value>
+  </data>
+  <data name="Challenge9" xml:space="preserve">
+    <value>Draw your favorite fictional character</value>
   </data>
 </root>

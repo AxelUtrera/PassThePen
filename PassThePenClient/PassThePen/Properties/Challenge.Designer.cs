@@ -70,20 +70,11 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Dibuja a tu personaje de ficción favorito.
+        ///   Busca una cadena traducida similar a Dibuja tu retrato.
         /// </summary>
         public static string Challenge10 {
             get {
                 return ResourceManager.GetString("Challenge10", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Dibuja tu retrato.
-        /// </summary>
-        public static string Challenge11 {
-            get {
-                return ResourceManager.GetString("Challenge11", resourceCulture);
             }
         }
         
@@ -124,7 +115,7 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Dibuja lo contrario a lo solicitado.
+        ///   Busca una cadena traducida similar a Dibuja solo con puntos.
         /// </summary>
         public static string Challenge6 {
             get {
@@ -133,7 +124,7 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Dibuja solo con puntos.
+        ///   Busca una cadena traducida similar a Dibuja con un solo trazo.
         /// </summary>
         public static string Challenge7 {
             get {
@@ -142,7 +133,7 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Dibuja con un solo trazo.
+        ///   Busca una cadena traducida similar a Dibuja lo más pequeño que puedas.
         /// </summary>
         public static string Challenge8 {
             get {
@@ -151,7 +142,7 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Dibuja lo más pequeño que puedas.
+        ///   Busca una cadena traducida similar a Dibuja a tu personaje de ficción favorito.
         /// </summary>
         public static string Challenge9 {
             get {

@@ -129,12 +129,24 @@
     <value>Confirm Password</value>
     <comment>Used by: Change Password</comment>
   </data>
+  <data name="ChangePassword_CurrentPasswordError_Message" xml:space="preserve">
+    <value>The current password is incorrect</value>
+    <comment>Used by: Change Password</comment>
+  </data>
   <data name="ChangePassword_Invalid_Fields_Label" xml:space="preserve">
     <value>Passwords do not match</value>
     <comment>Used by: Change Password</comment>
   </data>
   <data name="ChangePassword_NewPassword_Label" xml:space="preserve">
     <value>New Password</value>
+    <comment>Used by: Change Password</comment>
+  </data>
+  <data name="ChangePassword_PasswordChanged_Message" xml:space="preserve">
+    <value>Password updated successfully</value>
+    <comment>Used by: Change Password</comment>
+  </data>
+  <data name="ChangePassword_PasswordNotChanged_Message" xml:space="preserve">
+    <value>The password could not be updated</value>
     <comment>Used by: Change Password</comment>
   </data>
   <data name="ChangePassword_SavePassword_Button" xml:space="preserve">
@@ -161,12 +173,20 @@
     <value>Username</value>
     <comment>Used by: Login.</comment>
   </data>
+  <data name="Login_ErrorLogin_Message" xml:space="preserve">
+    <value>There was an error in the validation, try again</value>
+    <comment>Used by: Login</comment>
+  </data>
   <data name="Login_Forgot_Password_Button" xml:space="preserve">
     <value>Forgot your password?</value>
     <comment>Used by: login</comment>
   </data>
   <data name="Login_GuestClic_Label" xml:space="preserve">
     <value>Login as Guest</value>
+    <comment>Used by: Login</comment>
+  </data>
+  <data name="Login_InvalidData_Message" xml:space="preserve">
+    <value>Invalid data, please verify the information</value>
     <comment>Used by: Login</comment>
   </data>
   <data name="Login_Login_Button" xml:space="preserve">
@@ -185,6 +205,10 @@
     <value>You still do not have an account?</value>
     <comment>Used by: login</comment>
   </data>
+  <data name="Mach_MatchWinner_Message" xml:space="preserve">
+    <value>The winner is </value>
+    <comment>Used by: Match</comment>
+  </data>
   <data name="MainManu_FriendList_Label" xml:space="preserve">
     <value>Friend list</value>
     <comment>Used by: MainMenu</comment>
@@ -195,6 +219,10 @@
   </data>
   <data name="MainMenu_ExitGroup_Button" xml:space="preserve">
     <value>Leave group</value>
+    <comment>Used by: MainMenu</comment>
+  </data>
+  <data name="MainMenu_FriendRequestSend" xml:space="preserve">
+    <value>The friend request was sent successfully</value>
     <comment>Used by: MainMenu</comment>
   </data>
   <data name="MainMenu_FriendRequests_Button" xml:space="preserve">
@@ -213,8 +241,44 @@
     <value>Friends</value>
     <comment>Used by: MainMenu</comment>
   </data>
+  <data name="MainMenu_FullGroup_Message" xml:space="preserve">
+    <value>The group is full</value>
+    <comment>Used by: MainMenu</comment>
+  </data>
   <data name="MainMenu_GameMenu_Label" xml:space="preserve">
     <value>Game menu</value>
+    <comment>Used by: MainMenu</comment>
+  </data>
+  <data name="MainMenu_InvitationBody_Message" xml:space="preserve">
+    <value>has invited you to a game, would you like to join?</value>
+    <comment>Used by: MainMenu</comment>
+  </data>
+  <data name="MainMenu_InvitationConfirmation_Message" xml:space="preserve">
+    <value>You have joined the game</value>
+    <comment>Used by: MainMenu</comment>
+  </data>
+  <data name="MainMenu_InvitationTitle_Message" xml:space="preserve">
+    <value>Match invitation</value>
+    <comment>Used by: MainMenu</comment>
+  </data>
+  <data name="MainMenu_LeaveGroup_Message" xml:space="preserve">
+    <value>Leave the group?</value>
+    <comment>Used by: MainMenu</comment>
+  </data>
+  <data name="MainMenu_LeaveHost_Message" xml:space="preserve">
+    <value>The host has leave the group :(</value>
+    <comment>Used by: MainMenu</comment>
+  </data>
+  <data name="MainMenu_PlayerInGroup_Message" xml:space="preserve">
+    <value>The player is already in the group</value>
+    <comment>Used by: MainMenu</comment>
+  </data>
+  <data name="MainMenu_PlayerNotExist_Message" xml:space="preserve">
+    <value>The player you want to add does not exist, try again</value>
+    <comment>Used by: MainMenu</comment>
+  </data>
+  <data name="MainMenu_PlayerOffline_Message" xml:space="preserve">
+    <value>The player is offline</value>
     <comment>Used by: MainMenu</comment>
   </data>
   <data name="MainMenu_Play_Button" xml:space="preserve">
@@ -227,6 +291,22 @@
   </data>
   <data name="Match_CurrentDraw_Label" xml:space="preserve">
     <value>Current Draw</value>
+    <comment>Used by: Match</comment>
+  </data>
+  <data name="Match_LeaveMatch_Message" xml:space="preserve">
+    <value>Leave match?</value>
+    <comment>Used by: Match</comment>
+  </data>
+  <data name="Match_NotHostRemove_Message" xml:space="preserve">
+    <value>Only the host can remove players</value>
+    <comment>Used by: Match</comment>
+  </data>
+  <data name="Match_NotHostTurn_Message" xml:space="preserve">
+    <value>Only the host can start the turn</value>
+    <comment>Used by: MainMenu</comment>
+  </data>
+  <data name="Match_RemovePlayer_Message" xml:space="preserve">
+    <value>Remove player?</value>
     <comment>Used by: Match</comment>
   </data>
   <data name="Match_ScorePlayer_Label" xml:space="preserve">
@@ -265,6 +345,10 @@
     <value>Email</value>
     <comment>Used by: Profile</comment>
   </data>
+  <data name="Profile_ImageFile_Message" xml:space="preserve">
+    <value>Image File (*.jpg;*.bmp;*.png)|*.jpg;*.bmp;*.png</value>
+    <comment>Used by: Profile</comment>
+  </data>
   <data name="Profile_Invalid_Fields_Label" xml:space="preserve">
     <value>Please fill all the fields</value>
     <comment>Used by: Profile</comment>
@@ -279,6 +363,18 @@
   </data>
   <data name="Profile_SaveProfile_Button" xml:space="preserve">
     <value>Save</value>
+    <comment>Used by: Profile</comment>
+  </data>
+  <data name="Profile_SelectImage_Message" xml:space="preserve">
+    <value>Select a profile image</value>
+    <comment>Used by: Profile</comment>
+  </data>
+  <data name="Profile_UpdatedProfile_Message" xml:space="preserve">
+    <value>The profile has been updated succesfully</value>
+    <comment>Used by: Profile</comment>
+  </data>
+  <data name="Profile_UpdateProfileError_Message" xml:space="preserve">
+    <value>Could not update profile</value>
     <comment>Used by: Profile</comment>
   </data>
   <data name="Profile_Username_Label" xml:space="preserve">
@@ -297,9 +393,25 @@
     <value>Enter the validation code</value>
     <comment>Used by: Recover Password</comment>
   </data>
+  <data name="RecoverPassword_IncorrectCode_Message" xml:space="preserve">
+    <value>Incorrect code</value>
+    <comment>Used by: RecoverPassword</comment>
+  </data>
+  <data name="RecoverPassword_InvalidEmail_Message" xml:space="preserve">
+    <value>Invalid email</value>
+    <comment>Used by: RecoverPassword</comment>
+  </data>
   <data name="RecoverPassword_NewPassword_Label" xml:space="preserve">
     <value>Type your new password</value>
     <comment>Used by: Recover Password</comment>
+  </data>
+  <data name="RecoverPassword_PasswordNotUpdated_Message" xml:space="preserve">
+    <value>Failed to change password</value>
+    <comment>Used by:RecoverPassword</comment>
+  </data>
+  <data name="RecoverPassword_PasswordUpdated_Message" xml:space="preserve">
+    <value>The password has been changed successfully</value>
+    <comment>Used by: RecoverPassword</comment>
   </data>
   <data name="RecoverPassword_RepitPassword_Label" xml:space="preserve">
     <value>Retype your password</value>
@@ -309,13 +421,41 @@
     <value>Send</value>
     <comment>Used by: Recover Password</comment>
   </data>
+  <data name="RecoverPassword_Timeout_Message" xml:space="preserve">
+    <value>Waiting time exceeded, please try again later</value>
+    <comment>Used by: RecoverPassword</comment>
+  </data>
   <data name="RecoverPassword_Title_Label" xml:space="preserve">
     <value>Forgot your password?</value>
+    <comment>Used by: Recover Password</comment>
+  </data>
+  <data name="RecoverPassword_UnmatchedPassword_Message" xml:space="preserve">
+    <value>Error in the passwords please verify them</value>
+    <comment>Used by: RecoverPassword</comment>
+  </data>
+  <data name="RecoverPassword_ValidationCodeSendError_Message" xml:space="preserve">
+    <value>Failed to send validation code</value>
+    <comment>Used by: Recover Password</comment>
+  </data>
+  <data name="RecoverPassword_ValidationCodeSend_Message" xml:space="preserve">
+    <value>Validation code sent successfully</value>
+    <comment>Used by: Recover Password</comment>
+  </data>
+  <data name="RecoverPassword_ValidationCodeTitle_Message" xml:space="preserve">
+    <value>Validation code</value>
     <comment>Used by: Recover Password</comment>
   </data>
   <data name="RecoverPassword_Valid_Button" xml:space="preserve">
     <value>Validate</value>
     <comment>Used by: Recover Password</comment>
+  </data>
+  <data name="Register_ErrorRegister_Message" xml:space="preserve">
+    <value>An error occurred, the player could not be registered</value>
+    <comment>Used by: Register</comment>
+  </data>
+  <data name="Register_InvalidFields_Message" xml:space="preserve">
+    <value>Invalid fields please verify</value>
+    <comment>Used by: Register</comment>
   </data>
   <data name="Register_LastName_Label" xml:space="preserve">
     <value>Last Name</value>
@@ -335,6 +475,10 @@
   </data>
   <data name="Register_Repeat_Password" xml:space="preserve">
     <value>Confirm Password</value>
+    <comment>Used by: Register</comment>
+  </data>
+  <data name="Register_SuccessfulRegister_Message" xml:space="preserve">
+    <value>New player successfully registered</value>
     <comment>Used by: Register</comment>
   </data>
 </root>

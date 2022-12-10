@@ -20,6 +20,8 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Xml.Serialization;
 using System.Security.Policy;
+using System.Reflection;
+using System.Resources;
 
 namespace PassThePen
 {
@@ -28,6 +30,7 @@ namespace PassThePen
     /// </summary>
     public partial class MainMenu : Window, PassThePenService.IPlayerConnectionCallback
     {
+        ResourceManager messageResource = new ResourceManager("PassThePen.Properties.Resources", Assembly.GetExecutingAssembly());
         public static string username { set; get; }
         private List<string> listUsernameStrings = new List<string>();
         private List<Friends> friendList = new List<Friends>();
@@ -36,10 +39,10 @@ namespace PassThePen
         public int NotifyMatchInvitation(string invitingPlayer)
         {
             int operationResult = 500;
-            var response = MessageBox.Show("acepta la invitacion para unirte a su grupo.", invitingPlayer + " te ha invitado a una partida ¿Deseas unirte? ", MessageBoxButton.YesNo);
+            var response = MessageBox.Show(messageResource.GetString("MainMenu_InvitationBody_Message"), invitingPlayer + messageResource.GetString("MainMenu_InvitationTitle_Message"), MessageBoxButton.YesNo, MessageBoxImage.Information);
             if (response == MessageBoxResult.Yes)
             {
-                MessageBox.Show("te has unido al grupo");
+                MessageBox.Show(messageResource.GetString("MainMenu_InvitationConfirmation_Message"));
                 operationResult = 200;
             }
             return operationResult;
@@ -80,7 +83,7 @@ namespace PassThePen
         public void OpenExitHostMessage()
         {
             GetDataPlayersInGoup();
-            MessageBox.Show(username, "El host ha abandonado la partida :(");
+            MessageBox.Show(username, messageResource.GetString("MainMenu_LeaveHost_Message"));
         }
 
 
@@ -316,11 +319,11 @@ namespace PassThePen
                     friendUsername = username
                 };
                 client.SendFriendRequests(friendRequest);
-                MessageBox.Show("La solicitud de amistad fue enviada con exito");
+                MessageBox.Show(messageResource.GetString("MainMenu_FriendRequestSend"));
             }
             else
             {
-                MessageBox.Show("El usuario que intentas agregar no existe, intentalo nuevamente");
+                MessageBox.Show(messageResource.GetString("MainMenu_PlayerNotExist_Message"));
             }
 
         }
@@ -347,17 +350,17 @@ namespace PassThePen
                 }
                 else
                 {
-                    MessageBox.Show("El jugador ya se encuentra en un grupo");
+                    MessageBox.Show(messageResource.GetString("MainMenu_PlayerInGroup_Message"));
                 }
             }
             else
             {
-                MessageBox.Show("El jugador no se encuentra conectado");
+                MessageBox.Show(messageResource.GetString("MainMenu_PlayerOffline_Message"));
             }
 
             if (client.GroupIsNotFull() != groupIsNotFull)
             {
-                MessageBox.Show("El grupo se encuentra lleno");
+                MessageBox.Show(messageResource.GetString("MainMenu_FullGroup_Message"));
             }
         }
 
@@ -373,9 +376,10 @@ namespace PassThePen
 
         public void OpenMatchWindow()
         {
+            PlacePlayersInGroup(new List<Player>());
             Match match = new Match();
             match.Show();
-            Close();
+            this.Visibility = Visibility.Hidden;
         }
 
 
@@ -465,7 +469,7 @@ namespace PassThePen
         {
             InstanceContext context = new InstanceContext(this);
             PassThePenService.PlayerConnectionClient client = new PassThePenService.PlayerConnectionClient(context);
-            var response = MessageBox.Show("Aviso", "¿Esta seguro de abandonar el grupo?", MessageBoxButton.YesNo);
+            var response = MessageBox.Show(messageResource.GetString("MainMenu_LeaveGroup_Message"), "",  MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (response == MessageBoxResult.Yes)
             {
                 Button_LeaveGroup.Visibility = Visibility.Collapsed;

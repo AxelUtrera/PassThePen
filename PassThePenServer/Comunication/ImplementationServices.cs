@@ -389,18 +389,24 @@ namespace Comunication
 
         public void ObtainMatchWinner()
         {
+            int operationOk = 200;
             int maxScore = playersInGroup.Max(s => s.score);
             ConnectedUser winner = playersInGroup.Where(w => w.score == maxScore).FirstOrDefault();
 
             MatchLogic matchLogic = new MatchLogic();
             int result = matchLogic.AddMatchWinner(winner.username);
+            playersDraws.Clear();
+            turnNumber= 0;
 
-            if(result == 200)
+            if(result == operationOk)
             {
-                foreach(ConnectedUser user in playersInGroup)
+                foreach(ConnectedUser player in playersInGroup)
                 {
-                    user.matchContext.GetCallbackChannel<IMatchCallback>().NotifyWinner(winner.username);
+                    users.Where(u => u.username == player.username).First().score = 0;
+                    player.matchContext.GetCallbackChannel<IMatchCallback>().NotifyWinner(winner.username);
+                    
                 }
+                playersInGroup.Clear();
             }
         }
 
@@ -417,11 +423,42 @@ namespace Comunication
 
             ConnectedUser removedPlayer = playersInGroup.Where(u => u.username == username).FirstOrDefault();
             removedPlayer.matchContext.GetCallbackChannel<IMatchCallback>().CloseMatchWindow();
+            users.Where(u => u.username == removedPlayer.username).First().score = 0;
+
             playersInGroup.Remove(removedPlayer);
+            playersDraws.Remove(removedPlayer.username);
 
             foreach (ConnectedUser user in playersInGroup)
             {
                 user.matchContext.GetCallbackChannel<IMatchCallback>().UpdateMatchPlayers();
+            }
+        }
+
+        public void LeaveMatch(string username)
+        {
+            ConnectedUser leavePlayer = playersInGroup.Where(u => u.username == username).FirstOrDefault();
+
+            if(leavePlayer.hostState == true)
+            {
+                foreach (ConnectedUser user in playersInGroup)
+                {
+                    users.Where(u => u.username == user.username).First().score = 0;
+                    user.matchContext.GetCallbackChannel<IMatchCallback>().CloseMatchWindow();
+                }
+                playersInGroup.Clear();
+                playersDraws.Clear();
+                turnNumber = 0;
+            }
+            else
+            {
+                leavePlayer.matchContext.GetCallbackChannel<IMatchCallback>().CloseMatchWindow();
+                users.Where(u => u.username == leavePlayer.username).First().score = 0;
+                playersInGroup.Remove(leavePlayer);
+
+                foreach (ConnectedUser user in playersInGroup)
+                {
+                    user.matchContext.GetCallbackChannel<IMatchCallback>().UpdateMatchPlayers();
+                }
             }
         }
     }

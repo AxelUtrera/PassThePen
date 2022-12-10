@@ -520,6 +520,13 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
+      <xs:element name="LeaveMatch">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="DistributeCard">
         <xs:complexType>
           <xs:sequence>
@@ -953,6 +960,9 @@
   <wsdl:message name="IMatchManagement_RemoveMatchPlayer_InputMessage">
     <wsdl:part name="parameters" element="tns:RemoveMatchPlayer" />
   </wsdl:message>
+  <wsdl:message name="IMatchManagement_LeaveMatch_InputMessage">
+    <wsdl:part name="parameters" element="tns:LeaveMatch" />
+  </wsdl:message>
   <wsdl:message name="IMatchManagement_DistributeCard_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:DistributeCard" />
   </wsdl:message>
@@ -1154,6 +1164,9 @@
     </wsdl:operation>
     <wsdl:operation name="RemoveMatchPlayer">
       <wsdl:input wsaw:Action="http://tempuri.org/IMatchManagement/RemoveMatchPlayer" message="tns:IMatchManagement_RemoveMatchPlayer_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LeaveMatch">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchManagement/LeaveMatch" message="tns:IMatchManagement_LeaveMatch_InputMessage" />
     </wsdl:operation>
     <wsdl:operation name="DistributeCard">
       <wsdl:output wsaw:Action="http://tempuri.org/IMatchManagement/DistributeCard" message="tns:IMatchManagement_DistributeCard_OutputCallbackMessage" />
@@ -1543,6 +1556,12 @@
     </wsdl:operation>
     <wsdl:operation name="RemoveMatchPlayer">
       <soap12:operation soapAction="http://tempuri.org/IMatchManagement/RemoveMatchPlayer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="LeaveMatch">
+      <soap12:operation soapAction="http://tempuri.org/IMatchManagement/LeaveMatch" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

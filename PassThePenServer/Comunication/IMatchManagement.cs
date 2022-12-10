@@ -37,6 +37,9 @@ namespace Comunication
 
         [OperationContract(IsOneWay = true)]
         void RemoveMatchPlayer(string username);
+
+        [OperationContract(IsOneWay = true)]
+        void LeaveMatch(string username);
     }
 
     [ServiceContract]
