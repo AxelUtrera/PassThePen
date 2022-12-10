@@ -178,6 +178,15 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Error al enviar el correo electronico.
+        /// </summary>
+        public static string Global_EmailError_Message {
+            get {
+                return ResourceManager.GetString("Global_EmailError_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Numero de caracteres excedidos. Numero maximo: 50.
         /// </summary>
         public static string Global_Error__LastName_Label {

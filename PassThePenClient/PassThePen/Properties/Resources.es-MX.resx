@@ -171,21 +171,27 @@
   </data>
   <data name="Global_Error_Email_Label" xml:space="preserve">
     <value>Favor de revisar el formato de su correo electronico</value>
+    <comment>Used by: Register, Profile</comment>
   </data>
   <data name="Global_Error_Name_Label" xml:space="preserve">
     <value>Numero de caracteres excedidos. Numero maximo: 50</value>
+    <comment>Used by: Register, Profile</comment>
   </data>
   <data name="Global_Error_Password_Label" xml:space="preserve">
     <value>Debe contener: *, +, @, #, $, %. Una mayuscula y un numero. Longitud entre 8-16.</value>
+    <comment>Used by: Register, Recover Password, Change Password</comment>
   </data>
   <data name="Global_Error_Repit_Password" xml:space="preserve">
     <value>Las contraseñas no son iguales</value>
+    <comment>Used by: Register, Recover Password, Change Password</comment>
   </data>
   <data name="Global_Error_Username_Label" xml:space="preserve">
     <value>Numero de caracteres excedidos. Numero maximo: 20</value>
+    <comment>Used by: Register, Recover Password</comment>
   </data>
   <data name="Global_Error__LastName_Label" xml:space="preserve">
     <value>Numero de caracteres excedidos. Numero maximo: 50</value>
+    <comment>Used by: Register, Profile</comment>
   </data>
   <data name="Global_Label_Password" xml:space="preserve">
     <value>Contraseña</value>
@@ -498,5 +504,9 @@
   <data name="Register_tittle" xml:space="preserve">
     <value>Registrar nuevo usuario</value>
     <comment>Used by: Register</comment>
+  </data>
+  <data name="Global_EmailError_Message" xml:space="preserve">
+    <value>Error al enviar el correo electronico</value>
+    <comment>Used by: Register, Recover Password</comment>
   </data>
 </root>

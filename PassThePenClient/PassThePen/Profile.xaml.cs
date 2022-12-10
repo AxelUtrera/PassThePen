@@ -47,7 +47,6 @@ namespace PassThePen
                     email = TextBox_Email.Text,
                     profileImage = image
                 };
-
                 if (client.UpdateDataPlayer(MainMenu.username, player) == 200)
                 {
                     MessageBox.Show(messageResource.GetString("Profile_UpdatedProfile_Message"));
@@ -84,7 +83,6 @@ namespace PassThePen
             label_Error_Lastname.Visibility = Visibility.Hidden;
             label_Error_Email.Visibility = Visibility.Hidden;
             Boolean isValid = true;
-
             if (!ValidateNullFields())
             {
                 isValid = false;
