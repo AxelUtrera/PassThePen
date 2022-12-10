@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,6 +24,8 @@ namespace PassThePen
     /// </summary>
     public partial class Profile : Window
     {
+        ResourceManager messageResource = new ResourceManager("PassThePen.Properties.Resources", Assembly.GetExecutingAssembly());
+
         public Profile()
         {
             InitializeComponent();
@@ -46,11 +50,11 @@ namespace PassThePen
 
                 if (client.UpdateDataPlayer(MainMenu.username, player) == 200)
                 {
-                    MessageBox.Show("Perfil actualizado con exito");
+                    MessageBox.Show(messageResource.GetString("Profile_UpdatedProfile_Message"));
                 }
                 else
                 {
-                    MessageBox.Show("No se pudo actualizar el perfil");
+                    MessageBox.Show(messageResource.GetString("Profile_UpdateProfileError_Message"));
                 }
             }
             client.Close();
@@ -174,8 +178,8 @@ namespace PassThePen
         private void Button_Select_Image_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Title = "Select a profile image";
-            openFileDialog.Filter = "Image File (*.jpg;*.bmp;*.png)|*.jpg;*.bmp;*.png";
+            openFileDialog.Title = messageResource.GetString("Profile_SelectImage_Message");
+            openFileDialog.Filter = messageResource.GetString("Profile_ImageFile_Message");
             if (openFileDialog.ShowDialog() == true)
             {
                 BitmapImage image = new BitmapImage(new Uri(openFileDialog.FileName));

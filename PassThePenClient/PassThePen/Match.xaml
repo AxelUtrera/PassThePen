@@ -19,8 +19,7 @@
         <Label Content="{x:Static p:Resources.Match_CurrentDraw_Label}" HorizontalAlignment="Left" Margin="150,30,0,0" VerticalAlignment="Top" FontSize="20"/>
         <Image HorizontalAlignment="Right" Height="36" Margin="0,70,190,0" VerticalAlignment="Top" Width="34" Source="Img\Icon_Score.png"/>
         <Label x:Name="Label_Score" Content="50" HorizontalAlignment="Right" Margin="0,62,150,0" VerticalAlignment="Top" FontSize="30"/>
-        <Label x:Name="Label_CurrentDraw" Content="Draw" HorizontalAlignment="Left" Margin="170,60,0,0" VerticalAlignment="Top" FontSize="30"/>
-        
+
         <Border BorderThickness="5" CornerRadius="10,10,10,10" BorderBrush="Black" Margin="380,142,405,15">
             <Grid>
                 <InkCanvas x:Name="InkCanvas_DrawTable" x:FieldModifier="public" Background="White" Opacity="1" EditingMode="Ink" ForceCursor="True" Cursor="Pen" Margin="5,5,5,5" >
@@ -142,5 +141,6 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
+        <TextBlock x:Name="Label_CurrentDraw" HorizontalAlignment="Left" Margin="10,72,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" FontSize="25" Width="439" TextAlignment="Center"/>
     </Grid>
 </Window>

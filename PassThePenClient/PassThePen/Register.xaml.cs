@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +25,8 @@ namespace PassThePen
     /// </summary>
     public partial class Register : Window
     {
+        ResourceManager messageResource = new ResourceManager("PassThePen.Properties.Resources", Assembly.GetExecutingAssembly());
+
         private Player player = new Player();
         private int validationCode;
         private int resendNumber = 0;
@@ -60,7 +64,7 @@ namespace PassThePen
                 validationCode = randomNumber.Next(100000, 1000000);
                 if (client.CodeEmail(player.email, "Validation Code", validationCode) == 200)
                 {
-                    MessageBox.Show("Código de validación enviado a su correo favor de revisarlo");
+                    MessageBox.Show(messageResource.GetString("Register_SuccessfulRegister_Message"));
                 }
             }   
         }
@@ -203,14 +207,14 @@ namespace PassThePen
                 statusCode = client.AddPlayer(player);
                 if (statusCode == statusOK)
                 {
-                    MessageBox.Show("Nuevo jugador registrado con éxito");
+                    MessageBox.Show(messageResource.GetString("Register_SuccessfulRegister_Message"));
                     Login login = new Login();
                     login.Show();
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Upss ocurrio un error, no se ha podido registrar al Jugador");
+                    MessageBox.Show(messageResource.GetString("Register_ErrorRegister_Message"));
                 }
                 client.Close();
             }
@@ -229,7 +233,7 @@ namespace PassThePen
                 result = false;
                 MessageBox.Show("Longitud incorrecta, el código de validación no excede los 6 caracteres");
             }
-            if (!Validation.ValidateFormat(TexBox_Code_Validation.Text, "^[0-9]+$"))
+            if (Validation.ValidateFormat(TexBox_Code_Validation.Text, "^[0-9]+$"))
             {
                 if (Int32.Parse(TexBox_Code_Validation.Text) != validationCode)
                 {

@@ -121,9 +121,6 @@
     <value>Dibuja con tu mano no dominante</value>
   </data>
   <data name="Challenge10" xml:space="preserve">
-    <value>Dibuja a tu personaje de ficción favorito</value>
-  </data>
-  <data name="Challenge11" xml:space="preserve">
     <value>Dibuja tu retrato</value>
   </data>
   <data name="Challenge2" xml:space="preserve">
@@ -139,15 +136,15 @@
     <value>Dibuja a tu crush</value>
   </data>
   <data name="Challenge6" xml:space="preserve">
-    <value>Dibuja lo contrario a lo solicitado</value>
-  </data>
-  <data name="Challenge7" xml:space="preserve">
     <value>Dibuja solo con puntos</value>
   </data>
-  <data name="Challenge8" xml:space="preserve">
+  <data name="Challenge7" xml:space="preserve">
     <value>Dibuja con un solo trazo</value>
   </data>
-  <data name="Challenge9" xml:space="preserve">
+  <data name="Challenge8" xml:space="preserve">
     <value>Dibuja lo más pequeño que puedas</value>
+  </data>
+  <data name="Challenge9" xml:space="preserve">
+    <value>Dibuja a tu personaje de ficción favorito</value>
   </data>
 </root>

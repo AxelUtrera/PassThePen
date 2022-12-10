@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,6 +25,8 @@ namespace PassThePen
     /// </summary>
     public partial class Login : Window
     {
+        ResourceManager messageResource = new ResourceManager("PassThePen.Properties.Resources", Assembly.GetExecutingAssembly());
+
         public Login()
         {
             InitializeComponent();
@@ -50,12 +54,12 @@ namespace PassThePen
                 }
                 else
                 {
-                    MessageBox.Show("Hubo un error en la validacion");
+                    MessageBox.Show(messageResource.GetString("Login_ErrorLogin_Message"));
                 }
             }
             else
             {
-                MessageBox.Show("Datos invalidos: Favor de verificar los datos ingresados");
+                MessageBox.Show(messageResource.GetString("Login_InvalidData_Message"));
             }
            
         }

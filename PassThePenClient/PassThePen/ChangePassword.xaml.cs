@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,6 +22,8 @@ namespace PassThePen
     /// </summary>
     public partial class ChangePassword : Window
     {
+        ResourceManager messageResource = new ResourceManager("PassThePen.Properties.Resources", Assembly.GetExecutingAssembly());
+
         public ChangePassword()
         {
             InitializeComponent();
@@ -41,19 +45,18 @@ namespace PassThePen
                     string password = PasswordBox_ConfirmPassword.Password;
                     if (client.UpdatePlayerPassword(MainMenu.username, password) == 200)
                     {
-                        MessageBox.Show("Contraseña actualizada con exito", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                        MessageBox.Show(messageResource.GetString("ChangePassword_PasswordChanged_Message"), "", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                     else
                     {
-                        MessageBox.Show("La contraseña no pudo ser actualizada", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show(messageResource.GetString("ChangePassword_PasswordNotChanged_Message"), "", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
-                else
-                {
-                    MessageBox.Show("La contraseña actual es incorrecta", "", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
             }
-            
+            else
+            {
+                MessageBox.Show(messageResource.GetString("ChangePassword_CurrentPasswordError_Message"), "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             client.Close();
         }
 
