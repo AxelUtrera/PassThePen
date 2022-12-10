@@ -80,28 +80,86 @@ namespace PassThePen
         private Boolean ValidateInformation()
         {
             InvalidFields_Label.Visibility = Visibility.Hidden;
+            label_Error_Name.Visibility = Visibility.Hidden;
+            label_Error_Lastname.Visibility = Visibility.Hidden;
+            label_Error_Email.Visibility = Visibility.Hidden;
             Boolean isValid = true;
-            if (TextBox_Email.Text.Equals("") || TextBox_Name.Text.Equals("") || TextBox_Lastname.Text.Equals(""))
-            {
-                InvalidFields_Label.Visibility = Visibility.Visible;
-                isValid = false;
-            }
 
-
-
-            if (!Validation.ValidateFormat(TextBox_Email.Text, "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"))
-            {
-                InvalidFields_Label.Visibility = Visibility.Visible;
-                isValid = false;
-            }
-
-            if (TextBox_Email.Text.Length > 100 || TextBox_Name.Text.Length > 50 || TextBox_Lastname.Text.Length > 50)
+            if (!ValidateNullFields())
             {
                 isValid = false;
             }
-
+            if (!FormatValidate())
+            {
+                isValid = false;
+            }
+            if (!ValidateLengthFields())
+            {
+                isValid = false;
+            }
             return isValid;
         }
+
+
+        private bool FormatValidate()
+        {
+            bool isValid = true;
+            if (!Validation.ValidateFormat(TextBox_Email.Text, "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"))
+            {
+                label_Error_Email.Visibility = Visibility.Visible;
+                isValid = false;               
+            }
+            if (!Validation.ValidateFormat(TextBox_Name.Text, @"^[A-Za-z\s@]*$") || !Validation.ValidateFormat(TextBox_Lastname.Text, @"^[A-Za-z\s@]*$"))
+            {
+                isValid = false;
+                MessageBox.Show("No se aceptan numeros o datos vacios en los apartados nombre y apellido");
+            }
+            return isValid;
+        }
+
+        private bool ValidateNullFields()
+        {
+            bool isValid = true;
+            if (string.IsNullOrEmpty(TextBox_Name.Text))
+            {
+                isValid = false;
+            }
+            if (string.IsNullOrEmpty(TextBox_Lastname.Text))
+            {
+                isValid = false;
+            }
+            if (string.IsNullOrEmpty(TextBox_Email.Text))
+            {
+                isValid = false;
+            }
+            if (!isValid)
+            {
+                InvalidFields_Label.Visibility = Visibility.Visible;
+            }
+            return isValid;
+        }
+        private bool ValidateLengthFields()
+        {
+            bool isValid = true;
+
+            if (TextBox_Name.Text.Length > 50)
+            {
+                label_Error_Name.Visibility = Visibility.Visible;
+                isValid = false;
+            }
+            if (TextBox_Lastname.Text.Length > 50)
+            {
+                label_Error_Lastname.Visibility = Visibility.Visible;
+                isValid = false;
+            }
+            if (TextBox_Email.Text.Length > 100)
+            {
+                label_Error_Email.Visibility = Visibility.Visible;
+                isValid = false;
+            }
+            return isValid;
+        }
+
 
 
         private void Button_Cancel_Click(object sender, RoutedEventArgs e)

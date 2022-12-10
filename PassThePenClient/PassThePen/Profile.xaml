@@ -16,10 +16,13 @@
         <TextBox x:Name="TextBox_Username" HorizontalAlignment="Center" Margin="0,208,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="420" IsEnabled="False"/>
         <Label Content="{x:Static p:Resources.Profile_Name_Label}" HorizontalAlignment="Left" Margin="40,242,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="TextBox_Name" HorizontalAlignment="Center" Margin="0,268,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="420"/>
+        <Label x:Name="label_Error_Name" Margin="40,280,0,0" FontSize="10" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{x:Static p:Resources.Global_Error_Name_Label}" Foreground="Red" Visibility="Hidden"/>
         <Label Content="{x:Static p:Resources.Profile_LastName_Label}" HorizontalAlignment="Left" Margin="40,306,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.079,0.515"/>
         <TextBox x:Name="TextBox_Lastname" HorizontalAlignment="Center" Margin="0,332,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="420"/>
+        <Label x:Name="label_Error_Lastname" Margin="40,344,0,0" FontSize="10" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{x:Static p:Resources.Global_Error__LastName_Label}" Foreground="Red" Visibility="Hidden"/>
         <Label Content="{x:Static p:Resources.Profile_Email_Label}" HorizontalAlignment="Left" Margin="40,369,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="TextBox_Email" HorizontalAlignment="Center" Margin="0,395,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="420"/>
+        <Label x:Name="label_Error_Email" Margin="40,407,0,0" FontSize="10" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{x:Static p:Resources.Global_Error_Email_Label}" Foreground="Red" Visibility="Hidden"/>
         <Button x:Name="Button_SaveChanges" Cursor="Hand" Margin="364,578,36,97" Width="100" Height="25" Foreground="White" FontSize="13" Click="Button_SaveProfileChanges_Click">
             <Button.Template>
                 <ControlTemplate TargetType="Button">

@@ -38,9 +38,9 @@ namespace PassThePen
         {
             PlayerManagementClient client = new PlayerManagementClient();
             string currentPassword = PasswordBox_CurrentPassword.Password;
-            if (AutenticatePassword(MainMenu.username, currentPassword) == 200)
+            if (ValidatePassword())
             {
-                if (ValidatePassword())
+                if (AutenticatePassword(MainMenu.username, currentPassword) == 200)
                 {
                     string password = PasswordBox_ConfirmPassword.Password;
                     if (client.UpdatePlayerPassword(MainMenu.username, password) == 200)
@@ -63,6 +63,7 @@ namespace PassThePen
         private Boolean ValidatePassword()
         {
             Label_InvalidPasswords.Visibility = Visibility.Hidden;
+            Label_Error_Passwords.Visibility = Visibility.Hidden;
             Boolean isValid = true;
             string currentPassword = PasswordBox_CurrentPassword.Password;
             string newPassword = PasswordBox_NewPassword.Password;
@@ -72,7 +73,26 @@ namespace PassThePen
                 Label_InvalidPasswords.Visibility = Visibility.Visible;
                 isValid = false;
             }
+            if (!ValidateNullFields(currentPassword, confirmPassword, newPassword))
+            {
+                isValid = false;
+            }
+            if (PasswordBox_CurrentPassword.Password.Length < 8 || PasswordBox_CurrentPassword.Password.Length > 16)
+            {
+                MessageBox.Show("La contraseña actual debe ser mayor de 8 y menor de 16 caracteres");
+                isValid = false;
+            }
+            if (!Validation.ValidateFormat(newPassword, "^(?=.*\\d)(?=.*[\\u0021-\\u002b\\u003c-\\u0040])(?=.*[A-Z])(?=.*[a-z])\\S{8,16}$"))
+            {
+                Label_Error_Passwords.Visibility = Visibility.Visible;
+                isValid = false;
+            }
+            return isValid;
+        }
 
+        private bool ValidateNullFields(string currentPassword, string confirmPassword, string newPassword)
+        {
+            bool isValid = true;
             if (string.IsNullOrEmpty(newPassword))
             {
                 Label_InvalidPasswords.Visibility = Visibility.Visible;
@@ -90,9 +110,9 @@ namespace PassThePen
                 Label_InvalidPasswords.Visibility = Visibility.Visible;
                 isValid = false;
             }
-            if (!Validation.ValidateFormat(newPassword, "^(?=.*\\d)(?=.*[\\u0021-\\u002b\\u003c-\\u0040])(?=.*[A-Z])(?=.*[a-z])\\S{8,16}$"))
+            if (!isValid)
             {
-                isValid = false;
+                MessageBox.Show("No se aceptan campos vacios, favor de llenar todos los campos");
             }
             return isValid;
         }
