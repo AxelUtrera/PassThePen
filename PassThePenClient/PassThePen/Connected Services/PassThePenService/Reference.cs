@@ -651,6 +651,12 @@ namespace PassThePen.PassThePenService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/SendMathInvitation", ReplyAction="http://tempuri.org/IPlayerConnection/SendMathInvitationResponse")]
         System.Threading.Tasks.Task SendMathInvitationAsync(string invitingPlayer, string invitedPlayer);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/LeaveGroup", ReplyAction="http://tempuri.org/IPlayerConnection/LeaveGroupResponse")]
+        void LeaveGroup(string usernamePlayer);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/LeaveGroup", ReplyAction="http://tempuri.org/IPlayerConnection/LeaveGroupResponse")]
+        System.Threading.Tasks.Task LeaveGroupAsync(string usernamePlayer);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/FindPlayerIsConected", ReplyAction="http://tempuri.org/IPlayerConnection/FindPlayerIsConectedResponse")]
         int FindPlayerIsConected(string usernamePlayer);
         
@@ -669,11 +675,11 @@ namespace PassThePen.PassThePenService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/GroupIsNotFull", ReplyAction="http://tempuri.org/IPlayerConnection/GroupIsNotFullResponse")]
         System.Threading.Tasks.Task<int> GroupIsNotFullAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/GetListUsernamesPlayersInGroup", ReplyAction="http://tempuri.org/IPlayerConnection/GetListUsernamesPlayersInGroupResponse")]
-        string[] GetListUsernamesPlayersInGroup();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/GetListPlayersInGroup", ReplyAction="http://tempuri.org/IPlayerConnection/GetListPlayersInGroupResponse")]
+        PassThePen.PassThePenService.Player[] GetListPlayersInGroup();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/GetListUsernamesPlayersInGroup", ReplyAction="http://tempuri.org/IPlayerConnection/GetListUsernamesPlayersInGroupResponse")]
-        System.Threading.Tasks.Task<string[]> GetListUsernamesPlayersInGroupAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/GetListPlayersInGroup", ReplyAction="http://tempuri.org/IPlayerConnection/GetListPlayersInGroupResponse")]
+        System.Threading.Tasks.Task<PassThePen.PassThePenService.Player[]> GetListPlayersInGroupAsync();
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPlayerConnection/StartMatch")]
         void StartMatch(string username);
@@ -685,14 +691,23 @@ namespace PassThePen.PassThePenService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IPlayerConnectionCallback {
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPlayerConnection/PlayersCallBack")]
-        void PlayersCallBack(PassThePen.PassThePenService.Friends[] friends);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPlayerConnection/RechargeFriends")]
+        void RechargeFriends(PassThePen.PassThePenService.Friends[] friends);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPlayerConnection/VisualizeButtonLeaveGroup")]
+        void VisualizeButtonLeaveGroup();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPlayerConnection/GetDataPlayersInGoup")]
+        void GetDataPlayersInGoup();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/NotifyMatchInvitation", ReplyAction="http://tempuri.org/IPlayerConnection/NotifyMatchInvitationResponse")]
         int NotifyMatchInvitation(string invitingPlayer);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPlayerConnection/OpenMatchWindow")]
         void OpenMatchWindow();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPlayerConnection/OpenExitHostMessage")]
+        void OpenExitHostMessage();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -763,6 +778,14 @@ namespace PassThePen.PassThePenService {
             return base.Channel.SendMathInvitationAsync(invitingPlayer, invitedPlayer);
         }
         
+        public void LeaveGroup(string usernamePlayer) {
+            base.Channel.LeaveGroup(usernamePlayer);
+        }
+        
+        public System.Threading.Tasks.Task LeaveGroupAsync(string usernamePlayer) {
+            return base.Channel.LeaveGroupAsync(usernamePlayer);
+        }
+        
         public int FindPlayerIsConected(string usernamePlayer) {
             return base.Channel.FindPlayerIsConected(usernamePlayer);
         }
@@ -787,12 +810,12 @@ namespace PassThePen.PassThePenService {
             return base.Channel.GroupIsNotFullAsync();
         }
         
-        public string[] GetListUsernamesPlayersInGroup() {
-            return base.Channel.GetListUsernamesPlayersInGroup();
+        public PassThePen.PassThePenService.Player[] GetListPlayersInGroup() {
+            return base.Channel.GetListPlayersInGroup();
         }
         
-        public System.Threading.Tasks.Task<string[]> GetListUsernamesPlayersInGroupAsync() {
-            return base.Channel.GetListUsernamesPlayersInGroupAsync();
+        public System.Threading.Tasks.Task<PassThePen.PassThePenService.Player[]> GetListPlayersInGroupAsync() {
+            return base.Channel.GetListPlayersInGroupAsync();
         }
         
         public void StartMatch(string username) {
@@ -831,6 +854,36 @@ namespace PassThePen.PassThePenService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/SetMatchOperationContext")]
         System.Threading.Tasks.Task SetMatchOperationContextAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/SendDraws")]
+        void SendDraws(string username, byte[] draw);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/SendDraws")]
+        System.Threading.Tasks.Task SendDrawsAsync(string username, byte[] draw);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManagement/GetPlayersScore", ReplyAction="http://tempuri.org/IMatchManagement/GetPlayersScoreResponse")]
+        System.Collections.Generic.Dictionary<string, int> GetPlayersScore();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManagement/GetPlayersScore", ReplyAction="http://tempuri.org/IMatchManagement/GetPlayersScoreResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, int>> GetPlayersScoreAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManagement/ObtainMatchWinner", ReplyAction="http://tempuri.org/IMatchManagement/ObtainMatchWinnerResponse")]
+        void ObtainMatchWinner();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManagement/ObtainMatchWinner", ReplyAction="http://tempuri.org/IMatchManagement/ObtainMatchWinnerResponse")]
+        System.Threading.Tasks.Task ObtainMatchWinnerAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManagement/GetHostState", ReplyAction="http://tempuri.org/IMatchManagement/GetHostStateResponse")]
+        bool GetHostState(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManagement/GetHostState", ReplyAction="http://tempuri.org/IMatchManagement/GetHostStateResponse")]
+        System.Threading.Tasks.Task<bool> GetHostStateAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/RemoveMatchPlayer")]
+        void RemoveMatchPlayer(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/RemoveMatchPlayer")]
+        System.Threading.Tasks.Task RemoveMatchPlayerAsync(string username);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -844,6 +897,18 @@ namespace PassThePen.PassThePenService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/ReturnStartTurnSignal")]
         void ReturnStartTurnSignal(int turnNumber);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/DistributeDraws")]
+        void DistributeDraws(System.Collections.Generic.Dictionary<string, byte[]> playersDraw);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/NotifyWinner")]
+        void NotifyWinner(string winner);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/UpdateMatchPlayers")]
+        void UpdateMatchPlayers();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManagement/CloseMatchWindow")]
+        void CloseMatchWindow();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -904,6 +969,46 @@ namespace PassThePen.PassThePenService {
         
         public System.Threading.Tasks.Task SetMatchOperationContextAsync(string username) {
             return base.Channel.SetMatchOperationContextAsync(username);
+        }
+        
+        public void SendDraws(string username, byte[] draw) {
+            base.Channel.SendDraws(username, draw);
+        }
+        
+        public System.Threading.Tasks.Task SendDrawsAsync(string username, byte[] draw) {
+            return base.Channel.SendDrawsAsync(username, draw);
+        }
+        
+        public System.Collections.Generic.Dictionary<string, int> GetPlayersScore() {
+            return base.Channel.GetPlayersScore();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, int>> GetPlayersScoreAsync() {
+            return base.Channel.GetPlayersScoreAsync();
+        }
+        
+        public void ObtainMatchWinner() {
+            base.Channel.ObtainMatchWinner();
+        }
+        
+        public System.Threading.Tasks.Task ObtainMatchWinnerAsync() {
+            return base.Channel.ObtainMatchWinnerAsync();
+        }
+        
+        public bool GetHostState(string username) {
+            return base.Channel.GetHostState(username);
+        }
+        
+        public System.Threading.Tasks.Task<bool> GetHostStateAsync(string username) {
+            return base.Channel.GetHostStateAsync(username);
+        }
+        
+        public void RemoveMatchPlayer(string username) {
+            base.Channel.RemoveMatchPlayer(username);
+        }
+        
+        public System.Threading.Tasks.Task RemoveMatchPlayerAsync(string username) {
+            return base.Channel.RemoveMatchPlayerAsync(username);
         }
     }
     
@@ -977,21 +1082,20 @@ namespace PassThePen.PassThePenService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PassThePenService.IDrawReviewService", CallbackContract=typeof(PassThePen.PassThePenService.IDrawReviewServiceCallback))]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PassThePenService.IDrawReviewService")]
     public interface IDrawReviewService {
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IDrawReviewService/SendDraws")]
-        void SendDraws(byte[] draw);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDrawReviewService/SetDrawReviewContext", ReplyAction="http://tempuri.org/IDrawReviewService/SetDrawReviewContextResponse")]
+        void SetDrawReviewContext(string username);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IDrawReviewService/SendDraws")]
-        System.Threading.Tasks.Task SendDrawsAsync(byte[] draw);
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IDrawReviewServiceCallback {
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDrawReviewService/SetDrawReviewContext", ReplyAction="http://tempuri.org/IDrawReviewService/SetDrawReviewContextResponse")]
+        System.Threading.Tasks.Task SetDrawReviewContextAsync(string username);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IDrawReviewService/DistributeDraws")]
-        void DistributeDraws(byte[][] playersDraws);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDrawReviewService/AddPlayerScore", ReplyAction="http://tempuri.org/IDrawReviewService/AddPlayerScoreResponse")]
+        void AddPlayerScore(System.Collections.Generic.Dictionary<string, int> playerScore);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDrawReviewService/AddPlayerScore", ReplyAction="http://tempuri.org/IDrawReviewService/AddPlayerScoreResponse")]
+        System.Threading.Tasks.Task AddPlayerScoreAsync(System.Collections.Generic.Dictionary<string, int> playerScore);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1000,34 +1104,41 @@ namespace PassThePen.PassThePenService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class DrawReviewServiceClient : System.ServiceModel.DuplexClientBase<PassThePen.PassThePenService.IDrawReviewService>, PassThePen.PassThePenService.IDrawReviewService {
+    public partial class DrawReviewServiceClient : System.ServiceModel.ClientBase<PassThePen.PassThePenService.IDrawReviewService>, PassThePen.PassThePenService.IDrawReviewService {
         
-        public DrawReviewServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
-                base(callbackInstance) {
+        public DrawReviewServiceClient() {
         }
         
-        public DrawReviewServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
-                base(callbackInstance, endpointConfigurationName) {
+        public DrawReviewServiceClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
         }
         
-        public DrawReviewServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
-                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        public DrawReviewServiceClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
         }
         
-        public DrawReviewServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        public DrawReviewServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
         }
         
-        public DrawReviewServiceClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(callbackInstance, binding, remoteAddress) {
+        public DrawReviewServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
         }
         
-        public void SendDraws(byte[] draw) {
-            base.Channel.SendDraws(draw);
+        public void SetDrawReviewContext(string username) {
+            base.Channel.SetDrawReviewContext(username);
         }
         
-        public System.Threading.Tasks.Task SendDrawsAsync(byte[] draw) {
-            return base.Channel.SendDrawsAsync(draw);
+        public System.Threading.Tasks.Task SetDrawReviewContextAsync(string username) {
+            return base.Channel.SetDrawReviewContextAsync(username);
+        }
+        
+        public void AddPlayerScore(System.Collections.Generic.Dictionary<string, int> playerScore) {
+            base.Channel.AddPlayerScore(playerScore);
+        }
+        
+        public System.Threading.Tasks.Task AddPlayerScoreAsync(System.Collections.Generic.Dictionary<string, int> playerScore) {
+            return base.Channel.AddPlayerScoreAsync(playerScore);
         }
     }
 }

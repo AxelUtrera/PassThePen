@@ -26,17 +26,22 @@ namespace PassThePen
     /// <summary>
     /// Lógica de interacción para Match.xaml
     /// </summary>
-    public partial class Match : Window, IMatchManagementCallback, IChatServicesCallback, IDrawReviewServiceCallback
+    public partial class Match : Window, IMatchManagementCallback, IChatServicesCallback
     {
 
         DispatcherTimer timer = new DispatcherTimer();
         private int selectedTime;
+        Dictionary<string, int> playerScore;
+        string username = MainMenu.username;
+        Boolean hostState;
 
         public Match()
         {
             InitializeComponent();
+            SetHostState(username);
             SetChatOperationContext(MainMenu.username);
             SetMatchOperationContext(MainMenu.username);
+            SetPlayersScoreTable();
         }
 
         private void Button_SetEraser_Click(object sender, RoutedEventArgs e)
@@ -105,7 +110,7 @@ namespace PassThePen
             PassThePenService.ChatServicesClient client = new ChatServicesClient(context);
 
             string username = MainMenu.username;
-            String message = TextBox_Message.Text;
+            string message = TextBox_Message.Text;
             if(message != "")
             {
                 TextBox_Message.Clear();
@@ -123,13 +128,23 @@ namespace PassThePen
 
         private void Button_StartTurn_Click(object sender, RoutedEventArgs e)
         {
-            InstanceContext instanceContext = new InstanceContext(this);
-            PassThePenService.MatchManagementClient client = new MatchManagementClient(instanceContext);
-            client.StartTurnSignal(MainMenu.username);
+            if (hostState)
+            {
+                InstanceContext instanceContext = new InstanceContext(this);
+                PassThePenService.MatchManagementClient client = new MatchManagementClient(instanceContext);
+                client.StartTurnSignal(MainMenu.username);
+            }
+            else
+            {
+                MessageBox.Show("Solo el host puede iniciar el turno", "", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            
         }
 
         private void StartTurn()
         {
+            SetPlayersScoreTable();
+            InkCanvas_DrawTable.Strokes.Clear();
             ObtainCard();
             ObtainTurnTime();
             StartTurnTimer();
@@ -150,6 +165,7 @@ namespace PassThePen
         private void StartTurnTimer()
         {
             timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick -= Timer_Tick;
             timer.Tick += Timer_Tick;
             timer.Start();
         }
@@ -166,11 +182,13 @@ namespace PassThePen
             selectedTime--;
         }
 
+
         public void ReturnStartTurnSignal(int turnNumber)
         {
             Label_TurnNumber.Content = turnNumber;
             StartTurn();
         }
+
 
         private byte[] GetCanvasDraw()
         {
@@ -216,19 +234,13 @@ namespace PassThePen
         private void SendDraw()
         {
             InstanceContext context = new InstanceContext(this);
-            PassThePenService.DrawReviewServiceClient client = new DrawReviewServiceClient(context);
+            PassThePenService.MatchManagementClient client = new MatchManagementClient(context);
 
             Byte[] playerDraw = GetCanvasDraw();
 
-            client.SendDraws(playerDraw);
+            client.SendDraws(MainMenu.username, playerDraw);
         }
 
-        public void DistributeDraws(byte[] draw)
-        {
-            DrawReview.bytes = draw;
-            DrawReview drawReview = new DrawReview();
-            drawReview.Show();            
-        }
 
         public void SetChatOperationContext(string username)
         {
@@ -244,9 +256,86 @@ namespace PassThePen
             client.SetMatchOperationContext(username);
         }
 
-        public void DistributeDraws(byte[][] playersDraws)
+        public void DistributeDraws(Dictionary<string, byte[]> playersDraw)
         {
-            throw new NotImplementedException();
+            playersDraw.Remove(username);
+            DrawReview.playersDraw = playersDraw;
+            DrawReview drawReview = new DrawReview();
+            drawReview.Show();
+        }
+
+
+        public void SetPlayersScoreTable()
+        {
+            InstanceContext context = new InstanceContext(this);
+            PassThePenService.MatchManagementClient client = new PassThePenService.MatchManagementClient(context);
+            playerScore = client.GetPlayersScore();
+
+            int score = playerScore.First(u => u.Key == username).Value;
+            Label_Score.Content = score.ToString();
+            playerScore.Remove(username);
+            ListBox_PlayersInGame.ItemsSource = playerScore;
+        }
+
+
+        public void NotifyWinner(string winner)
+        {
+            MessageBox.Show("El ganador de la partida es: " + winner, "", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("La partida ha terminado, regresando al menu principal", "", MessageBoxButton.OK, MessageBoxImage.Information);
+            OpenMainMenu();
+        }
+
+
+        private void OpenMainMenu()
+        {
+            Close();
+        }
+
+
+        private void Button_Remove_Match_Player_Click(object sender, MouseButtonEventArgs e)
+        {
+            if (hostState)
+            {
+                var confirmationButton = MessageBox.Show("¿Expulsar jugador?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (confirmationButton == MessageBoxResult.Yes)
+                {
+                    Image buttonRemovePlayer = (Image)sender;
+                    StackPanel parent = (StackPanel)buttonRemovePlayer.Parent;
+                    var playerToRemove = (KeyValuePair<string, int>)parent.DataContext;
+
+                    InstanceContext context = new InstanceContext(this);
+                    PassThePenService.MatchManagementClient client = new PassThePenService.MatchManagementClient(context);
+                    client.RemoveMatchPlayer(playerToRemove.Key);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Usted no puede sacar a nadie calmese, prro");
+            }
+            
+        }
+
+        private void SetHostState(string username)
+        {
+            InstanceContext context = new InstanceContext(this);
+            PassThePenService.MatchManagementClient client = new PassThePenService.MatchManagementClient(context);
+
+            hostState = client.GetHostState(username);
+        }
+
+        private void Button_Leave_Match_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        public void UpdateMatchPlayers()
+        {
+            SetPlayersScoreTable();
+        }
+
+        public void CloseMatchWindow()
+        {
+            OpenMainMenu();
         }
     }
 }

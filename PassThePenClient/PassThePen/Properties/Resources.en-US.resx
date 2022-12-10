@@ -223,6 +223,10 @@
     <value>Leave to play</value>
     <comment>Used by: MainMenu</comment>
   </data>
+  <data name="MainMenu_ExitGroup_Button" xml:space="preserve">
+    <value>Leave group</value>
+    <comment>Used by: MainMenu</comment>
+  </data>
   <data name="MainMenu_FriendRequests_Button" xml:space="preserve">
     <value>Requests</value>
     <comment>Used by: MainMenu</comment>

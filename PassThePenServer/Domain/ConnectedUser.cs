@@ -15,5 +15,6 @@ namespace Domain
         public OperationContext chatContext { get; set; }
         public OperationContext matchContext { get; set; }
         public OperationContext drawContext { get; set; }
+        public int score { get; set; }
     }
 }

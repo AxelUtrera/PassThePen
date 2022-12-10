@@ -322,6 +322,15 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Salir del grupo.
+        /// </summary>
+        public static string MainMenu_ExitGroup_Button {
+            get {
+                return ResourceManager.GetString("MainMenu_ExitGroup_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Solicitudes.
         /// </summary>
         public static string MainMenu_FriendRequests_Button {

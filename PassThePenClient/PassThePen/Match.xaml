@@ -8,55 +8,19 @@
         mc:Ignorable="d"
         WindowState="Maximized"
         WindowStyle="None"
-        Title="Match" Height="1080" Width="1920">
+        Title="Match" Height="720" Width="1280">
 
     <Grid>
-
+        
         <Rectangle HorizontalAlignment="Center" Height="120" Fill="LightGray" Stroke="LightGray" VerticalAlignment="Top" Width="1920"/>
         <Label Content="{x:Static p:Resources.Match_Score_Label}" HorizontalAlignment="Right" Margin="0,30,150,0" VerticalAlignment="Top" FontSize="20"/>
         <Label Content="{x:Static p:Resources.Match_TimeRemaining_Label}" HorizontalAlignment="Center" Margin="0,30,0,0" VerticalAlignment="Top" FontSize="20"/>
         <Label x:Name="Label_TimeRemaining" Content="X" HorizontalAlignment="Center" Margin="0,60,0,0" VerticalAlignment="Top" FontSize="35"/>
         <Label Content="{x:Static p:Resources.Match_CurrentDraw_Label}" HorizontalAlignment="Left" Margin="150,30,0,0" VerticalAlignment="Top" FontSize="20"/>
-        <Image HorizontalAlignment="Right" Height="36" Margin="0,65,150,0" VerticalAlignment="Top" Width="34" Source="Img\Icon_Score.png"/>
-        <Label x:Name="Label_Score" Content="50" HorizontalAlignment="Right" Margin="0,60,190,0" VerticalAlignment="Top" FontSize="30"/>
+        <Image HorizontalAlignment="Right" Height="36" Margin="0,70,190,0" VerticalAlignment="Top" Width="34" Source="Img\Icon_Score.png"/>
+        <Label x:Name="Label_Score" Content="50" HorizontalAlignment="Right" Margin="0,62,150,0" VerticalAlignment="Top" FontSize="30"/>
         <Label x:Name="Label_CurrentDraw" Content="Draw" HorizontalAlignment="Left" Margin="170,60,0,0" VerticalAlignment="Top" FontSize="30"/>
-        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="37,0,0,150" Background="LightGray">
-            <Canvas Margin="0,5" Height="102" Background="White" Width="310">
-                <Image Source="Img\logo_Pass_the_pen.png" Height="75" Width="97" Canvas.Left="15" Canvas.Top="15"></Image>
-                <Label Content="ElSeniorDibujos" Canvas.Left="131" Canvas.Top="15" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <Label Content="{x:Static p:Resources.Match_ScorePlayer_Label}" Canvas.Left="133" Canvas.Top="50" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <Image Height="37" Canvas.Left="250" Canvas.Top="45" Width="43" Source="C:\Users\danie\Documents\Universidad\7mo Semestre\Tecnologias\PassThePen\PassThePenClient\PassThePen\Img\Icon_Score.png"/>
-                <Label Content="50" Canvas.Left="214" Canvas.Top="50" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            </Canvas>
-            <Canvas Margin="0,5" Height="100" Background="White" Width="310">
-                <Image Source="C:\Users\danie\Documents\Universidad\7mo Semestre\Tecnologias\PassThePen\PassThePenClient\PassThePen\Img\logo_Pass_the_pen.png" Height="75" Width="97" Canvas.Left="15" Canvas.Top="15"></Image>
-                <Label Content="ElSeniorDibujos" Canvas.Left="131" Canvas.Top="15" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <Label Content="{x:Static p:Resources.Match_ScorePlayer_Label}" Canvas.Left="133" Canvas.Top="50" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <Image Height="37" Canvas.Left="250" Canvas.Top="45" Width="43" Source="C:\Users\danie\Documents\Universidad\7mo Semestre\Tecnologias\PassThePen\PassThePenClient\PassThePen\Img\Icon_Score.png"/>
-                <Label Content="50" Canvas.Left="214" Canvas.Top="50" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            </Canvas>
-            <Canvas  Margin="0,5" Height="100" Background="White" Width="310">
-                <Image Source="C:\Users\danie\Documents\Universidad\7mo Semestre\Tecnologias\PassThePen\PassThePenClient\PassThePen\Img\logo_Pass_the_pen.png" Height="75" Width="97" Canvas.Left="15" Canvas.Top="15"></Image>
-                <Label Content="ElSeniorDibujos" Canvas.Left="131" Canvas.Top="15" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <Label Content="{x:Static p:Resources.Match_ScorePlayer_Label}" Canvas.Left="133" Canvas.Top="50" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <Image Height="37" Canvas.Left="250" Canvas.Top="45" Width="43" Source="C:\Users\danie\Documents\Universidad\7mo Semestre\Tecnologias\PassThePen\PassThePenClient\PassThePen\Img\Icon_Score.png"/>
-                <Label Content="50" Canvas.Left="214" Canvas.Top="50" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            </Canvas>
-            <Canvas  Margin="0,5" Height="100" Background="White" Width="310">
-                <Image Source="C:\Users\danie\Documents\Universidad\7mo Semestre\Tecnologias\PassThePen\PassThePenClient\PassThePen\Img\logo_Pass_the_pen.png" Height="75" Width="97" Canvas.Left="15" Canvas.Top="15"></Image>
-                <Label Content="ElSeniorDibujos" Canvas.Left="131" Canvas.Top="15" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <Label Content="{x:Static p:Resources.Match_ScorePlayer_Label}" Canvas.Left="133" Canvas.Top="50" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <Image Height="37" Canvas.Left="250" Canvas.Top="45" Width="43" Source="C:\Users\danie\Documents\Universidad\7mo Semestre\Tecnologias\PassThePen\PassThePenClient\PassThePen\Img\Icon_Score.png"/>
-                <Label Content="50" Canvas.Left="214" Canvas.Top="50" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            </Canvas>
-            <Canvas Margin="0,5"  Height="100" Background="White" Width="310">
-                <Image Source="C:\Users\danie\Documents\Universidad\7mo Semestre\Tecnologias\PassThePen\PassThePenClient\PassThePen\Img\logo_Pass_the_pen.png" Height="75" Width="97" Canvas.Left="15" Canvas.Top="15"></Image>
-                <Label Content="ElSeniorDibujos" Canvas.Left="131" Canvas.Top="15" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <Label Content="{x:Static p:Resources.Match_ScorePlayer_Label}" Canvas.Left="133" Canvas.Top="50" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <Image Height="37" Canvas.Left="250" Canvas.Top="45" Width="43" Source="C:\Users\danie\Documents\Universidad\7mo Semestre\Tecnologias\PassThePen\PassThePenClient\PassThePen\Img\Icon_Score.png"/>
-                <Label Content="50" Canvas.Left="214" Canvas.Top="50" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            </Canvas>
-        </StackPanel>
+        
         <Border BorderThickness="5" CornerRadius="10,10,10,10" BorderBrush="Black" Margin="380,142,405,15">
             <Grid>
                 <InkCanvas x:Name="InkCanvas_DrawTable" x:FieldModifier="public" Background="White" Opacity="1" EditingMode="Ink" ForceCursor="True" Cursor="Pen" Margin="5,5,5,5" >
@@ -120,7 +84,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <ListBox x:Name="ListBox_ChatBox" BorderThickness="5" BorderBrush="Green" d:ItemsSource="{d:SampleData ItemCount=5}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,15,0" FontSize="15" IsEnabled="True" Height="790" Width="379">
+        <ListBox x:Name="ListBox_ChatBox" BorderThickness="5" BorderBrush="Green" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,15,15,0" FontSize="15" IsEnabled="True" Height="450" Width="379">
             <ListBox.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="10"></Setter>
@@ -134,9 +98,9 @@
                 </Style>
             </TextBox.Resources>
         </TextBox>
-        <Label Content="{x:Static p:Resources.Match_Turn_Label}" HorizontalAlignment="Left" Margin="130,0,0,240" VerticalAlignment="Bottom" FontSize="20"/>
-        <Label Content="X" Name="Label_TurnNumber" HorizontalAlignment="Left" Margin="180,0,0,200" VerticalAlignment="Bottom" FontSize="30"/>
-        <Button x:Name="Button_StartTurn" HorizontalAlignment="Left" Cursor="Hand" Margin="100,0,0,90" Foreground="White" VerticalAlignment="Bottom" Height="72" Width="195" FontSize="20" Click="Button_StartTurn_Click">
+        <Label Content="{x:Static p:Resources.Match_Turn_Label}" HorizontalAlignment="Left" Margin="130,0,0,150" VerticalAlignment="Bottom" FontSize="20"/>
+        <Label Content="X" Name="Label_TurnNumber" HorizontalAlignment="Left" Margin="180,0,0,110" VerticalAlignment="Bottom" FontSize="30"/>
+        <Button x:Name="Button_StartTurn" HorizontalAlignment="Left" Cursor="Hand" Margin="100,0,0,40" Foreground="White" VerticalAlignment="Bottom" Height="50" Width="175" FontSize="20" Click="Button_StartTurn_Click">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border Background="Green" BorderBrush="Green" CornerRadius="15, 15, 15, 15">
@@ -145,6 +109,38 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
+        <ListBox x:Name="ListBox_PlayersInGame" BorderThickness="5" BorderBrush="Green" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="14,0,0,50" Height="380" Width="350">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="320"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
 
+                        <StackPanel Grid.Column="0" Orientation="Horizontal">
+                            <Label Grid.Column="0" Content="{Binding Key}" Margin="0" Width="160" HorizontalAlignment="Left" FontSize="22"></Label>
+                            <Image Source="Img/Icon_Score.png" Width="30" HorizontalAlignment="Right"></Image>
+                            <Label Grid.Column="0" Content="{Binding Value}" Margin="0" Width="50" HorizontalContentAlignment="Right" FontSize="22" ></Label>
+                            <Image Name="Image_RemovePlayer" Source="Img/Icon_RemovePlayer.png" Width="30" Margin="50,0,0,0" Cursor="Hand" MouseLeftButtonDown="Button_Remove_Match_Player_Click" HorizontalAlignment="Right"></Image>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"></Setter>
+                </Style>
+            </ListBox.Resources>
+        </ListBox>
+
+        <Button Cursor="Hand" Margin="0,10,10,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="30" Height="30" Foreground="White" FontSize="13" Click="Button_Leave_Match_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="OrangeRed" BorderBrush="OrangeRed" CornerRadius="15,15,15,15">
+                        <ContentPresenter Content="X" HorizontalAlignment="Center" VerticalAlignment="Center"></ContentPresenter>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
     </Grid>
 </Window>
