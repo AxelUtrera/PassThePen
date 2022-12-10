@@ -133,6 +133,15 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Cancelar.
+        /// </summary>
+        public static string Global_Cancel_Button {
+            get {
+                return ResourceManager.GetString("Global_Cancel_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Correo .
         /// </summary>
         public static string Global_Email_Label {
@@ -142,11 +151,83 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Numero de caracteres excedidos. Numero maximo: 50.
+        /// </summary>
+        public static string Global_Error__LastName_Label {
+            get {
+                return ResourceManager.GetString("Global_Error__LastName_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Favor de revisar el formato de su correo electronico.
+        /// </summary>
+        public static string Global_Error_Email_Label {
+            get {
+                return ResourceManager.GetString("Global_Error_Email_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Numero de caracteres excedidos. Numero maximo: 50.
+        /// </summary>
+        public static string Global_Error_Name_Label {
+            get {
+                return ResourceManager.GetString("Global_Error_Name_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Debe contener: *, +, @, #, $, %. Una mayuscula y un numero. Longitud entre 8-16..
+        /// </summary>
+        public static string Global_Error_Password_Label {
+            get {
+                return ResourceManager.GetString("Global_Error_Password_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Las contraseñas no son iguales.
+        /// </summary>
+        public static string Global_Error_Repit_Password {
+            get {
+                return ResourceManager.GetString("Global_Error_Repit_Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Numero de caracteres excedidos. Numero maximo: 20.
+        /// </summary>
+        public static string Global_Error_Username_Label {
+            get {
+                return ResourceManager.GetString("Global_Error_Username_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Contraseña.
         /// </summary>
         public static string Global_Label_Password {
             get {
                 return ResourceManager.GetString("Global_Label_Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Reenviar.
+        /// </summary>
+        public static string Global_Resend_Button {
+            get {
+                return ResourceManager.GetString("Global_Resend_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Enviar.
+        /// </summary>
+        public static string Global_Send_Button {
+            get {
+                return ResourceManager.GetString("Global_Send_Button", resourceCulture);
             }
         }
         
@@ -439,15 +520,6 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Cancelar.
-        /// </summary>
-        public static string RecoverPassword_Cancel_Button {
-            get {
-                return ResourceManager.GetString("RecoverPassword_Cancel_Button", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Busca una cadena traducida similar a Cambiar.
         /// </summary>
         public static string RecoverPassword_Change_Button {
@@ -480,15 +552,6 @@ namespace PassThePen.Properties {
         public static string RecoverPassword_RepitPassword_Label {
             get {
                 return ResourceManager.GetString("RecoverPassword_RepitPassword_Label", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Enviar.
-        /// </summary>
-        public static string RecoverPassword_Send_Button {
-            get {
-                return ResourceManager.GetString("RecoverPassword_Send_Button", resourceCulture);
             }
         }
         

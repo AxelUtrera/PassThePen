@@ -251,12 +251,12 @@ namespace PassThePen
             if (!String.IsNullOrEmpty(TextBox_FindFriend.Text.Trim()))
             {
                 List<FriendRequest> friendsEquals = new List<FriendRequest>();
-                foreach (string str in listUsernameStrings)
+                foreach (string stringUsername in listUsernameStrings)
                 {
 
-                    if (str.StartsWith(TextBox_FindFriend.Text.Trim()))
+                    if (stringUsername.StartsWith(TextBox_FindFriend.Text.Trim()))
                     {
-                        friendsEquals.Add(friendRequests.Find(fri => fri.friendUsername.Contains(str)));
+                        friendsEquals.Add(friendRequests.Find(fri => fri.friendUsername.Contains(stringUsername)));
                     }
                 }
                 ListBox_FriendsRequests.ItemsSource = friendsEquals;
@@ -273,12 +273,12 @@ namespace PassThePen
             if (!String.IsNullOrEmpty(TextBox_FindFriend.Text.Trim()))
             {
                 List<Friends> friendsEquals = new List<Friends>();
-                foreach (string str in listUsernameStrings)
+                foreach (string stringUsername in listUsernameStrings)
                 {
 
-                    if (str.StartsWith(TextBox_FindFriend.Text.Trim()))
+                    if (stringUsername.StartsWith(TextBox_FindFriend.Text.Trim()))
                     {
-                        friendsEquals.Add(friendList.Find(fri => fri.friendUsername.Contains(str)));
+                        friendsEquals.Add(friendList.Find(fri => fri.friendUsername.Contains(stringUsername)));
                     }
                 }
                 ListBox_FriendList.ItemsSource = friendsEquals;

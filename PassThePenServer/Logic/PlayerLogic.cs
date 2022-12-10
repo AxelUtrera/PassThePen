@@ -133,6 +133,7 @@ namespace Logic
         public int UpdatePassword(string username, string password)
         {
             int stateCode = 500;
+            Console.WriteLine(username);
             string encriptedPassword = Encription.ToSHA2Hash(password);
             using (var dataBaseContext = new passthepenEntities())
             {
