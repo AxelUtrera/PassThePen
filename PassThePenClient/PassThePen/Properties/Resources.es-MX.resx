@@ -192,7 +192,7 @@
     <comment>Used by: login, Register</comment>
   </data>
   <data name="Login_ErrorLogin_Message" xml:space="preserve">
-    <value>Hubo un error en la validación, intentelo de nuevo</value>
+    <value>Los datos ingresados son invalidos o existe una sesion abierta.</value>
     <comment>Used by: Login</comment>
   </data>
   <data name="Global_Resend_Button" xml:space="preserve">

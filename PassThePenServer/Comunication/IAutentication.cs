@@ -18,5 +18,9 @@ namespace Comunication
 
         [OperationContract]
         int CodeEmail(string to, String affair, int validationCode);
+
+        [OperationContract]
+        int FindPlayerIsConected(string usernamePlayer);
+
     }
 }

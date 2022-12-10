@@ -7,7 +7,7 @@ using System.Net.NetworkInformation;
 using System.Security.Cryptography;
 using System.ServiceModel;
 using System.ServiceModel.Configuration;
-using System.Text;
+using System.Text;                                
 using System.Threading.Tasks;
 
 namespace Comunication
@@ -57,6 +57,11 @@ namespace Comunication
         {
             return playerLogic.FindPlayer(username);
         }
+
+        public int AddGuestFriend(string usernamePlayer)
+        {
+            return playerLogic.AddGuestFriend(usernamePlayer);
+        }
     }
 
     public partial class ImplementationServices : IAutentication
@@ -78,6 +83,20 @@ namespace Comunication
             SendEmail sendEmail = new SendEmail();
             return sendEmail.SendNewEmail(to, affair, validationCode);
         }
+
+        public int FindPlayerIsConected(string usernamePlayer)
+        {
+            int isConected = 200;
+            int userNotConected = 404;
+
+            if (usersConnected.FirstOrDefault(user => user.username.Equals(usernamePlayer)) == null)
+            {
+                isConected = userNotConected;
+            }
+
+            return isConected;
+        }
+
     }
 
     public partial class ImplementationServices : IFriendRequests
@@ -108,7 +127,7 @@ namespace Comunication
 
     public partial class ImplementationServices : IPlayerConnection
     {
-        private List<ConnectedUser> users = new List<ConnectedUser>();
+        private List<ConnectedUser> usersConnected = new List<ConnectedUser>();
         private static List<ConnectedUser> playersInGroup = new List<ConnectedUser>();
 
         public void Connect(string username)
@@ -120,16 +139,16 @@ namespace Comunication
                 score = 0
             };
 
-            users.Add(user);
+            usersConnected.Add(user);
         }
 
 
         public void Disconnect(string username)
         {
-            var user = users.FirstOrDefault(i => i.username == username);
+            var user = usersConnected.FirstOrDefault(i => i.username == username);
             if (user != null)
             {
-                users.Remove(user);
+                usersConnected.Remove(user);
             }
         }
 
@@ -137,7 +156,7 @@ namespace Comunication
         public List<string> GetNameOnlinePlayers()
         {
             List<string> onlinePlayers = new List<string>();
-            foreach (ConnectedUser player in users)
+            foreach (ConnectedUser player in usersConnected)
             {
                 onlinePlayers.Add(player.username);
             }
@@ -149,7 +168,7 @@ namespace Comunication
         public void SendOnlinePlayers(string username)
         {
             Friends[] friends = GetFriends(username);
-            users.Find(us => us.username.Equals(username)).operationContext.GetCallbackChannel<IPlayersServicesCallBack>().RechargeFriends(friends);
+            usersConnected.Find(us => us.username.Equals(username)).operationContext.GetCallbackChannel<IPlayersServicesCallBack>().RechargeFriends(friends);
         }
 
 
@@ -159,8 +178,8 @@ namespace Comunication
             int userNotFound = 404;
             int groupFull = 6;
 
-            ConnectedUser userConnected = users.FirstOrDefault(user => user.username.Equals(invitedPlayer));
-            ConnectedUser matchHost = users.FirstOrDefault(user => user.username.Equals(invitingPlayer));
+            ConnectedUser userConnected = usersConnected.FirstOrDefault(user => user.username.Equals(invitedPlayer));
+            ConnectedUser matchHost = usersConnected.FirstOrDefault(user => user.username.Equals(invitingPlayer));
 
             if (playersInGroup.Count <= groupFull)
             {                          
@@ -208,7 +227,6 @@ namespace Comunication
 
         private void LeaveHost(ConnectedUser host)
         {
-
             playersInGroup.Remove(host);
 
             foreach (ConnectedUser usersInGroup in playersInGroup)
@@ -217,21 +235,6 @@ namespace Comunication
             }
 
             playersInGroup.Clear();
-            
-        }
-
-
-        public int FindPlayerIsConected(string usernamePlayer)
-        {
-            int isConected = 200;
-            int userNotConected = 404;
-
-            if (users.FirstOrDefault(user => user.username.Equals(usernamePlayer)) == null)
-            {
-                isConected = userNotConected;
-            }
-
-            return isConected;
         }
 
 
@@ -402,7 +405,7 @@ namespace Comunication
             {
                 foreach(ConnectedUser player in playersInGroup)
                 {
-                    users.Where(u => u.username == player.username).First().score = 0;
+                    usersConnected.Where(u => u.username == player.username).First().score = 0;
                     player.matchContext.GetCallbackChannel<IMatchCallback>().NotifyWinner(winner.username);
                     
                 }
@@ -423,7 +426,7 @@ namespace Comunication
 
             ConnectedUser removedPlayer = playersInGroup.Where(u => u.username == username).FirstOrDefault();
             removedPlayer.matchContext.GetCallbackChannel<IMatchCallback>().CloseMatchWindow();
-            users.Where(u => u.username == removedPlayer.username).First().score = 0;
+            usersConnected.Where(u => u.username == removedPlayer.username).First().score = 0;
 
             playersInGroup.Remove(removedPlayer);
             playersDraws.Remove(removedPlayer.username);
@@ -442,7 +445,7 @@ namespace Comunication
             {
                 foreach (ConnectedUser user in playersInGroup)
                 {
-                    users.Where(u => u.username == user.username).First().score = 0;
+                    usersConnected.Where(u => u.username == user.username).First().score = 0;
                     user.matchContext.GetCallbackChannel<IMatchCallback>().CloseMatchWindow();
                 }
                 playersInGroup.Clear();
@@ -452,7 +455,7 @@ namespace Comunication
             else
             {
                 leavePlayer.matchContext.GetCallbackChannel<IMatchCallback>().CloseMatchWindow();
-                users.Where(u => u.username == leavePlayer.username).First().score = 0;
+                usersConnected.Where(u => u.username == leavePlayer.username).First().score = 0;
                 playersInGroup.Remove(leavePlayer);
 
                 foreach (ConnectedUser user in playersInGroup)

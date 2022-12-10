@@ -175,6 +175,20 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
+      <xs:element name="AddGuestFriend">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="usernamePlayer" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AddGuestFriendResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="AddGuestFriendResult" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="AutenticatePlayer">
         <xs:complexType>
           <xs:sequence>
@@ -216,6 +230,20 @@
         <xs:complexType>
           <xs:sequence>
             <xs:element minOccurs="0" name="CodeEmailResult" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="FindPlayerIsConected">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="usernamePlayer" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="FindPlayerIsConectedResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="FindPlayerIsConectedResult" type="xs:int" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -341,20 +369,6 @@
       <xs:element name="LeaveGroupResponse">
         <xs:complexType>
           <xs:sequence />
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="FindPlayerIsConected">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element minOccurs="0" name="usernamePlayer" nillable="true" type="xs:string" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="FindPlayerIsConectedResponse">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element minOccurs="0" name="FindPlayerIsConectedResult" type="xs:int" />
-          </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="FindPlayerInGroup">
@@ -801,6 +815,12 @@
   <wsdl:message name="IPlayerManagement_FindPlayer_OutputMessage">
     <wsdl:part name="parameters" element="tns:FindPlayerResponse" />
   </wsdl:message>
+  <wsdl:message name="IPlayerManagement_AddGuestFriend_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddGuestFriend" />
+  </wsdl:message>
+  <wsdl:message name="IPlayerManagement_AddGuestFriend_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddGuestFriendResponse" />
+  </wsdl:message>
   <wsdl:message name="IAutentication_AutenticatePlayer_InputMessage">
     <wsdl:part name="parameters" element="tns:AutenticatePlayer" />
   </wsdl:message>
@@ -818,6 +838,12 @@
   </wsdl:message>
   <wsdl:message name="IAutentication_CodeEmail_OutputMessage">
     <wsdl:part name="parameters" element="tns:CodeEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAutentication_FindPlayerIsConected_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindPlayerIsConected" />
+  </wsdl:message>
+  <wsdl:message name="IAutentication_FindPlayerIsConected_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindPlayerIsConectedResponse" />
   </wsdl:message>
   <wsdl:message name="IFriendRequests_AcceptFriendRequest_InputMessage">
     <wsdl:part name="parameters" element="tns:AcceptFriendRequest" />
@@ -875,12 +901,6 @@
   </wsdl:message>
   <wsdl:message name="IPlayerConnection_LeaveGroup_OutputMessage">
     <wsdl:part name="parameters" element="tns:LeaveGroupResponse" />
-  </wsdl:message>
-  <wsdl:message name="IPlayerConnection_FindPlayerIsConected_InputMessage">
-    <wsdl:part name="parameters" element="tns:FindPlayerIsConected" />
-  </wsdl:message>
-  <wsdl:message name="IPlayerConnection_FindPlayerIsConected_OutputMessage">
-    <wsdl:part name="parameters" element="tns:FindPlayerIsConectedResponse" />
   </wsdl:message>
   <wsdl:message name="IPlayerConnection_FindPlayerInGroup_InputMessage">
     <wsdl:part name="parameters" element="tns:FindPlayerInGroup" />
@@ -1038,6 +1058,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IPlayerManagement/FindPlayer" message="tns:IPlayerManagement_FindPlayer_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPlayerManagement/FindPlayerResponse" message="tns:IPlayerManagement_FindPlayer_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="AddGuestFriend">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerManagement/AddGuestFriend" message="tns:IPlayerManagement_AddGuestFriend_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerManagement/AddGuestFriendResponse" message="tns:IPlayerManagement_AddGuestFriend_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IAutentication">
     <wsdl:operation name="AutenticatePlayer">
@@ -1051,6 +1075,10 @@
     <wsdl:operation name="CodeEmail">
       <wsdl:input wsaw:Action="http://tempuri.org/IAutentication/CodeEmail" message="tns:IAutentication_CodeEmail_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAutentication/CodeEmailResponse" message="tns:IAutentication_CodeEmail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindPlayerIsConected">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAutentication/FindPlayerIsConected" message="tns:IAutentication_FindPlayerIsConected_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAutentication/FindPlayerIsConectedResponse" message="tns:IAutentication_FindPlayerIsConected_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IFriendRequests">
@@ -1094,10 +1122,6 @@
     <wsdl:operation name="LeaveGroup">
       <wsdl:input wsaw:Action="http://tempuri.org/IPlayerConnection/LeaveGroup" message="tns:IPlayerConnection_LeaveGroup_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPlayerConnection/LeaveGroupResponse" message="tns:IPlayerConnection_LeaveGroup_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="FindPlayerIsConected">
-      <wsdl:input wsaw:Action="http://tempuri.org/IPlayerConnection/FindPlayerIsConected" message="tns:IPlayerConnection_FindPlayerIsConected_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IPlayerConnection/FindPlayerIsConectedResponse" message="tns:IPlayerConnection_FindPlayerIsConected_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="FindPlayerInGroup">
       <wsdl:input wsaw:Action="http://tempuri.org/IPlayerConnection/FindPlayerInGroup" message="tns:IPlayerConnection_FindPlayerInGroup_InputMessage" />
@@ -1286,6 +1310,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="AddGuestFriend">
+      <soap12:operation soapAction="http://tempuri.org/IPlayerManagement/AddGuestFriend" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="NetTcpBinding_IAutentication" type="tns:IAutentication">
     <wsp:PolicyReference URI="#NetTcpBinding_IAutentication_policy" />
@@ -1310,6 +1343,15 @@
     </wsdl:operation>
     <wsdl:operation name="CodeEmail">
       <soap12:operation soapAction="http://tempuri.org/IAutentication/CodeEmail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindPlayerIsConected">
+      <soap12:operation soapAction="http://tempuri.org/IAutentication/FindPlayerIsConected" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1405,15 +1447,6 @@
     </wsdl:operation>
     <wsdl:operation name="LeaveGroup">
       <soap12:operation soapAction="http://tempuri.org/IPlayerConnection/LeaveGroup" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="FindPlayerIsConected">
-      <soap12:operation soapAction="http://tempuri.org/IPlayerConnection/FindPlayerIsConected" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

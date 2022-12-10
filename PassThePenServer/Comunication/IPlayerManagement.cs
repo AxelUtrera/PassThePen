@@ -34,6 +34,9 @@ namespace Comunication
 
         [OperationContract]
         int FindPlayer(string username);
+
+        [OperationContract]
+        int AddGuestFriend(string usernamePlayer);
     }
             
       

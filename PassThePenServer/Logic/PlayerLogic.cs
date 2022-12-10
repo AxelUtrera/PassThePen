@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Entity.Core;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -166,6 +167,40 @@ namespace Logic
             return result;
         }
 
+        public int AddGuestFriend(string username)
+        {
+            int operationResult = 500;
+
+            using (var dataBaseContext = new passthepenEntities())
+            {
+                try
+                {
+                    var resultUserToGuest = dataBaseContext.Friends.Add(new Friends() {
+                        usernamePlayer = "Guest", 
+                        friendUsername = username
+                    });
+
+                    var resultGuestToUser = dataBaseContext.Friends.Add(new Friends()
+                    {
+                        usernamePlayer = username,
+                        friendUsername = "Guest"
+                    });
+
+                    operationResult = dataBaseContext.SaveChanges();
+
+                    if (resultUserToGuest != null && resultGuestToUser != null)
+                    {
+                        operationResult = 200;
+                    }
+                }
+                catch(EntityException ex)
+                {
+                    //agregar log
+                }
+            }
+            return operationResult;
+
+        }
 
         public List<Domain.Friends> RecoverFriends(string username)
         {
@@ -187,8 +222,10 @@ namespace Logic
                         friendsList.Add(newFriend);
                     }
                 }
-                catch (Exception e)
+                catch (EntityException e)
                 {
+
+                    //Cambia esta wea
                     Console.WriteLine(e.StackTrace);
                 }
             }

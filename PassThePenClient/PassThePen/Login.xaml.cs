@@ -1,10 +1,12 @@
-﻿using PassThePen.Properties;
+﻿using PassThePen.PassThePenService;
+using PassThePen.Properties;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Resources;
+using System.ServiceModel;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -34,19 +36,24 @@ namespace PassThePen
 
         private void Button_login_Click(object sender, RoutedEventArgs e)
         {
-            PassThePenService.AutenticationClient client = new PassThePenService.AutenticationClient();
+            InstanceContext context = new InstanceContext(this);
+            PassThePenService.AutenticationClient clientAutentication = new PassThePenService.AutenticationClient();
             
+
             PassThePenService.Player player = new PassThePenService.Player()
             {
                 username = TextBox_Username.Text,
                 password = PasswordBox_PasswordUser.Password
             };
+
+
             if (ValidateInformation())
             {
                 int playerValid = 200;
-                int resultAutenticatePlayer = client.AutenticatePlayer(player);
+                int isNotConected = 404;
+                int resultAutenticatePlayer = clientAutentication.AutenticatePlayer(player);
 
-                if (resultAutenticatePlayer == playerValid)
+                if (resultAutenticatePlayer == playerValid && clientAutentication.FindPlayerIsConected(player.username) == isNotConected)
                 {
                     MainMenu.username = TextBox_Username.Text;
                     InvokeMainMenu();
@@ -107,6 +114,7 @@ namespace PassThePen
         private void Button_LoginAsGuest_Click(object sender, MouseButtonEventArgs e)
         {
             PassThePenService.AutenticationClient client = new PassThePenService.AutenticationClient();
+            PassThePenService.AutenticationClient clientAutentication = new PassThePenService.AutenticationClient();
 
             PassThePenService.Player guestPlayer = new PassThePenService.Player()
             {
@@ -115,12 +123,17 @@ namespace PassThePen
             };
 
             int autenticationValid = 200;
+            int isNotConected = 404;
             int resultAutentication = client.AutenticatePlayer(guestPlayer);
 
-            if(resultAutentication == autenticationValid)
+            if(resultAutentication == autenticationValid && clientAutentication.FindPlayerIsConected(guestPlayer.username) == isNotConected)
             {
                 MainMenu.username = "Guest";
                 InvokeMainMenu();
+            }
+            else
+            {
+                MessageBox.Show(messageResource.GetString("Login_ErrorLogin_Message"));
             }
             client.Close();
         }

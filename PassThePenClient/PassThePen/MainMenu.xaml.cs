@@ -319,6 +319,7 @@ namespace PassThePen
                     friendUsername = username
                 };
                 client.SendFriendRequests(friendRequest);
+                Textbox_AddFriend.Clear();
                 MessageBox.Show(messageResource.GetString("MainMenu_FriendRequestSend"));
             }
             else
@@ -332,7 +333,9 @@ namespace PassThePen
         private void Button_InviteFriend_Click(object sender, MouseButtonEventArgs e)
         {
             InstanceContext context = new InstanceContext(this);
-            PassThePenService.PlayerConnectionClient client = new PassThePenService.PlayerConnectionClient(context);
+            PassThePenService.PlayerConnectionClient clientPlayerConection = new PassThePenService.PlayerConnectionClient(context);
+            PassThePenService.AutenticationClient clientAutenticate = new PassThePenService.AutenticationClient();
+
             Image buttonInviteFriend = (Image)sender;
             StackPanel parent = (StackPanel)buttonInviteFriend.Parent;
             Friends friend = (Friends)parent.DataContext;
@@ -342,11 +345,11 @@ namespace PassThePen
 
 
             //Refactorizar
-            if (client.FindPlayerIsConected(friend.friendUsername) == playerIsConected && client.GroupIsNotFull() == groupIsNotFull)
+            if (clientAutenticate.FindPlayerIsConected(friend.friendUsername) == playerIsConected && clientPlayerConection.GroupIsNotFull() == groupIsNotFull)
             {
-                if (client.FindPlayerInGroup(friend.friendUsername) == statusPlayerIsNotInGroup)
+                if (clientPlayerConection.FindPlayerInGroup(friend.friendUsername) == statusPlayerIsNotInGroup)
                 {
-                    client.SendMathInvitation(username, friend.friendUsername);
+                    clientPlayerConection.SendMathInvitation(username, friend.friendUsername);
                 }
                 else
                 {
@@ -358,7 +361,7 @@ namespace PassThePen
                 MessageBox.Show(messageResource.GetString("MainMenu_PlayerOffline_Message"));
             }
 
-            if (client.GroupIsNotFull() != groupIsNotFull)
+            if (clientPlayerConection.GroupIsNotFull() != groupIsNotFull)
             {
                 MessageBox.Show(messageResource.GetString("MainMenu_FullGroup_Message"));
             }

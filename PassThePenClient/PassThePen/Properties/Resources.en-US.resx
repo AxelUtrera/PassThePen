@@ -204,7 +204,7 @@
     <comment>Used by: Login.</comment>
   </data>
   <data name="Login_ErrorLogin_Message" xml:space="preserve">
-    <value>There was an error in the validation, try again</value>
+    <value>The data entered is invalid or there is an open session.</value>
     <comment>Used by: Login</comment>
   </data>
   <data name="Login_Forgot_Password_Button" xml:space="preserve">

@@ -268,7 +268,7 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Hubo un error en la validación, intentelo de nuevo.
+        ///   Busca una cadena traducida similar a Los datos ingresados son invalidos o existe una sesion abierta..
         /// </summary>
         public static string Login_ErrorLogin_Message {
             get {
@@ -741,15 +741,6 @@ namespace PassThePen.Properties {
         public static string Profile_Username_Label {
             get {
                 return ResourceManager.GetString("Profile_Username_Label", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Cancelar.
-        /// </summary>
-        public static string RecoverPassword_Cancel_Button {
-            get {
-                return ResourceManager.GetString("RecoverPassword_Cancel_Button", resourceCulture);
             }
         }
         

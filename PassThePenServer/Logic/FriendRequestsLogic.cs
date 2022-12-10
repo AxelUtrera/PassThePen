@@ -3,7 +3,9 @@ using Domain;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Entity.Core;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -102,15 +104,42 @@ namespace Logic
 
             using (var context = new passthepenEntities())
             {
-                var friendRequestDataBase = context.FriendRequest.Add(dataAccesFriendRequests);
-                context.SaveChanges();
-
-                if (friendRequestDataBase != null)
+                if (ValidateExistFriendRequestOrFriend(friendRequests) == 404)
                 {
-                    operationCode = 200;
-                }
+                    var friendRequestDataBase = context.FriendRequest.Add(dataAccesFriendRequests);
+                    context.SaveChanges();
+
+                    if (friendRequestDataBase != null)
+                    {
+                        operationCode = 200;
+                    }
+                }                
             }
             return operationCode;
+        }
+
+        private int ValidateExistFriendRequestOrFriend(Domain.FriendRequest friendRequest)
+        {
+            int notExists = 404;
+
+            using(var context = new passthepenEntities())
+            { 
+                try
+                {
+                    var friendRequestInDataBase = context.FriendRequest.Where(u => u.friendUsername == friendRequest.friendUsername).FirstOrDefault();
+                    var friendInDataBase = context.Friends.Where(u => u.friendUsername == friendRequest.friendUsername).FirstOrDefault();
+
+                    if (friendRequestInDataBase != null || friendInDataBase != null)
+                    {
+                        notExists = 200;
+                    }
+                }
+                catch (EntityException ex)
+                {
+                    //manejar
+                }
+            }
+            return notExists;
         }
 
         private DataAccess.FriendRequest ConvertToDataAccessFriendRequests(Domain.FriendRequest domainFriendRequests)

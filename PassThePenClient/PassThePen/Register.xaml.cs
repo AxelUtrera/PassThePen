@@ -207,6 +207,7 @@ namespace PassThePen
                 statusCode = client.AddPlayer(player);
                 if (statusCode == statusOK)
                 {
+                    client.AddGuestFriend(player.username);
                     MessageBox.Show(messageResource.GetString("Register_SuccessfulRegister_Message"));
                     Login login = new Login();
                     login.Show();
