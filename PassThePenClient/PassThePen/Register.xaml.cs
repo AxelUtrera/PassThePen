@@ -45,26 +45,25 @@ namespace PassThePen
 
             if (ValidateFields())
             {
-                Player newPlayer = new Player()
-                {
-                    email = TexBox_Email.Text,
-                    username = TextBox_Username.Text,
-                    name = TextBox_Name.Text,
-                    lastname = TextBox_LastName.Text,
-                    password = PasswordBox_Password.Password,
-                    profileImage = defaultProfileImage
-                };
-
-                player = newPlayer;
-                HideComponetsRegister();
-                label_Code_Validation.Visibility = Visibility.Visible;
-                TexBox_Code_Validation.Visibility = Visibility.Visible;
-                Panel_Validation_Code.Visibility = Visibility.Visible;
+                player.email = TexBox_Email.Text;
+                player.username = TextBox_Username.Text;
+                player.name = TextBox_Name.Text;
+                player.lastname = TextBox_LastName.Text;
+                player.password = PasswordBox_Password.Password;
+                player.profileImage = defaultProfileImage;
                 Random randomNumber = new Random();
                 validationCode = randomNumber.Next(100000, 1000000);
                 if (client.CodeEmail(player.email, "Validation Code", validationCode) == 200)
                 {
                     MessageBox.Show(messageResource.GetString("Register_SuccessfulRegister_Message"));
+                    HideComponetsRegister();
+                    label_Code_Validation.Visibility = Visibility.Visible;
+                    TexBox_Code_Validation.Visibility = Visibility.Visible;
+                    Panel_Validation_Code.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    MessageBox.Show(messageResource.GetString("Global_EmailError_Message"));
                 }
             }   
         }
