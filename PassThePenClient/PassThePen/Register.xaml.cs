@@ -55,7 +55,7 @@ namespace PassThePen
                 validationCode = randomNumber.Next(100000, 1000000);
                 if (client.CodeEmail(player.email, "Validation Code", validationCode) == 200)
                 {
-                    MessageBox.Show(messageResource.GetString("Register_SuccessfulRegister_Message"));
+                    MessageBox.Show(messageResource.GetString("Register_Successful_Message"));
                     HideComponetsRegister();
                     label_Code_Validation.Visibility = Visibility.Visible;
                     TexBox_Code_Validation.Visibility = Visibility.Visible;

@@ -14,6 +14,7 @@ namespace Logic
     {
         private const string displayName = "Pass The Pen";
         private const string body = "Your validation code is: ";
+        private Log log = new Log();
 
         public int SendNewEmail(String to, String affair, int validationCode)
         {
@@ -37,7 +38,7 @@ namespace Logic
             }
             catch (SmtpException ex)
             {
-                String message = ex.Message;
+                log.Add(ex.ToString());
                 result = 500;
             }
             return result;

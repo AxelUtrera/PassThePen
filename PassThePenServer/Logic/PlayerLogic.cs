@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Entity.Core;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,21 +12,29 @@ namespace Logic
 {
     public class PlayerLogic
     {
+        private readonly Log log = new Log();
 
         public int AutenticatePlayer(Domain.Player player)
         {
             int userResult = 500;
             string passwordHash = Encription.ToSHA2Hash(player.password);
-            using (var dataBase = new passthepenEntities())
+            try
             {
-                var user = (from Player in dataBase.Player
-                            where Player.username.Equals(player.username)
-                            && Player.password.Equals(passwordHash)
-                            select Player).Count();
-                if (user > 0)
+                using (var dataBase = new passthepenEntities())
                 {
-                    userResult = 200;
+                    var user = (from Player in dataBase.Player
+                                where Player.username.Equals(player.username)
+                                && Player.password.Equals(passwordHash)
+                                select Player).Count();
+                    if (user > 0)
+                    {
+                        userResult = 200;
+                    }
                 }
+            }
+            catch (EntityException ex)
+            {
+                log.Add(ex.ToString());
             }
             return userResult;
         }
@@ -34,23 +44,34 @@ namespace Logic
         {
             //Tarea: Validar que no exista el usuario a agregar en la base de datos.
             int statusCode = 500;
-            using (var dataBase = new passthepenEntities())
+            try
             {
-                var newPlayer = dataBase.Player.Add(new Player()
+                using (var dataBase = new passthepenEntities())
                 {
-                    email = player.email,
-                    username = player.username,
-                    name = player.name,
-                    lastname = player.lastname,
-                    password = Encription.ToSHA2Hash(player.password),
-                    profileImage = player.profileImage
-                });
-                dataBase.SaveChanges();
+                    var newPlayer = dataBase.Player.Add(new Player()
+                    {
+                        email = player.email,
+                        username = player.username,
+                        name = player.name,
+                        lastname = player.lastname,
+                        password = Encription.ToSHA2Hash(player.password),
+                        profileImage = player.profileImage
+                    });
+                    dataBase.SaveChanges();
 
-                if (newPlayer != null)
-                {
-                    statusCode = 200;
+                    if (newPlayer != null)
+                    {
+                        statusCode = 200;
+                    }
                 }
+            }
+            catch (DbUpdateException ex)
+            {
+                log.Add(ex.ToString());
+            }
+            catch (EntityException ex)
+            {
+                log.Add(ex.ToString());
             }
             return statusCode;
         }
@@ -59,16 +80,23 @@ namespace Logic
         public int AutenticateEmail(string email)
         {
             int emailResult = 500;
-            using (var dataBase = new passthepenEntities())
+            try
             {
-                var playerEmail = (from Player in dataBase.Player
-                                   where
-                                   Player.email.Equals(email)
-                                   select Player).Count();
-                if (playerEmail > 0)
+                using (var dataBase = new passthepenEntities())
                 {
-                    emailResult = 200;
+                    var playerEmail = (from Player in dataBase.Player
+                                       where
+                                       Player.email.Equals(email)
+                                       select Player).Count();
+                    if (playerEmail > 0)
+                    {
+                        emailResult = 200;
+                    }
                 }
+            }
+            catch (EntityException ex)
+            {
+                log.Add(ex.ToString());
             }
             return emailResult;
         }
@@ -77,15 +105,21 @@ namespace Logic
         public int FindPlayer(string username)
         {
             int operationResult = 500;
-
-            using (var context = new passthepenEntities())
+            try
             {
-                var userFound = context.Player.Find(username);
-
-                if (userFound != null)
+                using (var context = new passthepenEntities())
                 {
-                    operationResult = 200;
+                    var userFound = context.Player.Find(username);
+
+                    if (userFound != null)
+                    {
+                        operationResult = 200;
+                    }
                 }
+            }
+            catch (EntityException ex)
+            {
+                log.Add(ex.ToString());
             }
             return operationResult;
         }
@@ -94,17 +128,24 @@ namespace Logic
         public Domain.Player ObtainPlayerData(string username)
         {
             Domain.Player playerSend = null;
-            using (var dataBaseContext = new passthepenEntities())
+            try
             {
-                Player playerObtained = dataBaseContext.Player.Find(username);
-                playerSend = new Domain.Player()
+                using (var dataBaseContext = new passthepenEntities())
                 {
-                    username = playerObtained.username,
-                    name = playerObtained.name,
-                    lastname = playerObtained.lastname,
-                    email = playerObtained.email,
-                    profileImage = playerObtained.profileImage
-                };
+                    Player playerObtained = dataBaseContext.Player.Find(username);
+                    playerSend = new Domain.Player()
+                    {
+                        username = playerObtained.username,
+                        name = playerObtained.name,
+                        lastname = playerObtained.lastname,
+                        email = playerObtained.email,
+                        profileImage = playerObtained.profileImage
+                    };
+                }
+            }
+            catch (EntityException ex)
+            {
+                log.Add(ex.ToString());
             }
             return playerSend;
         }
@@ -113,18 +154,25 @@ namespace Logic
         public int UpdateDataPlayer(String username, Domain.Player player)
         {
             int stateCode = 500;
-            using (var dataBaseContext = new passthepenEntities())
+            try
             {
-                var updatedPlayer = dataBaseContext.Player.First(u => u.username == username);
-                updatedPlayer.name = player.name;
-                updatedPlayer.lastname = player.lastname;
-                updatedPlayer.email = player.email;
-                updatedPlayer.profileImage = player.profileImage;
-                int returnValue = dataBaseContext.SaveChanges();
-                if (returnValue > 0)
+                using (var dataBaseContext = new passthepenEntities())
                 {
-                    stateCode = 200;
+                    var updatedPlayer = dataBaseContext.Player.First(u => u.username == username);
+                    updatedPlayer.name = player.name;
+                    updatedPlayer.lastname = player.lastname;
+                    updatedPlayer.email = player.email;
+                    updatedPlayer.profileImage = player.profileImage;
+                    int returnValue = dataBaseContext.SaveChanges();
+                    if (returnValue > 0)
+                    {
+                        stateCode = 200;
+                    }
                 }
+            }
+            catch (EntityException ex)
+            {
+                log.Add(ex.ToString());
             }
             return stateCode;
         }
@@ -187,9 +235,9 @@ namespace Logic
                         friendsList.Add(newFriend);
                     }
                 }
-                catch (Exception e)
+                catch (EntityException ex)
                 {
-                    Console.WriteLine(e.StackTrace);
+                    log.Add(ex.ToString());
                 }
             }
             return friendsList;
@@ -200,20 +248,26 @@ namespace Logic
         {
             int operationResult = 500;
 
-            using (var context = new passthepenEntities())
+            try
             {
-                var friendToDeleted = context.Friends.Where(u => u.usernamePlayer.Equals(friend.username) && u.friendUsername.Equals(friend.friendUsername)).First();
-                var deletedToFriend = context.Friends.Where(u => u.usernamePlayer.Equals(friend.friendUsername) && u.friendUsername.Equals(friend.username)).First();
-
-                if (friendToDeleted != null && deletedToFriend != null)
+                using (var context = new passthepenEntities())
                 {
-                    context.Friends.Remove(friendToDeleted);
-                    context.Friends.Remove(deletedToFriend);
-                    context.SaveChanges();
-                    operationResult = 200;
+                    var friendToDeleted = context.Friends.Where(u => u.usernamePlayer.Equals(friend.username) && u.friendUsername.Equals(friend.friendUsername)).First();
+                    var deletedToFriend = context.Friends.Where(u => u.usernamePlayer.Equals(friend.friendUsername) && u.friendUsername.Equals(friend.username)).First();
+
+                    if (friendToDeleted != null && deletedToFriend != null)
+                    {
+                        context.Friends.Remove(friendToDeleted);
+                        context.Friends.Remove(deletedToFriend);
+                        context.SaveChanges();
+                        operationResult = 200;
+                    }
                 }
             }
-
+            catch(EntityException ex)
+            {
+                log.Add(ex.ToString());
+            }
             return operationResult;
         }
 
