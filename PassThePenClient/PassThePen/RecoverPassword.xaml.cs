@@ -148,8 +148,6 @@ namespace PassThePen
                     MessageBox.Show(messageResource.GetString("RecoverPassword_PasswordUpdated_Message"));
                     Login login = new Login();
                     login.Show();
-
-                    
                     Close();
                 }
                 else

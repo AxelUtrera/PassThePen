@@ -178,6 +178,15 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Error al enviar el correo electronico.
+        /// </summary>
+        public static string Global_EmailError_Message {
+            get {
+                return ResourceManager.GetString("Global_EmailError_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Numero de caracteres excedidos. Numero maximo: 50.
         /// </summary>
         public static string Global_Error__LastName_Label {
@@ -741,15 +750,6 @@ namespace PassThePen.Properties {
         public static string Profile_Username_Label {
             get {
                 return ResourceManager.GetString("Profile_Username_Label", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Cancelar.
-        /// </summary>
-        public static string RecoverPassword_Cancel_Button {
-            get {
-                return ResourceManager.GetString("RecoverPassword_Cancel_Button", resourceCulture);
             }
         }
         
