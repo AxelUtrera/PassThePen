@@ -352,8 +352,8 @@ namespace Logic
             {
                 using (var context = new passthepenEntities())
                 {
-                    var friendToDeleted = context.Friends.Where(u => u.usernamePlayer.Equals(friend.username) && u.friendUsername.Equals(friend.friendUsername)).First();
-                    var deletedToFriend = context.Friends.Where(u => u.usernamePlayer.Equals(friend.friendUsername) && u.friendUsername.Equals(friend.username)).First();
+                    var friendToDeleted = context.Friends.Where(u => u.usernamePlayer.Equals(friend.username) && u.friendUsername.Equals(friend.friendUsername)).FirstOrDefault();
+                    var deletedToFriend = context.Friends.Where(u => u.usernamePlayer.Equals(friend.friendUsername) && u.friendUsername.Equals(friend.username)).FirstOrDefault();
 
                     if (friendToDeleted != null && deletedToFriend != null)
                     {

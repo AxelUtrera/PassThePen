@@ -514,6 +514,8 @@ namespace PassThePen
             PlacePlayersInGroup(new List<Player>());
             Match match = new Match();
             match.Show();
+            Button_LeaveGroup.Visibility = Visibility.Collapsed;
+            Button_ExitGame.Visibility = Visibility.Visible;
             this.Visibility = Visibility.Hidden;
         }
 

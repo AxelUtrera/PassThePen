@@ -1688,45 +1688,45 @@
   </wsdl:binding>
   <wsdl:service name="ImplementationServices">
     <wsdl:port name="NetTcpBinding_IPlayerManagement" binding="tns:NetTcpBinding_IPlayerManagement">
-      <soap12:address location="net.tcp://192.168.100.14:8081/PassThePen" />
+      <soap12:address location="net.tcp://localhost:8081/PassThePen" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.100.14:8081/PassThePen</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IAutentication" binding="tns:NetTcpBinding_IAutentication">
-      <soap12:address location="net.tcp://192.168.100.14:8081/PassThePen" />
+      <soap12:address location="net.tcp://localhost:8081/PassThePen" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.100.14:8081/PassThePen</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IFriendRequests" binding="tns:NetTcpBinding_IFriendRequests">
-      <soap12:address location="net.tcp://192.168.100.14:8081/PassThePen" />
+      <soap12:address location="net.tcp://localhost:8081/PassThePen" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.100.14:8081/PassThePen</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IPlayerConnection" binding="tns:NetTcpBinding_IPlayerConnection">
-      <soap12:address location="net.tcp://192.168.100.14:8081/PassThePen" />
+      <soap12:address location="net.tcp://localhost:8081/PassThePen" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.100.14:8081/PassThePen</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IMatchManagement" binding="tns:NetTcpBinding_IMatchManagement">
-      <soap12:address location="net.tcp://192.168.100.14:8081/PassThePen" />
+      <soap12:address location="net.tcp://localhost:8081/PassThePen" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.100.14:8081/PassThePen</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IChatServices" binding="tns:NetTcpBinding_IChatServices">
-      <soap12:address location="net.tcp://192.168.100.14:8081/PassThePen" />
+      <soap12:address location="net.tcp://localhost:8081/PassThePen" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.100.14:8081/PassThePen</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IDrawReviewService" binding="tns:NetTcpBinding_IDrawReviewService">
-      <soap12:address location="net.tcp://192.168.100.14:8081/PassThePen" />
+      <soap12:address location="net.tcp://localhost:8081/PassThePen" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.100.14:8081/PassThePen</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:8081/PassThePen</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

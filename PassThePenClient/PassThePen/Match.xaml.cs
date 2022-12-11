@@ -403,6 +403,7 @@ namespace PassThePen
         private void OpenMainMenu()
         {
             timer.Stop();
+            
             foreach (Window window in App.Current.Windows)
 
             {

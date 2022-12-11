@@ -293,10 +293,17 @@ namespace Comunication
         {
             int statusCode = 500;
 
-            if (playersInGroup.Count <= 6)
+            if (playersInGroup.Count < 6)
             {
                 statusCode = 200;
             }
+            Console.WriteLine(playersInGroup.Count);
+            foreach(ConnectedUser connectedUser in playersInGroup)
+            {
+                Console.WriteLine(connectedUser.username);
+            }
+
+            Console.WriteLine(statusCode + "\n");
             return statusCode;
         }
 
@@ -509,16 +516,11 @@ namespace Comunication
 
                 if (leavePlayer.hostState)
                 {
-                    foreach (ConnectedUser user in playersInGroup)
-                    {
-                        user.hostState = false;
-                        usersConnected.First(u => u.username == user.username).score = 0;
-                        user.matchContext.GetCallbackChannel<IMatchCallback>().CloseMatchWindow();
-                    }
-                    
-                    playersInGroup.Clear();
-                    playersDraws.Clear();
-                    turnNumber = 0;
+                    KickAllPlayers();
+                }
+                else if(playersInGroup.Count == 2)
+                {
+                    KickAllPlayers();
                 }
                 else
                 {
@@ -537,8 +539,21 @@ namespace Comunication
                 log.Add(ex.ToString());
             }
         }
-    }
 
+        private void KickAllPlayers()
+        {
+            foreach (ConnectedUser user in playersInGroup)
+            {
+                user.hostState = false;
+                usersConnected.First(u => u.username == user.username).score = 0;
+                user.matchContext.GetCallbackChannel<IMatchCallback>().CloseMatchWindow();
+            }
+
+            playersInGroup.Clear();
+            playersDraws.Clear();
+            turnNumber = 0;
+        }
+    }
 
 
     public partial class ImplementationServices : IChatServices
