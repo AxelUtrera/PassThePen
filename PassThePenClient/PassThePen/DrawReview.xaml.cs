@@ -34,6 +34,12 @@ namespace PassThePen
             InitializeComponent();
             SetPlayersDraw();
             SetDrawReviewContext(MainMenu.username);
+
+            Console.WriteLine(App.Current.Windows.Count);
+            foreach(Window window in App.Current.Windows)
+            {
+                Console.WriteLine(window.Name.ToString().Trim());
+            }
         }
 
 

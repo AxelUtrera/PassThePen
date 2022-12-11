@@ -451,25 +451,27 @@ namespace PassThePen
                 int statusPlayerIsNotInGroup = 404;
                 int playerIsConected = 200;
                 int groupIsNotFull = 200;
-                if (clientAutenticate.FindPlayerIsConected(friend.friendUsername) == playerIsConected && clientPlayerConection.GroupIsNotFull() == groupIsNotFull)
+                if (clientAutenticate.FindPlayerIsConected(friend.friendUsername) == playerIsConected)
                 {
-                    if (clientPlayerConection.FindPlayerInGroup(friend.friendUsername) == statusPlayerIsNotInGroup)
+                    if (clientPlayerConection.GroupIsNotFull() == groupIsNotFull)
                     {
-                        clientPlayerConection.SendMathInvitation(username, friend.friendUsername);
+                        if (clientPlayerConection.FindPlayerInGroup(friend.friendUsername) == statusPlayerIsNotInGroup)
+                        {
+                            clientPlayerConection.SendMathInvitation(username, friend.friendUsername);
+                        }
+                        else
+                        {
+                            MessageBox.Show(messageResource.GetString("MainMenu_PlayerInGroup_Message"));
+                        }
                     }
                     else
                     {
-                        MessageBox.Show(messageResource.GetString("MainMenu_PlayerInGroup_Message"));
+                        MessageBox.Show(messageResource.GetString("MainMenu_FullGroup_Message"));
                     }
                 }
                 else
                 {
                     MessageBox.Show(messageResource.GetString("MainMenu_PlayerOffline_Message"));
-                }
-
-                if (clientPlayerConection.GroupIsNotFull() != groupIsNotFull)
-                {
-                    MessageBox.Show(messageResource.GetString("MainMenu_FullGroup_Message"));
                 }
             }
             catch (EndpointNotFoundException ex)

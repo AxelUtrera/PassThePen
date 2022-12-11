@@ -386,7 +386,7 @@ namespace Comunication
         public void StartTurnSignal(string username)
         {
             turnNumber++;
-            if (turnNumber == 11)
+            if (turnNumber == 4)
             {
                 ObtainMatchWinner();
             }
@@ -458,6 +458,7 @@ namespace Comunication
                     foreach (ConnectedUser player in playersInGroup)
                     {
                         usersConnected.First(u => u.username == player.username).score = 0;
+                        player.hostState = false;
                         player.matchContext.GetCallbackChannel<IMatchCallback>().NotifyWinner(winner.username);
 
                     }
@@ -510,9 +511,11 @@ namespace Comunication
                 {
                     foreach (ConnectedUser user in playersInGroup)
                     {
+                        user.hostState = false;
                         usersConnected.First(u => u.username == user.username).score = 0;
                         user.matchContext.GetCallbackChannel<IMatchCallback>().CloseMatchWindow();
                     }
+                    
                     playersInGroup.Clear();
                     playersDraws.Clear();
                     turnNumber = 0;

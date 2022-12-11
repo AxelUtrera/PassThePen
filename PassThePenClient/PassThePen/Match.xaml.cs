@@ -43,6 +43,7 @@ namespace PassThePen
             SetChatOperationContext(MainMenu.username);
             SetMatchOperationContext(MainMenu.username);
             SetPlayersScoreTable();
+            Console.WriteLine(App.Current.Windows.Count);
         }
 
         private void Button_SetEraser_Click(object sender, RoutedEventArgs e)
@@ -219,6 +220,7 @@ namespace PassThePen
             selectedTime = turnTime;
         }
 
+
         private void StartTurnTimer()
         {
             timer.Interval = TimeSpan.FromSeconds(1);
@@ -226,6 +228,7 @@ namespace PassThePen
             timer.Tick += Timer_Tick;
             timer.Start();
         }
+
 
         private void Timer_Tick(object sender, EventArgs e)
         {
@@ -288,6 +291,7 @@ namespace PassThePen
             }
         }
 
+
         private void SendDraw()
         {
             try
@@ -310,6 +314,7 @@ namespace PassThePen
         }
 
 
+
         public void SetChatOperationContext(string username)
         {
             try
@@ -329,6 +334,7 @@ namespace PassThePen
                 log.Add(ex.ToString());
             }
         }
+
 
         public void SetMatchOperationContext(string username)
         {
@@ -350,12 +356,13 @@ namespace PassThePen
             }
         }
 
+
         public void DistributeDraws(Dictionary<string, byte[]> playersDraw)
         {
             playersDraw.Remove(username);
             DrawReview.playersDraw = playersDraw;
             DrawReview drawReview = new DrawReview();
-            drawReview.Show();
+            drawReview.ShowDialog();
         }
 
 
