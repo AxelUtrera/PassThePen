@@ -14,7 +14,7 @@ namespace Logic
     {
         private const string displayName = "Pass The Pen";
         private const string body = "Your validation code is: ";
-        private Log log = new Log();
+        private readonly Log log = new Log();
 
         public int SendNewEmail(String to, String affair, int validationCode)
         {
@@ -35,6 +35,10 @@ namespace Logic
                 client.Credentials = new NetworkCredential(from, password);
                 client.EnableSsl = true;
                 client.Send(mailMessage);
+            }
+            catch (ArgumentNullException ex)
+            {
+                log.Add(ex.ToString());
             }
             catch (SmtpException ex)
             {

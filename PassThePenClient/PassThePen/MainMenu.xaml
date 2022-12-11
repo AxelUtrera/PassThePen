@@ -10,7 +10,7 @@
         WindowState="Maximized"
         WindowStyle="None"
         ShowInTaskbar="False"
-        Width="1535" Height="870">
+        Width="1280" Height="720">
     <Grid>
         <StackPanel>
             <StackPanel>
@@ -39,14 +39,14 @@
             </StackPanel>
 
             <StackPanel Margin="0,0,0,40">
-                <Grid Height="650">
+                <Grid Height="504">
                     <Grid.ColumnDefinitions >
                         <ColumnDefinition Width="400"></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition Width="295"></ColumnDefinition>
+                        <ColumnDefinition Width="190"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel Margin="45,30,45,30" Grid.Column="0">
+                    <StackPanel Margin="45,30,45,10" Grid.Column="0">
                         <StackPanel Orientation="Horizontal">
                             <Label Content="{x:Static p:Resources.MainManu_FriendList_Label}" Margin="0,0,0,10" FontSize="24" FontWeight="bold"/>
                             <Image Name="Button_FindFriends" Source="/Img/Icon_Search.png" Margin="90,0" Width="30" Cursor="Hand" RenderTransformOrigin="0.5,0.711" MouseLeftButtonDown="Button_FindFriends_Click" />
@@ -73,11 +73,11 @@
                                 </Button.Template>
                             </Button>
                         </StackPanel>
-                        <Border Grid.Column="0" Width="305" Height="460"  BorderThickness="2" BorderBrush="Black" CornerRadius="10">
+                        <Border Grid.Column="0" Width="305" Height="330"  BorderThickness="2" BorderBrush="Black" CornerRadius="10">
                             <StackPanel>
                                 <Label Name="label_ListFriends" Content="{x:Static p:Resources.MainMenu_Friends_Label}" HorizontalAlignment="Center" FontWeight="Bold" />
                                 <Label Name="label_FriendRequests" Content="{x:Static p:Resources.MainMenu_FriendsRequests_Label}" HorizontalAlignment="Center" FontWeight="Bold" Visibility="Collapsed"/>
-                                <ListBox x:Name="ListBox_FriendList" Height="425" Width="300" BorderBrush="Transparent">
+                                <ListBox x:Name="ListBox_FriendList" Height="292" Width="300" BorderBrush="Transparent">
                                     <ListBox.ItemTemplate >
                                         <DataTemplate>
                                             <Grid>
@@ -100,7 +100,7 @@
                                     </ListBox.ItemTemplate>
                                 </ListBox>
 
-                                <ListBox Name="ListBox_FriendsRequests"  Margin="0" Height="373" Width="300" BorderBrush="Transparent" HorizontalAlignment="Stretch" Visibility="Collapsed">
+                                <ListBox Name="ListBox_FriendsRequests"  Margin="0" Height="270" Width="300" BorderBrush="Transparent" HorizontalAlignment="Stretch" Visibility="Collapsed">
                                     <ListBox.ItemTemplate >
                                         <DataTemplate>
                                             <Grid>
@@ -123,7 +123,7 @@
                             </StackPanel>
                         </Border>
                         <StackPanel Orientation="Horizontal" Margin="3">
-                            <TextBox Name="Textbox_AddFriend" Height="33" Width="200" Background="AliceBlue" BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" FontSize="18">
+                            <TextBox x:Name="Textbox_AddFriend" Height="33" Width="200" Background="AliceBlue" BorderBrush="Black" BorderThickness="2" FontSize="18">
                                 <TextBox.Resources>
                                     <Style TargetType="{x:Type Border}">
                                         <Setter Property="CornerRadius" Value="10"/>
@@ -141,8 +141,8 @@
                             </Button>
                         </StackPanel>
                     </StackPanel>
-                    <StackPanel Margin="90,30,0,0" Grid.Column="1" >
-                        <Grid Grid.Column="1" Height="596">
+                    <StackPanel Margin="90,0,0,0" Grid.Column="1" >
+                        <Grid Grid.Column="1" Height="490" Width="601">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
@@ -154,7 +154,7 @@
                                 <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
 
-                            
+
                             <!--Principal player-->
                             <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center">
                                 <Border  Height="100" Width="100" BorderThickness="1" BorderBrush="Transparent" VerticalAlignment="Top" HorizontalAlignment="Center">

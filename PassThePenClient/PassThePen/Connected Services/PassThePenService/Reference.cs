@@ -359,6 +359,12 @@ namespace PassThePen.PassThePenService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManagement/FindPlayer", ReplyAction="http://tempuri.org/IPlayerManagement/FindPlayerResponse")]
         System.Threading.Tasks.Task<int> FindPlayerAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManagement/AddGuestFriend", ReplyAction="http://tempuri.org/IPlayerManagement/AddGuestFriendResponse")]
+        int AddGuestFriend(string usernamePlayer);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerManagement/AddGuestFriend", ReplyAction="http://tempuri.org/IPlayerManagement/AddGuestFriendResponse")]
+        System.Threading.Tasks.Task<int> AddGuestFriendAsync(string usernamePlayer);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -451,6 +457,14 @@ namespace PassThePen.PassThePenService {
         public System.Threading.Tasks.Task<int> FindPlayerAsync(string username) {
             return base.Channel.FindPlayerAsync(username);
         }
+        
+        public int AddGuestFriend(string usernamePlayer) {
+            return base.Channel.AddGuestFriend(usernamePlayer);
+        }
+        
+        public System.Threading.Tasks.Task<int> AddGuestFriendAsync(string usernamePlayer) {
+            return base.Channel.AddGuestFriendAsync(usernamePlayer);
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -474,6 +488,12 @@ namespace PassThePen.PassThePenService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAutentication/CodeEmail", ReplyAction="http://tempuri.org/IAutentication/CodeEmailResponse")]
         System.Threading.Tasks.Task<int> CodeEmailAsync(string to, string affair, int validationCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAutentication/FindPlayerIsConected", ReplyAction="http://tempuri.org/IAutentication/FindPlayerIsConectedResponse")]
+        int FindPlayerIsConected(string usernamePlayer);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAutentication/FindPlayerIsConected", ReplyAction="http://tempuri.org/IAutentication/FindPlayerIsConectedResponse")]
+        System.Threading.Tasks.Task<int> FindPlayerIsConectedAsync(string usernamePlayer);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -525,6 +545,14 @@ namespace PassThePen.PassThePenService {
         
         public System.Threading.Tasks.Task<int> CodeEmailAsync(string to, string affair, int validationCode) {
             return base.Channel.CodeEmailAsync(to, affair, validationCode);
+        }
+        
+        public int FindPlayerIsConected(string usernamePlayer) {
+            return base.Channel.FindPlayerIsConected(usernamePlayer);
+        }
+        
+        public System.Threading.Tasks.Task<int> FindPlayerIsConectedAsync(string usernamePlayer) {
+            return base.Channel.FindPlayerIsConectedAsync(usernamePlayer);
         }
     }
     
@@ -657,12 +685,6 @@ namespace PassThePen.PassThePenService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/LeaveGroup", ReplyAction="http://tempuri.org/IPlayerConnection/LeaveGroupResponse")]
         System.Threading.Tasks.Task LeaveGroupAsync(string usernamePlayer);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/FindPlayerIsConected", ReplyAction="http://tempuri.org/IPlayerConnection/FindPlayerIsConectedResponse")]
-        int FindPlayerIsConected(string usernamePlayer);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/FindPlayerIsConected", ReplyAction="http://tempuri.org/IPlayerConnection/FindPlayerIsConectedResponse")]
-        System.Threading.Tasks.Task<int> FindPlayerIsConectedAsync(string usernamePlayer);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlayerConnection/FindPlayerInGroup", ReplyAction="http://tempuri.org/IPlayerConnection/FindPlayerInGroupResponse")]
         int FindPlayerInGroup(string usernameToFind);
         
@@ -784,14 +806,6 @@ namespace PassThePen.PassThePenService {
         
         public System.Threading.Tasks.Task LeaveGroupAsync(string usernamePlayer) {
             return base.Channel.LeaveGroupAsync(usernamePlayer);
-        }
-        
-        public int FindPlayerIsConected(string usernamePlayer) {
-            return base.Channel.FindPlayerIsConected(usernamePlayer);
-        }
-        
-        public System.Threading.Tasks.Task<int> FindPlayerIsConectedAsync(string usernamePlayer) {
-            return base.Channel.FindPlayerIsConectedAsync(usernamePlayer);
         }
         
         public int FindPlayerInGroup(string usernameToFind) {

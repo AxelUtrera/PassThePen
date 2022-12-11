@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Resources;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -25,6 +26,7 @@ namespace PassThePen
     public partial class Profile : Window
     {
         ResourceManager messageResource = new ResourceManager("PassThePen.Properties.Resources", Assembly.GetExecutingAssembly());
+        private LogClient log = new LogClient();
 
         public Profile()
         {
@@ -35,44 +37,70 @@ namespace PassThePen
 
         private void Button_SaveProfileChanges_Click(object sender, RoutedEventArgs e)
         {
-            PlayerManagementClient client = new PlayerManagementClient();
-            if (ValidateInformation())
+            try
             {
-                Byte[] image = ImageToByte(Image_ProfileImage.Source as BitmapImage);
-                Player player = new Player()
+                PlayerManagementClient client = new PlayerManagementClient();
+                if (ValidateInformation())
                 {
-                    username = TextBox_Username.Text,
-                    name = TextBox_Name.Text,
-                    lastname = TextBox_Lastname.Text,
-                    email = TextBox_Email.Text,
-                    profileImage = image
-                };
-                if (client.UpdateDataPlayer(MainMenu.username, player) == 200)
-                {
-                    MessageBox.Show(messageResource.GetString("Profile_UpdatedProfile_Message"));
+                    Byte[] image = ImageToByte(Image_ProfileImage.Source as BitmapImage);
+                    Player player = new Player()
+                    {
+                        username = TextBox_Username.Text,
+                        name = TextBox_Name.Text,
+                        lastname = TextBox_Lastname.Text,
+                        email = TextBox_Email.Text,
+                        profileImage = image
+                    };
+                    if (client.UpdateDataPlayer(MainMenu.username, player) == 200)
+                    {
+                        MessageBox.Show(messageResource.GetString("Profile_UpdatedProfile_Message"));
+                    }
+                    else
+                    {
+                        MessageBox.Show(messageResource.GetString("Profile_UpdateProfileError_Message"));
+                    }
                 }
-                else
-                {
-                    MessageBox.Show(messageResource.GetString("Profile_UpdateProfileError_Message"));
-                }
+                client.Close();
             }
-            client.Close();
+            catch (EndpointNotFoundException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
+                log.Add(ex.ToString());
+            }
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
+                log.Add(ex.ToString());
+            }
         }
 
 
         private void SetDataPlayer()
         {
-            PassThePenService.PlayerManagementClient client = new PassThePenService.PlayerManagementClient();
-            Player playerObtained = client.GetDataPlayer(MainMenu.username);
-            if (playerObtained != null)
+            try
             {
-                TextBox_Username.Text = playerObtained.username;
-                TextBox_Name.Text = playerObtained.name;
-                TextBox_Lastname.Text = playerObtained.lastname;
-                TextBox_Email.Text = playerObtained.email;
-                Image_ProfileImage.Source = ImageManager.ToImage(playerObtained.profileImage);
+                PassThePenService.PlayerManagementClient client = new PassThePenService.PlayerManagementClient();
+                Player playerObtained = client.GetDataPlayer(MainMenu.username);
+                if (playerObtained != null)
+                {
+                    TextBox_Username.Text = playerObtained.username;
+                    TextBox_Name.Text = playerObtained.name;
+                    TextBox_Lastname.Text = playerObtained.lastname;
+                    TextBox_Email.Text = playerObtained.email;
+                    Image_ProfileImage.Source = ImageManager.ToImage(playerObtained.profileImage);
+                }
+                client.Close();
             }
-            client.Close();
+            catch (EndpointNotFoundException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
+                log.Add(ex.ToString());
+            }
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
+                log.Add(ex.ToString());
+            }
         }
 
 

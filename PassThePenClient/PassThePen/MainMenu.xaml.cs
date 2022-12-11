@@ -22,6 +22,7 @@ using System.Xml.Serialization;
 using System.Security.Policy;
 using System.Reflection;
 using System.Resources;
+using System.Configuration;
 
 namespace PassThePen
 {
@@ -35,6 +36,7 @@ namespace PassThePen
         private List<string> listUsernameStrings = new List<string>();
         private List<Friends> friendList = new List<Friends>();
         private List<FriendRequest> friendRequests = new List<FriendRequest>();
+        private LogClient log = new LogClient();
 
         public int NotifyMatchInvitation(string invitingPlayer)
         {
@@ -58,27 +60,39 @@ namespace PassThePen
 
         public void GetDataPlayersInGoup()
         {
-            InstanceContext instanceContext = new InstanceContext(this);
-            PassThePenService.PlayerConnectionClient client = new PlayerConnectionClient(instanceContext);
-            List<Player> listGroupPlayers = client.GetListPlayersInGroup().ToList();
-            int minimumPlayersInGroup = 2;
-
-
-            if (listGroupPlayers.Count >= minimumPlayersInGroup)
+            try
             {
-                RemoveOwnerPlayerOfListPlayersInGroup(listGroupPlayers);
-            }
+                InstanceContext instanceContext = new InstanceContext(this);
+                PassThePenService.PlayerConnectionClient client = new PlayerConnectionClient(instanceContext);
+                List<Player> listGroupPlayers = client.GetListPlayersInGroup().ToList();
+                int minimumPlayersInGroup = 2;
 
-            if (listGroupPlayers.Count == 0)
+
+                if (listGroupPlayers.Count >= minimumPlayersInGroup)
+                {
+                   RemoveOwnerPlayerOfListPlayersInGroup(listGroupPlayers);
+                }
+
+                if (listGroupPlayers.Count == 0)
+                {
+                    Button_LeaveGroup.Visibility = Visibility.Collapsed;
+                    Button_ExitGame.Visibility = Visibility.Visible;
+                }
+
+                PlacePlayersInGroup(new List<Player>());
+                PlacePlayersInGroup(listGroupPlayers);
+            }
+            catch (EndpointNotFoundException ex)
             {
-                Button_LeaveGroup.Visibility = Visibility.Collapsed;
-                Button_ExitGame.Visibility = Visibility.Visible;
+                MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
+                log.Add(ex.ToString());
             }
-
-            PlacePlayersInGroup(new List<Player>());
-            PlacePlayersInGroup(listGroupPlayers);
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
+                log.Add(ex.ToString());
+            }
         }
-
 
         public void OpenExitHostMessage()
         {
@@ -129,14 +143,26 @@ namespace PassThePen
 
         private void Button_ExitGame_Click(object sender, RoutedEventArgs e)
         {
-            InstanceContext instanceContext = new InstanceContext(this);
-            PassThePenService.PlayerConnectionClient client = new PlayerConnectionClient(instanceContext);
-            client.Disconnect(username);
-            Login login = new Login();
-            login.Show();
-            client.Close();
-            this.Close();
-
+            try
+            {
+                InstanceContext instanceContext = new InstanceContext(this);
+                PassThePenService.PlayerConnectionClient client = new PlayerConnectionClient(instanceContext);
+                client.Disconnect(username);
+                Login login = new Login();
+                login.Show();
+                client.Close();
+                this.Close();
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
+                log.Add(ex.ToString());
+            }
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
+                log.Add(ex.ToString());
+            }
         }
 
 
@@ -176,11 +202,23 @@ namespace PassThePen
 
         private void Button_DeclineRequests_Click(object sender, RoutedEventArgs e)
         {
-            PassThePenService.FriendRequestsClient client = new FriendRequestsClient();
-            FriendRequest newFriendRequests = GetFriendRequestOfListboxImageButton(sender);
-            client.DeclineFriendRequests(newFriendRequests);
-            GenerateFriendRequestList();
-
+            try
+            {
+                PassThePenService.FriendRequestsClient client = new FriendRequestsClient();
+                FriendRequest newFriendRequests = GetFriendRequestOfListboxImageButton(sender);
+                client.DeclineFriendRequests(newFriendRequests);
+                GenerateFriendRequestList();
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
+                log.Add(ex.ToString());
+            }
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
+                log.Add(ex.ToString());
+            }
         }
 
 
@@ -204,35 +242,84 @@ namespace PassThePen
 
         private void Connected()
         {
-            InstanceContext instanceContext = new InstanceContext(this);
-            PassThePenService.PlayerConnectionClient client = new PlayerConnectionClient(instanceContext);
-            client.Connect(username);
+            try
+            {
+                InstanceContext instanceContext = new InstanceContext(this);
+                PassThePenService.PlayerConnectionClient client = new PlayerConnectionClient(instanceContext);
+                client.Connect(username);
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
+                log.Add(ex.ToString());
+            }
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
+                log.Add(ex.ToString());
+            }
         }
 
 
         private void GetFriends()
         {
-            InstanceContext instanceContext = new InstanceContext(this);
-            PassThePenService.PlayerConnectionClient client = new PlayerConnectionClient(instanceContext);
-            client.SendOnlinePlayers(username);
+            try
+            {
+                InstanceContext instanceContext = new InstanceContext(this);
+                PassThePenService.PlayerConnectionClient client = new PlayerConnectionClient(instanceContext);
+                client.SendOnlinePlayers(username);
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
+                log.Add(ex.ToString());
+            }
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
+                log.Add(ex.ToString());
+            }
         }
 
 
         public void RechargeFriends(Friends[] friends)
         {
-            InstanceContext instanceContext = new InstanceContext(this);
-            PassThePenService.PlayerConnectionClient client = new PlayerConnectionClient(instanceContext);
-            List<string> playersConected = client.GetNameOnlinePlayers().ToList();
-            friendList = friends.ToList();
-            ListBox_FriendList.ItemsSource = friendList;
+            try
+            {
+                friendList = friends.ToList();
+                ListBox_FriendList.ItemsSource = friendList;
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
+                log.Add(ex.ToString());
+            }
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
+                log.Add(ex.ToString());
+            }
         }
         
 
         private void Button_StartMatch_Click(object sender, RoutedEventArgs e)
         {
-            InstanceContext context = new InstanceContext(this);
-            PassThePenService.PlayerConnectionClient client = new PassThePenService.PlayerConnectionClient(context);
-            client.StartMatch(username);
+            try
+            {
+                InstanceContext context = new InstanceContext(this);
+                PassThePenService.PlayerConnectionClient client = new PassThePenService.PlayerConnectionClient(context);
+                client.StartMatch(username);
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
+                log.Add(ex.ToString());
+            }
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
+                log.Add(ex.ToString());
+            }
         }
 
 
@@ -307,70 +394,107 @@ namespace PassThePen
 
         private void Button_AddFriend_Click(object sender, RoutedEventArgs e)
         {
-            PlayerManagementClient playerClient = new PlayerManagementClient();
-            int playerExist = 200;
-
-            if (playerClient.FindPlayer(Textbox_AddFriend.Text) == playerExist)
+            try
             {
-                PassThePenService.FriendRequestsClient client = new FriendRequestsClient();
-                FriendRequest friendRequest = new FriendRequest()
+                PlayerManagementClient playerClient = new PlayerManagementClient();
+                int playerExist = 200;
+
+                if (playerClient.FindPlayer(Textbox_AddFriend.Text) == playerExist)
                 {
-                    usernamePlayer = Textbox_AddFriend.Text,
-                    friendUsername = username
-                };
-                client.SendFriendRequests(friendRequest);
-                MessageBox.Show(messageResource.GetString("MainMenu_FriendRequestSend"));
+                    PassThePenService.FriendRequestsClient client = new FriendRequestsClient();
+                    FriendRequest friendRequest = new FriendRequest()
+                    {
+                        usernamePlayer = Textbox_AddFriend.Text,
+                        friendUsername = username
+                    };
+                    client.SendFriendRequests(friendRequest);
+                    Textbox_AddFriend.Clear();
+                    MessageBox.Show(messageResource.GetString("MainMenu_FriendRequestSend"));
+                }
+                else
+                {
+                    MessageBox.Show(messageResource.GetString("MainMenu_PlayerNotExist_Message"));
+                }
             }
-            else
+            catch (EndpointNotFoundException ex)
             {
-                MessageBox.Show(messageResource.GetString("MainMenu_PlayerNotExist_Message"));
+                MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
+                log.Add(ex.ToString());
             }
-
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
+                log.Add(ex.ToString());
+            }
         }
 
 
         private void Button_InviteFriend_Click(object sender, MouseButtonEventArgs e)
         {
-            InstanceContext context = new InstanceContext(this);
-            PassThePenService.PlayerConnectionClient client = new PassThePenService.PlayerConnectionClient(context);
-            Image buttonInviteFriend = (Image)sender;
-            StackPanel parent = (StackPanel)buttonInviteFriend.Parent;
-            Friends friend = (Friends)parent.DataContext;
-            int statusPlayerIsNotInGroup = 404;
-            int playerIsConected = 200;
-            int groupIsNotFull = 200;
-
-
-            //Refactorizar
-            if (client.FindPlayerIsConected(friend.friendUsername) == playerIsConected && client.GroupIsNotFull() == groupIsNotFull)
+            try
             {
-                if (client.FindPlayerInGroup(friend.friendUsername) == statusPlayerIsNotInGroup)
+                InstanceContext context = new InstanceContext(this);
+                PassThePenService.PlayerConnectionClient clientPlayerConection = new PassThePenService.PlayerConnectionClient(context);
+                PassThePenService.AutenticationClient clientAutenticate = new PassThePenService.AutenticationClient();
+                Image buttonInviteFriend = (Image)sender;
+                StackPanel parent = (StackPanel)buttonInviteFriend.Parent;
+                Friends friend = (Friends)parent.DataContext;
+                int statusPlayerIsNotInGroup = 404;
+                int playerIsConected = 200;
+                int groupIsNotFull = 200;
+                if (clientAutenticate.FindPlayerIsConected(friend.friendUsername) == playerIsConected && clientPlayerConection.GroupIsNotFull() == groupIsNotFull)
                 {
-                    client.SendMathInvitation(username, friend.friendUsername);
+                    if (clientPlayerConection.FindPlayerInGroup(friend.friendUsername) == statusPlayerIsNotInGroup)
+                    {
+                        clientPlayerConection.SendMathInvitation(username, friend.friendUsername);
+                    }
+                    else
+                    {
+                        MessageBox.Show(messageResource.GetString("MainMenu_PlayerInGroup_Message"));
+                    }
                 }
                 else
                 {
-                    MessageBox.Show(messageResource.GetString("MainMenu_PlayerInGroup_Message"));
+                    MessageBox.Show(messageResource.GetString("MainMenu_PlayerOffline_Message"));
+                }
+
+                if (clientPlayerConection.GroupIsNotFull() != groupIsNotFull)
+                {
+                    MessageBox.Show(messageResource.GetString("MainMenu_FullGroup_Message"));
                 }
             }
-            else
+            catch (EndpointNotFoundException ex)
             {
-                MessageBox.Show(messageResource.GetString("MainMenu_PlayerOffline_Message"));
+                MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
+                log.Add(ex.ToString());
             }
-
-            if (client.GroupIsNotFull() != groupIsNotFull)
+            catch (TimeoutException ex)
             {
-                MessageBox.Show(messageResource.GetString("MainMenu_FullGroup_Message"));
+                MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
+                log.Add(ex.ToString());
             }
         }
 
 
         private void SetDataProfile()
         {
-            PassThePenService.PlayerManagementClient client = new PassThePenService.PlayerManagementClient();
-            Player playerObtained = client.GetDataPlayer(username);
-            Image_ProfileImage.Source = ImageManager.ToImage(playerObtained.profileImage);
-            Label_PrincipalPlayer.Content = username;
+            try
+            {
+                PassThePenService.PlayerManagementClient client = new PassThePenService.PlayerManagementClient();
+                Player playerObtained = client.GetDataPlayer(username);
+                Image_ProfileImage.Source = ImageManager.ToImage(playerObtained.profileImage);
+                Label_PrincipalPlayer.Content = username;
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
+                log.Add(ex.ToString());
+            }
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
+                log.Add(ex.ToString());
+            }
         }
 
 
@@ -385,20 +509,19 @@ namespace PassThePen
 
         private void PlacePlayersInGroup(List<Player> listPlayers)
         {
-
-            
+            string iconPlayer = ConfigurationManager.AppSettings.Get("Icon_Player");
             switch (listPlayers.Count)
             {
                 case 0:
-                    Image_InviteFiend1.Source = new BitmapImage(new Uri("pack://application:,,,/Img/Icon_AddUser.png"));
+                    Image_InviteFiend1.Source = new BitmapImage(new Uri(iconPlayer));
                     Label_PlayerAdded1.Content = null;
-                    Image_InviteFiend2.Source = new BitmapImage(new Uri("pack://application:,,,/Img/Icon_AddUser.png"));
+                    Image_InviteFiend2.Source = new BitmapImage(new Uri(iconPlayer));
                     Label_PlayerAdded2.Content = null;
-                    Image_InviteFiend3.Source = new BitmapImage(new Uri("pack://application:,,,/Img/Icon_AddUser.png"));
+                    Image_InviteFiend3.Source = new BitmapImage(new Uri(iconPlayer));
                     Label_PlayerAdded3.Content = null;
-                    Image_InviteFiend4.Source = new BitmapImage(new Uri("pack://application:,,,/Img/Icon_AddUser.png"));
+                    Image_InviteFiend4.Source = new BitmapImage(new Uri(iconPlayer));
                     Label_PlayerAdded4.Content = null;
-                    Image_InviteFiend5.Source = new BitmapImage(new Uri("pack://application:,,,/Img/Icon_AddUser.png"));
+                    Image_InviteFiend5.Source = new BitmapImage(new Uri(iconPlayer));
                     Label_PlayerAdded5.Content = null;
                     break;
 
@@ -452,7 +575,7 @@ namespace PassThePen
         }
 
 
-        private List<Player> RemoveOwnerPlayerOfListPlayersInGroup(List<Player> playersInGroup)
+        private void RemoveOwnerPlayerOfListPlayersInGroup(List<Player> playersInGroup)
         {
             Player playerFound = playersInGroup.FirstOrDefault(player => player.username.Equals(username));
 
@@ -460,24 +583,34 @@ namespace PassThePen
             {
                 playersInGroup.Remove(playerFound);
             }
-
-            return playersInGroup;
         }
 
 
         private void Button_ExitGroup_Click(object sender, RoutedEventArgs e)
         {
-            InstanceContext context = new InstanceContext(this);
-            PassThePenService.PlayerConnectionClient client = new PassThePenService.PlayerConnectionClient(context);
-            var response = MessageBox.Show(messageResource.GetString("MainMenu_LeaveGroup_Message"), "",  MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (response == MessageBoxResult.Yes)
+            try
             {
-                Button_LeaveGroup.Visibility = Visibility.Collapsed;
-                Button_ExitGame.Visibility = Visibility.Visible;
-                client.LeaveGroup(username);
-                PlacePlayersInGroup(new List<Player>());
+                InstanceContext context = new InstanceContext(this);
+                PassThePenService.PlayerConnectionClient client = new PassThePenService.PlayerConnectionClient(context);
+                var response = MessageBox.Show(messageResource.GetString("MainMenu_LeaveGroup_Message"), "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (response == MessageBoxResult.Yes)
+                {
+                    Button_LeaveGroup.Visibility = Visibility.Collapsed;
+                    Button_ExitGame.Visibility = Visibility.Visible;
+                    client.LeaveGroup(username);
+                    PlacePlayersInGroup(new List<Player>());
+                }
             }
-            
+            catch (EndpointNotFoundException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
+                log.Add(ex.ToString());
+            }
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
+                log.Add(ex.ToString());
+            }
         }
     }
 }

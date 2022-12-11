@@ -2,6 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Core;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,21 +13,33 @@ namespace Logic
 {
     public class MatchLogic
     {
+        private readonly Log log = new Log();
         public int AddMatchWinner(string username)
         {
             int statusCode = 500;
 
             using (var database = new passthepenEntities())
             {
-                var newWinner = database.Game.Add(new Game()
+                try
                 {
-                    winner = username
-                });
-                database.SaveChanges();
+                    var newWinner = database.Game.Add(new Game()
+                    {
+                        winner = username
+                    });
+                    database.SaveChanges();
 
-                if(newWinner != null)
+                    if (newWinner != null)
+                    {
+                        statusCode = 200;
+                    }
+                }
+                catch (DbUpdateException ex)
                 {
-                    statusCode = 200;
+                    log.Add(ex.ToString());
+                }
+                catch (EntityException ex)
+                {
+                    log.Add(ex.ToString());
                 }
             }
             return statusCode;

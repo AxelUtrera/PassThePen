@@ -2,11 +2,13 @@
 using PassThePen.PassThePenService;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Resources;
 using System.Runtime.CompilerServices;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -30,42 +32,55 @@ namespace PassThePen
         private Player player = new Player();
         private int validationCode;
         private int resendNumber = 0;
+        private LogClient log = new LogClient();
 
         public Register()
         {
             InitializeComponent();
-            Image_RegisterPlayer.Source = new BitmapImage(new Uri("pack://application:,,,/Img/Image_DefaultProfileImage.png"));
+            string NewIconPlayer = ConfigurationManager.AppSettings.Get("NewIcon_Player");
+            Image_RegisterPlayer.Source = new BitmapImage(new Uri(NewIconPlayer));
         }
 
         private void Button_Register_Click(object sender, RoutedEventArgs e)
         {
-            PassThePenService.AutenticationClient client = new PassThePenService.AutenticationClient();
-            byte[] defaultProfileImage = ImageToByte(Image_RegisterPlayer.Source as BitmapImage);
-
-
-            if (ValidateFields())
+            try
             {
-                player.email = TexBox_Email.Text;
-                player.username = TextBox_Username.Text;
-                player.name = TextBox_Name.Text;
-                player.lastname = TextBox_LastName.Text;
-                player.password = PasswordBox_Password.Password;
-                player.profileImage = defaultProfileImage;
-                Random randomNumber = new Random();
-                validationCode = randomNumber.Next(100000, 1000000);
-                if (client.CodeEmail(player.email, "Validation Code", validationCode) == 200)
+                PassThePenService.AutenticationClient client = new PassThePenService.AutenticationClient();
+                byte[] defaultProfileImage = ImageToByte(Image_RegisterPlayer.Source as BitmapImage);
+                if (ValidateFields())
                 {
-                    MessageBox.Show(messageResource.GetString("Register_Successful_Message"));
-                    HideComponetsRegister();
-                    label_Code_Validation.Visibility = Visibility.Visible;
-                    TexBox_Code_Validation.Visibility = Visibility.Visible;
-                    Panel_Validation_Code.Visibility = Visibility.Visible;
+                    player.email = TexBox_Email.Text;
+                    player.username = TextBox_Username.Text;
+                    player.name = TextBox_Name.Text;
+                    player.lastname = TextBox_LastName.Text;
+                    player.password = PasswordBox_Password.Password;
+                    player.profileImage = defaultProfileImage;
+                    Random randomNumber = new Random();
+                    validationCode = randomNumber.Next(100000, 1000000);
+                    if (client.CodeEmail(player.email, "Validation Code", validationCode) == 200)
+                    {
+                        MessageBox.Show(messageResource.GetString("Register_Successful_Message"));
+                        HideComponetsRegister();
+                        label_Code_Validation.Visibility = Visibility.Visible;
+                        TexBox_Code_Validation.Visibility = Visibility.Visible;
+                        Panel_Validation_Code.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        MessageBox.Show(messageResource.GetString("Global_EmailError_Message"));
+                    }
                 }
-                else
-                {
-                    MessageBox.Show(messageResource.GetString("Global_EmailError_Message"));
-                }
-            }   
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
+                log.Add(ex.ToString());
+            }
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
+                log.Add(ex.ToString());
+            }
         }
 
         private bool ValidateFields()
@@ -198,30 +213,43 @@ namespace PassThePen
 
         private void Button_Send_Click(object sender, RoutedEventArgs e)
         {
-            if (ValidateCodeValidation())
+            try
             {
-                PassThePenService.PlayerManagementClient client = new PassThePenService.PlayerManagementClient();
-                int statusCode;
-                int statusOK = 200;
-                statusCode = client.AddPlayer(player);
-                if (statusCode == statusOK)
+                if (ValidateCodeValidation())
                 {
-                    MessageBox.Show(messageResource.GetString("Register_SuccessfulRegister_Message"));
-                    Login login = new Login();
-                    login.Show();
-                    this.Close();
+                    PassThePenService.PlayerManagementClient client = new PassThePenService.PlayerManagementClient();
+                    int statusCode;
+                    int statusOK = 200;
+                    statusCode = client.AddPlayer(player);
+                    if (statusCode == statusOK)
+                    {
+                        client.AddGuestFriend(player.username);
+                        MessageBox.Show(messageResource.GetString("Register_SuccessfulRegister_Message"));
+                        Login login = new Login();
+                        login.Show();
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show(messageResource.GetString("Register_ErrorRegister_Message"));
+                    }
+                    client.Close();
                 }
                 else
                 {
-                    MessageBox.Show(messageResource.GetString("Register_ErrorRegister_Message"));
+                    MessageBox.Show("Código de validación invalido, favor de volverlo a ingresar");
                 }
-                client.Close();
             }
-            else
+            catch (EndpointNotFoundException ex)
             {
-                MessageBox.Show("Código de validación invalido, favor de volverlo a ingresar");
+                MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
+                log.Add(ex.ToString());
             }
-            
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
+                log.Add(ex.ToString());
+            }
         }
 
         private bool ValidateCodeValidation()
@@ -252,25 +280,37 @@ namespace PassThePen
 
         private void Button_Resend_Click(object sender, RoutedEventArgs e)
         {
-            if (resendNumber < 3)
+            try
             {
-                PassThePenService.AutenticationClient client = new PassThePenService.AutenticationClient();
-                if (client.CodeEmail(player.email, "Validation Code", validationCode) == 200)
+                if (resendNumber < 3)
                 {
-                    MessageBox.Show("Código de validación enviado a su correo favor de revisarlo");
-                    resendNumber++;
+                    PassThePenService.AutenticationClient client = new PassThePenService.AutenticationClient();
+                    if (client.CodeEmail(player.email, "Validation Code", validationCode) == 200)
+                    {
+                        MessageBox.Show("Código de validación enviado a su correo favor de revisarlo");
+                        resendNumber++;
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se ha podido enviar el correo electronico, favor de verificar el correo ingresado");
+                    }
+                    client.Close();
                 }
                 else
                 {
-                    MessageBox.Show("No se ha podido enviar el correo electronico, favor de verificar el correo ingresado");
+                    MessageBox.Show("Numero de reeenvios superado");
                 }
-                client.Close();
             }
-            else
+            catch (EndpointNotFoundException ex)
             {
-                MessageBox.Show("Numero de reeenvios superado");
+                MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
+                log.Add(ex.ToString());
             }
-            
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
+                log.Add(ex.ToString());
+            }
         }
 
         private void Button_Cancel_Click(object sender, RoutedEventArgs e)

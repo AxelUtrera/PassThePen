@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +25,8 @@ namespace PassThePen
         public static Dictionary<string, byte[]> playersDraw { get; set; }
         private Dictionary<string, int> playersScore = new Dictionary<string, int>();
         private int drawCount = 0;
+        private LogClient log = new LogClient();
+        ResourceManager messageResource = new ResourceManager("PassThePen.Properties.Resources", Assembly.GetExecutingAssembly());
 
 
         public DrawReview()
@@ -53,7 +57,7 @@ namespace PassThePen
             string username = Label_PlayerReview.Content.ToString();
             int score = (int)Rating_DrawReview.Value;
             playersScore.Add(username, score);
-            if(drawCount < playersDraw.Count()-1)
+            if(drawCount < playersDraw.Count - 1)
             {
                 drawCount++;
                 SetPlayersDraw();
@@ -75,14 +79,40 @@ namespace PassThePen
 
         private void SetDrawReviewContext(String username)
         {
-            PassThePenService.DrawReviewServiceClient client = new PassThePenService.DrawReviewServiceClient();
-            client.SetDrawReviewContext(username);
+            try
+            {
+                PassThePenService.DrawReviewServiceClient client = new PassThePenService.DrawReviewServiceClient();
+                client.SetDrawReviewContext(username);
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
+                log.Add(ex.ToString());
+            }
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
+                log.Add(ex.ToString());
+            }
         }
 
         public void AddPlayerScore(Dictionary<string, int> playerScore)
         {
-            PassThePenService.DrawReviewServiceClient client = new PassThePenService.DrawReviewServiceClient();
-            client.AddPlayerScore(playerScore);
+            try
+            {
+                PassThePenService.DrawReviewServiceClient client = new PassThePenService.DrawReviewServiceClient();
+                client.AddPlayerScore(playerScore);
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
+                log.Add(ex.ToString());
+            }
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
+                log.Add(ex.ToString());
+            }
         }
     }
 }

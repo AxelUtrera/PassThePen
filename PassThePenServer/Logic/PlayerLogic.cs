@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Data.Entity.Core;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,6 +32,10 @@ namespace Logic
                         userResult = 200;
                     }
                 }
+            }
+            catch(ArgumentNullException ex)
+            {
+                log.Add(ex.ToString());
             }
             catch (EntityException ex)
             {
@@ -94,6 +99,10 @@ namespace Logic
                     }
                 }
             }
+            catch (ArgumentNullException ex)
+            {
+                log.Add(ex.ToString());
+            }
             catch (EntityException ex)
             {
                 log.Add(ex.ToString());
@@ -117,6 +126,10 @@ namespace Logic
                     }
                 }
             }
+            catch (InvalidOperationException ex)
+            {
+                log.Add(ex.ToString());
+            }
             catch (EntityException ex)
             {
                 log.Add(ex.ToString());
@@ -133,15 +146,22 @@ namespace Logic
                 using (var dataBaseContext = new passthepenEntities())
                 {
                     Player playerObtained = dataBaseContext.Player.Find(username);
-                    playerSend = new Domain.Player()
+                    if (playerObtained != null)
                     {
-                        username = playerObtained.username,
-                        name = playerObtained.name,
-                        lastname = playerObtained.lastname,
-                        email = playerObtained.email,
-                        profileImage = playerObtained.profileImage
-                    };
+                        playerSend = new Domain.Player()
+                        {
+                            username = playerObtained.username,
+                            name = playerObtained.name,
+                            lastname = playerObtained.lastname,
+                            email = playerObtained.email,
+                            profileImage = playerObtained.profileImage
+                        };
+                    }
                 }
+            }
+            catch(InvalidOperationException ex)
+            {
+                log.Add(ex.ToString());
             }
             catch (EntityException ex)
             {
@@ -170,6 +190,14 @@ namespace Logic
                     }
                 }
             }
+            catch (ArgumentNullException ex)
+            {
+                log.Add(ex.ToString());
+            }
+            catch (DbUpdateException ex)
+            {
+                log.Add(ex.ToString());
+            }
             catch (EntityException ex)
             {
                 log.Add(ex.ToString());
@@ -181,17 +209,31 @@ namespace Logic
         public int UpdatePassword(string username, string password)
         {
             int stateCode = 500;
-            Console.WriteLine(username);
-            string encriptedPassword = Encription.ToSHA2Hash(password);
-            using (var dataBaseContext = new passthepenEntities())
+            try
             {
-                var updatedPassword = dataBaseContext.Player.First(u => u.username == username);
-                updatedPassword.password = encriptedPassword;
-                int returnValue = dataBaseContext.SaveChanges();
-                if (returnValue > 0)
+                string encriptedPassword = Encription.ToSHA2Hash(password);
+                using (var dataBaseContext = new passthepenEntities())
                 {
-                    stateCode = 200;
+                    var updatedPassword = dataBaseContext.Player.First(u => u.username == username);
+                    updatedPassword.password = encriptedPassword;
+                    int returnValue = dataBaseContext.SaveChanges();
+                    if (returnValue > 0)
+                    {
+                        stateCode = 200;
+                    }
                 }
+            }
+            catch (ArgumentNullException ex)
+            {
+                log.Add(ex.ToString());
+            }
+            catch (DbUpdateException ex)
+            {
+                log.Add(ex.ToString());
+            }
+            catch (EntityException ex)
+            {
+                log.Add(ex.ToString());
             }
             return stateCode;
         }
@@ -200,20 +242,75 @@ namespace Logic
         public int UpdatePasswordEmail(string email, string password)
         {
             int result = 500;
-            string encriptedPassword = Encription.ToSHA2Hash(password);
-            using (var dataBaseContext = new passthepenEntities())
+            try
             {
-                var updatePasswordEmail = dataBaseContext.Player.First(e => e.email == email);
-                updatePasswordEmail.password = encriptedPassword;
-                int returnValue = dataBaseContext.SaveChanges();
-                if (returnValue > 0)
+                string encriptedPassword = Encription.ToSHA2Hash(password);
+                using (var dataBaseContext = new passthepenEntities())
                 {
-                    result = 200;
+                    var updatePasswordEmail = dataBaseContext.Player.First(e => e.email == email);
+                    updatePasswordEmail.password = encriptedPassword;
+                    int returnValue = dataBaseContext.SaveChanges();
+                    if (returnValue > 0)
+                    {
+                        result = 200;
+                    }
                 }
+            }
+            catch (ArgumentNullException ex)
+            {
+                log.Add(ex.ToString());
+            }
+            catch (DbUpdateException ex)
+            {
+                log.Add(ex.ToString());
+            }
+            catch (EntityException ex)
+            {
+                log.Add(ex.ToString());
             }
             return result;
         }
 
+        public int AddGuestFriend(string username)
+        {
+            int operationResult = 500;
+            try
+            {
+                using (var dataBaseContext = new passthepenEntities())
+                {
+
+                    var resultUserToGuest = dataBaseContext.Friends.Add(new Friends()
+                    {
+                        usernamePlayer = "Guest",
+                        friendUsername = username
+                    });
+
+                    var resultGuestToUser = dataBaseContext.Friends.Add(new Friends()
+                    {
+                        usernamePlayer = username,
+                        friendUsername = "Guest"
+                    });
+
+                    operationResult = dataBaseContext.SaveChanges();
+
+                    if (resultUserToGuest != null && resultGuestToUser != null)
+                    {
+                        operationResult = 200;
+                    }
+
+
+                }
+            }
+            catch (DbUpdateException ex)
+            {
+                log.Add(ex.ToString());
+            }
+            catch (EntityException ex)
+            {
+                log.Add(ex.ToString());
+            }
+            return operationResult;
+        }
 
         public List<Domain.Friends> RecoverFriends(string username)
         {
@@ -234,6 +331,10 @@ namespace Logic
                         newFriend.friendUsername = friends[index].friendUsername;
                         friendsList.Add(newFriend);
                     }
+                }
+                catch (ArgumentNullException ex)
+                {
+                    log.Add(ex.ToString());
                 }
                 catch (EntityException ex)
                 {
@@ -264,7 +365,15 @@ namespace Logic
                     }
                 }
             }
-            catch(EntityException ex)
+            catch (ArgumentNullException ex)
+            {
+                log.Add(ex.ToString());
+            }
+            catch (DbUpdateException ex)
+            {
+                log.Add(ex.ToString());
+            }
+            catch (EntityException ex)
             {
                 log.Add(ex.ToString());
             }

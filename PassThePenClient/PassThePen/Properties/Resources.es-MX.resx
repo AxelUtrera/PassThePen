@@ -198,7 +198,7 @@
     <comment>Used by: login, Register</comment>
   </data>
   <data name="Login_ErrorLogin_Message" xml:space="preserve">
-    <value>Hubo un error en la validación, intentelo de nuevo</value>
+    <value>Los datos ingresados son invalidos o existe una sesion abierta.</value>
     <comment>Used by: Login</comment>
   </data>
   <data name="Global_Resend_Button" xml:space="preserve">
@@ -508,5 +508,13 @@
   <data name="Global_EmailError_Message" xml:space="preserve">
     <value>Error al enviar el correo electronico</value>
     <comment>Used by: Register, Recover Password</comment>
+  </data>
+  <data name="Global_ServerError_Message" xml:space="preserve">
+    <value>Error con el servidor, favor de intentarlo más tarde</value>
+    <comment>Used by: All</comment>
+  </data>
+  <data name="Global_Timeout_Message" xml:space="preserve">
+    <value>Tiempo de espera excedido, por favor intentelo más tarde</value>
+    <comment>Used by: All</comment>
   </data>
 </root>

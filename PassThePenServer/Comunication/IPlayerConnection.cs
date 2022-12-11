@@ -30,9 +30,6 @@ namespace Comunication
         void LeaveGroup(string usernamePlayer);
 
         [OperationContract]
-        int FindPlayerIsConected(string usernamePlayer);
-
-        [OperationContract]
         int FindPlayerInGroup(string usernameToFind);
 
         [OperationContract]
