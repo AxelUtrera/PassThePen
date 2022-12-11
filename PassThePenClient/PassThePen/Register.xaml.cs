@@ -47,6 +47,7 @@ namespace PassThePen
             {
                 PassThePenService.AutenticationClient client = new PassThePenService.AutenticationClient();
                 byte[] defaultProfileImage = ImageToByte(Image_RegisterPlayer.Source as BitmapImage);
+                HideErrorLabels();
                 if (ValidateFields())
                 {
                     player.email = TexBox_Email.Text;
@@ -59,7 +60,7 @@ namespace PassThePen
                     validationCode = randomNumber.Next(100000, 1000000);
                     if (client.CodeEmail(player.email, "Validation Code", validationCode) == 200)
                     {
-                        MessageBox.Show(messageResource.GetString("Register_Successful_Message"));
+                        MessageBox.Show(messageResource.GetString("Register_SuccessfulRegister_Message"));
                         HideComponetsRegister();
                         label_Code_Validation.Visibility = Visibility.Visible;
                         TexBox_Code_Validation.Visibility = Visibility.Visible;
@@ -86,24 +87,35 @@ namespace PassThePen
         private bool ValidateFields()
         {
             bool result = true;
-            HideErrorLabels();
-            if(!PasswordBox_Password.Password.Equals(PasswordBox_RepeatPassword.Password))
+
+
+            if (ValidateUsernameNotRegister())
+            {
+                label_Error_Username.Visibility = Visibility.Visible;
+                result = false;
+            }
+
+            if (!PasswordBox_Password.Password.Equals(PasswordBox_RepeatPassword.Password))
             {
                 label_Error_RepeatPassword.Visibility = Visibility.Visible;
                 result = false;
             }
+
             if(!ValidateNullFields())
             {
                 result = false;
             }
+
             if (!FormatValidate())
             {
                 result = false;
             }
+
             if (!ValidateLength())
             {
                 result = false;
             }
+            
             return result;
         }
 
@@ -186,7 +198,6 @@ namespace PassThePen
             label_Error_Email.Visibility = Visibility.Hidden;
             label_Error_LastName.Visibility = Visibility.Hidden;
             label_Error_Name.Visibility = Visibility.Hidden;
-            label_Error_Password.Visibility = Visibility.Hidden;
             label_Error_RepeatPassword.Visibility = Visibility.Hidden;
             label_Error_Username.Visibility = Visibility.Hidden;
         }
@@ -274,8 +285,20 @@ namespace PassThePen
                 MessageBox.Show("No se aceptan letras o campos vacios en el apartado codigo de validación");
             }
                 
-
             return result;
+        }
+
+        private bool ValidateUsernameNotRegister()
+        {
+            PassThePenService.PlayerManagementClient client = new PassThePenService.PlayerManagementClient();
+
+            bool operationResult = true;
+            if (client.FindPlayer(TextBox_Username.Text) == 500)
+            {
+                operationResult = false;
+            }
+
+            return operationResult;
         }
 
         private void Button_Resend_Click(object sender, RoutedEventArgs e)

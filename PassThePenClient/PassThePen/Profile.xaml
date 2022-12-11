@@ -56,7 +56,7 @@
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border Background="Gray" BorderBrush="Gray" CornerRadius="15,15,15,15">
-                        <Image Source="C:\Users\danie\Documents\Universidad\7mo Semestre\Tecnologias\PassThePen\PassThePenClient\PassThePen\Img\Icon_ProfileImage.png"></Image>
+                        <Image Source="Img\Icon_ProfileImage.png"></Image>
                     </Border>
                 </ControlTemplate>
             </Button.Template>

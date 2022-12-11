@@ -47,7 +47,6 @@ namespace Logic
 
         public int AddPlayer(Domain.Player player)
         {
-            //Tarea: Validar que no exista el usuario a agregar en la base de datos.
             int statusCode = 500;
             try
             {

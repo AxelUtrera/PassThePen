@@ -131,14 +131,15 @@ namespace Logic
         public int SendFriendRequests(Domain.FriendRequest friendRequests)
         {
             int operationCode = 500;
-
+            int validationOKCode = 200; 
             DataAccess.FriendRequest dataAccesFriendRequests = ConvertToDataAccessFriendRequests(friendRequests);
 
             using (var context = new passthepenEntities())
             {
+                
                 try
                 {
-                    if (ValidateExistFriendRequestOrFriend(friendRequests) == 404)
+                    if (ValidateExistFriendRequestOrFriend(friendRequests) == validationOKCode && friendRequests.usernamePlayer != friendRequests.friendUsername)
                     {
                         var friendRequestDataBase = context.FriendRequest.Add(dataAccesFriendRequests);
                         context.SaveChanges();
@@ -163,19 +164,21 @@ namespace Logic
 
         private int ValidateExistFriendRequestOrFriend(Domain.FriendRequest friendRequest)
         {
-            int notExists = 404;
+            int operationResult = 500;
 
-            using(var context = new passthepenEntities())
-            { 
+            using (var context = new passthepenEntities())
+            {
                 try
                 {
-                    var friendRequestInDataBase = context.FriendRequest.Where(u => u.friendUsername == friendRequest.friendUsername).FirstOrDefault();
-                    var friendInDataBase = context.Friends.Where(u => u.friendUsername == friendRequest.friendUsername).FirstOrDefault();
+                    DataAccess.Friends friendInDataBase = context.Friends.Where(u => u.usernamePlayer.Equals(friendRequest.usernamePlayer) && u.friendUsername.Equals(friendRequest.friendUsername)).FirstOrDefault();
+                    DataAccess.FriendRequest friendRequestsInDataBase = context.FriendRequest.Where(u => u.usernamePlayer.Equals(friendRequest.usernamePlayer) && u.friendUsername.Equals(friendRequest.friendUsername)).FirstOrDefault();
 
-                    if (friendRequestInDataBase != null || friendInDataBase != null)
+                    if (friendInDataBase == null && friendRequestsInDataBase == null)
                     {
-                        notExists = 200;
+                        operationResult = 200;
                     }
+
+                    Console.WriteLine(operationResult);
                 }
                 catch (ArgumentNullException ex)
                 {
@@ -186,7 +189,7 @@ namespace Logic
                     log.Add(ex.ToString());
                 }
             }
-            return notExists;
+            return operationResult;
         }
 
         private DataAccess.FriendRequest ConvertToDataAccessFriendRequests(Domain.FriendRequest domainFriendRequests)

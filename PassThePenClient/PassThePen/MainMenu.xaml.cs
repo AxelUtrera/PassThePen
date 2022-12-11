@@ -68,10 +68,10 @@ namespace PassThePen
                 int minimumPlayersInGroup = 2;
 
 
-                if (listGroupPlayers.Count >= minimumPlayersInGroup)
-                {
-                   RemoveOwnerPlayerOfListPlayersInGroup(listGroupPlayers);
-                }
+            if (listGroupPlayers.Count >= minimumPlayersInGroup)
+            {
+                listGroupPlayers = RemoveOwnerPlayerOfListPlayersInGroup(listGroupPlayers);
+            }
 
                 if (listGroupPlayers.Count == 0)
                 {
@@ -398,7 +398,7 @@ namespace PassThePen
             {
                 PlayerManagementClient playerClient = new PlayerManagementClient();
                 int playerExist = 200;
-
+                int errorFriendRequest = 500;
                 if (playerClient.FindPlayer(Textbox_AddFriend.Text) == playerExist)
                 {
                     PassThePenService.FriendRequestsClient client = new FriendRequestsClient();
@@ -407,9 +407,18 @@ namespace PassThePen
                         usernamePlayer = Textbox_AddFriend.Text,
                         friendUsername = username
                     };
-                    client.SendFriendRequests(friendRequest);
-                    Textbox_AddFriend.Clear();
-                    MessageBox.Show(messageResource.GetString("MainMenu_FriendRequestSend"));
+                    if (client.SendFriendRequests(friendRequest) == errorFriendRequest)
+                    {
+
+                        MessageBox.Show(messageResource.GetString("MainMenu_FriendRequestSendError_Message"));
+
+                    }
+                    else
+                    {
+                        Textbox_AddFriend.Clear();
+                        MessageBox.Show(messageResource.GetString("MainMenu_FriendRequestSend_Message"));
+                    }
+
                 }
                 else
                 {
@@ -547,25 +556,11 @@ namespace PassThePen
                     break;
 
                 case 4:
-                    Image_InviteFiend1.Source = ImageManager.ToImage(listPlayers.ElementAt(0).profileImage);
-                    Label_PlayerAdded1.Content = listPlayers.ElementAt(0).username;
-                    Image_InviteFiend2.Source = ImageManager.ToImage(listPlayers.ElementAt(1).profileImage);
-                    Label_PlayerAdded2.Content = listPlayers.ElementAt(1).username;
-                    Image_InviteFiend3.Source = ImageManager.ToImage(listPlayers.ElementAt(2).profileImage);
-                    Label_PlayerAdded3.Content = listPlayers.ElementAt(2).username;
-                    Image_InviteFiend4.Source = ImageManager.ToImage(listPlayers.ElementAt(3).profileImage);
-                    Label_PlayerAdded4.Content = listPlayers.ElementAt(3).username;
+                    PlaceFourPlayersInGroup(listPlayers);
                     break;
 
                 case 5:
-                    Image_InviteFiend1.Source = ImageManager.ToImage(listPlayers.ElementAt(0).profileImage);
-                    Label_PlayerAdded1.Content = listPlayers.ElementAt(0).username;
-                    Image_InviteFiend2.Source = ImageManager.ToImage(listPlayers.ElementAt(1).profileImage);
-                    Label_PlayerAdded2.Content = listPlayers.ElementAt(1).username;
-                    Image_InviteFiend3.Source = ImageManager.ToImage(listPlayers.ElementAt(2).profileImage);
-                    Label_PlayerAdded3.Content = listPlayers.ElementAt(2).username;
-                    Image_InviteFiend4.Source = ImageManager.ToImage(listPlayers.ElementAt(3).profileImage);
-                    Label_PlayerAdded4.Content = listPlayers.ElementAt(3).username;
+                    PlaceFourPlayersInGroup(listPlayers);
                     Image_InviteFiend5.Source = ImageManager.ToImage(listPlayers.ElementAt(4).profileImage);
                     Label_PlayerAdded5.Content = listPlayers.ElementAt(4).username;
                     break;
@@ -574,8 +569,19 @@ namespace PassThePen
             }
         }
 
+        private void PlaceFourPlayersInGroup(List<Player> listPlayers)
+        {
+            Image_InviteFiend1.Source = ImageManager.ToImage(listPlayers.ElementAt(0).profileImage);
+            Label_PlayerAdded1.Content = listPlayers.ElementAt(0).username;
+            Image_InviteFiend2.Source = ImageManager.ToImage(listPlayers.ElementAt(1).profileImage);
+            Label_PlayerAdded2.Content = listPlayers.ElementAt(1).username;
+            Image_InviteFiend3.Source = ImageManager.ToImage(listPlayers.ElementAt(2).profileImage);
+            Label_PlayerAdded3.Content = listPlayers.ElementAt(2).username;
+            Image_InviteFiend4.Source = ImageManager.ToImage(listPlayers.ElementAt(3).profileImage);
+            Label_PlayerAdded4.Content = listPlayers.ElementAt(3).username;
+        }  
 
-        private void RemoveOwnerPlayerOfListPlayersInGroup(List<Player> playersInGroup)
+        private List<Player> RemoveOwnerPlayerOfListPlayersInGroup(List<Player> playersInGroup)
         {
             Player playerFound = playersInGroup.FirstOrDefault(player => player.username.Equals(username));
 
@@ -583,6 +589,7 @@ namespace PassThePen
             {
                 playersInGroup.Remove(playerFound);
             }
+            return playersInGroup;
         }
 
 

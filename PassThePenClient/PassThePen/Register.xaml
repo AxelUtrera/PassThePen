@@ -43,7 +43,7 @@
             <Label x:Name="label_Error_LastName" Margin="195,0,50,0" FontSize="10" Content="{x:Static p:Resources.Global_Error__LastName_Label}" Foreground="Red" Visibility="Hidden"/>
             <Label x:Name="label_Password" Margin="195,0,50,0" FontSize="15" Content="{x:Static p:Resources.Global_Label_Password}" Width="388" />
             <PasswordBox Name="PasswordBox_Password" Margin="200,0" BorderBrush="Black" Height="20" />
-            <Label x:Name="label_Error_Password" Margin="195,0,50,0" FontSize="9" Content="{x:Static p:Resources.Global_Error_Password_Label}" Foreground="Red" Visibility="Hidden" Width="427"/>
+            <Label x:Name="label_Error_Password" Margin="50,0,50,0" HorizontalAlignment="Center" FontSize="9" Content="{x:Static p:Resources.Global_Error_Password_Label}" Foreground="Blue" Width="552" Height="25"/>
             <Label x:Name="label_Confirm_Password" Margin="195,0,50,0" FontSize="15" Content="{x:Static p:Resources.Register_Repeat_Password}" Width="388" />
             <PasswordBox Name="PasswordBox_RepeatPassword" Margin="200,0" BorderBrush="Black" Height="20" />
             <Label x:Name="label_Error_RepeatPassword" Margin="195,0,50,0" FontSize="10" Content="{x:Static p:Resources.Global_Error_Repit_Password}" Foreground="Red" Visibility="Hidden"/>

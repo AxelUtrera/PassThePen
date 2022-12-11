@@ -182,7 +182,7 @@
     <comment>Used by: Register, Profile</comment>
   </data>
   <data name="Global_Error_Password_Label" xml:space="preserve">
-    <value>Debe contener: *, +, @, #, $, %. Una mayuscula y un numero. Longitud entre 8-16.</value>
+    <value>Debe contener al menos uno de los siguientes caracteres:  *, +, @, #, $, %,  una mayuscula y un numero. Longitud entre 8-16 caracteres.</value>
     <comment>Used by: Register, Recover Password, Change Password</comment>
   </data>
   <data name="Global_Error_Repit_Password" xml:space="preserve">
@@ -190,7 +190,7 @@
     <comment>Used by: Register, Recover Password, Change Password</comment>
   </data>
   <data name="Global_Error_Username_Label" xml:space="preserve">
-    <value>Numero de caracteres excedidos. Numero maximo: 20</value>
+    <value>El nombre de usuario ya existe o tiene un formato incorrecto.</value>
     <comment>Used by: Register, Recover Password</comment>
   </data>
   <data name="Global_Error__LastName_Label" xml:space="preserve">
@@ -269,7 +269,11 @@
     <value>Salir del grupo</value>
     <comment>Used by: MainMenu</comment>
   </data>
-  <data name="MainMenu_FriendRequestSend" xml:space="preserve">
+  <data name="MainMenu_FriendRequestSendError_Message" xml:space="preserve">
+    <value>Error al enviar la solicitud verifiquela e intentelo de nuevo</value>
+    <comment>Used by: MainMenu</comment>
+  </data>
+  <data name="MainMenu_FriendRequestSend_Message" xml:space="preserve">
     <value>La solicitud de amistad fue enviada con éxito</value>
     <comment>Used by: MainMenu</comment>
   </data>
