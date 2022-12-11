@@ -214,7 +214,7 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Debe contener: *, +, @, #, $, %. Una mayuscula y un numero. Longitud entre 8-16..
+        ///   Busca una cadena traducida similar a Debe contener al menos uno de los siguientes caracteres:  *, +, @, #, $, %,  una mayuscula y un numero. Longitud entre 8-16 caracteres..
         /// </summary>
         public static string Global_Error_Password_Label {
             get {
@@ -232,7 +232,7 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Numero de caracteres excedidos. Numero maximo: 20.
+        ///   Busca una cadena traducida similar a El nombre de usuario ya existe o tiene un formato incorrecto..
         /// </summary>
         public static string Global_Error_Username_Label {
             get {
@@ -405,9 +405,18 @@ namespace PassThePen.Properties {
         /// <summary>
         ///   Busca una cadena traducida similar a La solicitud de amistad fue enviada con éxito.
         /// </summary>
-        public static string MainMenu_FriendRequestSend {
+        public static string MainMenu_FriendRequestSend_Message {
             get {
-                return ResourceManager.GetString("MainMenu_FriendRequestSend", resourceCulture);
+                return ResourceManager.GetString("MainMenu_FriendRequestSend_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Error al enviar la solicitud verifiquela e intentelo de nuevo.
+        /// </summary>
+        public static string MainMenu_FriendRequestSendError_Message {
+            get {
+                return ResourceManager.GetString("MainMenu_FriendRequestSendError_Message", resourceCulture);
             }
         }
         

@@ -66,7 +66,7 @@ namespace PassThePen
 
             if (listGroupPlayers.Count >= minimumPlayersInGroup)
             {
-                RemoveOwnerPlayerOfListPlayersInGroup(listGroupPlayers);
+                listGroupPlayers = RemoveOwnerPlayerOfListPlayersInGroup(listGroupPlayers);
             }
 
             if (listGroupPlayers.Count == 0)
@@ -309,7 +309,7 @@ namespace PassThePen
         {
             PlayerManagementClient playerClient = new PlayerManagementClient();
             int playerExist = 200;
-
+            int errorFriendRequest = 500;
             if (playerClient.FindPlayer(Textbox_AddFriend.Text) == playerExist)
             {
                 PassThePenService.FriendRequestsClient client = new FriendRequestsClient();
@@ -318,9 +318,18 @@ namespace PassThePen
                     usernamePlayer = Textbox_AddFriend.Text,
                     friendUsername = username
                 };
-                client.SendFriendRequests(friendRequest);
-                Textbox_AddFriend.Clear();
-                MessageBox.Show(messageResource.GetString("MainMenu_FriendRequestSend"));
+                if (client.SendFriendRequests(friendRequest) == errorFriendRequest)
+                {
+
+                    MessageBox.Show(messageResource.GetString("MainMenu_FriendRequestSendError_Message"));
+
+                }
+                else
+                {
+                    Textbox_AddFriend.Clear();
+                    MessageBox.Show(messageResource.GetString("MainMenu_FriendRequestSend_Message"));
+                }
+                
             }
             else
             {

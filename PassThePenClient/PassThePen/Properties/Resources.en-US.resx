@@ -182,7 +182,7 @@
     <comment>Used by: Register, Profile</comment>
   </data>
   <data name="Global_Error_Password_Label" xml:space="preserve">
-    <value>Must contain: *, +, @, #, $, %. A capital letter and a number. Length between 8-16.</value>
+    <value>It must contain at least one of the following characters: *, +, @, #, $, %, a capital letter, and a number. Length between 8-16 characters.</value>
     <comment>Used by: Register, Recover Password, Change Password</comment>
   </data>
   <data name="Global_Error_Repit_Password" xml:space="preserve">
@@ -190,7 +190,7 @@
     <comment>Used by: Register, Recover Password, Change Password</comment>
   </data>
   <data name="Global_Error_Username_Label" xml:space="preserve">
-    <value>Number of characters exceeded. Maximum number: 20</value>
+    <value>The username already exists or is in the wrong format.</value>
     <comment>Used by: Register, Recover Password</comment>
   </data>
   <data name="Global_Error__LastName_Label" xml:space="preserve">
@@ -261,7 +261,11 @@
     <value>Leave group</value>
     <comment>Used by: MainMenu</comment>
   </data>
-  <data name="MainMenu_FriendRequestSend" xml:space="preserve">
+  <data name="MainMenu_FriendRequestSendError_Message" xml:space="preserve">
+    <value>Error sending the request, check it and try again</value>
+    <comment>Used by: MainMenu</comment>
+  </data>
+  <data name="MainMenu_FriendRequestSend_Message" xml:space="preserve">
     <value>The friend request was sent successfully</value>
     <comment>Used by: MainMenu</comment>
   </data>
