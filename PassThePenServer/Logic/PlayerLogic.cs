@@ -97,14 +97,17 @@ namespace Logic
             using (var dataBaseContext = new passthepenEntities())
             {
                 Player playerObtained = dataBaseContext.Player.Find(username);
-                playerSend = new Domain.Player()
+                if (playerObtained != null)
                 {
-                    username = playerObtained.username,
-                    name = playerObtained.name,
-                    lastname = playerObtained.lastname,
-                    email = playerObtained.email,
-                    profileImage = playerObtained.profileImage
-                };
+                    playerSend = new Domain.Player()
+                    {
+                        username = playerObtained.username,
+                        name = playerObtained.name,
+                        lastname = playerObtained.lastname,
+                        email = playerObtained.email,
+                        profileImage = playerObtained.profileImage
+                    };
+                }
             }
             return playerSend;
         }
@@ -113,14 +116,19 @@ namespace Logic
         public int UpdateDataPlayer(String username, Domain.Player player)
         {
             int stateCode = 500;
+            int returnValue = 0;
             using (var dataBaseContext = new passthepenEntities())
             {
                 var updatedPlayer = dataBaseContext.Player.First(u => u.username == username);
-                updatedPlayer.name = player.name;
-                updatedPlayer.lastname = player.lastname;
-                updatedPlayer.email = player.email;
-                updatedPlayer.profileImage = player.profileImage;
-                int returnValue = dataBaseContext.SaveChanges();
+                if (updatedPlayer != null)
+                {
+                    updatedPlayer.name = player.name;
+                    updatedPlayer.lastname = player.lastname;
+                    updatedPlayer.email = player.email;
+                    updatedPlayer.profileImage = player.profileImage;
+                    returnValue = dataBaseContext.SaveChanges();
+                }
+
                 if (returnValue > 0)
                 {
                     stateCode = 200;
@@ -138,7 +146,11 @@ namespace Logic
             using (var dataBaseContext = new passthepenEntities())
             {
                 var updatedPassword = dataBaseContext.Player.First(u => u.username == username);
-                updatedPassword.password = encriptedPassword;
+                if (updatedPassword != null)
+                {
+                    updatedPassword.password = encriptedPassword;
+                }
+                
                 int returnValue = dataBaseContext.SaveChanges();
                 if (returnValue > 0)
                 {
@@ -153,9 +165,11 @@ namespace Logic
         {
             int result = 500;
             string encriptedPassword = Encription.ToSHA2Hash(password);
+
             using (var dataBaseContext = new passthepenEntities())
             {
                 var updatePasswordEmail = dataBaseContext.Player.First(e => e.email == email);
+
                 updatePasswordEmail.password = encriptedPassword;
                 int returnValue = dataBaseContext.SaveChanges();
                 if (returnValue > 0)
@@ -238,8 +252,8 @@ namespace Logic
 
             using (var context = new passthepenEntities())
             {
-                var friendToDeleted = context.Friends.Where(u => u.usernamePlayer.Equals(friend.username) && u.friendUsername.Equals(friend.friendUsername)).First();
-                var deletedToFriend = context.Friends.Where(u => u.usernamePlayer.Equals(friend.friendUsername) && u.friendUsername.Equals(friend.username)).First();
+                var friendToDeleted = context.Friends.Where(u => u.usernamePlayer.Equals(friend.username) && u.friendUsername.Equals(friend.friendUsername)).FirstOrDefault();
+                var deletedToFriend = context.Friends.Where(u => u.usernamePlayer.Equals(friend.friendUsername) && u.friendUsername.Equals(friend.username)).FirstOrDefault();
 
                 if (friendToDeleted != null && deletedToFriend != null)
                 {
