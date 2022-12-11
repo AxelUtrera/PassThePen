@@ -446,6 +446,7 @@ namespace Comunication
                 foreach (ConnectedUser user in playersInGroup)
                 {
                     usersConnected.Where(u => u.username == user.username).First().score = 0;
+                    usersConnected.Where(u => u.username == user.username).First().hostState = false;
                     user.matchContext.GetCallbackChannel<IMatchCallback>().CloseMatchWindow();
                 }
                 playersInGroup.Clear();

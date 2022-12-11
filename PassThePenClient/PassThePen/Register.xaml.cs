@@ -247,7 +247,7 @@ namespace PassThePen
                 MessageBox.Show("No se aceptan letras o campos vacios en el apartado codigo de validación");
             }
                 
-
+            
             return result;
         }
 

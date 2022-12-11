@@ -56,7 +56,7 @@ namespace Logic
 
             using (var context = new passthepenEntities())
             {
-                var friendRequestInDataBase = context.FriendRequest.Where(u => u.idRequest == friendRequest.idRequest).First();
+                var friendRequestInDataBase = context.FriendRequest.Where(u => u.idRequest == friendRequest.idRequest).FirstOrDefault();
 
                 if (friendRequestInDataBase != null)
                 {
