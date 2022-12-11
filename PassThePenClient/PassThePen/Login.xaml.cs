@@ -28,6 +28,7 @@ namespace PassThePen
     public partial class Login : Window
     {
         ResourceManager messageResource = new ResourceManager("PassThePen.Properties.Resources", Assembly.GetExecutingAssembly());
+        private LogClient log = new LogClient();
 
         public Login()
         {
@@ -36,39 +37,44 @@ namespace PassThePen
 
         private void Button_login_Click(object sender, RoutedEventArgs e)
         {
-            InstanceContext context = new InstanceContext(this);
-            PassThePenService.AutenticationClient clientAutentication = new PassThePenService.AutenticationClient();
-            
-
-            PassThePenService.Player player = new PassThePenService.Player()
+            try
             {
-                username = TextBox_Username.Text,
-                password = PasswordBox_PasswordUser.Password
-            };
-
-
-            if (ValidateInformation())
-            {
-                int playerValid = 200;
-                int isNotConected = 404;
-                int resultAutenticatePlayer = clientAutentication.AutenticatePlayer(player);
-
-                if (resultAutenticatePlayer == playerValid && clientAutentication.FindPlayerIsConected(player.username) == isNotConected)
+                PassThePenService.AutenticationClient clientAutentication = new PassThePenService.AutenticationClient();
+                PassThePenService.Player player = new PassThePenService.Player()
                 {
-                    MainMenu.username = TextBox_Username.Text;
-                    InvokeMainMenu();
-                    
+                    username = TextBox_Username.Text,
+                    password = PasswordBox_PasswordUser.Password
+                };
+                if (ValidateInformation())
+                {
+                    int playerValid = 200;
+                    int isNotConected = 404;
+                    int resultAutenticatePlayer = clientAutentication.AutenticatePlayer(player);
+                    if (resultAutenticatePlayer == playerValid && clientAutentication.FindPlayerIsConected(player.username) == isNotConected)
+                    {
+                        MainMenu.username = TextBox_Username.Text;
+                        InvokeMainMenu();
+                    }
+                    else
+                    {
+                        MessageBox.Show(messageResource.GetString("Login_ErrorLogin_Message"));
+                    }
                 }
                 else
                 {
-                    MessageBox.Show(messageResource.GetString("Login_ErrorLogin_Message"));
+                    MessageBox.Show(messageResource.GetString("Login_InvalidData_Message"));
                 }
             }
-            else
+            catch (EndpointNotFoundException ex)
             {
-                MessageBox.Show(messageResource.GetString("Login_InvalidData_Message"));
+                MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
+                log.Add(ex.ToString());
             }
-           
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
+                log.Add(ex.ToString());
+            }
         }
 
         private bool ValidateInformation()
@@ -113,29 +119,42 @@ namespace PassThePen
 
         private void Button_LoginAsGuest_Click(object sender, MouseButtonEventArgs e)
         {
-            PassThePenService.AutenticationClient client = new PassThePenService.AutenticationClient();
-            PassThePenService.AutenticationClient clientAutentication = new PassThePenService.AutenticationClient();
-
-            PassThePenService.Player guestPlayer = new PassThePenService.Player()
+            try
             {
-                username = "Guest",
-                password = "guest"
-            };
+                PassThePenService.AutenticationClient client = new PassThePenService.AutenticationClient();
+                PassThePenService.AutenticationClient clientAutentication = new PassThePenService.AutenticationClient();
 
-            int autenticationValid = 200;
-            int isNotConected = 404;
-            int resultAutentication = client.AutenticatePlayer(guestPlayer);
+                PassThePenService.Player guestPlayer = new PassThePenService.Player()
+                {
+                    username = "Guest",
+                    password = "guest"
+                };
 
-            if(resultAutentication == autenticationValid && clientAutentication.FindPlayerIsConected(guestPlayer.username) == isNotConected)
-            {
-                MainMenu.username = "Guest";
-                InvokeMainMenu();
+                int autenticationValid = 200;
+                int isNotConected = 404;
+                int resultAutentication = client.AutenticatePlayer(guestPlayer);
+
+                if (resultAutentication == autenticationValid && clientAutentication.FindPlayerIsConected(guestPlayer.username) == isNotConected)
+                {
+                    MainMenu.username = "Guest";
+                    InvokeMainMenu();
+                }
+                else
+                {
+                    MessageBox.Show(messageResource.GetString("Login_ErrorLogin_Message"));
+                }
+                client.Close();
             }
-            else
+            catch (EndpointNotFoundException ex)
             {
-                MessageBox.Show(messageResource.GetString("Login_ErrorLogin_Message"));
+                MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
+                log.Add(ex.ToString());
             }
-            client.Close();
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
+                log.Add(ex.ToString());
+            }
         }
 
         private void Button_ChangeLanguageEN_Click(object sender, MouseButtonEventArgs e)

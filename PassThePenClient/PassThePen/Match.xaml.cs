@@ -34,6 +34,7 @@ namespace PassThePen
         Dictionary<string, int> playerScore;
         string username = MainMenu.username;
         Boolean hostState;
+        private LogClient log = new LogClient();
 
         public Match()
         {
@@ -85,25 +86,37 @@ namespace PassThePen
 
         private void ObtainCard()
         {
-            string card;
-            InstanceContext instanceContext = new InstanceContext(this);
-            PassThePenService.MatchManagementClient client = new PassThePenService.MatchManagementClient(instanceContext);
-
-            var random = new Random();
-            int numberCard = random.Next(1, 100);
-
-            ResourceManager cardResource = new ResourceManager("PassThePen.Properties.Deck", Assembly.GetExecutingAssembly());
-            card = cardResource.GetString("Card" + numberCard);
-
-            if(card.Equals("Reto") || card.Equals("Challenge"))
+            try
             {
-                int challengeNumber = random.Next(1, 10);
-                ResourceManager challengeResource = new ResourceManager("PassThePen.Properties.Challenge", Assembly.GetExecutingAssembly());
-                card = challengeResource.GetString("Challenge" + challengeNumber);
+                string card;
+                InstanceContext instanceContext = new InstanceContext(this);
+                PassThePenService.MatchManagementClient client = new PassThePenService.MatchManagementClient(instanceContext);
+
+                var random = new Random();
+                int numberCard = random.Next(1, 100);
+
+                ResourceManager cardResource = new ResourceManager("PassThePen.Properties.Deck", Assembly.GetExecutingAssembly());
+                card = cardResource.GetString("Card" + numberCard);
+
+                if (card.Equals("Reto") || card.Equals("Challenge"))
+                {
+                    int challengeNumber = random.Next(1, 10);
+                    ResourceManager challengeResource = new ResourceManager("PassThePen.Properties.Challenge", Assembly.GetExecutingAssembly());
+                    card = challengeResource.GetString("Challenge" + challengeNumber);
+                }
+
+                client.SendCard(card);
             }
-
-            client.SendCard(card);
-
+            catch (EndpointNotFoundException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
+                log.Add(ex.ToString());
+            }
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
+                log.Add(ex.ToString());
+            }
         }
 
         public void DistributeCard(string card)
@@ -114,18 +127,29 @@ namespace PassThePen
 
         private void Button_SendMessage_Click(object sender, RoutedEventArgs e)
         {
-            InstanceContext context = new InstanceContext(this);
-            PassThePenService.ChatServicesClient client = new ChatServicesClient(context);
-
-            string username = MainMenu.username;
-            string message = TextBox_Message.Text;
-            if(message != "")
+            try
             {
-                TextBox_Message.Clear();
-                client.SendMessage(username, message);
+                InstanceContext context = new InstanceContext(this);
+                PassThePenService.ChatServicesClient client = new ChatServicesClient(context);
+
+                string usernameSend = MainMenu.username;
+                string message = TextBox_Message.Text;
+                if (message != "")
+                {
+                    TextBox_Message.Clear();
+                    client.SendMessage(usernameSend, message);
+                }
             }
-
-
+            catch (EndpointNotFoundException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
+                log.Add(ex.ToString());
+            }
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
+                log.Add(ex.ToString());
+            }
         }
 
         public void MessageSend(string message)
@@ -136,17 +160,29 @@ namespace PassThePen
 
         private void Button_StartTurn_Click(object sender, RoutedEventArgs e)
         {
-            if (hostState)
+            try
             {
-                InstanceContext instanceContext = new InstanceContext(this);
-                PassThePenService.MatchManagementClient client = new MatchManagementClient(instanceContext);
-                client.StartTurnSignal(MainMenu.username);
+                if (hostState)
+                {
+                    InstanceContext instanceContext = new InstanceContext(this);
+                    PassThePenService.MatchManagementClient client = new MatchManagementClient(instanceContext);
+                    client.StartTurnSignal(MainMenu.username);
+                }
+                else
+                {
+                    MessageBox.Show(messageResource.GetString("Match_NotHostTurn_Message"), "", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
             }
-            else
+            catch (EndpointNotFoundException ex)
             {
-                MessageBox.Show(messageResource.GetString("Match_NotHostTurn_Message"), "", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
+                log.Add(ex.ToString());
             }
-            
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
+                log.Add(ex.ToString());
+            }
         }
 
         private void StartTurn()
@@ -160,9 +196,22 @@ namespace PassThePen
 
         private void ObtainTurnTime()
         {
-            InstanceContext context = new InstanceContext(this);
-            PassThePenService.MatchManagementClient client = new MatchManagementClient(context);
-            client.SelectTurnTime();
+            try
+            {
+                InstanceContext context = new InstanceContext(this);
+                PassThePenService.MatchManagementClient client = new MatchManagementClient(context);
+                client.SelectTurnTime();
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
+                log.Add(ex.ToString());
+            }
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
+                log.Add(ex.ToString());
+            }
         }
 
         public void DistributeTurnTime(int turnTime)
@@ -241,27 +290,64 @@ namespace PassThePen
 
         private void SendDraw()
         {
-            InstanceContext context = new InstanceContext(this);
-            PassThePenService.MatchManagementClient client = new MatchManagementClient(context);
-
-            Byte[] playerDraw = GetCanvasDraw();
-
-            client.SendDraws(MainMenu.username, playerDraw);
+            try
+            {
+                InstanceContext context = new InstanceContext(this);
+                PassThePenService.MatchManagementClient client = new MatchManagementClient(context);
+                Byte[] playerDraw = GetCanvasDraw();
+                client.SendDraws(MainMenu.username, playerDraw);
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
+                log.Add(ex.ToString());
+            }
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
+                log.Add(ex.ToString());
+            }
         }
 
 
         public void SetChatOperationContext(string username)
         {
-            InstanceContext instanceContext = new InstanceContext(this);
-            PassThePenService.ChatServicesClient client = new PassThePenService.ChatServicesClient(instanceContext);
-            client.SetChatOperationContext(username);
+            try
+            {
+                InstanceContext instanceContext = new InstanceContext(this);
+                PassThePenService.ChatServicesClient client = new PassThePenService.ChatServicesClient(instanceContext);
+                client.SetChatOperationContext(username);
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
+                log.Add(ex.ToString());
+            }
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
+                log.Add(ex.ToString());
+            }
         }
 
         public void SetMatchOperationContext(string username)
         {
-            InstanceContext instanceContext = new InstanceContext(this);
-            PassThePenService.MatchManagementClient client = new PassThePenService.MatchManagementClient(instanceContext);
-            client.SetMatchOperationContext(username);
+            try
+            {
+                InstanceContext instanceContext = new InstanceContext(this);
+                PassThePenService.MatchManagementClient client = new PassThePenService.MatchManagementClient(instanceContext);
+                client.SetMatchOperationContext(username);
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
+                log.Add(ex.ToString());
+            }
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
+                log.Add(ex.ToString());
+            }
         }
 
         public void DistributeDraws(Dictionary<string, byte[]> playersDraw)
@@ -275,14 +361,27 @@ namespace PassThePen
 
         public void SetPlayersScoreTable()
         {
-            InstanceContext context = new InstanceContext(this);
-            PassThePenService.MatchManagementClient client = new PassThePenService.MatchManagementClient(context);
-            playerScore = client.GetPlayersScore();
+            try
+            {
+                InstanceContext context = new InstanceContext(this);
+                PassThePenService.MatchManagementClient client = new PassThePenService.MatchManagementClient(context);
+                playerScore = client.GetPlayersScore();
 
-            int score = playerScore.First(u => u.Key == username).Value;
-            Label_Score.Content = score.ToString();
-            playerScore.Remove(username);
-            ListBox_PlayersInGame.ItemsSource = playerScore;
+                int score = playerScore.First(u => u.Key == username).Value;
+                Label_Score.Content = score.ToString();
+                playerScore.Remove(username);
+                ListBox_PlayersInGame.ItemsSource = playerScore;
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
+                log.Add(ex.ToString());
+            }
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
+                log.Add(ex.ToString());
+            }
         }
 
 
@@ -334,10 +433,22 @@ namespace PassThePen
 
         private void SetHostState(string username)
         {
-            InstanceContext context = new InstanceContext(this);
-            PassThePenService.MatchManagementClient client = new PassThePenService.MatchManagementClient(context);
-
-            hostState = client.GetHostState(username);
+            try
+            {
+                InstanceContext context = new InstanceContext(this);
+                PassThePenService.MatchManagementClient client = new PassThePenService.MatchManagementClient(context);
+                hostState = client.GetHostState(username);
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
+                log.Add(ex.ToString());
+            }
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
+                log.Add(ex.ToString());
+            }
         }
 
         private void Button_Leave_Match_Click(object sender, RoutedEventArgs e)

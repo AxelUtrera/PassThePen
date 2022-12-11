@@ -209,6 +209,14 @@
     <value>Send</value>
     <comment>Used by: Recover Password, Register</comment>
   </data>
+  <data name="Global_ServerError_Message" xml:space="preserve">
+    <value>Server error, please try again later</value>
+    <comment>Used by: All</comment>
+  </data>
+  <data name="Global_Timeout_Message" xml:space="preserve">
+    <value>Waiting time exceeded, please try again later</value>
+    <comment>Used by: All</comment>
+  </data>
   <data name="Global_Username_Label" xml:space="preserve">
     <value>Username</value>
     <comment>Used by: Login.</comment>
@@ -460,10 +468,6 @@
   <data name="RecoverPassword_Send_Button" xml:space="preserve">
     <value>Send</value>
     <comment>Used by: Recover Password</comment>
-  </data>
-  <data name="RecoverPassword_Timeout_Message" xml:space="preserve">
-    <value>Waiting time exceeded, please try again later</value>
-    <comment>Used by: RecoverPassword</comment>
   </data>
   <data name="RecoverPassword_Title_Label" xml:space="preserve">
     <value>Forgot your password?</value>

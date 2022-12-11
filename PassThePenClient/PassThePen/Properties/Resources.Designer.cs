@@ -268,6 +268,24 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Error con el servidor, favor de intentarlo más tarde.
+        /// </summary>
+        public static string Global_ServerError_Message {
+            get {
+                return ResourceManager.GetString("Global_ServerError_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Tiempo de espera excedido, por favor intentelo más tarde.
+        /// </summary>
+        public static string Global_Timeout_Message {
+            get {
+                return ResourceManager.GetString("Global_Timeout_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Nombre de usuario.
         /// </summary>
         public static string Global_Username_Label {
@@ -840,15 +858,6 @@ namespace PassThePen.Properties {
         public static string RecoverPassword_Send_Button {
             get {
                 return ResourceManager.GetString("RecoverPassword_Send_Button", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Tiempo de espera excedido, por favor intentelo más tarde.
-        /// </summary>
-        public static string RecoverPassword_Timeout_Message {
-            get {
-                return ResourceManager.GetString("RecoverPassword_Timeout_Message", resourceCulture);
             }
         }
         

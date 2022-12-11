@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Resources;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,6 +24,7 @@ namespace PassThePen
     public partial class ChangePassword : Window
     {
         ResourceManager messageResource = new ResourceManager("PassThePen.Properties.Resources", Assembly.GetExecutingAssembly());
+        private LogClient log = new LogClient();
 
         public ChangePassword()
         {
@@ -36,28 +38,41 @@ namespace PassThePen
 
         private void Button_Change_Password_Click(object sender, RoutedEventArgs e)
         {
-            PlayerManagementClient client = new PlayerManagementClient();
-            string currentPassword = PasswordBox_CurrentPassword.Password;
-            if (ValidatePassword())
+            try
             {
-                if (AutenticatePassword(MainMenu.username, currentPassword) == 200)
+                PlayerManagementClient client = new PlayerManagementClient();
+                string currentPassword = PasswordBox_CurrentPassword.Password;
+                if (ValidatePassword())
                 {
-                    string password = PasswordBox_ConfirmPassword.Password;
-                    if (client.UpdatePlayerPassword(MainMenu.username, password) == 200)
+                    if (AutenticatePassword(MainMenu.username, currentPassword) == 200)
                     {
-                        MessageBox.Show(messageResource.GetString("ChangePassword_PasswordChanged_Message"), "", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
-                    else
-                    {
-                        MessageBox.Show(messageResource.GetString("ChangePassword_PasswordNotChanged_Message"), "", MessageBoxButton.OK, MessageBoxImage.Error);
+                        string password = PasswordBox_ConfirmPassword.Password;
+                        if (client.UpdatePlayerPassword(MainMenu.username, password) == 200)
+                        {
+                            MessageBox.Show(messageResource.GetString("ChangePassword_PasswordChanged_Message"), "", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show(messageResource.GetString("ChangePassword_PasswordNotChanged_Message"), "", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
                     }
                 }
+                else
+                {
+                    MessageBox.Show(messageResource.GetString("ChangePassword_CurrentPasswordError_Message"), "", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                client.Close();
             }
-            else
+            catch (EndpointNotFoundException ex)
             {
-                MessageBox.Show(messageResource.GetString("ChangePassword_CurrentPasswordError_Message"), "", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
+                log.Add(ex.ToString());
             }
-            client.Close();
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
+                log.Add(ex.ToString());
+            }  
         }
 
         private Boolean ValidatePassword()
@@ -119,11 +134,26 @@ namespace PassThePen
 
         private int AutenticatePassword(string username, string password)
         {
-            int result;
-            PassThePenService.Player player = new Player { username = username, password = password };
-            PassThePenService.AutenticationClient client = new PassThePenService.AutenticationClient();
-            result = client.AutenticatePlayer(player);
-            client.Close();
+            int result = 200;
+            try
+            {
+                PassThePenService.Player player = new Player { username = username, password = password };
+                PassThePenService.AutenticationClient client = new PassThePenService.AutenticationClient();
+                result = client.AutenticatePlayer(player);
+                client.Close();
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
+                result = 500;
+                log.Add(ex.ToString());
+            }
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
+                result = 500;
+                log.Add(ex.ToString());
+            }
             return result;
         }
     }

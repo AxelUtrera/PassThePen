@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.Entity.Core;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
@@ -13,6 +14,7 @@ namespace Logic
 {
     public class FriendRequestsLogic
     {
+        readonly Log log = new Log();
 
         public int AcceptFriendRequest(Domain.FriendRequest friendRequest)
         {
@@ -20,32 +22,39 @@ namespace Logic
 
             using (var context = new passthepenEntities())
             {
-
-                //Se realizan 2 registros para que haya relacion desde los dos usuarios, al que se le envio la solicitud y el que la acepto
-                var registerFriendApplicantToPlayer = context.Friends.Add(new DataAccess.Friends()
+                try
                 {
-                    usernamePlayer = friendRequest.usernamePlayer,
-                    friendUsername = friendRequest.friendUsername
-                });
+                    //Se realizan 2 registros para que haya relacion desde los dos usuarios, al que se le envio la solicitud y el que la acepto
+                    var registerFriendApplicantToPlayer = context.Friends.Add(new DataAccess.Friends()
+                    {
+                        usernamePlayer = friendRequest.usernamePlayer,
+                        friendUsername = friendRequest.friendUsername
+                    });
 
-                context.Friends.Add(new DataAccess.Friends()
-                {
-                    usernamePlayer = friendRequest.friendUsername,
-                    friendUsername = friendRequest.usernamePlayer
-                });
+                    context.Friends.Add(new DataAccess.Friends()
+                    {
+                        usernamePlayer = friendRequest.friendUsername,
+                        friendUsername = friendRequest.usernamePlayer
+                    });
 
-                context.SaveChanges();
+                    context.SaveChanges();
 
-                int statusFriendRequest = DeleteFriendRequest(friendRequest);
+                    int statusFriendRequest = DeleteFriendRequest(friendRequest);
 
-                if (registerFriendApplicantToPlayer != null && statusFriendRequest == 200)
-                {
-                    operationResult = 200;
+                    if (registerFriendApplicantToPlayer != null && statusFriendRequest == 200)
+                    {
+                        operationResult = 200;
+                    }
                 }
-
-
+                catch (DbUpdateException ex)
+                {
+                    log.Add(ex.ToString());
+                }
+                catch (EntityException ex)
+                {
+                    log.Add(ex.ToString());
+                }
             }
-
             return operationResult;
         }
 
@@ -56,16 +65,29 @@ namespace Logic
 
             using (var context = new passthepenEntities())
             {
-                var friendRequestInDataBase = context.FriendRequest.Where(u => u.idRequest == friendRequest.idRequest).FirstOrDefault();
-
-                if (friendRequestInDataBase != null)
+                try
                 {
-                    context.FriendRequest.Remove(friendRequestInDataBase);
-                    context.SaveChanges();
-                    operationResult = 200;
+                    var friendRequestInDataBase = context.FriendRequest.Where(u => u.idRequest == friendRequest.idRequest).First();
+                    if (friendRequestInDataBase != null)
+                    {
+                        context.FriendRequest.Remove(friendRequestInDataBase);
+                        context.SaveChanges();
+                        operationResult = 200;
+                    }
                 }
-            }
-
+                catch (ArgumentNullException ex)
+                {
+                    log.Add(ex.ToString());
+                }
+                catch (DbUpdateException ex)
+                {
+                    log.Add(ex.ToString());
+                }
+                catch (EntityException ex)
+                {
+                    log.Add(ex.ToString());
+                }
+            }   
             return operationResult;
         }
 
@@ -76,24 +98,34 @@ namespace Logic
 
             using (var context = new passthepenEntities())
             {
-                var listRequests = context.FriendRequest
+                try
+                {
+                    var listRequests = context.FriendRequest
                                    .Where(b => b.usernamePlayer.Equals(username))
                                    .ToList();
 
-                foreach (DataAccess.FriendRequest request in listRequests)
-                {
-                    Domain.FriendRequest friendRequest = new Domain.FriendRequest
+                    foreach (DataAccess.FriendRequest request in listRequests)
                     {
-                        idRequest = request.idRequest,
-                        usernamePlayer = request.usernamePlayer,
-                        friendUsername = request.friendUsername,
-                    };
+                        Domain.FriendRequest friendRequest = new Domain.FriendRequest
+                        {
+                            idRequest = request.idRequest,
+                            usernamePlayer = request.usernamePlayer,
+                            friendUsername = request.friendUsername,
+                        };
 
-                    friendRequestList.Add(friendRequest);
+                        friendRequestList.Add(friendRequest);
+                    }
                 }
-                return friendRequestList;
+                catch (ArgumentNullException ex)
+                {
+                    log.Add(ex.ToString());
+                }
+                catch (EntityException ex)
+                {
+                    log.Add(ex.ToString());
+                }
             }
-
+            return friendRequestList;
         }
 
         public int SendFriendRequests(Domain.FriendRequest friendRequests)
@@ -104,16 +136,28 @@ namespace Logic
 
             using (var context = new passthepenEntities())
             {
-                if (ValidateExistFriendRequestOrFriend(friendRequests) == validationOKCode && friendRequests.usernamePlayer != friendRequests.friendUsername)
+                
+                try
                 {
-                    var friendRequestDataBase = context.FriendRequest.Add(dataAccesFriendRequests);
-                    context.SaveChanges();
-
-                    if (friendRequestDataBase != null)
+                    if (ValidateExistFriendRequestOrFriend(friendRequests) == validationOKCode && friendRequests.usernamePlayer != friendRequests.friendUsername)
                     {
-                        operationCode = 200;
+                        var friendRequestDataBase = context.FriendRequest.Add(dataAccesFriendRequests);
+                        context.SaveChanges();
+
+                        if (friendRequestDataBase != null)
+                        {
+                            operationCode = 200;
+                        }
                     }
-                }                
+                }
+                catch (DbUpdateException ex)
+                {
+                    log.Add(ex.ToString());
+                }
+                catch (EntityException ex)
+                {
+                    log.Add(ex.ToString());
+                }
             }
             return operationCode;
         }
@@ -136,10 +180,14 @@ namespace Logic
 
                     Console.WriteLine(operationResult);
                 }
+                catch (ArgumentNullException ex)
+                {
+                    log.Add(ex.ToString());
+                }
                 catch (EntityException ex)
                 {
-                    //manejar
-                } 
+                    log.Add(ex.ToString());
+                }
             }
             return operationResult;
         }

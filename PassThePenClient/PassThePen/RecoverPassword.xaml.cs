@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Resources;
+using System.ServiceModel;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -26,6 +27,7 @@ namespace PassThePen
         private String email;
         private int resendNumber = 0;
         private String username;
+        private LogClient log = new LogClient();
 
         public RecoverPassword()
         {
@@ -34,41 +36,57 @@ namespace PassThePen
 
         private void Button_Send_Click(object sender, RoutedEventArgs e)
         {
-            PassThePenService.PlayerManagementClient client = new PassThePenService.PlayerManagementClient();
-            if (ValidateUsername())
+            try
             {
-                Player player = client.GetDataPlayer(TextBox_Username_Code.Text.Trim());
-                client.Close();
-                PassThePenService.AutenticationClient clientEmail = new PassThePenService.AutenticationClient();
-                Random randomNumber = new Random();
-                validationCode = randomNumber.Next(100000, 1000000);
-                String affair = messageResource.GetString("RecoverPassword_ValidationCodeTitle_Message");
-                email = player.email;
-                username = TextBox_Username_Code.Text.Trim();
-                try 
+                if (ValidateUsername())
                 {
-                    if (clientEmail.CodeEmail(email, affair, validationCode) == 200)
+                    PassThePenService.PlayerManagementClient client = new PassThePenService.PlayerManagementClient();
+                    Player player = client.GetDataPlayer(TextBox_Username_Code.Text.Trim());
+                    client.Close();
+                    if (player != null)
                     {
-                        MessageBox.Show(messageResource.GetString("RecoverPassword_ValidationCodeSend_Message"));
-                        Label_Email.Visibility = Visibility.Hidden;
-                        Label_Code.Visibility = Visibility.Visible;
-                        Button_Valid.Visibility = Visibility.Visible;
-                        Button_Resend.Visibility = Visibility.Visible;
-                        Button_Send.Visibility = Visibility.Hidden;
-                        TextBox_Username_Code.Text = "";
-
+                        Random randomNumber = new Random();
+                        validationCode = randomNumber.Next(100000, 1000000);
+                        String affair = messageResource.GetString("RecoverPassword_ValidationCodeTitle_Message");
+                        email = player.email;
+                        username = TextBox_Username_Code.Text.Trim();
+                        PassThePenService.AutenticationClient clientEmail = new PassThePenService.AutenticationClient();
+                        if (clientEmail.CodeEmail(email, affair, validationCode) == 200)
+                        {
+                            MessageBox.Show(messageResource.GetString("RecoverPassword_ValidationCodeSend_Message"));
+                            Label_Email.Visibility = Visibility.Hidden;
+                            Label_Code.Visibility = Visibility.Visible;
+                            Button_Valid.Visibility = Visibility.Visible;
+                            Button_Resend.Visibility = Visibility.Visible;
+                            Button_Send.Visibility = Visibility.Hidden;
+                            TextBox_Username_Code.Text = "";
+                            clientEmail.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show(messageResource.GetString("Global_EmailError_Message"));
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("El usuario no se encuentra registrado en el sistema");
                     }
                 }
-                catch (TimeoutException)
+                else
                 {
-                    MessageBox.Show(messageResource.GetString("RecoverPassword_Timeout_Message"));
+                    MessageBox.Show(messageResource.GetString("RecoverPassword_InvalidEmail_Message"));
                 }
             }
-            else
+            catch (EndpointNotFoundException ex)
             {
-                MessageBox.Show(messageResource.GetString("RecoverPassword_InvalidEmail_Message"));
+                MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
+                log.Add(ex.ToString());
             }
-            client.Close();
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
+                log.Add(ex.ToString());
+            }
         }
 
         private void Button_Cancel_Click(object sender, RoutedEventArgs e)
@@ -140,26 +158,40 @@ namespace PassThePen
 
         private void Button_change_Click(object sender, RoutedEventArgs e)
         {
-            PassThePenService.PlayerManagementClient client = new PassThePenService.PlayerManagementClient();
-            if (ValidatePassword())
+            try
             {
-                if (client.UpdatePlayerPassword(username, PasswordBox_NewPassword.Password) == 200)
+                PassThePenService.PlayerManagementClient client = new PassThePenService.PlayerManagementClient();
+                if (ValidatePassword())
                 {
-                    MessageBox.Show(messageResource.GetString("RecoverPassword_PasswordUpdated_Message"));
-                    Login login = new Login();
-                    login.Show();
-                    Close();
+                    if (client.UpdatePlayerPassword(username, PasswordBox_NewPassword.Password) == 200)
+                    {
+                        MessageBox.Show(messageResource.GetString("RecoverPassword_PasswordUpdated_Message"));
+                        client.Close();
+                        Login login = new Login();
+                        login.Show();
+                        Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("La contraseña debe ser diferente a la anterior");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("La contraseña debe ser diferente a la anterior");
+                    MessageBox.Show(messageResource.GetString("RecoverPassword_UnmatchedPassword_Message"));
                 }
             }
-            else
+            catch (EndpointNotFoundException ex)
             {
-                MessageBox.Show(messageResource.GetString("RecoverPassword_UnmatchedPassword_Message"));
+                MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
+                log.Add(ex.ToString());
             }
-            client.Close();
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
+                log.Add(ex.ToString());
+            }
+
         }
 
         private  Boolean ValidatePassword()
@@ -187,24 +219,38 @@ namespace PassThePen
 
         private void Button_Resend_Click(object sender, RoutedEventArgs e)
         {
-            if (resendNumber < 3)
+            try
             {
-                PassThePenService.AutenticationClient client = new PassThePenService.AutenticationClient();
-                if (client.CodeEmail(email, "Validation Code", validationCode) == 200)
+                if (resendNumber < 3)
                 {
-                    MessageBox.Show("Código de validación enviado a su correo favor de revisarlo");
-                    resendNumber++;
+                    PassThePenService.AutenticationClient client = new PassThePenService.AutenticationClient();
+                    if (client.CodeEmail(email, "Validation Code", validationCode) == 200)
+                    {
+                        MessageBox.Show("Código de validación enviado a su correo favor de revisarlo");
+                        resendNumber++;
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se ha podido enviar el correo electronico, favor de verificar el correo ingresado");
+                    }
+                    client.Close();
                 }
                 else
                 {
-                    MessageBox.Show("No se ha podido enviar el correo electronico, favor de verificar el correo ingresado");
+                    MessageBox.Show("Numero de reeenvios superado");
                 }
-                client.Close();
             }
-            else
+            catch (EndpointNotFoundException ex)
             {
-                MessageBox.Show("Numero de reeenvios superado");
+                MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
+                log.Add(ex.ToString());
             }
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
+                log.Add(ex.ToString());
+            }
+            
         }
     }
 }

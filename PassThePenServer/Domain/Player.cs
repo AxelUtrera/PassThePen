@@ -32,5 +32,17 @@ namespace Domain
                    lastname == player.lastname &&
                    email == player.email;
         }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1416777821;
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(username);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(password);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(name);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(lastname);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(email);
+            hashCode = hashCode * -1521134295 + EqualityComparer<byte[]>.Default.GetHashCode(profileImage);
+            return hashCode;
+        }
     }
 }

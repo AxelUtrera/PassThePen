@@ -509,6 +509,14 @@
     <value>Error al enviar el correo electronico</value>
     <comment>Used by: Register, Recover Password</comment>
   </data>
+  <data name="Global_ServerError_Message" xml:space="preserve">
+    <value>Error con el servidor, favor de intentarlo más tarde</value>
+    <comment>Used by: All</comment>
+  </data>
+  <data name="Global_Timeout_Message" xml:space="preserve">
+    <value>Tiempo de espera excedido, por favor intentelo más tarde</value>
+    <comment>Used by: All</comment>
+  </data>
   <data name="MainMenu_FriendRequestSendError_Message" xml:space="preserve">
     <value>Error al enviar la solicitud verifiquela e intentelo de nuevo</value>
     <comment>Used by: MainMenu</comment>
