@@ -380,13 +380,9 @@ namespace Comunication
 
         public void SetMatchOperationContext(string username)
         {
-
-            foreach (ConnectedUser user in _playersInGroup)
+            foreach (var user in _playersInGroup.Where(user => user.username.Equals(username)))
             {
-                if (user.username.Equals(username))
-                {
-                    user.matchContext = OperationContext.Current;
-                }
+                user.matchContext = OperationContext.Current;
             }
         }
 
@@ -572,12 +568,9 @@ namespace Comunication
 
         public void SetChatOperationContext(string username)
         {
-            foreach (ConnectedUser user in _playersInGroup)
+            foreach (var user in _playersInGroup.Where(user => user.username.Equals(username)))
             {
-                if (user.username.Equals(username))
-                {
-                    user.chatContext = OperationContext.Current;
-                }
+                user.chatContext = OperationContext.Current;
             }
         }
     }
@@ -596,12 +589,9 @@ namespace Comunication
 
         public void SetDrawReviewContext(string username)
         {
-            foreach(ConnectedUser player in _playersInGroup)
+            foreach (var player in _playersInGroup.Where(player => player.username.Equals(username)))
             {
-                if (player.username.Equals(username))
-                {
-                    player.drawContext = OperationContext.Current;
-                }
+                player.drawContext = OperationContext.Current;
             }
         }
     }
