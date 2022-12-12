@@ -3,31 +3,23 @@
 
 -----------------------------REGLAS PASS THE PEN-----------------------------
 
-1. Cada partida esta limitada a 10 rondas.
-2. El jugador mas viejo empieza la partida.
-3. El mazo de cartas se compone de 100 cartas de estas cartas 50 son de objetos para dibujar, 30 de retos para 
-dibujar y 20 de comodines.
-4. El juego debe tener 2 dados, uno de tiempo y uno de reto, el dado de reto unicamente se utilizara cuando salga
-una carta de reto.
-5. Todos los jugadores deben dibujar en cada ronda.
-6. Despues de las 10 rondas gana el jugador que cuente con mas estrellas.
-7. No se puede puntuar el dibujo propio.
+1.	Cada partida está limitada a 10 rondas.
+2.	El mazo de cartas se compone de 100 cartas de estas cartas 75 son de objetos para dibujar y 25 de retos para dibujar.
+3.	Todos los jugadores deben dibujar en cada ronda.
+4.	Después de las 10 rondas gana el jugador que cuente con más estrellas.
+5.	No se puede puntuar el dibujo propio.
+
 
 
 -----------------------------¿COMO JUGAR?-----------------------------
 
-1. Para empezar el juego el jugador mas viejo saca una carta de la cima del mazo, si es una carta de reto se tira el dado para 
-seleccionar el reto dependiendo del color que salga en el dado, si el dado cae en el signo de interrogación el jugador elegira 
-cual de los retos de la carta hacer, si es una carta de comodin se hace lo que diga dicha carta, si es una carta de objeto se
-dibuja el objeto que aparece en la carta.
-2. El jugador que saco la carta debe tirar el dado de tiempo para establecer el tiempo que tendran los jugadores para realizar su
-dibujo.
-3. Todos los jugadores deben dibujar el objeto o el reto que indica la carta que saco el jugador.
-4. Una vez se acabe el tiempo todos los jugadores deberan puntuar con estrellas (1-5) los dibujos de los demas jugadores.
-5. Una vez todos los jugadores hayan puntuado los dibujos de sus compañeros se sumara la cantidad de estrellas obtenidas a la
+1. El host debe iniciar la partida.
+2. Se definira un una carta aleatoria para dibujar (Puede ser un objeto o reto).
+3. Se definira un tiempo limite para dibujar (15, 20, 25, 30 segundos).
+4. Todos los jugadores deben dibujar el objeto o el reto que indica la carta que se definio.
+5. Una vez se acabe el tiempo todos los jugadores deberan puntuar con estrellas (1-5) los dibujos de los demas jugadores.
+6. Una vez todos los jugadores hayan puntuado los dibujos de sus compañeros se sumara la cantidad de estrellas obtenidas a la
 puntuacion de cada jugador.
-6. Una vez terminada la ronda el jugador que saco la carta en la ronda anterior debe tirar el dado de jugador para establecer
-que jugador sacara una carta en la siguiente ronda.
 7. Se repiten los pasos 1 a 6 con el jugador que haya sido elegido esta vez.
 8. Una vez se hayan completado 10 rondas gana el jugador que haya conseguido mas estrellas.
 

@@ -64,7 +64,7 @@ namespace PassThePen
 
                     if (client.CodeEmail(_player.email, "Validation Code", _validationCode) == 200)
                     {
-                        MessageBox.Show(messageResource.GetString("Register_SuccessfulRegister_Message"));
+                        MessageBox.Show(messageResource.GetString("Register_EmailSend_Message"));
                         HideComponetsRegister();
                         Label_CodeValidation.Visibility = Visibility.Visible;
                         TexBox_CodeValidation.Visibility = Visibility.Visible;
@@ -144,7 +144,7 @@ namespace PassThePen
             }
             if (!result)
             {
-                MessageBox.Show("Campos incompletos favor de llenar todos los campos");
+                MessageBox.Show(messageResource.GetString("Register_IncompleteFields_Message"));
             }
             return result;
         }
@@ -165,7 +165,7 @@ namespace PassThePen
             if (!Validation.ValidateFormat(TextBox_Name.Text, @"^[A-Za-z\s@]*$") || !Validation.ValidateFormat(TextBox_LastName.Text, @"^[A-Za-z\s@]*$"))
             {
                 result = false;
-                MessageBox.Show("No se aceptan numeros o datos vacios en los apartados nombre y apellido");
+                MessageBox.Show(messageResource.GetString("Register_EmptyFields_Message"));
             }
             return result;
         }
@@ -252,7 +252,7 @@ namespace PassThePen
                 }
                 else
                 {
-                    MessageBox.Show("Código de validación invalido, favor de volverlo a ingresar");
+                    MessageBox.Show(messageResource.GetString("Register_InvalidCode_Message"));
                 }
             }
             catch (EndpointNotFoundException ex)
@@ -273,20 +273,20 @@ namespace PassThePen
             if (TexBox_CodeValidation.Text.Length > 6)
             {
                 result = false;
-                MessageBox.Show("Longitud incorrecta, el código de validación no excede los 6 caracteres");
+                MessageBox.Show(messageResource.GetString("Register_ValidationCodeLengthError_Message"));
             }
             if (Validation.ValidateFormat(TexBox_CodeValidation.Text, "^[0-9]+$"))
             {
                 if (Int32.Parse(TexBox_CodeValidation.Text) != _validationCode)
                 {
                     result = false;
-                    MessageBox.Show("Codigo de validación incorrecto, favor de verificarlo");
+                    MessageBox.Show(messageResource.GetString("Register_IncorrectCodeValidationCode_Message"));
                 }
             }
             else
             {
                 result = false;
-                MessageBox.Show("No se aceptan letras o campos vacios en el apartado codigo de validación");
+                MessageBox.Show(messageResource.GetString("Register_ValidationCodeEmpty_Message"));
             }
                 
             return result;
@@ -314,18 +314,18 @@ namespace PassThePen
                     PassThePenService.AutenticationClient client = new PassThePenService.AutenticationClient();
                     if (client.CodeEmail(_player.email, "Validation Code", _validationCode) == 200)
                     {
-                        MessageBox.Show("Código de validación enviado a su correo favor de revisarlo");
+                        MessageBox.Show(messageResource.GetString("Register_ValidationCodeEmail_Message"));
                         _resendNumber++;
                     }
                     else
                     {
-                        MessageBox.Show("No se ha podido enviar el correo electronico, favor de verificar el correo ingresado");
+                        MessageBox.Show(messageResource.GetString("Register_ValidationCodeEmailError_Mesage"));
                     }
                     client.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Numero de reeenvios superado");
+                    MessageBox.Show(messageResource.GetString("Register_ResendNumberExceed_Message"));
                 }
             }
             catch (EndpointNotFoundException ex)

@@ -15,7 +15,7 @@ namespace PassThePenServer
             using(ServiceHost host = new ServiceHost(typeof(Comunication.ImplementationServices)))
             {   
                     host.Open();
-                    Console.WriteLine("The server is already :D");
+                    Console.WriteLine("The server is ready :D");
                     Console.ReadLine();
             }
             

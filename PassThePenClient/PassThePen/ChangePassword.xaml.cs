@@ -97,7 +97,7 @@ namespace PassThePen
             }
             if (PasswordBox_CurrentPassword.Password.Length < 8 || PasswordBox_CurrentPassword.Password.Length > 16)
             {
-                MessageBox.Show("La contraseña actual debe ser mayor de 8 y menor de 16 caracteres");
+                MessageBox.Show(messageResource.GetString("Global_PasswordLengthError_Message"));
                 isValid = false;
             }
             if (!Validation.ValidateFormat(newPassword, "^(?=.*\\d)(?=.*[\\u0021-\\u002b\\u003c-\\u0040])(?=.*[A-Z])(?=.*[a-z])\\S{8,16}$"))
@@ -130,7 +130,7 @@ namespace PassThePen
             }
             if (!isValid)
             {
-                MessageBox.Show("No se aceptan campos vacios, favor de llenar todos los campos");
+                MessageBox.Show(messageResource.GetString("Global_EmptyFields_Message"));
             }
             return isValid;
         }

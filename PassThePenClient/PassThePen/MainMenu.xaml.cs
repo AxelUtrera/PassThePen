@@ -391,7 +391,7 @@ namespace PassThePen
                     };
                     if (client.SendFriendRequests(friendRequest) == errorFriendRequest)
                     {
-
+                        TextBox_AddFriend.Clear();
                         MessageBox.Show(messageResource.GetString("MainMenu_FriendRequestSendError_Message"));
 
                     }
@@ -404,6 +404,7 @@ namespace PassThePen
                 }
                 else
                 {
+                    TextBox_AddFriend.Clear();
                     MessageBox.Show(messageResource.GetString("MainMenu_PlayerNotExist_Message"));
                 }
             }
@@ -613,7 +614,7 @@ namespace PassThePen
 
         public void NotifyOnlyHostStart()
         {
-            MessageBox.Show("Solo el host puede iniciar la partida", "", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show(messageResource.GetString("MainMenu_OnlyHostStartMatch_Message"), "", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 }

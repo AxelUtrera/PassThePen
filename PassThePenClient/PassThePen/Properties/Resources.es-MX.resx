@@ -282,7 +282,7 @@
     <comment>Used by: MainMenu</comment>
   </data>
   <data name="MainMenu_InvitationBody_Message" xml:space="preserve">
-    <value>te ha invitado a una partida, ¿Desear unirte?</value>
+    <value> te ha invitado a una partida, ¿Desear unirte?</value>
     <comment>Used by: MainMenu</comment>
   </data>
   <data name="MainMenu_InvitationConfirmation_Message" xml:space="preserve">
@@ -519,6 +519,102 @@
   </data>
   <data name="Register_Title_Label" xml:space="preserve">
     <value>Registrar nuevo jugador</value>
+    <comment>Used by: Register</comment>
+  </data>
+  <data name="Global_EmptyFields_Message" xml:space="preserve">
+    <value>No se aceptan campos vacios, por favor llene todos los campos</value>
+    <comment>Used by: ChangePassword</comment>
+  </data>
+  <data name="Global_PasswordLengthError_Message" xml:space="preserve">
+    <value>La contraseña actual debe ser mayor de 8 y menor de 16 caracteres</value>
+    <comment>Used by: ChangePassword</comment>
+  </data>
+  <data name="MainMenu_OnlyHostStartMatch_Message" xml:space="preserve">
+    <value>Solo el host puede iniciar la partida</value>
+    <comment>Used by: MainMenu</comment>
+  </data>
+  <data name="Profile_EmptyFields_Message" xml:space="preserve">
+    <value>No se aceptan numeros o datos vacios en los apartados nombre y apellido</value>
+    <comment>Used by: Profile</comment>
+  </data>
+  <data name="RecoverPassword_DifferentPassword_Message" xml:space="preserve">
+    <value>La contraseña debe ser diferente a la anterior</value>
+    <comment>Used by: RecoverPassword</comment>
+  </data>
+  <data name="RecoverPassword_EmptyFields_Message" xml:space="preserve">
+    <value>Campos vacios, favor de llenar todos los campos</value>
+    <comment>Used by: RecoverPassword</comment>
+  </data>
+  <data name="RecoverPassword_IncorrectCodeValidationCode_Message" xml:space="preserve">
+    <value>Codigo de validación incorrecto, por favor verifiquelo</value>
+    <comment>Used by: RecoverPassword</comment>
+  </data>
+  <data name="RecoverPassword_InvalidFields_Message" xml:space="preserve">
+    <value>No se aceptan campos invalidos en el sistema</value>
+    <comment>Used by: RecoverPassword</comment>
+  </data>
+  <data name="RecoverPassword_ResendNumberExceed_Message" xml:space="preserve">
+    <value>Numero de reeenvios superado</value>
+    <comment>Used by: RecoverPassword</comment>
+  </data>
+  <data name="RecoverPassword_UserNotExist_Message" xml:space="preserve">
+    <value>El usuario no se encuentra registrado en el sistema</value>
+    <comment>Used by: RecoverPassword</comment>
+  </data>
+  <data name="RecoverPassword_ValidationCodeEmailError_Mesage" xml:space="preserve">
+    <value>No se ha podido enviar el correo electronico, verifique el correo ingresado</value>
+    <comment>Used by: RecoverPassword</comment>
+  </data>
+  <data name="RecoverPassword_ValidationCodeEmail_Message" xml:space="preserve">
+    <value>Se ha enviado un código de validación a su correo electronico</value>
+    <comment>Used by: RecoverPassword</comment>
+  </data>
+  <data name="RecoverPassword_ValidationCodeEmpty_Message" xml:space="preserve">
+    <value>No se aceptan letras o campos vacios en el codigo de validación</value>
+    <comment>Used by: RecoverPassword</comment>
+  </data>
+  <data name="RecoverPassword_ValidationCodeLengthError_Message" xml:space="preserve">
+    <value>Longitud incorrecta, el código de validación no excede los 6 caracteres</value>
+    <comment>Used by: RecoverPassword</comment>
+  </data>
+  <data name="Register_EmailSend_Message" xml:space="preserve">
+    <value>Se ha enviado un código de validación a su correo electronico</value>
+    <comment>Used by: Register</comment>
+  </data>
+  <data name="Register_EmptyFields_Message" xml:space="preserve">
+    <value>No se aceptan numeros o datos vacios en los apartados nombre y apellido</value>
+    <comment>Used by: Register</comment>
+  </data>
+  <data name="Register_IncompleteFields_Message" xml:space="preserve">
+    <value>Campos incompletos, por favor llene todos los campos</value>
+    <comment>Used by: Register</comment>
+  </data>
+  <data name="Register_IncorrectCodeValidationCode_Message" xml:space="preserve">
+    <value>Codigo de validación incorrecto, por favor verifiquelo</value>
+    <comment>Used by: Register</comment>
+  </data>
+  <data name="Register_InvalidCode_Message" xml:space="preserve">
+    <value>Código de validación invalido, por favor intentelo de nuevo</value>
+    <comment>Used by: Register</comment>
+  </data>
+  <data name="Register_ResendNumberExceed_Message" xml:space="preserve">
+    <value>Numero de reeenvios superado</value>
+    <comment>Used by: Register</comment>
+  </data>
+  <data name="Register_ValidationCodeEmailError_Mesage" xml:space="preserve">
+    <value>No se ha podido enviar el correo electronico, verifique el correo ingresado</value>
+    <comment>Used by: Register</comment>
+  </data>
+  <data name="Register_ValidationCodeEmail_Message" xml:space="preserve">
+    <value>Se ha enviado un código de validación a su correo electronico</value>
+    <comment>Used by: Register</comment>
+  </data>
+  <data name="Register_ValidationCodeEmpty_Message" xml:space="preserve">
+    <value>No se aceptan letras o campos vacios en el codigo de validación</value>
+    <comment>Used by: Register</comment>
+  </data>
+  <data name="Register_ValidationCodeLengthError_Message" xml:space="preserve">
+    <value>Longitud incorrecta, el código de validación no excede los 6 caracteres</value>
     <comment>Used by: Register</comment>
   </data>
 </root>

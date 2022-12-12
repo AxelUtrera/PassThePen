@@ -142,7 +142,7 @@ namespace PassThePen
             if (!Validation.ValidateFormat(TextBox_Name.Text, @"^[A-Za-z\s@]*$") || !Validation.ValidateFormat(TextBox_Lastname.Text, @"^[A-Za-z\s@]*$"))
             {
                 isValid = false;
-                MessageBox.Show("No se aceptan numeros o datos vacios en los apartados nombre y apellido");
+                MessageBox.Show(messageResource.GetString("Profile_EmptyFields_Message"));
             }
             return isValid;
         }

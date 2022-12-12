@@ -187,6 +187,15 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a No se aceptan campos vacios, por favor llene todos los campos.
+        /// </summary>
+        public static string Global_EmptyFields_Message {
+            get {
+                return ResourceManager.GetString("Global_EmptyFields_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Favor de revisar el formato de su correo electronico.
         /// </summary>
         public static string Global_ErrorEmail_Label {
@@ -246,6 +255,15 @@ namespace PassThePen.Properties {
         public static string Global_Password_Label {
             get {
                 return ResourceManager.GetString("Global_Password_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a La contraseña actual debe ser mayor de 8 y menor de 16 caracteres.
+        /// </summary>
+        public static string Global_PasswordLengthError_Message {
+            get {
+                return ResourceManager.GetString("Global_PasswordLengthError_Message", resourceCulture);
             }
         }
         
@@ -484,7 +502,7 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a te ha invitado a una partida, ¿Desear unirte?.
+        ///   Busca una cadena traducida similar a  te ha invitado a una partida, ¿Desear unirte?.
         /// </summary>
         public static string MainMenu_InvitationBody_Message {
             get {
@@ -525,6 +543,15 @@ namespace PassThePen.Properties {
         public static string MainMenu_LeaveHost_Message {
             get {
                 return ResourceManager.GetString("MainMenu_LeaveHost_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Solo el host puede iniciar la partida.
+        /// </summary>
+        public static string MainMenu_OnlyHostStartMatch_Message {
+            get {
+                return ResourceManager.GetString("MainMenu_OnlyHostStartMatch_Message", resourceCulture);
             }
         }
         
@@ -700,6 +727,15 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a No se aceptan numeros o datos vacios en los apartados nombre y apellido.
+        /// </summary>
+        public static string Profile_EmptyFields_Message {
+            get {
+                return ResourceManager.GetString("Profile_EmptyFields_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Archivo de imagen (*.jpg;*.bmp;*.png)|*.jpg;*.bmp;*.png.
         /// </summary>
         public static string Profile_ImageFile_Message {
@@ -799,6 +835,24 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a La contraseña debe ser diferente a la anterior.
+        /// </summary>
+        public static string RecoverPassword_DifferentPassword_Message {
+            get {
+                return ResourceManager.GetString("RecoverPassword_DifferentPassword_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Campos vacios, favor de llenar todos los campos.
+        /// </summary>
+        public static string RecoverPassword_EmptyFields_Message {
+            get {
+                return ResourceManager.GetString("RecoverPassword_EmptyFields_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Código incorrecto.
         /// </summary>
         public static string RecoverPassword_IncorrectCode_Message {
@@ -808,11 +862,29 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Codigo de validación incorrecto, por favor verifiquelo.
+        /// </summary>
+        public static string RecoverPassword_IncorrectCodeValidationCode_Message {
+            get {
+                return ResourceManager.GetString("RecoverPassword_IncorrectCodeValidationCode_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Correo electronico invalido.
         /// </summary>
         public static string RecoverPassword_InvalidEmail_Message {
             get {
                 return ResourceManager.GetString("RecoverPassword_InvalidEmail_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No se aceptan campos invalidos en el sistema.
+        /// </summary>
+        public static string RecoverPassword_InvalidFields_Message {
+            get {
+                return ResourceManager.GetString("RecoverPassword_InvalidFields_Message", resourceCulture);
             }
         }
         
@@ -853,6 +925,15 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Numero de reeenvios superado.
+        /// </summary>
+        public static string RecoverPassword_ResendNumberExceed_Message {
+            get {
+                return ResourceManager.GetString("RecoverPassword_ResendNumberExceed_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Enviar.
         /// </summary>
         public static string RecoverPassword_Send_Button {
@@ -880,11 +961,56 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a El usuario no se encuentra registrado en el sistema.
+        /// </summary>
+        public static string RecoverPassword_UserNotExist_Message {
+            get {
+                return ResourceManager.GetString("RecoverPassword_UserNotExist_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Validar.
         /// </summary>
         public static string RecoverPassword_Valid_Button {
             get {
                 return ResourceManager.GetString("RecoverPassword_Valid_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Se ha enviado un código de validación a su correo electronico.
+        /// </summary>
+        public static string RecoverPassword_ValidationCodeEmail_Message {
+            get {
+                return ResourceManager.GetString("RecoverPassword_ValidationCodeEmail_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No se ha podido enviar el correo electronico, verifique el correo ingresado.
+        /// </summary>
+        public static string RecoverPassword_ValidationCodeEmailError_Mesage {
+            get {
+                return ResourceManager.GetString("RecoverPassword_ValidationCodeEmailError_Mesage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No se aceptan letras o campos vacios en el codigo de validación.
+        /// </summary>
+        public static string RecoverPassword_ValidationCodeEmpty_Message {
+            get {
+                return ResourceManager.GetString("RecoverPassword_ValidationCodeEmpty_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Longitud incorrecta, el código de validación no excede los 6 caracteres.
+        /// </summary>
+        public static string RecoverPassword_ValidationCodeLengthError_Message {
+            get {
+                return ResourceManager.GetString("RecoverPassword_ValidationCodeLengthError_Message", resourceCulture);
             }
         }
         
@@ -916,11 +1042,56 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Se ha enviado un código de validación a su correo electronico.
+        /// </summary>
+        public static string Register_EmailSend_Message {
+            get {
+                return ResourceManager.GetString("Register_EmailSend_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No se aceptan numeros o datos vacios en los apartados nombre y apellido.
+        /// </summary>
+        public static string Register_EmptyFields_Message {
+            get {
+                return ResourceManager.GetString("Register_EmptyFields_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Ocurrio un error, no se ha podido registrar al Jugador.
         /// </summary>
         public static string Register_ErrorRegister_Message {
             get {
                 return ResourceManager.GetString("Register_ErrorRegister_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Campos incompletos, por favor llene todos los campos.
+        /// </summary>
+        public static string Register_IncompleteFields_Message {
+            get {
+                return ResourceManager.GetString("Register_IncompleteFields_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Codigo de validación incorrecto, por favor verifiquelo.
+        /// </summary>
+        public static string Register_IncorrectCodeValidationCode_Message {
+            get {
+                return ResourceManager.GetString("Register_IncorrectCodeValidationCode_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Código de validación invalido, por favor intentelo de nuevo.
+        /// </summary>
+        public static string Register_InvalidCode_Message {
+            get {
+                return ResourceManager.GetString("Register_InvalidCode_Message", resourceCulture);
             }
         }
         
@@ -979,6 +1150,15 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Numero de reeenvios superado.
+        /// </summary>
+        public static string Register_ResendNumberExceed_Message {
+            get {
+                return ResourceManager.GetString("Register_ResendNumberExceed_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Nuevo jugador registrado con éxito.
         /// </summary>
         public static string Register_SuccessfulRegister_Message {
@@ -993,6 +1173,42 @@ namespace PassThePen.Properties {
         public static string Register_Title_Label {
             get {
                 return ResourceManager.GetString("Register_Title_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Se ha enviado un código de validación a su correo electronico.
+        /// </summary>
+        public static string Register_ValidationCodeEmail_Message {
+            get {
+                return ResourceManager.GetString("Register_ValidationCodeEmail_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No se ha podido enviar el correo electronico, verifique el correo ingresado.
+        /// </summary>
+        public static string Register_ValidationCodeEmailError_Mesage {
+            get {
+                return ResourceManager.GetString("Register_ValidationCodeEmailError_Mesage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No se aceptan letras o campos vacios en el codigo de validación.
+        /// </summary>
+        public static string Register_ValidationCodeEmpty_Message {
+            get {
+                return ResourceManager.GetString("Register_ValidationCodeEmpty_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Longitud incorrecta, el código de validación no excede los 6 caracteres.
+        /// </summary>
+        public static string Register_ValidationCodeLengthError_Message {
+            get {
+                return ResourceManager.GetString("Register_ValidationCodeLengthError_Message", resourceCulture);
             }
         }
     }

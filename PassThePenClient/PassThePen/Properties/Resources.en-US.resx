@@ -173,6 +173,10 @@
     <value>Email</value>
     <comment>Used by: login</comment>
   </data>
+  <data name="Global_EmptyFields_Message" xml:space="preserve">
+    <value>Empty fields are not accepted, please fill in all the fields</value>
+    <comment>Used by: ChangePassword</comment>
+  </data>
   <data name="Global_ErrorEmail_Label" xml:space="preserve">
     <value>Please check the format of your email</value>
     <comment>Used by: Register, Profile</comment>
@@ -196,6 +200,10 @@
   <data name="Global_ErrorUsername_Label" xml:space="preserve">
     <value>The username already exists or is in the wrong format.</value>
     <comment>Used by: Register, Recover Password</comment>
+  </data>
+  <data name="Global_PasswordLengthError_Message" xml:space="preserve">
+    <value>The current password must be greater than 8 and less than 16 characters</value>
+    <comment>Used by: ChangePassword</comment>
   </data>
   <data name="Global_Password_Label" xml:space="preserve">
     <value>Password</value>
@@ -302,7 +310,7 @@
     <comment>Used by: MainMenu</comment>
   </data>
   <data name="MainMenu_InvitationBody_Message" xml:space="preserve">
-    <value>has invited you to a game, would you like to join?</value>
+    <value> has invited you to a game, would you like to join?</value>
     <comment>Used by: MainMenu</comment>
   </data>
   <data name="MainMenu_InvitationConfirmation_Message" xml:space="preserve">
@@ -319,6 +327,10 @@
   </data>
   <data name="MainMenu_LeaveHost_Message" xml:space="preserve">
     <value>The host has leave the group :(</value>
+    <comment>Used by: MainMenu</comment>
+  </data>
+  <data name="MainMenu_OnlyHostStartMatch_Message" xml:space="preserve">
+    <value>Only the host can start the game</value>
     <comment>Used by: MainMenu</comment>
   </data>
   <data name="MainMenu_PlayerInGroup_Message" xml:space="preserve">
@@ -397,6 +409,10 @@
     <value>Email</value>
     <comment>Used by: Profile</comment>
   </data>
+  <data name="Profile_EmptyFields_Message" xml:space="preserve">
+    <value>Numbers or empty data are not accepted in the name and lastname fields</value>
+    <comment>Used by: Profile</comment>
+  </data>
   <data name="Profile_ImageFile_Message" xml:space="preserve">
     <value>Image File (*.jpg;*.bmp;*.png)|*.jpg;*.bmp;*.png</value>
     <comment>Used by: Profile</comment>
@@ -441,12 +457,28 @@
     <value>Enter the validation code</value>
     <comment>Used by: Recover Password</comment>
   </data>
+  <data name="RecoverPassword_DifferentPassword_Message" xml:space="preserve">
+    <value>The password must be different from the previous one</value>
+    <comment>Used by: RecoverPassword</comment>
+  </data>
+  <data name="RecoverPassword_EmptyFields_Message" xml:space="preserve">
+    <value>Empty fields, please fill in all the fields</value>
+    <comment>Used by: RecoverPassword</comment>
+  </data>
+  <data name="RecoverPassword_IncorrectCodeValidationCode_Message" xml:space="preserve">
+    <value>Wrong validation code, please check it</value>
+    <comment>Used by: RecoverPassword</comment>
+  </data>
   <data name="RecoverPassword_IncorrectCode_Message" xml:space="preserve">
     <value>Incorrect code</value>
     <comment>Used by: RecoverPassword</comment>
   </data>
   <data name="RecoverPassword_InvalidEmail_Message" xml:space="preserve">
     <value>Invalid email</value>
+    <comment>Used by: RecoverPassword</comment>
+  </data>
+  <data name="RecoverPassword_InvalidFields_Message" xml:space="preserve">
+    <value>Invalid fields are not accepted in the system</value>
     <comment>Used by: RecoverPassword</comment>
   </data>
   <data name="RecoverPassword_NewPassword_Label" xml:space="preserve">
@@ -465,6 +497,10 @@
     <value>Retype your password</value>
     <comment>Used by: Recover Password</comment>
   </data>
+  <data name="RecoverPassword_ResendNumberExceed_Message" xml:space="preserve">
+    <value>Number of resubmissions exceeded</value>
+    <comment>Used by: RecoverPassword</comment>
+  </data>
   <data name="RecoverPassword_Send_Button" xml:space="preserve">
     <value>Send</value>
     <comment>Used by: Recover Password</comment>
@@ -475,6 +511,26 @@
   </data>
   <data name="RecoverPassword_UnmatchedPassword_Message" xml:space="preserve">
     <value>Error in the passwords please verify them</value>
+    <comment>Used by: RecoverPassword</comment>
+  </data>
+  <data name="RecoverPassword_UserNotExist_Message" xml:space="preserve">
+    <value>The user is not registered in the system</value>
+    <comment>Used by: RecoverPassword</comment>
+  </data>
+  <data name="RecoverPassword_ValidationCodeEmailError_Mesage" xml:space="preserve">
+    <value>The email could not be sent, check the email entered</value>
+    <comment>Used by: RecoverPassword</comment>
+  </data>
+  <data name="RecoverPassword_ValidationCodeEmail_Message" xml:space="preserve">
+    <value>A validation code has been sent to your email</value>
+    <comment>Used by: RecoverPassword</comment>
+  </data>
+  <data name="RecoverPassword_ValidationCodeEmpty_Message" xml:space="preserve">
+    <value>Empty letters or fields are not accepted in the validation code</value>
+    <comment>Used by: RecoverPassword</comment>
+  </data>
+  <data name="RecoverPassword_ValidationCodeLengthError_Message" xml:space="preserve">
+    <value>Wrong length, validation code does not exceed 6 characters</value>
     <comment>Used by: RecoverPassword</comment>
   </data>
   <data name="RecoverPassword_ValidationCodeSendError_Message" xml:space="preserve">
@@ -493,8 +549,28 @@
     <value>Validate</value>
     <comment>Used by: Recover Password</comment>
   </data>
+  <data name="Register_EmailSend_Message" xml:space="preserve">
+    <value>A validation code has been sent to your email</value>
+    <comment>Used by: Register</comment>
+  </data>
+  <data name="Register_EmptyFields_Message" xml:space="preserve">
+    <value>Numbers or empty data are not accepted in the name and lastname fields</value>
+    <comment>Used by: Register</comment>
+  </data>
   <data name="Register_ErrorRegister_Message" xml:space="preserve">
     <value>An error occurred, the player could not be registered</value>
+    <comment>Used by: Register</comment>
+  </data>
+  <data name="Register_IncompleteFields_Message" xml:space="preserve">
+    <value>Incomplete fields, please fill in all the fields</value>
+    <comment>Used by: Register</comment>
+  </data>
+  <data name="Register_IncorrectCodeValidationCode_Message" xml:space="preserve">
+    <value>Wrong validation code, please check it</value>
+    <comment>Used by: Register</comment>
+  </data>
+  <data name="Register_InvalidCode_Message" xml:space="preserve">
+    <value>Invalid validation code, please try again</value>
     <comment>Used by: Register</comment>
   </data>
   <data name="Register_InvalidFields_Message" xml:space="preserve">
@@ -521,12 +597,32 @@
     <value>Confirm Password</value>
     <comment>Used by: Register</comment>
   </data>
+  <data name="Register_ResendNumberExceed_Message" xml:space="preserve">
+    <value>Number of resubmissions exceeded</value>
+    <comment>Used by: Register</comment>
+  </data>
   <data name="Register_SuccessfulRegister_Message" xml:space="preserve">
     <value>New player successfully registered</value>
     <comment>Used by: Register</comment>
   </data>
   <data name="Register_Title_Label" xml:space="preserve">
     <value>Sign Up</value>
+    <comment>Used by: Register</comment>
+  </data>
+  <data name="Register_ValidationCodeEmailError_Mesage" xml:space="preserve">
+    <value>The email could not be sent, check the email entered</value>
+    <comment>Used by: Register</comment>
+  </data>
+  <data name="Register_ValidationCodeEmail_Message" xml:space="preserve">
+    <value>A validation code has been sent to your email</value>
+    <comment>Used by: Register</comment>
+  </data>
+  <data name="Register_ValidationCodeEmpty_Message" xml:space="preserve">
+    <value>Empty letters or fields are not accepted in the validation code</value>
+    <comment>Used by: Register</comment>
+  </data>
+  <data name="Register_ValidationCodeLengthError_Message" xml:space="preserve">
+    <value>Wrong length, validation code does not exceed 6 characters</value>
     <comment>Used by: Register</comment>
   </data>
 </root>

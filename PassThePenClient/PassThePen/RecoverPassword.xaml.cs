@@ -70,7 +70,7 @@ namespace PassThePen
                     }
                     else
                     {
-                        MessageBox.Show("El usuario no se encuentra registrado en el sistema");
+                        MessageBox.Show(messageResource.GetString("RecoverPassword_UserNotExist_Message"));
                     }
                 }
                 else
@@ -121,20 +121,20 @@ namespace PassThePen
             if (TextBox_UsernameCode.Text.Length > 6)
             {
                 result = false;
-                MessageBox.Show("Longitud incorrecta, el código de validación no excede los 6 caracteres");
+                MessageBox.Show(messageResource.GetString("RecoverPassword_ValidationCodeLengthError_Message"));
             }
             if (Validation.ValidateFormat(TextBox_UsernameCode.Text, "^[0-9]+$"))
             {
                 if (Int32.Parse(TextBox_UsernameCode.Text) != _validationCode)
                 {
                     result = false;
-                    MessageBox.Show("Codigo de validación incorrecto, favor de verificarlo");
+                    MessageBox.Show(messageResource.GetString("RecoverPassword_IncorrectCodeValidationCode_Message"));
                 }                
             }
             else
             {
                 result = false;
-                MessageBox.Show("No se aceptan letras o campos vacios en el apartado codigo de validación");
+                MessageBox.Show(messageResource.GetString("RecoverPassword_ValidationCodeEmpty_Message"));
             }    
             
             return result;
@@ -146,7 +146,7 @@ namespace PassThePen
             Label_ErrorEmail.Visibility = Visibility.Hidden;
             if (string.IsNullOrEmpty(TextBox_UsernameCode.Text))
             {
-                MessageBox.Show("Campos vacios, favor de llenar todos los campos");
+                MessageBox.Show(messageResource.GetString("RecoverPassword_EmptyFields_Message"));
                 result = false;
             }
             if (TextBox_UsernameCode.Text.Length > 20)
@@ -175,7 +175,7 @@ namespace PassThePen
                     }
                     else
                     {
-                        MessageBox.Show("La contraseña debe ser diferente a la anterior");
+                        MessageBox.Show(messageResource.GetString("RecoverPassword_DifferentPassword_Message"));
                     }
                 }
                 else
@@ -203,7 +203,7 @@ namespace PassThePen
             Label_ErrorPassword.Visibility = Visibility.Hidden;
             if (PasswordBox_NewPassword.Password.Equals("") || PasswordBox_RepitPassword.Password.Equals(""))
             {
-                MessageBox.Show("No se aceptan campos invalidos en el sistema");
+                MessageBox.Show(messageResource.GetString("RecoverPassword_InvalidFields_Message"));
                 result = false;
             }
             if (! PasswordBox_NewPassword.Password.Equals(PasswordBox_RepitPassword.Password))
@@ -228,18 +228,18 @@ namespace PassThePen
                     PassThePenService.AutenticationClient client = new PassThePenService.AutenticationClient();
                     if (client.CodeEmail(_email, "Validation Code", _validationCode) == 200)
                     {
-                        MessageBox.Show("Código de validación enviado a su correo favor de revisarlo");
+                        MessageBox.Show(messageResource.GetString("RecoverPassword_ValidationCodeEmail_Message"));
                         _resendNumber++;
                     }
                     else
                     {
-                        MessageBox.Show("No se ha podido enviar el correo electronico, favor de verificar el correo ingresado");
+                        MessageBox.Show(messageResource.GetString("RecoverPassword_ValidationCodeEmailError_Mesage"));
                     }
                     client.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Numero de reeenvios superado");
+                    MessageBox.Show(messageResource.GetString("RecoverPassword_ResendNumberExceed_Message"));
                 }
             }
             catch (EndpointNotFoundException ex)
