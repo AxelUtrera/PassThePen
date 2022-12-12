@@ -61,7 +61,7 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Dibuja con tu mano no dominante.
+        ///   Busca una cadena traducida similar a Dibuja con tu mano no dominante (Dibujo libre).
         /// </summary>
         public static string Challenge1 {
             get {
@@ -70,7 +70,7 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Dibuja tu retrato.
+        ///   Busca una cadena traducida similar a  .
         /// </summary>
         public static string Challenge10 {
             get {
@@ -79,7 +79,7 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Dibuja con tus ojos cerrados.
+        ///   Busca una cadena traducida similar a Dibuja con tus ojos cerrados (Dibujo libre).
         /// </summary>
         public static string Challenge2 {
             get {
@@ -88,7 +88,7 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Comienza dibujar cuando queden 10 segundos.
+        ///   Busca una cadena traducida similar a Comienza dibujar cuando queden 10 segundos (Dibujo libre).
         /// </summary>
         public static string Challenge3 {
             get {
@@ -97,7 +97,7 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Dibuja solo con lineas rectas.
+        ///   Busca una cadena traducida similar a Dibuja solo con lineas rectas (Dibujo libre).
         /// </summary>
         public static string Challenge4 {
             get {
@@ -115,7 +115,7 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Dibuja solo con puntos.
+        ///   Busca una cadena traducida similar a Dibuja solo con puntos (Dibujo libre).
         /// </summary>
         public static string Challenge6 {
             get {
@@ -124,7 +124,7 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Dibuja con un solo trazo.
+        ///   Busca una cadena traducida similar a Dibuja con un solo trazo (Dibujo libre).
         /// </summary>
         public static string Challenge7 {
             get {
@@ -133,7 +133,7 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Dibuja lo más pequeño que puedas.
+        ///   Busca una cadena traducida similar a Dibuja lo más pequeño que puedas (Dibujo libre).
         /// </summary>
         public static string Challenge8 {
             get {

@@ -11,6 +11,7 @@
         WindowStyle="None"
         ShowInTaskbar="False"
         Width="1280" Height="720">
+
     <Grid>
         <StackPanel>
             <StackPanel>
@@ -75,8 +76,8 @@
                         </StackPanel>
                         <Border Grid.Column="0" Width="305" Height="330"  BorderThickness="2" BorderBrush="Black" CornerRadius="10">
                             <StackPanel>
-                                <Label Name="label_ListFriends" Content="{x:Static p:Resources.MainMenu_Friends_Label}" HorizontalAlignment="Center" FontWeight="Bold" />
-                                <Label Name="label_FriendRequests" Content="{x:Static p:Resources.MainMenu_FriendsRequests_Label}" HorizontalAlignment="Center" FontWeight="Bold" Visibility="Collapsed"/>
+                                <Label Name="Label_ListFriends" Content="{x:Static p:Resources.MainMenu_Friends_Label}" HorizontalAlignment="Center" FontWeight="Bold" />
+                                <Label Name="Label_FriendRequests" Content="{x:Static p:Resources.MainMenu_FriendsRequests_Label}" HorizontalAlignment="Center" FontWeight="Bold" Visibility="Collapsed"/>
                                 <ListBox x:Name="ListBox_FriendList" Height="292" Width="300" BorderBrush="Transparent">
                                     <ListBox.ItemTemplate >
                                         <DataTemplate>
@@ -123,7 +124,7 @@
                             </StackPanel>
                         </Border>
                         <StackPanel Orientation="Horizontal" Margin="3">
-                            <TextBox x:Name="Textbox_AddFriend" Height="33" Width="200" Background="AliceBlue" BorderBrush="Black" BorderThickness="2" FontSize="18">
+                            <TextBox x:Name="TextBox_AddFriend" Height="33" Width="200" Background="AliceBlue" BorderBrush="Black" BorderThickness="2" FontSize="18">
                                 <TextBox.Resources>
                                     <Style TargetType="{x:Type Border}">
                                         <Setter Property="CornerRadius" Value="10"/>
@@ -197,10 +198,6 @@
                                 </Border>
                                 <Label Name="Label_PlayerAdded5" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center"></Label>
                             </StackPanel>
-
-
-
-
                         </Grid>
                     </StackPanel>
                 </Grid>

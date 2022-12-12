@@ -62,6 +62,9 @@ namespace Comunication
 
         [OperationContract(IsOneWay = true)]
         void OpenExitHostMessage();
+
+        [OperationContract(IsOneWay = true)]
+        void NotifyOnlyHostStart();
     }
 }
 

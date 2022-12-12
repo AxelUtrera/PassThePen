@@ -133,7 +133,7 @@
     <value>The current password is incorrect</value>
     <comment>Used by: Change Password</comment>
   </data>
-  <data name="ChangePassword_Invalid_Fields_Label" xml:space="preserve">
+  <data name="ChangePassword_InvalidFields_Label" xml:space="preserve">
     <value>Passwords do not match</value>
     <comment>Used by: Change Password</comment>
   </data>
@@ -158,7 +158,7 @@
     <comment>Used by: Draw Review</comment>
   </data>
   <data name="DrawReview_Title_Label" xml:space="preserve">
-    <value>Rate the drwaings</value>
+    <value>Rate the drawings</value>
     <comment>Used by: DrawReview</comment>
   </data>
   <data name="Global_Cancel_Button" xml:space="preserve">
@@ -173,31 +173,31 @@
     <value>Email</value>
     <comment>Used by: login</comment>
   </data>
-  <data name="Global_Error_Email_Label" xml:space="preserve">
+  <data name="Global_ErrorEmail_Label" xml:space="preserve">
     <value>Please check the format of your email</value>
     <comment>Used by: Register, Profile</comment>
   </data>
-  <data name="Global_Error_Name_Label" xml:space="preserve">
+  <data name="Global_ErrorLastName_Label" xml:space="preserve">
     <value>Number of characters exceeded. Maximum number: 50</value>
     <comment>Used by: Register, Profile</comment>
   </data>
-  <data name="Global_Error_Password_Label" xml:space="preserve">
+  <data name="Global_ErrorName_Label" xml:space="preserve">
+    <value>Number of characters exceeded. Maximum number: 50</value>
+    <comment>Used by: Register, Profile</comment>
+  </data>
+  <data name="Global_ErrorPassword_Label" xml:space="preserve">
     <value>It must contain at least one of the following characters: *, +, @, #, $, %, a capital letter, and a number. Length between 8-16 characters.</value>
     <comment>Used by: Register, Recover Password, Change Password</comment>
   </data>
-  <data name="Global_Error_Repit_Password" xml:space="preserve">
+  <data name="Global_ErrorRepit_Password" xml:space="preserve">
     <value>Passwords are not the same</value>
     <comment>Used by: Register, Recover Password, Change Password</comment>
   </data>
-  <data name="Global_Error_Username_Label" xml:space="preserve">
+  <data name="Global_ErrorUsername_Label" xml:space="preserve">
     <value>The username already exists or is in the wrong format.</value>
     <comment>Used by: Register, Recover Password</comment>
   </data>
-  <data name="Global_Error__LastName_Label" xml:space="preserve">
-    <value>Number of characters exceeded. Maximum number: 50</value>
-    <comment>Used by: Register, Profile</comment>
-  </data>
-  <data name="Global_Label_Password" xml:space="preserve">
+  <data name="Global_Password_Label" xml:space="preserve">
     <value>Password</value>
     <comment>Used by: login, Register</comment>
   </data>
@@ -225,7 +225,7 @@
     <value>The data entered is invalid or there is an open session.</value>
     <comment>Used by: Login</comment>
   </data>
-  <data name="Login_Forgot_Password_Button" xml:space="preserve">
+  <data name="Login_ForgotPassword_Button" xml:space="preserve">
     <value>Forgot your password?</value>
     <comment>Used by: login</comment>
   </data>
@@ -241,15 +241,15 @@
     <value>Log In</value>
     <comment>Used by: login</comment>
   </data>
-  <data name="Login_Login_tittle" xml:space="preserve">
+  <data name="Login_Login_Tittle" xml:space="preserve">
     <value>Login</value>
     <comment>Used by: login</comment>
   </data>
-  <data name="Login_New_Player_Button" xml:space="preserve">
+  <data name="Login_NewPlayer_Button" xml:space="preserve">
     <value>Sign Up Here</value>
     <comment>Used by: login</comment>
   </data>
-  <data name="Login_New_Player_Label" xml:space="preserve">
+  <data name="Login_NewPlayer_Label" xml:space="preserve">
     <value>You still do not have an account?</value>
     <comment>Used by: login</comment>
   </data>
@@ -401,7 +401,7 @@
     <value>Image File (*.jpg;*.bmp;*.png)|*.jpg;*.bmp;*.png</value>
     <comment>Used by: Profile</comment>
   </data>
-  <data name="Profile_Invalid_Fields_Label" xml:space="preserve">
+  <data name="Profile_InvalidFields_Label" xml:space="preserve">
     <value>Please fill all the fields</value>
     <comment>Used by: Profile</comment>
   </data>
@@ -523,6 +523,10 @@
   </data>
   <data name="Register_SuccessfulRegister_Message" xml:space="preserve">
     <value>New player successfully registered</value>
+    <comment>Used by: Register</comment>
+  </data>
+  <data name="Register_Title_Label" xml:space="preserve">
+    <value>Sign Up</value>
     <comment>Used by: Register</comment>
   </data>
 </root>

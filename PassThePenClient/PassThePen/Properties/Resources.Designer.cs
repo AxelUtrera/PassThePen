@@ -99,9 +99,9 @@ namespace PassThePen.Properties {
         /// <summary>
         ///   Busca una cadena traducida similar a Las contraseñas no coinciden.
         /// </summary>
-        public static string ChangePassword_Invalid_Fields_Label {
+        public static string ChangePassword_InvalidFields_Label {
             get {
-                return ResourceManager.GetString("ChangePassword_Invalid_Fields_Label", resourceCulture);
+                return ResourceManager.GetString("ChangePassword_InvalidFields_Label", resourceCulture);
             }
         }
         
@@ -187,65 +187,65 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Numero de caracteres excedidos. Numero maximo: 50.
-        /// </summary>
-        public static string Global_Error__LastName_Label {
-            get {
-                return ResourceManager.GetString("Global_Error__LastName_Label", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Busca una cadena traducida similar a Favor de revisar el formato de su correo electronico.
         /// </summary>
-        public static string Global_Error_Email_Label {
+        public static string Global_ErrorEmail_Label {
             get {
-                return ResourceManager.GetString("Global_Error_Email_Label", resourceCulture);
+                return ResourceManager.GetString("Global_ErrorEmail_Label", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Busca una cadena traducida similar a Numero de caracteres excedidos. Numero maximo: 50.
         /// </summary>
-        public static string Global_Error_Name_Label {
+        public static string Global_ErrorLastName_Label {
             get {
-                return ResourceManager.GetString("Global_Error_Name_Label", resourceCulture);
+                return ResourceManager.GetString("Global_ErrorLastName_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Numero de caracteres excedidos. Numero maximo: 50.
+        /// </summary>
+        public static string Global_ErrorName_Label {
+            get {
+                return ResourceManager.GetString("Global_ErrorName_Label", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Busca una cadena traducida similar a Debe contener al menos uno de los siguientes caracteres:  *, +, @, #, $, %,  una mayuscula y un numero. Longitud entre 8-16 caracteres..
         /// </summary>
-        public static string Global_Error_Password_Label {
+        public static string Global_ErrorPassword_Label {
             get {
-                return ResourceManager.GetString("Global_Error_Password_Label", resourceCulture);
+                return ResourceManager.GetString("Global_ErrorPassword_Label", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Busca una cadena traducida similar a Las contraseñas no son iguales.
         /// </summary>
-        public static string Global_Error_Repit_Password {
+        public static string Global_ErrorRepit_Password {
             get {
-                return ResourceManager.GetString("Global_Error_Repit_Password", resourceCulture);
+                return ResourceManager.GetString("Global_ErrorRepit_Password", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Busca una cadena traducida similar a El nombre de usuario ya existe o tiene un formato incorrecto..
         /// </summary>
-        public static string Global_Error_Username_Label {
+        public static string Global_ErrorUsername_Label {
             get {
-                return ResourceManager.GetString("Global_Error_Username_Label", resourceCulture);
+                return ResourceManager.GetString("Global_ErrorUsername_Label", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Busca una cadena traducida similar a Contraseña.
         /// </summary>
-        public static string Global_Label_Password {
+        public static string Global_Password_Label {
             get {
-                return ResourceManager.GetString("Global_Label_Password", resourceCulture);
+                return ResourceManager.GetString("Global_Password_Label", resourceCulture);
             }
         }
         
@@ -306,9 +306,9 @@ namespace PassThePen.Properties {
         /// <summary>
         ///   Busca una cadena traducida similar a ¿Olvidaste tu contraseña?.
         /// </summary>
-        public static string Login_Forgot_Password_Button {
+        public static string Login_ForgotPassword_Button {
             get {
-                return ResourceManager.GetString("Login_Forgot_Password_Button", resourceCulture);
+                return ResourceManager.GetString("Login_ForgotPassword_Button", resourceCulture);
             }
         }
         
@@ -342,27 +342,27 @@ namespace PassThePen.Properties {
         /// <summary>
         ///   Busca una cadena traducida similar a Inicio de sesión.
         /// </summary>
-        public static string Login_Login_tittle {
+        public static string Login_Login_Tittle {
             get {
-                return ResourceManager.GetString("Login_Login_tittle", resourceCulture);
+                return ResourceManager.GetString("Login_Login_Tittle", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Busca una cadena traducida similar a Registrate aquí.
         /// </summary>
-        public static string Login_New_Player_Button {
+        public static string Login_NewPlayer_Button {
             get {
-                return ResourceManager.GetString("Login_New_Player_Button", resourceCulture);
+                return ResourceManager.GetString("Login_NewPlayer_Button", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Busca una cadena traducida similar a ¿Aun no tienes una cuenta?.
         /// </summary>
-        public static string Login_New_Player_Label {
+        public static string Login_NewPlayer_Label {
             get {
-                return ResourceManager.GetString("Login_New_Player_Label", resourceCulture);
+                return ResourceManager.GetString("Login_NewPlayer_Label", resourceCulture);
             }
         }
         
@@ -711,9 +711,9 @@ namespace PassThePen.Properties {
         /// <summary>
         ///   Busca una cadena traducida similar a Ingrese toda la información.
         /// </summary>
-        public static string Profile_Invalid_Fields_Label {
+        public static string Profile_InvalidFields_Label {
             get {
-                return ResourceManager.GetString("Profile_Invalid_Fields_Label", resourceCulture);
+                return ResourceManager.GetString("Profile_InvalidFields_Label", resourceCulture);
             }
         }
         
@@ -988,11 +988,11 @@ namespace PassThePen.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Registrar nuevo usuario.
+        ///   Busca una cadena traducida similar a Registrar nuevo jugador.
         /// </summary>
-        public static string Register_tittle {
+        public static string Register_Title_Label {
             get {
-                return ResourceManager.GetString("Register_tittle", resourceCulture);
+                return ResourceManager.GetString("Register_Title_Label", resourceCulture);
             }
         }
     }

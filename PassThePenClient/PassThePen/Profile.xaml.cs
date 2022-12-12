@@ -26,7 +26,7 @@ namespace PassThePen
     public partial class Profile : Window
     {
         ResourceManager messageResource = new ResourceManager("PassThePen.Properties.Resources", Assembly.GetExecutingAssembly());
-        private LogClient log = new LogClient();
+        private LogClient _log = new LogClient();
 
         public Profile()
         {
@@ -40,9 +40,11 @@ namespace PassThePen
             try
             {
                 PlayerManagementClient client = new PlayerManagementClient();
+                const int validCode = 200;
+
                 if (ValidateInformation())
                 {
-                    Byte[] image = ImageToByte(Image_ProfileImage.Source as BitmapImage);
+                    Byte[] image = ImageManager.ImageToByte(Image_ProfileImage.Source as BitmapImage);
                     Player player = new Player()
                     {
                         username = TextBox_Username.Text,
@@ -51,7 +53,8 @@ namespace PassThePen
                         email = TextBox_Email.Text,
                         profileImage = image
                     };
-                    if (client.UpdateDataPlayer(MainMenu.username, player) == 200)
+
+                    if (client.UpdateDataPlayer(MainMenu.username, player) == validCode)
                     {
                         MessageBox.Show(messageResource.GetString("Profile_UpdatedProfile_Message"));
                     }
@@ -60,17 +63,17 @@ namespace PassThePen
                         MessageBox.Show(messageResource.GetString("Profile_UpdateProfileError_Message"));
                     }
                 }
-                client.Close();
+                
             }
             catch (EndpointNotFoundException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (TimeoutException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
         }
 
@@ -81,36 +84,37 @@ namespace PassThePen
             {
                 PassThePenService.PlayerManagementClient client = new PassThePenService.PlayerManagementClient();
                 Player playerObtained = client.GetDataPlayer(MainMenu.username);
+
                 if (playerObtained != null)
                 {
                     TextBox_Username.Text = playerObtained.username;
                     TextBox_Name.Text = playerObtained.name;
                     TextBox_Lastname.Text = playerObtained.lastname;
                     TextBox_Email.Text = playerObtained.email;
-                    Image_ProfileImage.Source = ImageManager.ToImage(playerObtained.profileImage);
+                    Image_ProfileImage.Source = ImageManager.ByteToImage(playerObtained.profileImage);
                 }
-                client.Close();
             }
             catch (EndpointNotFoundException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (TimeoutException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
         }
 
 
         private Boolean ValidateInformation()
         {
-            InvalidFields_Label.Visibility = Visibility.Hidden;
-            label_Error_Name.Visibility = Visibility.Hidden;
-            label_Error_Lastname.Visibility = Visibility.Hidden;
-            label_Error_Email.Visibility = Visibility.Hidden;
+            Label_InvalidFields.Visibility = Visibility.Hidden;
+            Label_ErrorName.Visibility = Visibility.Hidden;
+            Label_ErrorLastname.Visibility = Visibility.Hidden;
+            Label_ErrorEmail.Visibility = Visibility.Hidden;
             Boolean isValid = true;
+
             if (!ValidateNullFields())
             {
                 isValid = false;
@@ -132,7 +136,7 @@ namespace PassThePen
             bool isValid = true;
             if (!Validation.ValidateFormat(TextBox_Email.Text, "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"))
             {
-                label_Error_Email.Visibility = Visibility.Visible;
+                Label_ErrorEmail.Visibility = Visibility.Visible;
                 isValid = false;               
             }
             if (!Validation.ValidateFormat(TextBox_Name.Text, @"^[A-Za-z\s@]*$") || !Validation.ValidateFormat(TextBox_Lastname.Text, @"^[A-Za-z\s@]*$"))
@@ -142,6 +146,7 @@ namespace PassThePen
             }
             return isValid;
         }
+
 
         private bool ValidateNullFields()
         {
@@ -160,27 +165,29 @@ namespace PassThePen
             }
             if (!isValid)
             {
-                InvalidFields_Label.Visibility = Visibility.Visible;
+                Label_InvalidFields.Visibility = Visibility.Visible;
             }
             return isValid;
         }
+
+
         private bool ValidateLengthFields()
         {
             bool isValid = true;
 
             if (TextBox_Name.Text.Length > 50)
             {
-                label_Error_Name.Visibility = Visibility.Visible;
+                Label_ErrorName.Visibility = Visibility.Visible;
                 isValid = false;
             }
             if (TextBox_Lastname.Text.Length > 50)
             {
-                label_Error_Lastname.Visibility = Visibility.Visible;
+                Label_ErrorLastname.Visibility = Visibility.Visible;
                 isValid = false;
             }
             if (TextBox_Email.Text.Length > 100)
             {
-                label_Error_Email.Visibility = Visibility.Visible;
+                Label_ErrorEmail.Visibility = Visibility.Visible;
                 isValid = false;
             }
             return isValid;
@@ -201,11 +208,12 @@ namespace PassThePen
         }
 
 
-        private void Button_Select_Image_Click(object sender, RoutedEventArgs e)
+        private void Button_SelectImage_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Title = messageResource.GetString("Profile_SelectImage_Message");
             openFileDialog.Filter = messageResource.GetString("Profile_ImageFile_Message");
+
             if (openFileDialog.ShowDialog() == true)
             {
                 BitmapImage image = new BitmapImage(new Uri(openFileDialog.FileName));
@@ -225,22 +233,5 @@ namespace PassThePen
                 Button_SaveChanges.IsEnabled = false;
             }
         }
-
-        public static byte[] ImageToByte(BitmapImage imageSource)
-        {
-            byte[] data;
-            JpegBitmapEncoder encoder = new JpegBitmapEncoder();
-            encoder.Frames.Add(BitmapFrame.Create(imageSource));
-            using (MemoryStream ms = new MemoryStream())
-            {
-                encoder.Save(ms);
-                data = ms.ToArray();
-            }
-            return data;
-        }
-
-
-
-
     }
 }

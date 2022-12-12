@@ -88,10 +88,10 @@ namespace Comunication
         public int FindPlayerIsConected(string usernamePlayer)
         {
             int isConected = 200;
-            int userNotConected = 404;
+            const int userNotConected = 404;
             try
             {
-                if (usersConnected.FirstOrDefault(user => user.username.Equals(usernamePlayer)) == null)
+                if (_usersConnected.FirstOrDefault(user => user.username.Equals(usernamePlayer)) == null)
                 {
                     isConected = userNotConected;
                 }
@@ -133,8 +133,8 @@ namespace Comunication
 
     public partial class ImplementationServices : IPlayerConnection
     {
-        private List<ConnectedUser> usersConnected = new List<ConnectedUser>();
-        private static List<ConnectedUser> playersInGroup = new List<ConnectedUser>();
+        private List<ConnectedUser> _usersConnected = new List<ConnectedUser>();
+        private List<ConnectedUser> _playersInGroup = new List<ConnectedUser>();
 
         public void Connect(string username)
         {
@@ -145,7 +145,7 @@ namespace Comunication
                 score = 0
             };
 
-            usersConnected.Add(user);
+            _usersConnected.Add(user);
         }
 
 
@@ -153,24 +153,23 @@ namespace Comunication
         {
             try
             {
-                var user = usersConnected.FirstOrDefault(i => i.username == username);
+                var user = _usersConnected.FirstOrDefault(i => i.username == username);
                 if (user != null)
                 {
-                    usersConnected.Remove(user);
+                    _usersConnected.Remove(user);
                 }
             }
             catch (ArgumentNullException ex)
             {
                 log.Add(ex.ToString());
-            }
-            
+            }            
         }
 
 
         public List<string> GetNameOnlinePlayers()
         {
             List<string> onlinePlayers = new List<string>();
-            foreach (ConnectedUser player in usersConnected)
+            foreach (ConnectedUser player in _usersConnected)
             {
                 onlinePlayers.Add(player.username);
             }
@@ -184,7 +183,7 @@ namespace Comunication
             try
             {
                 Friends[] friends = GetFriends(username);
-                usersConnected.Find(us => us.username.Equals(username)).operationContext.GetCallbackChannel<IPlayersServicesCallBack>().RechargeFriends(friends);
+                _usersConnected.Find(us => us.username.Equals(username)).operationContext.GetCallbackChannel<IPlayersServicesCallBack>().RechargeFriends(friends);
             }
             catch (ArgumentNullException ex)
             {
@@ -195,25 +194,25 @@ namespace Comunication
 
         public void SendMathInvitation(string invitingPlayer, string invitedPlayer)
         {        
-            int invitationAcepted = 200;
-            int userNotFound = 404;
-            int groupFull = 6;
+            const int invitationAcepted = 200;
+            const int userNotFound = 404;
+            
             try
             {
-                ConnectedUser userConnected = usersConnected.FirstOrDefault(user => user.username.Equals(invitedPlayer));
-                ConnectedUser matchHost = usersConnected.FirstOrDefault(user => user.username.Equals(invitingPlayer));
+                ConnectedUser userConnected = _usersConnected.FirstOrDefault(user => user.username.Equals(invitedPlayer));
+                ConnectedUser matchHost = _usersConnected.FirstOrDefault(user => user.username.Equals(invitingPlayer));
 
-                if (playersInGroup.Count <= groupFull && userConnected.operationContext.GetCallbackChannel<IPlayersServicesCallBack>().NotifyMatchInvitation(invitingPlayer) == invitationAcepted)
+                if (userConnected.operationContext.GetCallbackChannel<IPlayersServicesCallBack>().NotifyMatchInvitation(invitingPlayer) == invitationAcepted)
                 {
                     
                     if (FindPlayerInGroup(invitingPlayer) == userNotFound)
                     {
                         matchHost.hostState = true;
-                        playersInGroup.Add(matchHost);
+                        _playersInGroup.Add(matchHost);
                     }
 
-                    playersInGroup.Add(userConnected);
-                    foreach (ConnectedUser playerInGroup in playersInGroup)
+                    _playersInGroup.Add(userConnected);
+                    foreach (ConnectedUser playerInGroup in _playersInGroup)
                     {
                         playerInGroup.operationContext.GetCallbackChannel<IPlayersServicesCallBack>().GetDataPlayersInGoup();
                         playerInGroup.operationContext.GetCallbackChannel<IPlayersServicesCallBack>().VisualizeButtonLeaveGroup();
@@ -231,24 +230,25 @@ namespace Comunication
         {
             try
             {
-                ConnectedUser player = playersInGroup.FirstOrDefault(i => i.username == usernamePlayer);
+                ConnectedUser player = _playersInGroup.FirstOrDefault(i => i.username == usernamePlayer);
+
                 if (player != null)
                 {
                     if (player.hostState)
                     {
-                        LeaveHost(player);
+                        LeaveHost(player);                       
                     }
 
-                    playersInGroup.Remove(player);
-                    foreach (ConnectedUser playerInGroup in playersInGroup)
+                    _playersInGroup.Remove(player);
+                    foreach (ConnectedUser playerInGroup in _playersInGroup)
                     {
                         playerInGroup.operationContext.GetCallbackChannel<IPlayersServicesCallBack>().GetDataPlayersInGoup();
                     }
                 }
 
-                if (playersInGroup.Count == 1)
+                if (_playersInGroup.Count == 1)
                 {
-                    playersInGroup.Clear();
+                    _playersInGroup.Clear();
                 }
             }
             catch (ArgumentNullException ex)
@@ -257,26 +257,28 @@ namespace Comunication
             }
         }
 
+
         private void LeaveHost(ConnectedUser host)
         {
-            playersInGroup.Remove(host);
+            _playersInGroup.Remove(host);
 
-            foreach (ConnectedUser usersInGroup in playersInGroup)
+            foreach (ConnectedUser usersInGroup in _playersInGroup)
             {
                 usersInGroup.operationContext.GetCallbackChannel<IPlayersServicesCallBack>().OpenExitHostMessage();
             }
 
-            playersInGroup.Clear();
+            _playersInGroup.Clear();
         }
 
 
         public int FindPlayerInGroup(string usernameToFind)
         {
             int statusUser = 200;
-            int userNotFound = 404;
+            const int userNotFound = 404; 
+
             try
             {
-                if (playersInGroup.FirstOrDefault(user => user.username.Equals(usernameToFind)) == null)
+                if (_playersInGroup.FirstOrDefault(user => user.username.Equals(usernameToFind)) == null)
                 {
                     statusUser = userNotFound;
                 }
@@ -293,17 +295,11 @@ namespace Comunication
         {
             int statusCode = 500;
 
-            if (playersInGroup.Count < 6)
+            if (_playersInGroup.Count < 6)
             {
                 statusCode = 200;
             }
-            Console.WriteLine(playersInGroup.Count);
-            foreach(ConnectedUser connectedUser in playersInGroup)
-            {
-                Console.WriteLine(connectedUser.username);
-            }
 
-            Console.WriteLine(statusCode + "\n");
             return statusCode;
         }
 
@@ -313,7 +309,7 @@ namespace Comunication
             PlayerLogic playerLogicGroup  = new PlayerLogic();
             List<Player> groupPlayers = new List<Player>();
 
-            foreach (ConnectedUser playerInGroup in playersInGroup)
+            foreach (ConnectedUser playerInGroup in _playersInGroup)
             {
                 Player dataPlayer = playerLogicGroup.ObtainPlayerData(playerInGroup.username);
 
@@ -322,21 +318,25 @@ namespace Comunication
                     groupPlayers.Add(dataPlayer);
                 }
             }
+
             return groupPlayers;
         }
 
 
         public void StartMatch(string username)
         {
-            foreach (ConnectedUser user in playersInGroup)
+            ConnectedUser user = _playersInGroup.FirstOrDefault(u => u.username.Equals(username));
+
+            if (user.hostState)
             {
-                if (user.username.Equals(username) && user.hostState)
+                foreach (ConnectedUser connectedUser in _playersInGroup)
                 {
-                    foreach (ConnectedUser connectedUser in playersInGroup)
-                    {
-                        connectedUser.operationContext.GetCallbackChannel<IPlayersServicesCallBack>().OpenMatchWindow();
-                    }
+                    connectedUser.operationContext.GetCallbackChannel<IPlayersServicesCallBack>().OpenMatchWindow();
                 }
+            }
+            else
+            {
+                user.operationContext.GetCallbackChannel<IPlayersServicesCallBack>().NotifyOnlyHostStart();
             }
         }
     }
@@ -345,8 +345,8 @@ namespace Comunication
 
     public partial class ImplementationServices : IMatchManagement
     {
-        private int turnNumber = 0;
-        Dictionary<string, byte[]> playersDraws = new Dictionary<string, byte[]>();
+        private int _turnNumber = 0;
+        private Dictionary<string, byte[]> _playersDraws = new Dictionary<string, byte[]>();
 
 
         public void SelectTurnTime()
@@ -356,7 +356,8 @@ namespace Comunication
                 int[] seconds = { 15, 20, 25, 30 };
                 Random random = new Random();
                 int time = seconds[random.Next(seconds.Length)];
-                foreach (ConnectedUser user in playersInGroup)
+
+                foreach (ConnectedUser user in _playersInGroup)
                 {
                     user.matchContext.GetCallbackChannel<IMatchCallback>().DistributeTurnTime(time);
                 }
@@ -370,7 +371,7 @@ namespace Comunication
 
         public void SendCard(string card)
         {
-            foreach (ConnectedUser user in playersInGroup)
+            foreach (ConnectedUser user in _playersInGroup)
             {
                 user.matchContext.GetCallbackChannel<IMatchCallback>().DistributeCard(card);
             }
@@ -380,7 +381,7 @@ namespace Comunication
         public void SetMatchOperationContext(string username)
         {
 
-            foreach (ConnectedUser user in playersInGroup)
+            foreach (ConnectedUser user in _playersInGroup)
             {
                 if (user.username.Equals(username))
                 {
@@ -392,16 +393,16 @@ namespace Comunication
 
         public void StartTurnSignal(string username)
         {
-            turnNumber++;
-            if (turnNumber == 4)
+            _turnNumber++;
+            if (_turnNumber == 11)
             {
                 ObtainMatchWinner();
             }
             else
             {
-                foreach (ConnectedUser matchUser in playersInGroup)
+                foreach (ConnectedUser matchUser in _playersInGroup)
                 {
-                    matchUser.matchContext.GetCallbackChannel<IMatchCallback>().ReturnStartTurnSignal(turnNumber);
+                    matchUser.matchContext.GetCallbackChannel<IMatchCallback>().ReturnStartTurnSignal(_turnNumber);
                 }
             }
         }
@@ -411,15 +412,15 @@ namespace Comunication
         {
             try
             {
-                playersDraws.Add(username, draw);
+                _playersDraws.Add(username, draw);
 
-                if (playersDraws.Count == playersInGroup.Count)
+                if (_playersDraws.Count == _playersInGroup.Count)
                 {
-                    foreach (ConnectedUser player in playersInGroup)
+                    foreach (ConnectedUser player in _playersInGroup)
                     {
-                        player.matchContext.GetCallbackChannel<IMatchCallback>().DistributeDraws(playersDraws);
+                        player.matchContext.GetCallbackChannel<IMatchCallback>().DistributeDraws(_playersDraws);
                     }
-                    playersDraws.Clear();
+                    _playersDraws.Clear();
                 }
             }
             catch (ArgumentNullException ex)
@@ -434,7 +435,7 @@ namespace Comunication
             Dictionary<string, int> playersScore = new Dictionary<string, int>();
             try
             {
-                foreach (ConnectedUser user in playersInGroup)
+                foreach (ConnectedUser user in _playersInGroup)
                 {
                     playersScore.Add(user.username, user.score);
                 }
@@ -451,25 +452,24 @@ namespace Comunication
         {
             try
             {
-                int operationOk = 200;
-                int maxScore = playersInGroup.Max(s => s.score);
-                ConnectedUser winner = playersInGroup.FirstOrDefault(w => w.score == maxScore);
+                const int operationValid = 200;
+                int maxScore = _playersInGroup.Max(s => s.score);
+                ConnectedUser winner = _playersInGroup.FirstOrDefault(w => w.score == maxScore);
 
                 MatchLogic matchLogic = new MatchLogic();
                 int result = matchLogic.AddMatchWinner(winner.username);
-                playersDraws.Clear();
-                turnNumber = 0;
+                _playersDraws.Clear();
+                _turnNumber = 0;
 
-                if (result == operationOk)
+                if (result == operationValid)
                 {
-                    foreach (ConnectedUser player in playersInGroup)
+                    foreach (ConnectedUser player in _playersInGroup)
                     {
-                        usersConnected.First(u => u.username == player.username).score = 0;
+                        _usersConnected.First(u => u.username == player.username).score = 0;
                         player.hostState = false;
                         player.matchContext.GetCallbackChannel<IMatchCallback>().NotifyWinner(winner.username);
-
                     }
-                    playersInGroup.Clear();
+                    _playersInGroup.Clear();
                 }
             }
             catch (ArgumentNullException ex)
@@ -481,7 +481,7 @@ namespace Comunication
 
         public bool GetHostState(string username)
         {
-            ConnectedUser user = playersInGroup.FirstOrDefault(w => w.username == username);
+            ConnectedUser user = _playersInGroup.FirstOrDefault(w => w.username == username);
             return user.hostState;
         }
 
@@ -490,14 +490,14 @@ namespace Comunication
         {
             try
             {
-                ConnectedUser removedPlayer = playersInGroup.FirstOrDefault(u => u.username == username);
+                ConnectedUser removedPlayer = _playersInGroup.FirstOrDefault(u => u.username == username);
                 removedPlayer.matchContext.GetCallbackChannel<IMatchCallback>().CloseMatchWindow();
-                usersConnected.First(u => u.username == removedPlayer.username).score = 0;
+                _usersConnected.First(u => u.username == removedPlayer.username).score = 0;
 
-                playersInGroup.Remove(removedPlayer);
-                playersDraws.Remove(removedPlayer.username);
+                _playersInGroup.Remove(removedPlayer);
+                _playersDraws.Remove(removedPlayer.username);
 
-                foreach (ConnectedUser user in playersInGroup)
+                foreach (ConnectedUser user in _playersInGroup)
                 {
                     user.matchContext.GetCallbackChannel<IMatchCallback>().UpdateMatchPlayers();
                 }
@@ -512,23 +512,23 @@ namespace Comunication
         {
             try
             {
-                ConnectedUser leavePlayer = playersInGroup.FirstOrDefault(u => u.username == username);
+                ConnectedUser leavePlayer = _playersInGroup.FirstOrDefault(u => u.username == username);
 
                 if (leavePlayer.hostState)
                 {
                     KickAllPlayers();
                 }
-                else if(playersInGroup.Count == 2)
+                else if(_playersInGroup.Count == 2)
                 {
                     KickAllPlayers();
                 }
                 else
                 {
                     leavePlayer.matchContext.GetCallbackChannel<IMatchCallback>().CloseMatchWindow();
-                    usersConnected.First(u => u.username == leavePlayer.username).score = 0;
-                    playersInGroup.Remove(leavePlayer);
+                    _usersConnected.First(u => u.username == leavePlayer.username).score = 0;
+                    _playersInGroup.Remove(leavePlayer);
 
-                    foreach (ConnectedUser user in playersInGroup)
+                    foreach (ConnectedUser user in _playersInGroup)
                     {
                         user.matchContext.GetCallbackChannel<IMatchCallback>().UpdateMatchPlayers();
                     }
@@ -542,16 +542,16 @@ namespace Comunication
 
         private void KickAllPlayers()
         {
-            foreach (ConnectedUser user in playersInGroup)
+            foreach (ConnectedUser user in _playersInGroup)
             {
                 user.hostState = false;
-                usersConnected.First(u => u.username == user.username).score = 0;
+                _usersConnected.First(u => u.username == user.username).score = 0;
                 user.matchContext.GetCallbackChannel<IMatchCallback>().CloseMatchWindow();
             }
 
-            playersInGroup.Clear();
-            playersDraws.Clear();
-            turnNumber = 0;
+            _playersInGroup.Clear();
+            _playersDraws.Clear();
+            _turnNumber = 0;
         }
     }
 
@@ -563,19 +563,16 @@ namespace Comunication
             ChatLogic chatLogic = new ChatLogic();
             string completeMessage = chatLogic.BuildMessage(senderUsername, message);
 
-            foreach (ConnectedUser user in playersInGroup)
+            foreach (ConnectedUser user in _playersInGroup)
             {
                 user.chatContext.GetCallbackChannel<IChatServiceCallback>().MessageSend(completeMessage);
             }
 
         }
 
-
-
-
         public void SetChatOperationContext(string username)
         {
-            foreach (ConnectedUser user in playersInGroup)
+            foreach (ConnectedUser user in _playersInGroup)
             {
                 if (user.username.Equals(username))
                 {
@@ -585,21 +582,21 @@ namespace Comunication
         }
     }
 
+
     public partial class ImplementationServices : IDrawReviewService
     {
         public void AddPlayerScore(Dictionary<string, int> playerScore)
         {
-            foreach(ConnectedUser player in playersInGroup)
+            foreach(ConnectedUser player in _playersInGroup)
             {
                 player.score += playerScore.FirstOrDefault(x => x.Key == player.username).Value;
             }
         }
 
 
-        
         public void SetDrawReviewContext(string username)
         {
-            foreach(ConnectedUser player in playersInGroup)
+            foreach(ConnectedUser player in _playersInGroup)
             {
                 if (player.username.Equals(username))
                 {

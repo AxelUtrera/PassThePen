@@ -29,22 +29,22 @@ namespace PassThePen
     public partial class Match : Window, IMatchManagementCallback, IChatServicesCallback
     {
         ResourceManager messageResource = new ResourceManager("PassThePen.Properties.Resources", Assembly.GetExecutingAssembly());
-        DispatcherTimer timer = new DispatcherTimer();
-        private int selectedTime;
-        Dictionary<string, int> playerScore;
-        string username = MainMenu.username;
-        Boolean hostState;
-        private LogClient log = new LogClient();
+        private DispatcherTimer _timer = new DispatcherTimer();
+        private int _selectedTime;
+        private Dictionary<string, int> _playerScore;
+        private string _username = MainMenu.username;
+        private Boolean _hostState;
+        private LogClient _log = new LogClient();
 
         public Match()
         {
             InitializeComponent();
-            SetHostState(username);
-            SetChatOperationContext(MainMenu.username);
-            SetMatchOperationContext(MainMenu.username);
+            SetHostState(_username);
+            SetChatOperationContext(_username);
+            SetMatchOperationContext(_username);
             SetPlayersScoreTable();
-            Console.WriteLine(App.Current.Windows.Count);
         }
+
 
         private void Button_SetEraser_Click(object sender, RoutedEventArgs e)
         {
@@ -53,51 +53,51 @@ namespace PassThePen
             InkCanvas_DrawTable.EditingMode = InkCanvasEditingMode.EraseByPoint;
         }
 
+
         private void Button_SetColorGreen_Click(object sender, RoutedEventArgs e)
         {
-            InkCanvas_DrawTable.EditingMode = InkCanvasEditingMode.Ink;
-            InkCanvas_DrawTable.DefaultDrawingAttributes.Width = 5;
-            InkCanvas_DrawTable.DefaultDrawingAttributes.Height = 5;
-            InkCanvas_DrawTable.DefaultDrawingAttributes.Color = Colors.Green;
+            ChangePencilColor(Colors.Green);
         }
+
 
         private void Button_SetColorBlue_Click(object sender, RoutedEventArgs e)
         {
-            InkCanvas_DrawTable.EditingMode = InkCanvasEditingMode.Ink;
-            InkCanvas_DrawTable.DefaultDrawingAttributes.Width = 5;
-            InkCanvas_DrawTable.DefaultDrawingAttributes.Height = 5;
-            InkCanvas_DrawTable.DefaultDrawingAttributes.Color = Colors.Blue;
+            ChangePencilColor(Colors.Blue);
         }
+
 
         private void Button_SetColorRed_Click(object sender, RoutedEventArgs e)
         {
-            InkCanvas_DrawTable.EditingMode = InkCanvasEditingMode.Ink;
-            InkCanvas_DrawTable.DefaultDrawingAttributes.Width = 5;
-            InkCanvas_DrawTable.DefaultDrawingAttributes.Height = 5;
-            InkCanvas_DrawTable.DefaultDrawingAttributes.Color = Colors.Red;
+            ChangePencilColor(Colors.Red);
         }
 
+
         private void Button_SetColorBlack_Click(object sender, RoutedEventArgs e)
+        {
+            ChangePencilColor(Colors.Black);
+        }
+
+
+        private void ChangePencilColor(Color color)
         {
             InkCanvas_DrawTable.EditingMode = InkCanvasEditingMode.Ink;
             InkCanvas_DrawTable.DefaultDrawingAttributes.Width = 5;
             InkCanvas_DrawTable.DefaultDrawingAttributes.Height = 5;
-            InkCanvas_DrawTable.DefaultDrawingAttributes.Color = Colors.Black;
+            InkCanvas_DrawTable.DefaultDrawingAttributes.Color = color;
         }
+
 
         private void ObtainCard()
         {
             try
             {
-                string card;
+                
                 InstanceContext instanceContext = new InstanceContext(this);
                 PassThePenService.MatchManagementClient client = new PassThePenService.MatchManagementClient(instanceContext);
-
+                ResourceManager cardResource = new ResourceManager("PassThePen.Properties.Deck", Assembly.GetExecutingAssembly());
                 var random = new Random();
                 int numberCard = random.Next(1, 100);
-
-                ResourceManager cardResource = new ResourceManager("PassThePen.Properties.Deck", Assembly.GetExecutingAssembly());
-                card = cardResource.GetString("Card" + numberCard);
+                string card  = cardResource.GetString("Card" + numberCard);
 
                 if (card.Equals("Reto") || card.Equals("Challenge"))
                 {
@@ -105,20 +105,20 @@ namespace PassThePen
                     ResourceManager challengeResource = new ResourceManager("PassThePen.Properties.Challenge", Assembly.GetExecutingAssembly());
                     card = challengeResource.GetString("Challenge" + challengeNumber);
                 }
-
                 client.SendCard(card);
             }
             catch (EndpointNotFoundException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (TimeoutException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
         }
+
 
         public void DistributeCard(string card)
         {
@@ -133,8 +133,9 @@ namespace PassThePen
                 InstanceContext context = new InstanceContext(this);
                 PassThePenService.ChatServicesClient client = new ChatServicesClient(context);
 
-                string usernameSend = MainMenu.username;
+                string usernameSend = _username;
                 string message = TextBox_Message.Text;
+
                 if (message != "")
                 {
                     TextBox_Message.Clear();
@@ -144,14 +145,15 @@ namespace PassThePen
             catch (EndpointNotFoundException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (TimeoutException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
         }
+
 
         public void MessageSend(string message)
         {
@@ -163,11 +165,11 @@ namespace PassThePen
         {
             try
             {
-                if (hostState)
+                if (_hostState)
                 {
                     InstanceContext instanceContext = new InstanceContext(this);
                     PassThePenService.MatchManagementClient client = new MatchManagementClient(instanceContext);
-                    client.StartTurnSignal(MainMenu.username);
+                    client.StartTurnSignal(_username);
                 }
                 else
                 {
@@ -177,14 +179,15 @@ namespace PassThePen
             catch (EndpointNotFoundException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (TimeoutException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
         }
+
 
         private void StartTurn()
         {
@@ -194,6 +197,7 @@ namespace PassThePen
             ObtainTurnTime();
             StartTurnTimer();
         }
+
 
         private void ObtainTurnTime()
         {
@@ -206,40 +210,40 @@ namespace PassThePen
             catch (EndpointNotFoundException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (TimeoutException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
         }
 
+
         public void DistributeTurnTime(int turnTime)
         {
-            selectedTime = turnTime;
+            _selectedTime = turnTime;
         }
 
 
         private void StartTurnTimer()
         {
-            timer.Interval = TimeSpan.FromSeconds(1);
-            timer.Tick -= Timer_Tick;
-            timer.Tick += Timer_Tick;
-            timer.Start();
+            _timer.Interval = TimeSpan.FromSeconds(1);
+            _timer.Tick -= Timer_Tick;
+            _timer.Tick += Timer_Tick;
+            _timer.Start();
         }
 
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            if (selectedTime == 0)
+            if (_selectedTime == 0)
             {
-                timer.Stop();
+                _timer.Stop();
                 SendDraw();
-                
             }
-            Label_TimeRemaining.Content = selectedTime;
-            selectedTime--;
+            Label_TimeRemaining.Content = _selectedTime;
+            _selectedTime--;
         }
 
 
@@ -278,20 +282,6 @@ namespace PassThePen
         }
 
 
-        public BitmapImage ConvertByteToImage(byte[] array)
-        {
-            using (var ms = new System.IO.MemoryStream(array))
-            {
-                var image = new BitmapImage();
-                image.BeginInit();
-                image.CacheOption = BitmapCacheOption.OnLoad;
-                image.StreamSource = ms;
-                image.EndInit();
-                return image;
-            }
-        }
-
-
         private void SendDraw()
         {
             try
@@ -299,17 +289,17 @@ namespace PassThePen
                 InstanceContext context = new InstanceContext(this);
                 PassThePenService.MatchManagementClient client = new MatchManagementClient(context);
                 Byte[] playerDraw = GetCanvasDraw();
-                client.SendDraws(MainMenu.username, playerDraw);
+                client.SendDraws(_username, playerDraw);
             }
             catch (EndpointNotFoundException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (TimeoutException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
         }
 
@@ -326,12 +316,12 @@ namespace PassThePen
             catch (EndpointNotFoundException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (TimeoutException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
         }
 
@@ -347,19 +337,19 @@ namespace PassThePen
             catch (EndpointNotFoundException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (TimeoutException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
         }
 
 
         public void DistributeDraws(Dictionary<string, byte[]> playersDraw)
         {
-            playersDraw.Remove(username);
+            playersDraw.Remove(_username);
             DrawReview.playersDraw = playersDraw;
             DrawReview drawReview = new DrawReview();
             drawReview.ShowDialog();
@@ -372,22 +362,22 @@ namespace PassThePen
             {
                 InstanceContext context = new InstanceContext(this);
                 PassThePenService.MatchManagementClient client = new PassThePenService.MatchManagementClient(context);
-                playerScore = client.GetPlayersScore();
+                _playerScore = client.GetPlayersScore();
 
-                int score = playerScore.First(u => u.Key == username).Value;
+                int score = _playerScore.First(u => u.Key == _username).Value;
                 Label_Score.Content = score.ToString();
-                playerScore.Remove(username);
-                ListBox_PlayersInGame.ItemsSource = playerScore;
+                _playerScore.Remove(_username);
+                ListBox_PlayersInGame.ItemsSource = _playerScore;
             }
             catch (EndpointNotFoundException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (TimeoutException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
         }
 
@@ -402,7 +392,7 @@ namespace PassThePen
 
         private void OpenMainMenu()
         {
-            timer.Stop();
+            _timer.Stop();
             
             foreach (Window window in App.Current.Windows)
 
@@ -416,9 +406,9 @@ namespace PassThePen
         }
 
 
-        private void Button_Remove_Match_Player_Click(object sender, MouseButtonEventArgs e)
+        private void Button_RemoveMatchPlayer_Click(object sender, MouseButtonEventArgs e)
         {
-            if (hostState)
+            if (_hostState)
             {
                 var confirmationButton = MessageBox.Show(messageResource.GetString("Match_RemovePlayer_Message"), "", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (confirmationButton == MessageBoxResult.Yes)
@@ -445,21 +435,21 @@ namespace PassThePen
             {
                 InstanceContext context = new InstanceContext(this);
                 PassThePenService.MatchManagementClient client = new PassThePenService.MatchManagementClient(context);
-                hostState = client.GetHostState(username);
+                _hostState = client.GetHostState(username);
             }
             catch (EndpointNotFoundException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (TimeoutException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
         }
 
-        private void Button_Leave_Match_Click(object sender, RoutedEventArgs e)
+        private void Button_LeaveMatch_Click(object sender, RoutedEventArgs e)
         {
             var confirmationButton = MessageBox.Show(messageResource.GetString("Match_LeaveMatch_Message"), "", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
@@ -468,7 +458,7 @@ namespace PassThePen
                 InstanceContext context = new InstanceContext(this);
                 PassThePenService.MatchManagementClient client = new PassThePenService.MatchManagementClient(context);
 
-                client.LeaveMatch(username);
+                client.LeaveMatch(_username);
             }
         }
 

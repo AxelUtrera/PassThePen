@@ -10,7 +10,7 @@
         WindowState="Maximized"
         ShowInTaskbar="False"
         WindowStartupLocation="CenterOwner"
-        Title="{x:Static p:Resources.Register_tittle}" Height="1080" Width="1920">
+        Title="{x:Static p:Resources.Register_Title_Label}" Height="1080" Width="1920">
 
     <Grid Margin="0,-1,0,1" >
         <Grid.Background>
@@ -29,24 +29,24 @@
             </Button>
             <Image Source="Img/logo_Pass_the_pen.png" Height="146" Width="158"/>
 
-            <Label x:Name="label_Email" Margin=" 195,10,50,0 " FontSize="15" Content="{x:Static p:Resources.Global_Email_Label}" />
+            <Label x:Name="Label_Email" Margin=" 195,10,50,0 " FontSize="15" Content="{x:Static p:Resources.Global_Email_Label}" />
             <TextBox Name="TexBox_Email" Margin="200,0" BorderBrush="black" Height="20" />
-            <Label x:Name="label_Error_Email" Margin="195,0,50,0" FontSize="10" Content="{x:Static p:Resources.Global_Error_Email_Label}" Foreground="Red" Visibility="Hidden"/>
-            <Label x:Name="label_Nickname" Margin="195,0,50,0" FontSize="15" Content="{x:Static p:Resources.Register_Nickname_Label}" Width="388" />
+            <Label x:Name="Label_ErrorEmail" Margin="195,0,50,0" FontSize="10" Content="{x:Static p:Resources.Global_ErrorEmail_Label}" Foreground="Red" Visibility="Hidden"/>
+            <Label x:Name="Label_Nickname" Margin="195,0,50,0" FontSize="15" Content="{x:Static p:Resources.Register_Nickname_Label}" Width="388" />
             <TextBox Name="TextBox_Username" Margin="200,0" BorderBrush="Black" Height="20" />
-            <Label x:Name="label_Error_Username" Margin="195,0,50,0" FontSize="10" Content="{x:Static p:Resources.Global_Error_Username_Label}" Foreground="Red" Visibility="Hidden"/>
-            <Label x:Name="label_Name" Margin=" 195,0,50,0 " FontSize="15" Content="{x:Static p:Resources.Register_Name_Label}" />
+            <Label x:Name="Label_ErrorUsername" Margin="195,0,50,0" FontSize="10" Content="{x:Static p:Resources.Global_ErrorUsername_Label}" Foreground="Red" Visibility="Hidden"/>
+            <Label x:Name="Label_Name" Margin=" 195,0,50,0 " FontSize="15" Content="{x:Static p:Resources.Register_Name_Label}" />
             <TextBox Name="TextBox_Name" Margin="200,0" BorderBrush="black" Height="20" />
-            <Label x:Name="label_Error_Name" Margin="195,0,50,0" FontSize="10" Content="{x:Static p:Resources.Global_Error__LastName_Label}" Foreground="Red" Visibility="Hidden"/>
-            <Label x:Name="label_Lastname" Margin=" 195,0,50,0 " FontSize="15" Content="{x:Static p:Resources.Register_LastName_Label}" />
+            <Label x:Name="Label_ErrorName" Margin="195,0,50,0" FontSize="10" Content="{x:Static p:Resources.Global_ErrorLastName_Label}" Foreground="Red" Visibility="Hidden"/>
+            <Label x:Name="Label_Lastname" Margin=" 195,0,50,0 " FontSize="15" Content="{x:Static p:Resources.Register_LastName_Label}" />
             <TextBox Name="TextBox_LastName" Margin="200,0" BorderBrush="black" Height="20" />
-            <Label x:Name="label_Error_LastName" Margin="195,0,50,0" FontSize="10" Content="{x:Static p:Resources.Global_Error__LastName_Label}" Foreground="Red" Visibility="Hidden"/>
-            <Label x:Name="label_Password" Margin="195,0,50,0" FontSize="15" Content="{x:Static p:Resources.Global_Label_Password}" Width="388" />
+            <Label x:Name="Label_ErrorLastName" Margin="195,0,50,0" FontSize="10" Content="{x:Static p:Resources.Global_ErrorLastName_Label}" Foreground="Red" Visibility="Hidden"/>
+            <Label x:Name="Label_Password" Margin="195,0,50,0" FontSize="15" Content="{x:Static p:Resources.Global_Password_Label}" Width="388" />
             <PasswordBox Name="PasswordBox_Password" Margin="200,0" BorderBrush="Black" Height="20" />
-            <Label x:Name="label_Error_Password" Margin="50,0,50,0" HorizontalAlignment="Center" FontSize="9" Content="{x:Static p:Resources.Global_Error_Password_Label}" Foreground="Blue" Width="552" Height="25"/>
-            <Label x:Name="label_Confirm_Password" Margin="195,0,50,0" FontSize="15" Content="{x:Static p:Resources.Register_Repeat_Password}" Width="388" />
+            <Label x:Name="Label_ErrorPassword" Margin="50,0,50,0" HorizontalAlignment="Center" FontSize="9" Content="{x:Static p:Resources.Global_ErrorPassword_Label}" Foreground="Blue" Width="552" Height="25"/>
+            <Label x:Name="Label_ConfirmPassword" Margin="195,0,50,0" FontSize="15" Content="{x:Static p:Resources.Register_Repeat_Password}" Width="388" />
             <PasswordBox Name="PasswordBox_RepeatPassword" Margin="200,0" BorderBrush="Black" Height="20" />
-            <Label x:Name="label_Error_RepeatPassword" Margin="195,0,50,0" FontSize="10" Content="{x:Static p:Resources.Global_Error_Repit_Password}" Foreground="Red" Visibility="Hidden"/>
+            <Label x:Name="Label_ErrorRepeatPassword" Margin="195,0,50,0" FontSize="10" Content="{x:Static p:Resources.Global_ErrorRepit_Password}" Foreground="Red" Visibility="Hidden"/>
 
             <Button x:Name="Button_Register" Cursor="Hand" Margin="50,10,50,0" Width="200" Height="35" Foreground="#f3f3f3" FontSize="16" Click="Button_Register_Click" >
                 <Button.Template >
@@ -57,9 +57,9 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <Label x:Name="label_Code_Validation" Margin=" 195,0,50,0 " FontSize="15" Content="{x:Static p:Resources.RecoverPassword_Code_Label}" Visibility="Collapsed"/>
-            <TextBox Name="TexBox_Code_Validation" Margin="200,0" BorderBrush="black" Height="20" Visibility="Collapsed"/>
-            <StackPanel Name="Panel_Validation_Code"  Width="350" Orientation="Horizontal" Height="50" HorizontalAlignment="Center" Margin="0,0,0,0" Visibility="Collapsed">
+            <Label x:Name="Label_CodeValidation" Margin=" 195,0,50,0 " FontSize="15" Content="{x:Static p:Resources.RecoverPassword_Code_Label}" Visibility="Collapsed"/>
+            <TextBox Name="TexBox_CodeValidation" Margin="200,0" BorderBrush="black" Height="20" Visibility="Collapsed"/>
+            <StackPanel Name="Panel_ValidationCode"  Width="350" Orientation="Horizontal" Height="50" HorizontalAlignment="Center" Margin="0,0,0,0" Visibility="Collapsed">
                 <Button Name="Button_Send" Width="100" Height="30" Foreground="#f3f3f3" FontSize="16" HorizontalAlignment="Center" Cursor="Hand" Click="Button_Send_Click">
                     <Button.Template >
                         <ControlTemplate TargetType="Button" >

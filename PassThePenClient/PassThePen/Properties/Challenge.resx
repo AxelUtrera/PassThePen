@@ -118,31 +118,31 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Challenge1" xml:space="preserve">
-    <value>Dibuja con tu mano no dominante</value>
+    <value>Dibuja con tu mano no dominante (Dibujo libre)</value>
   </data>
   <data name="Challenge10" xml:space="preserve">
     <value>Dibuja tu retrato</value>
   </data>
   <data name="Challenge2" xml:space="preserve">
-    <value>Dibuja con tus ojos cerrados</value>
+    <value>Dibuja con tus ojos cerrados (Dibujo libre)</value>
   </data>
   <data name="Challenge3" xml:space="preserve">
-    <value>Comienza dibujar cuando queden 10 segundos</value>
+    <value>Comienza dibujar cuando queden 10 segundos (Dibujo libre)</value>
   </data>
   <data name="Challenge4" xml:space="preserve">
-    <value>Dibuja solo con lineas rectas</value>
+    <value>Dibuja solo con lineas rectas (Dibujo libre)</value>
   </data>
   <data name="Challenge5" xml:space="preserve">
     <value>Dibuja a tu crush</value>
   </data>
   <data name="Challenge6" xml:space="preserve">
-    <value>Dibuja solo con puntos</value>
+    <value>Dibuja solo con puntos (Dibujo libre)</value>
   </data>
   <data name="Challenge7" xml:space="preserve">
-    <value>Dibuja con un solo trazo</value>
+    <value>Dibuja con un solo trazo (Dibujo libre)</value>
   </data>
   <data name="Challenge8" xml:space="preserve">
-    <value>Dibuja lo más pequeño que puedas</value>
+    <value>Dibuja lo más pequeño que puedas (Dibujo libre)</value>
   </data>
   <data name="Challenge9" xml:space="preserve">
     <value>Dibuja a tu personaje de ficción favorito</value>

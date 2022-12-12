@@ -28,14 +28,16 @@ namespace PassThePen
     public partial class Login : Window
     {
         ResourceManager messageResource = new ResourceManager("PassThePen.Properties.Resources", Assembly.GetExecutingAssembly());
-        private LogClient log = new LogClient();
+        private LogClient _log = new LogClient();
+
 
         public Login()
         {
             InitializeComponent();
         }
 
-        private void Button_login_Click(object sender, RoutedEventArgs e)
+
+        private void Button_Login_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -47,8 +49,9 @@ namespace PassThePen
                 };
                 if (ValidateInformation())
                 {
-                    int playerValid = 200;
-                    int isNotConected = 404;
+                    const int playerValid = 200;
+                    const int isNotConected = 404;
+
                     int resultAutenticatePlayer = clientAutentication.AutenticatePlayer(player);
                     if (resultAutenticatePlayer == playerValid && clientAutentication.FindPlayerIsConected(player.username) == isNotConected)
                     {
@@ -68,28 +71,30 @@ namespace PassThePen
             catch (EndpointNotFoundException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (TimeoutException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
         }
+
 
         private bool ValidateInformation()
         {
             bool result = true;
             if (string.IsNullOrEmpty(TextBox_Username.Text) && string.IsNullOrEmpty(PasswordBox_PasswordUser.Password))
             {
-                return false;
+                result = false;
             }
             if (TextBox_Username.Text.Length > 50 && PasswordBox_PasswordUser.Password.Length > 16)
             {
-                return false;
+                result = false;
             }
             return result;
         }
+
 
         private void Button_Register_Click(object sender, RoutedEventArgs e)
         {
@@ -98,24 +103,28 @@ namespace PassThePen
             this.Close();
         }
 
-        private void Button_Forgot_Password_Click(object sender, RoutedEventArgs e)
+
+        private void Button_ForgotPassword_Click(object sender, RoutedEventArgs e)
         {
             RecoverPassword recover = new RecoverPassword();
             recover.Show();
             this.Close();
         }
 
+
         private void Button_Exit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
         
+
         private void InvokeMainMenu()
         {
             MainMenu mainMenu = new MainMenu();
             mainMenu.Show();
             this.Close();
         }
+
 
         private void Button_LoginAsGuest_Click(object sender, MouseButtonEventArgs e)
         {
@@ -130,11 +139,10 @@ namespace PassThePen
                     password = "guest"
                 };
 
-                int autenticationValid = 200;
-                int isNotConected = 404;
-                int resultAutentication = client.AutenticatePlayer(guestPlayer);
+                const int autenticationValid = 200;
+                const int isNotConected = 404;
 
-                if (resultAutentication == autenticationValid && clientAutentication.FindPlayerIsConected(guestPlayer.username) == isNotConected)
+                if (client.AutenticatePlayer(guestPlayer) == autenticationValid && clientAutentication.FindPlayerIsConected(guestPlayer.username) == isNotConected)
                 {
                     MainMenu.username = "Guest";
                     InvokeMainMenu();
@@ -143,19 +151,19 @@ namespace PassThePen
                 {
                     MessageBox.Show(messageResource.GetString("Login_ErrorLogin_Message"));
                 }
-                client.Close();
             }
             catch (EndpointNotFoundException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (TimeoutException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
         }
+
 
         private void Button_ChangeLanguageEN_Click(object sender, MouseButtonEventArgs e)
         {
@@ -164,11 +172,13 @@ namespace PassThePen
             MessageBox.Show("The language is now English, login to visualize the changes", "", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
+
         private void Button_ChangeLanguageES_Click(object sender, MouseButtonEventArgs e)
         {
             Thread.CurrentThread.CurrentCulture = new CultureInfo("es-MX");
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("es-MX");
             MessageBox.Show("El lenguaje ahora es Español, inicie sesión para ver los cambios", "", MessageBoxButton.OK, MessageBoxImage.Information);
         }
+
     }
 }

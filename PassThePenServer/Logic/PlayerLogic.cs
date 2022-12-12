@@ -13,12 +13,13 @@ namespace Logic
 {
     public class PlayerLogic
     {
-        private readonly Log log = new Log();
+        private readonly Log _log = new Log();
 
         public int AutenticatePlayer(Domain.Player player)
         {
             int userResult = 500;
             string passwordHash = Encription.ToSHA2Hash(player.password);
+
             try
             {
                 using (var dataBase = new passthepenEntities())
@@ -27,6 +28,7 @@ namespace Logic
                                 where Player.username.Equals(player.username)
                                 && Player.password.Equals(passwordHash)
                                 select Player).Count();
+
                     if (user > 0)
                     {
                         userResult = 200;
@@ -35,11 +37,11 @@ namespace Logic
             }
             catch(ArgumentNullException ex)
             {
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (EntityException ex)
             {
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             return userResult;
         }
@@ -48,6 +50,7 @@ namespace Logic
         public int AddPlayer(Domain.Player player)
         {
             int statusCode = 500;
+
             try
             {
                 using (var dataBase = new passthepenEntities())
@@ -71,11 +74,11 @@ namespace Logic
             }
             catch (DbUpdateException ex)
             {
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (EntityException ex)
             {
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             return statusCode;
         }
@@ -84,6 +87,7 @@ namespace Logic
         public int AutenticateEmail(string email)
         {
             int emailResult = 500;
+
             try
             {
                 using (var dataBase = new passthepenEntities())
@@ -100,11 +104,11 @@ namespace Logic
             }
             catch (ArgumentNullException ex)
             {
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (EntityException ex)
             {
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             return emailResult;
         }
@@ -113,6 +117,7 @@ namespace Logic
         public int FindPlayer(string username)
         {
             int operationResult = 500;
+
             try
             {
                 using (var context = new passthepenEntities())
@@ -127,11 +132,11 @@ namespace Logic
             }
             catch (InvalidOperationException ex)
             {
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (EntityException ex)
             {
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             return operationResult;
         }
@@ -140,6 +145,7 @@ namespace Logic
         public Domain.Player ObtainPlayerData(string username)
         {
             Domain.Player playerSend = null;
+
             try
             {
                 using (var dataBaseContext = new passthepenEntities())
@@ -160,11 +166,11 @@ namespace Logic
             }
             catch(InvalidOperationException ex)
             {
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (EntityException ex)
             {
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             return playerSend;
         }
@@ -191,15 +197,15 @@ namespace Logic
             }
             catch (ArgumentNullException ex)
             {
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (DbUpdateException ex)
             {
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (EntityException ex)
             {
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             return stateCode;
         }
@@ -224,15 +230,15 @@ namespace Logic
             }
             catch (ArgumentNullException ex)
             {
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (DbUpdateException ex)
             {
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (EntityException ex)
             {
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             return stateCode;
         }
@@ -257,15 +263,15 @@ namespace Logic
             }
             catch (ArgumentNullException ex)
             {
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (DbUpdateException ex)
             {
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (EntityException ex)
             {
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             return result;
         }
@@ -302,11 +308,11 @@ namespace Logic
             }
             catch (DbUpdateException ex)
             {
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (EntityException ex)
             {
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             return operationResult;
         }
@@ -314,6 +320,7 @@ namespace Logic
         public List<Domain.Friends> RecoverFriends(string username)
         {
             List<Domain.Friends> friendsList = new List<Domain.Friends>();
+
             using (var dataBaseContext = new passthepenEntities())
             {
                 try
@@ -322,22 +329,23 @@ namespace Logic
                                    where
                                    Friends.usernamePlayer == username
                                    select Friends).ToList();
-                    for (int index = 0; index < friends.Count; index++)
+
+                    foreach (DataAccess.Friends friend in friends)
                     {
                         Domain.Friends newFriend = new Domain.Friends();
-                        newFriend.idPlayerFriends = friends[index].idFriend;
-                        newFriend.username = friends[index].usernamePlayer;
-                        newFriend.friendUsername = friends[index].friendUsername;
+                        newFriend.idPlayerFriends = friend.idFriend;
+                        newFriend.username = friend.usernamePlayer;
+                        newFriend.friendUsername = friend.friendUsername;
                         friendsList.Add(newFriend);
                     }
                 }
                 catch (ArgumentNullException ex)
                 {
-                    log.Add(ex.ToString());
+                    _log.Add(ex.ToString());
                 }
                 catch (EntityException ex)
                 {
-                    log.Add(ex.ToString());
+                    _log.Add(ex.ToString());
                 }
             }
             return friendsList;
@@ -366,16 +374,17 @@ namespace Logic
             }
             catch (ArgumentNullException ex)
             {
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (DbUpdateException ex)
             {
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (EntityException ex)
             {
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
+
             return operationResult;
         }
 

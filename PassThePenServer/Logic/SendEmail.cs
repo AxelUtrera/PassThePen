@@ -12,9 +12,9 @@ namespace Logic
 {
     public class SendEmail
     {
-        private const string displayName = "Pass The Pen";
-        private const string body = "Your validation code is: ";
-        private readonly Log log = new Log();
+        private const string _displayName = "Pass The Pen";
+        private const string _body = "Your validation code is: ";
+        private readonly Log _log = new Log();
 
         public int SendNewEmail(String to, String affair, int validationCode)
         {
@@ -23,11 +23,12 @@ namespace Logic
             {
                 string from = ConfigurationManager.AppSettings.Get("Email");
                 string password = ConfigurationManager.AppSettings.Get("Password");
+
                 MailMessage mailMessage = new MailMessage();
-                mailMessage.From = new MailAddress(from , displayName);
+                mailMessage.From = new MailAddress(from , _displayName);
                 mailMessage.To.Add(to);
                 mailMessage.Subject = affair;
-                mailMessage.Body = body + validationCode;
+                mailMessage.Body = _body + validationCode;
                 mailMessage.BodyEncoding = Encoding.UTF8;
                 mailMessage.IsBodyHtml = true;
 
@@ -38,11 +39,11 @@ namespace Logic
             }
             catch (ArgumentNullException ex)
             {
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (SmtpException ex)
             {
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
                 result = 500;
             }
             return result;

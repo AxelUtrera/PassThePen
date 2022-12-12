@@ -23,11 +23,11 @@ namespace PassThePen
     public partial class RecoverPassword : Window
     {
         ResourceManager messageResource = new ResourceManager("PassThePen.Properties.Resources", Assembly.GetExecutingAssembly());
-        private int validationCode;
-        private String email;
-        private int resendNumber = 0;
-        private String username;
-        private LogClient log = new LogClient();
+        private int _validationCode;
+        private String _email;
+        private int _resendNumber = 0;
+        private String _username;
+        private LogClient _log = new LogClient();
 
         public RecoverPassword()
         {
@@ -41,26 +41,27 @@ namespace PassThePen
                 if (ValidateUsername())
                 {
                     PassThePenService.PlayerManagementClient client = new PassThePenService.PlayerManagementClient();
-                    Player player = client.GetDataPlayer(TextBox_Username_Code.Text.Trim());
-                    client.Close();
+                    PassThePenService.AutenticationClient clientEmail = new PassThePenService.AutenticationClient();
+                    Player player = client.GetDataPlayer(TextBox_UsernameCode.Text.Trim());
+
                     if (player != null)
                     {
                         Random randomNumber = new Random();
-                        validationCode = randomNumber.Next(100000, 1000000);
+                        _validationCode = randomNumber.Next(100000, 1000000);
                         String affair = messageResource.GetString("RecoverPassword_ValidationCodeTitle_Message");
-                        email = player.email;
-                        username = TextBox_Username_Code.Text.Trim();
-                        PassThePenService.AutenticationClient clientEmail = new PassThePenService.AutenticationClient();
-                        if (clientEmail.CodeEmail(email, affair, validationCode) == 200)
+                        _email = player.email;
+                        _username = TextBox_UsernameCode.Text.Trim();
+                        
+                        if (clientEmail.CodeEmail(_email, affair, _validationCode) == 200)
                         {
                             MessageBox.Show(messageResource.GetString("RecoverPassword_ValidationCodeSend_Message"));
+
                             Label_Email.Visibility = Visibility.Hidden;
                             Label_Code.Visibility = Visibility.Visible;
                             Button_Valid.Visibility = Visibility.Visible;
                             Button_Resend.Visibility = Visibility.Visible;
                             Button_Send.Visibility = Visibility.Hidden;
-                            TextBox_Username_Code.Text = "";
-                            clientEmail.Close();
+                            TextBox_UsernameCode.Text = "";
                         }
                         else
                         {
@@ -80,12 +81,12 @@ namespace PassThePen
             catch (EndpointNotFoundException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (TimeoutException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
         }
 
@@ -101,9 +102,10 @@ namespace PassThePen
             if (ValidateCodeValidation())
             {
                 MessageBox.Show("Codigo correcto");
+
                 Label_Email.Visibility = Visibility.Collapsed;
                 Label_Code.Visibility = Visibility.Collapsed;
-                TextBox_Username_Code.Visibility = Visibility.Collapsed;
+                TextBox_UsernameCode.Visibility = Visibility.Collapsed;
                 Panel_Email.Visibility = Visibility.Collapsed;
                 Label_NewPassword.Visibility = Visibility.Visible;
                 Label_RepitPassword.Visibility = Visibility.Visible;
@@ -116,14 +118,14 @@ namespace PassThePen
         private bool ValidateCodeValidation()
         {
             bool result = true;
-            if (TextBox_Username_Code.Text.Length > 6)
+            if (TextBox_UsernameCode.Text.Length > 6)
             {
                 result = false;
                 MessageBox.Show("Longitud incorrecta, el código de validación no excede los 6 caracteres");
             }
-            if (Validation.ValidateFormat(TextBox_Username_Code.Text, "^[0-9]+$"))
+            if (Validation.ValidateFormat(TextBox_UsernameCode.Text, "^[0-9]+$"))
             {
-                if (Int32.Parse(TextBox_Username_Code.Text) != validationCode)
+                if (Int32.Parse(TextBox_UsernameCode.Text) != _validationCode)
                 {
                     result = false;
                     MessageBox.Show("Codigo de validación incorrecto, favor de verificarlo");
@@ -141,29 +143,29 @@ namespace PassThePen
         private bool ValidateUsername()
         {
             bool result = true;
-            label_Error_Email.Visibility = Visibility.Hidden;
-            if (string.IsNullOrEmpty(TextBox_Username_Code.Text))
+            Label_ErrorEmail.Visibility = Visibility.Hidden;
+            if (string.IsNullOrEmpty(TextBox_UsernameCode.Text))
             {
                 MessageBox.Show("Campos vacios, favor de llenar todos los campos");
                 result = false;
             }
-            if (TextBox_Username_Code.Text.Length > 20)
+            if (TextBox_UsernameCode.Text.Length > 20)
             {
-                label_Error_Email.Visibility = Visibility.Visible;
+                Label_ErrorEmail.Visibility = Visibility.Visible;
                 result = false;
             }
             return result;
         }
         
 
-        private void Button_change_Click(object sender, RoutedEventArgs e)
+        private void Button_Change_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 PassThePenService.PlayerManagementClient client = new PassThePenService.PlayerManagementClient();
                 if (ValidatePassword())
                 {
-                    if (client.UpdatePlayerPassword(username, PasswordBox_NewPassword.Password) == 200)
+                    if (client.UpdatePlayerPassword(_username, PasswordBox_NewPassword.Password) == 200)
                     {
                         MessageBox.Show(messageResource.GetString("RecoverPassword_PasswordUpdated_Message"));
                         client.Close();
@@ -184,12 +186,12 @@ namespace PassThePen
             catch (EndpointNotFoundException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (TimeoutException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
 
         }
@@ -197,8 +199,8 @@ namespace PassThePen
         private  Boolean ValidatePassword()
         {
             Boolean result = true;
-            label_Error_Repit_Password.Visibility = Visibility.Hidden;
-            label_Error_Password.Visibility = Visibility.Hidden;
+            Label_ErrorRepitPassword.Visibility = Visibility.Hidden;
+            Label_ErrorPassword.Visibility = Visibility.Hidden;
             if (PasswordBox_NewPassword.Password.Equals("") || PasswordBox_RepitPassword.Password.Equals(""))
             {
                 MessageBox.Show("No se aceptan campos invalidos en el sistema");
@@ -206,12 +208,12 @@ namespace PassThePen
             }
             if (! PasswordBox_NewPassword.Password.Equals(PasswordBox_RepitPassword.Password))
             {
-                label_Error_Repit_Password.Visibility = Visibility.Visible;
+                Label_ErrorRepitPassword.Visibility = Visibility.Visible;
                 result = false;
             }
             if (! Validation.ValidateFormat(PasswordBox_NewPassword.Password, "^(?=.*\\d)(?=.*[\\u0021-\\u002b\\u003c-\\u0040])(?=.*[A-Z])(?=.*[a-z])\\S{8,16}$"))
             {
-                label_Error_Password.Visibility = Visibility.Visible;
+                Label_ErrorPassword.Visibility = Visibility.Visible;
                 result = false;
             }
             return result;
@@ -221,13 +223,13 @@ namespace PassThePen
         {
             try
             {
-                if (resendNumber < 3)
+                if (_resendNumber < 3)
                 {
                     PassThePenService.AutenticationClient client = new PassThePenService.AutenticationClient();
-                    if (client.CodeEmail(email, "Validation Code", validationCode) == 200)
+                    if (client.CodeEmail(_email, "Validation Code", _validationCode) == 200)
                     {
                         MessageBox.Show("Código de validación enviado a su correo favor de revisarlo");
-                        resendNumber++;
+                        _resendNumber++;
                     }
                     else
                     {
@@ -243,12 +245,12 @@ namespace PassThePen
             catch (EndpointNotFoundException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (TimeoutException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             
         }

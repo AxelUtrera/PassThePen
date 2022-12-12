@@ -118,31 +118,31 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Challenge1" xml:space="preserve">
-    <value>Draw with your non-dominant hand</value>
+    <value>Draw with your non-dominant hand (Free Draw)</value>
   </data>
   <data name="Challenge10" xml:space="preserve">
     <value>Draw your portrait</value>
   </data>
   <data name="Challenge2" xml:space="preserve">
-    <value>Draw with your eyes closed</value>
+    <value>Draw with your eyes closed (Free Draw)</value>
   </data>
   <data name="Challenge3" xml:space="preserve">
-    <value>Start drawing when 10 seconds left</value>
+    <value>Start drawing when 10 seconds left (Free Draw)</value>
   </data>
   <data name="Challenge4" xml:space="preserve">
-    <value>Draw only with straight lines</value>
+    <value>Draw only with straight lines (Free Draw)</value>
   </data>
   <data name="Challenge5" xml:space="preserve">
     <value>Draw your crush</value>
   </data>
   <data name="Challenge6" xml:space="preserve">
-    <value>Draw only with dots</value>
+    <value>Draw only with dots (Free Draw)</value>
   </data>
   <data name="Challenge7" xml:space="preserve">
-    <value>Draw with a single stroke</value>
+    <value>Draw with a single stroke (Free Draw)</value>
   </data>
   <data name="Challenge8" xml:space="preserve">
-    <value>Draw as small as you can</value>
+    <value>Draw as small as you can (Free Draw)</value>
   </data>
   <data name="Challenge9" xml:space="preserve">
     <value>Draw your favorite fictional character</value>

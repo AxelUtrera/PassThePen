@@ -133,7 +133,7 @@
     <value>La contraseña actual es incorrecta</value>
     <comment>Used by: Change Password</comment>
   </data>
-  <data name="ChangePassword_Invalid_Fields_Label" xml:space="preserve">
+  <data name="ChangePassword_InvalidFields_Label" xml:space="preserve">
     <value>Las contraseñas no coinciden</value>
     <comment>Used by: Change Password</comment>
   </data>
@@ -173,31 +173,31 @@
     <value>Correo </value>
     <comment>Used by: login</comment>
   </data>
-  <data name="Global_Error_Email_Label" xml:space="preserve">
+  <data name="Global_ErrorEmail_Label" xml:space="preserve">
     <value>Favor de revisar el formato de su correo electronico</value>
     <comment>Used by: Register, Profile</comment>
   </data>
-  <data name="Global_Error_Name_Label" xml:space="preserve">
+  <data name="Global_ErrorLastName_Label" xml:space="preserve">
     <value>Numero de caracteres excedidos. Numero maximo: 50</value>
     <comment>Used by: Register, Profile</comment>
   </data>
-  <data name="Global_Error_Password_Label" xml:space="preserve">
+  <data name="Global_ErrorName_Label" xml:space="preserve">
+    <value>Numero de caracteres excedidos. Numero maximo: 50</value>
+    <comment>Used by: Register, Profile</comment>
+  </data>
+  <data name="Global_ErrorPassword_Label" xml:space="preserve">
     <value>Debe contener al menos uno de los siguientes caracteres:  *, +, @, #, $, %,  una mayuscula y un numero. Longitud entre 8-16 caracteres.</value>
     <comment>Used by: Register, Recover Password, Change Password</comment>
   </data>
-  <data name="Global_Error_Repit_Password" xml:space="preserve">
+  <data name="Global_ErrorRepit_Password" xml:space="preserve">
     <value>Las contraseñas no son iguales</value>
     <comment>Used by: Register, Recover Password, Change Password</comment>
   </data>
-  <data name="Global_Error_Username_Label" xml:space="preserve">
+  <data name="Global_ErrorUsername_Label" xml:space="preserve">
     <value>El nombre de usuario ya existe o tiene un formato incorrecto.</value>
     <comment>Used by: Register, Recover Password</comment>
   </data>
-  <data name="Global_Error__LastName_Label" xml:space="preserve">
-    <value>Numero de caracteres excedidos. Numero maximo: 50</value>
-    <comment>Used by: Register, Profile</comment>
-  </data>
-  <data name="Global_Label_Password" xml:space="preserve">
+  <data name="Global_Password_Label" xml:space="preserve">
     <value>Contraseña</value>
     <comment>Used by: login, Register</comment>
   </data>
@@ -225,7 +225,7 @@
     <value>Los datos ingresados son invalidos o existe una sesion abierta.</value>
     <comment>Used by: Login</comment>
   </data>
-  <data name="Login_Forgot_Password_Button" xml:space="preserve">
+  <data name="Login_ForgotPassword_Button" xml:space="preserve">
     <value>¿Olvidaste tu contraseña?</value>
     <comment>Used by: login</comment>
   </data>
@@ -241,15 +241,15 @@
     <value>Iniciar sesión</value>
     <comment>Used by: login</comment>
   </data>
-  <data name="Login_Login_tittle" xml:space="preserve">
+  <data name="Login_Login_Tittle" xml:space="preserve">
     <value>Inicio de sesión</value>
     <comment>Used by: login</comment>
   </data>
-  <data name="Login_New_Player_Button" xml:space="preserve">
+  <data name="Login_NewPlayer_Button" xml:space="preserve">
     <value>Registrate aquí</value>
     <comment>Used by: login</comment>
   </data>
-  <data name="Login_New_Player_Label" xml:space="preserve">
+  <data name="Login_NewPlayer_Label" xml:space="preserve">
     <value>¿Aun no tienes una cuenta?</value>
     <comment>Used by: login</comment>
   </data>
@@ -405,7 +405,7 @@
     <value>Archivo de imagen (*.jpg;*.bmp;*.png)|*.jpg;*.bmp;*.png</value>
     <comment>Used by: Profile</comment>
   </data>
-  <data name="Profile_Invalid_Fields_Label" xml:space="preserve">
+  <data name="Profile_InvalidFields_Label" xml:space="preserve">
     <value>Ingrese toda la información</value>
     <comment>Used by: Profile</comment>
   </data>
@@ -529,8 +529,8 @@
     <value>Nuevo jugador registrado con éxito</value>
     <comment>Used by: Register</comment>
   </data>
-  <data name="Register_tittle" xml:space="preserve">
-    <value>Registrar nuevo usuario</value>
+  <data name="Register_Title_Label" xml:space="preserve">
+    <value>Registrar nuevo jugador</value>
     <comment>Used by: Register</comment>
   </data>
 </root>

@@ -13,7 +13,9 @@ namespace Logic
 {
     public class MatchLogic
     {
-        private readonly Log log = new Log();
+        private readonly Log _log = new Log();
+
+
         public int AddMatchWinner(string username)
         {
             int statusCode = 500;
@@ -35,11 +37,11 @@ namespace Logic
                 }
                 catch (DbUpdateException ex)
                 {
-                    log.Add(ex.ToString());
+                    _log.Add(ex.ToString());
                 }
                 catch (EntityException ex)
                 {
-                    log.Add(ex.ToString());
+                    _log.Add(ex.ToString());
                 }
             }
             return statusCode;

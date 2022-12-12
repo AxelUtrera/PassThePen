@@ -29,11 +29,11 @@ namespace PassThePen
     {
         ResourceManager messageResource = new ResourceManager("PassThePen.Properties.Resources", Assembly.GetExecutingAssembly());
 
-        private Player player = new Player();
-        private int validationCode;
-        private int resendNumber = 0;
-        private LogClient log = new LogClient();
-
+        private Player _player = new Player();
+        private int _validationCode;
+        private int _resendNumber = 0;
+        private LogClient _log = new LogClient();
+       
         public Register()
         {
             InitializeComponent();
@@ -41,30 +41,34 @@ namespace PassThePen
             Image_RegisterPlayer.Source = new BitmapImage(new Uri(NewIconPlayer));
         }
 
+
         private void Button_Register_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 PassThePenService.AutenticationClient client = new PassThePenService.AutenticationClient();
                 byte[] defaultProfileImage = ImageToByte(Image_RegisterPlayer.Source as BitmapImage);
+
                 HideErrorLabels();
                 if (ValidateFields())
                 {
-                    player.email = TexBox_Email.Text;
-                    player.username = TextBox_Username.Text;
-                    player.name = TextBox_Name.Text;
-                    player.lastname = TextBox_LastName.Text;
-                    player.password = PasswordBox_Password.Password;
-                    player.profileImage = defaultProfileImage;
+                    _player.email = TexBox_Email.Text;
+                    _player.username = TextBox_Username.Text;
+                    _player.name = TextBox_Name.Text;
+                    _player.lastname = TextBox_LastName.Text;
+                    _player.password = PasswordBox_Password.Password;
+                    _player.profileImage = defaultProfileImage;
+
                     Random randomNumber = new Random();
-                    validationCode = randomNumber.Next(100000, 1000000);
-                    if (client.CodeEmail(player.email, "Validation Code", validationCode) == 200)
+                    _validationCode = randomNumber.Next(100000, 1000000);
+
+                    if (client.CodeEmail(_player.email, "Validation Code", _validationCode) == 200)
                     {
                         MessageBox.Show(messageResource.GetString("Register_SuccessfulRegister_Message"));
                         HideComponetsRegister();
-                        label_Code_Validation.Visibility = Visibility.Visible;
-                        TexBox_Code_Validation.Visibility = Visibility.Visible;
-                        Panel_Validation_Code.Visibility = Visibility.Visible;
+                        Label_CodeValidation.Visibility = Visibility.Visible;
+                        TexBox_CodeValidation.Visibility = Visibility.Visible;
+                        Panel_ValidationCode.Visibility = Visibility.Visible;
                     }
                     else
                     {
@@ -75,12 +79,12 @@ namespace PassThePen
             catch (EndpointNotFoundException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (TimeoutException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
         }
 
@@ -91,13 +95,13 @@ namespace PassThePen
 
             if (ValidateUsernameNotRegister())
             {
-                label_Error_Username.Visibility = Visibility.Visible;
+                Label_ErrorUsername.Visibility = Visibility.Visible;
                 result = false;
             }
 
             if (!PasswordBox_Password.Password.Equals(PasswordBox_RepeatPassword.Password))
             {
-                label_Error_RepeatPassword.Visibility = Visibility.Visible;
+                Label_ErrorRepeatPassword.Visibility = Visibility.Visible;
                 result = false;
             }
 
@@ -150,12 +154,12 @@ namespace PassThePen
             bool result = true;
             if (!Validation.ValidateFormat(TexBox_Email.Text, "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"))
             {
-                label_Error_Email.Visibility = Visibility.Visible;
+                Label_ErrorEmail.Visibility = Visibility.Visible;
                 result = false;
             }
             if (!Validation.ValidateFormat(PasswordBox_Password.Password, "^(?=.*\\d)(?=.*[\\u0021-\\u002b\\u003c-\\u0040])(?=.*[A-Z])(?=.*[a-z])\\S{8,16}$"))
             {
-                label_Error_Password.Visibility = Visibility.Visible;
+                Label_ErrorPassword.Visibility = Visibility.Visible;
                 result = false;
             }
             if (!Validation.ValidateFormat(TextBox_Name.Text, @"^[A-Za-z\s@]*$") || !Validation.ValidateFormat(TextBox_LastName.Text, @"^[A-Za-z\s@]*$"))
@@ -171,22 +175,22 @@ namespace PassThePen
             bool result = true;
             if (TextBox_Username.Text.Length > 20)
             {
-                label_Error_Username.Visibility = Visibility.Visible;
+                Label_ErrorUsername.Visibility = Visibility.Visible;
                 result = false;
             }
             if (TextBox_Name.Text.Length > 50)
             {
-                label_Error_Name.Visibility = Visibility.Visible;
+                Label_ErrorName.Visibility = Visibility.Visible;
                 result = false;
             }
             if (TextBox_LastName.Text.Length > 50)
             {
-                label_Error_LastName.Visibility = Visibility.Visible;
+                Label_ErrorLastName.Visibility = Visibility.Visible;
                 result = false;
             }
             if (TexBox_Email.Text.Length > 100)
             {
-                label_Error_Email.Visibility = Visibility.Visible;
+                Label_ErrorEmail.Visibility = Visibility.Visible;
                 result = false;
             }
             return result;
@@ -195,11 +199,11 @@ namespace PassThePen
 
         private void HideErrorLabels()
         {
-            label_Error_Email.Visibility = Visibility.Hidden;
-            label_Error_LastName.Visibility = Visibility.Hidden;
-            label_Error_Name.Visibility = Visibility.Hidden;
-            label_Error_RepeatPassword.Visibility = Visibility.Hidden;
-            label_Error_Username.Visibility = Visibility.Hidden;
+            Label_ErrorEmail.Visibility = Visibility.Hidden;
+            Label_ErrorLastName.Visibility = Visibility.Hidden;
+            Label_ErrorName.Visibility = Visibility.Hidden;
+            Label_ErrorRepeatPassword.Visibility = Visibility.Hidden;
+            Label_ErrorUsername.Visibility = Visibility.Hidden;
         }
 
         private void Button_Exit_Click(object sender, RoutedEventArgs e)
@@ -231,10 +235,10 @@ namespace PassThePen
                     PassThePenService.PlayerManagementClient client = new PassThePenService.PlayerManagementClient();
                     int statusCode;
                     int statusOK = 200;
-                    statusCode = client.AddPlayer(player);
+                    statusCode = client.AddPlayer(_player);
                     if (statusCode == statusOK)
                     {
-                        client.AddGuestFriend(player.username);
+                        client.AddGuestFriend(_player.username);
                         MessageBox.Show(messageResource.GetString("Register_SuccessfulRegister_Message"));
                         Login login = new Login();
                         login.Show();
@@ -254,26 +258,26 @@ namespace PassThePen
             catch (EndpointNotFoundException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (TimeoutException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
         }
 
         private bool ValidateCodeValidation()
         {
             bool result = true;
-            if (TexBox_Code_Validation.Text.Length > 6)
+            if (TexBox_CodeValidation.Text.Length > 6)
             {
                 result = false;
                 MessageBox.Show("Longitud incorrecta, el código de validación no excede los 6 caracteres");
             }
-            if (Validation.ValidateFormat(TexBox_Code_Validation.Text, "^[0-9]+$"))
+            if (Validation.ValidateFormat(TexBox_CodeValidation.Text, "^[0-9]+$"))
             {
-                if (Int32.Parse(TexBox_Code_Validation.Text) != validationCode)
+                if (Int32.Parse(TexBox_CodeValidation.Text) != _validationCode)
                 {
                     result = false;
                     MessageBox.Show("Codigo de validación incorrecto, favor de verificarlo");
@@ -305,13 +309,13 @@ namespace PassThePen
         {
             try
             {
-                if (resendNumber < 3)
+                if (_resendNumber < 3)
                 {
                     PassThePenService.AutenticationClient client = new PassThePenService.AutenticationClient();
-                    if (client.CodeEmail(player.email, "Validation Code", validationCode) == 200)
+                    if (client.CodeEmail(_player.email, "Validation Code", _validationCode) == 200)
                     {
                         MessageBox.Show("Código de validación enviado a su correo favor de revisarlo");
-                        resendNumber++;
+                        _resendNumber++;
                     }
                     else
                     {
@@ -327,30 +331,30 @@ namespace PassThePen
             catch (EndpointNotFoundException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (TimeoutException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
         }
 
         private void Button_Cancel_Click(object sender, RoutedEventArgs e)
         {
-            resendNumber = 0;
-            TexBox_Code_Validation.Text = "";
+            _resendNumber = 0;
+            TexBox_CodeValidation.Text = "";
             ShowComponentsRegister();
         }
 
         private void ShowComponentsRegister()
         {
-            label_Email.Visibility = Visibility.Visible;
-            label_Confirm_Password.Visibility = Visibility.Visible;
-            label_Lastname.Visibility = Visibility.Visible;
-            label_Name.Visibility = Visibility.Visible;
-            label_Nickname.Visibility = Visibility.Visible;
-            label_Password.Visibility = Visibility.Visible;
+            Label_Email.Visibility = Visibility.Visible;
+            Label_ConfirmPassword.Visibility = Visibility.Visible;
+            Label_Lastname.Visibility = Visibility.Visible;
+            Label_Name.Visibility = Visibility.Visible;
+            Label_Nickname.Visibility = Visibility.Visible;
+            Label_Password.Visibility = Visibility.Visible;
             HideErrorLabels();
             TexBox_Email.Visibility = Visibility.Visible;
             TextBox_LastName.Visibility = Visibility.Visible;
@@ -359,25 +363,25 @@ namespace PassThePen
             PasswordBox_Password.Visibility = Visibility.Visible;
             PasswordBox_RepeatPassword.Visibility = Visibility.Visible;
             Button_Register.Visibility = Visibility.Visible;
-            Panel_Validation_Code.Visibility = Visibility.Collapsed;
-            TexBox_Code_Validation.Visibility = Visibility.Collapsed;
-            label_Code_Validation.Visibility = Visibility.Collapsed;
+            Panel_ValidationCode.Visibility = Visibility.Collapsed;
+            TexBox_CodeValidation.Visibility = Visibility.Collapsed;
+            Label_CodeValidation.Visibility = Visibility.Collapsed;
         }
 
         private void HideComponetsRegister()
         {
-            label_Email.Visibility = Visibility.Collapsed;
-            label_Confirm_Password.Visibility = Visibility.Collapsed;
-            label_Lastname.Visibility = Visibility.Collapsed;
-            label_Name.Visibility = Visibility.Collapsed;
-            label_Nickname.Visibility = Visibility.Collapsed;
-            label_Password.Visibility = Visibility.Collapsed;
-            label_Error_Email.Visibility = Visibility.Collapsed;
-            label_Error_LastName.Visibility = Visibility.Collapsed;
-            label_Error_Name.Visibility = Visibility.Collapsed;
-            label_Error_Password.Visibility = Visibility.Collapsed;
-            label_Error_RepeatPassword.Visibility= Visibility.Collapsed;
-            label_Error_Username.Visibility = Visibility.Collapsed;
+            Label_Email.Visibility = Visibility.Collapsed;
+            Label_ConfirmPassword.Visibility = Visibility.Collapsed;
+            Label_Lastname.Visibility = Visibility.Collapsed;
+            Label_Name.Visibility = Visibility.Collapsed;
+            Label_Nickname.Visibility = Visibility.Collapsed;
+            Label_Password.Visibility = Visibility.Collapsed;
+            Label_ErrorEmail.Visibility = Visibility.Collapsed;
+            Label_ErrorLastName.Visibility = Visibility.Collapsed;
+            Label_ErrorName.Visibility = Visibility.Collapsed;
+            Label_ErrorPassword.Visibility = Visibility.Collapsed;
+            Label_ErrorRepeatPassword.Visibility= Visibility.Collapsed;
+            Label_ErrorUsername.Visibility = Visibility.Collapsed;
             TexBox_Email.Visibility = Visibility.Collapsed;
             TextBox_LastName.Visibility = Visibility.Collapsed;
             TextBox_Name.Visibility = Visibility.Collapsed;

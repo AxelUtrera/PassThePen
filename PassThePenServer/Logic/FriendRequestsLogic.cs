@@ -14,7 +14,7 @@ namespace Logic
 {
     public class FriendRequestsLogic
     {
-        readonly Log log = new Log();
+        private readonly Log _log = new Log();
 
         public int AcceptFriendRequest(Domain.FriendRequest friendRequest)
         {
@@ -24,7 +24,6 @@ namespace Logic
             {
                 try
                 {
-                    //Se realizan 2 registros para que haya relacion desde los dos usuarios, al que se le envio la solicitud y el que la acepto
                     var registerFriendApplicantToPlayer = context.Friends.Add(new DataAccess.Friends()
                     {
                         usernamePlayer = friendRequest.usernamePlayer,
@@ -48,11 +47,11 @@ namespace Logic
                 }
                 catch (DbUpdateException ex)
                 {
-                    log.Add(ex.ToString());
+                    _log.Add(ex.ToString());
                 }
                 catch (EntityException ex)
                 {
-                    log.Add(ex.ToString());
+                    _log.Add(ex.ToString());
                 }
             }
             return operationResult;
@@ -77,15 +76,15 @@ namespace Logic
                 }
                 catch (ArgumentNullException ex)
                 {
-                    log.Add(ex.ToString());
+                    _log.Add(ex.ToString());
                 }
                 catch (DbUpdateException ex)
                 {
-                    log.Add(ex.ToString());
+                    _log.Add(ex.ToString());
                 }
                 catch (EntityException ex)
                 {
-                    log.Add(ex.ToString());
+                    _log.Add(ex.ToString());
                 }
             }   
             return operationResult;
@@ -100,9 +99,7 @@ namespace Logic
             {
                 try
                 {
-                    var listRequests = context.FriendRequest
-                                   .Where(b => b.usernamePlayer.Equals(username))
-                                   .ToList();
+                    var listRequests = context.FriendRequest.Where(b => b.usernamePlayer.Equals(username)).ToList();
 
                     foreach (DataAccess.FriendRequest request in listRequests)
                     {
@@ -118,25 +115,26 @@ namespace Logic
                 }
                 catch (ArgumentNullException ex)
                 {
-                    log.Add(ex.ToString());
+                    _log.Add(ex.ToString());
                 }
                 catch (EntityException ex)
                 {
-                    log.Add(ex.ToString());
+                    _log.Add(ex.ToString());
                 }
             }
+
             return friendRequestList;
         }
+
 
         public int SendFriendRequests(Domain.FriendRequest friendRequests)
         {
             int operationCode = 500;
-            int validationOKCode = 200; 
+            const int validationOKCode = 200; 
             DataAccess.FriendRequest dataAccesFriendRequests = ConvertToDataAccessFriendRequests(friendRequests);
 
             using (var context = new passthepenEntities())
             {
-                
                 try
                 {
                     if (ValidateExistFriendRequestOrFriend(friendRequests) == validationOKCode && friendRequests.usernamePlayer != friendRequests.friendUsername)
@@ -152,15 +150,16 @@ namespace Logic
                 }
                 catch (DbUpdateException ex)
                 {
-                    log.Add(ex.ToString());
+                    _log.Add(ex.ToString());
                 }
                 catch (EntityException ex)
                 {
-                    log.Add(ex.ToString());
+                    _log.Add(ex.ToString());
                 }
             }
             return operationCode;
         }
+
 
         private int ValidateExistFriendRequestOrFriend(Domain.FriendRequest friendRequest)
         {
@@ -177,18 +176,17 @@ namespace Logic
                     {
                         operationResult = 200;
                     }
-
-                    Console.WriteLine(operationResult);
                 }
                 catch (ArgumentNullException ex)
                 {
-                    log.Add(ex.ToString());
+                    _log.Add(ex.ToString());
                 }
                 catch (EntityException ex)
                 {
-                    log.Add(ex.ToString());
+                    _log.Add(ex.ToString());
                 }
             }
+
             return operationResult;
         }
 
@@ -199,7 +197,6 @@ namespace Logic
                 usernamePlayer = domainFriendRequests.usernamePlayer,
                 friendUsername = domainFriendRequests.friendUsername,
             };
-
         }
     }
 }

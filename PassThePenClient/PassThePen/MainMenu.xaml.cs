@@ -33,15 +33,15 @@ namespace PassThePen
     {
         ResourceManager messageResource = new ResourceManager("PassThePen.Properties.Resources", Assembly.GetExecutingAssembly());
         public static string username { set; get; }
-        private List<string> listUsernameStrings = new List<string>();
-        private List<Friends> friendList = new List<Friends>();
-        private List<FriendRequest> friendRequests = new List<FriendRequest>();
-        private LogClient log = new LogClient();
+        private List<string> _listUsernameStrings = new List<string>();
+        private List<Friends> _friendList = new List<Friends>();
+        private List<FriendRequest> _friendRequests = new List<FriendRequest>();
+        private LogClient _log = new LogClient();
 
         public int NotifyMatchInvitation(string invitingPlayer)
         {
             int operationResult = 500;
-            var response = MessageBox.Show(messageResource.GetString("MainMenu_InvitationBody_Message"), invitingPlayer + messageResource.GetString("MainMenu_InvitationTitle_Message"), MessageBoxButton.YesNo, MessageBoxImage.Information);
+            var response = MessageBox.Show(invitingPlayer + messageResource.GetString("MainMenu_InvitationBody_Message"), messageResource.GetString("MainMenu_InvitationTitle_Message"), MessageBoxButton.YesNo, MessageBoxImage.Information);
             if (response == MessageBoxResult.Yes)
             {
                 MessageBox.Show(messageResource.GetString("MainMenu_InvitationConfirmation_Message"));
@@ -65,13 +65,13 @@ namespace PassThePen
                 InstanceContext instanceContext = new InstanceContext(this);
                 PassThePenService.PlayerConnectionClient client = new PlayerConnectionClient(instanceContext);
                 List<Player> listGroupPlayers = client.GetListPlayersInGroup().ToList();
-                int minimumPlayersInGroup = 2;
+                const int minimumPlayersInGroup = 2;
 
 
-            if (listGroupPlayers.Count >= minimumPlayersInGroup)
-            {
-                listGroupPlayers = RemoveOwnerPlayerOfListPlayersInGroup(listGroupPlayers);
-            }
+                if (listGroupPlayers.Count >= minimumPlayersInGroup)
+                {
+                    listGroupPlayers = RemoveOwnerPlayerOfListPlayersInGroup(listGroupPlayers);
+                }
 
                 if (listGroupPlayers.Count == 0)
                 {
@@ -85,19 +85,19 @@ namespace PassThePen
             catch (EndpointNotFoundException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (TimeoutException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
         }
 
         public void OpenExitHostMessage()
         {
             GetDataPlayersInGoup();
-            MessageBox.Show(username, messageResource.GetString("MainMenu_LeaveHost_Message"));
+            MessageBox.Show(messageResource.GetString("MainMenu_LeaveHost_Message"), username, MessageBoxButton.OK ,MessageBoxImage.Exclamation);
         }
 
 
@@ -106,7 +106,7 @@ namespace PassThePen
             InitializeComponent();
             Connected();
             GetFriends();
-            listUsernameStrings.Clear();
+            _listUsernameStrings.Clear();
             SetDataProfile();
         }
 
@@ -114,23 +114,22 @@ namespace PassThePen
         private void Button_Profile_Click(object sender, RoutedEventArgs e)
         {
             Profile profile = new Profile();
-            profile.Show();
-
+            profile.ShowDialog();
         }
 
 
         private void Button_FindFriends_Click(object sender, RoutedEventArgs e)
         {
-            listUsernameStrings.Clear();
+            _listUsernameStrings.Clear();
             if (TextBox_FindFriend.Visibility == Visibility.Collapsed && ListBox_FriendList.Visibility == Visibility.Visible)
             {
                 TextBox_FindFriend.Visibility = Visibility.Visible;
-                friendList.ForEach(fri => listUsernameStrings.Add(fri.friendUsername));
+                _friendList.ForEach(friend => _listUsernameStrings.Add(friend.friendUsername));
             }
             else if (TextBox_FindFriend.Visibility == Visibility.Collapsed && ListBox_FriendsRequests.Visibility == Visibility.Visible)
             {
                 TextBox_FindFriend.Visibility = Visibility.Visible;
-                friendRequests.ForEach(fri => listUsernameStrings.Add(fri.friendUsername));
+                _friendRequests.ForEach(friend => _listUsernameStrings.Add(friend.friendUsername));
             }
             else
             {
@@ -156,34 +155,34 @@ namespace PassThePen
             catch (EndpointNotFoundException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (TimeoutException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
         }
 
 
         private void Button_FriendRequests_Click(object sender, RoutedEventArgs e)
         {
-            label_ListFriends.Visibility = Visibility.Collapsed;
-            label_FriendRequests.Visibility = Visibility.Visible;
+            Label_ListFriends.Visibility = Visibility.Collapsed;
+            Label_FriendRequests.Visibility = Visibility.Visible;
             TextBox_FindFriend.Visibility = Visibility.Collapsed;
-            TextBox_FindFriend.Text = "";
+            TextBox_FindFriend.Clear();
             GenerateFriendRequestList();
         }
 
 
         private void Button_Friends_Click(object sender, RoutedEventArgs e)
         {
-            label_FriendRequests.Visibility = Visibility.Collapsed;
-            label_ListFriends.Visibility = Visibility.Visible;
+            Label_FriendRequests.Visibility = Visibility.Collapsed;
+            Label_ListFriends.Visibility = Visibility.Visible;
             ListBox_FriendsRequests.Visibility = Visibility.Collapsed;
             ListBox_FriendList.Visibility = Visibility.Visible;
             TextBox_FindFriend.Visibility = Visibility.Collapsed;
-            TextBox_FindFriend.Text = "";
+            TextBox_FindFriend.Clear();
             GetFriends();
         }
     
@@ -196,7 +195,6 @@ namespace PassThePen
             clientFriendRequest.AcceptFriendRequest(newFriendRequests);
             GenerateFriendRequestList();
             ListBox_FriendList.ItemsSource = clientFriends.GetFriends(username);
-
         }
 
 
@@ -212,12 +210,12 @@ namespace PassThePen
             catch (EndpointNotFoundException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (TimeoutException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
         }
 
@@ -236,8 +234,8 @@ namespace PassThePen
             ListBox_FriendList.Visibility = Visibility.Collapsed;
             ListBox_FriendsRequests.Visibility = Visibility.Visible;
             FriendRequestsClient client = new FriendRequestsClient();
-            friendRequests = client.GetFriendRequestsList(username).ToList();
-            ListBox_FriendsRequests.ItemsSource = friendRequests;
+            _friendRequests = client.GetFriendRequestsList(username).ToList();
+            ListBox_FriendsRequests.ItemsSource = _friendRequests;
         }
 
         private void Connected()
@@ -251,12 +249,12 @@ namespace PassThePen
             catch (EndpointNotFoundException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (TimeoutException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
         }
 
@@ -272,12 +270,12 @@ namespace PassThePen
             catch (EndpointNotFoundException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (TimeoutException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
         }
 
@@ -286,18 +284,18 @@ namespace PassThePen
         {
             try
             {
-                friendList = friends.ToList();
-                ListBox_FriendList.ItemsSource = friendList;
+                _friendList = friends.ToList();
+                ListBox_FriendList.ItemsSource = _friendList;
             }
             catch (EndpointNotFoundException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (TimeoutException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
         }
         
@@ -313,12 +311,12 @@ namespace PassThePen
             catch (EndpointNotFoundException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (TimeoutException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
         }
 
@@ -341,19 +339,20 @@ namespace PassThePen
             if (!String.IsNullOrEmpty(TextBox_FindFriend.Text.Trim()))
             {
                 List<FriendRequest> friendsEquals = new List<FriendRequest>();
-                foreach (string stringUsername in listUsernameStrings)
-                {
 
+                foreach (string stringUsername in _listUsernameStrings)
+                {
                     if (stringUsername.StartsWith(TextBox_FindFriend.Text.Trim()))
                     {
-                        friendsEquals.Add(friendRequests.Find(fri => fri.friendUsername.Contains(stringUsername)));
+                        friendsEquals.Add(_friendRequests.Find(friend => friend.friendUsername.Contains(stringUsername)));
                     }
                 }
+
                 ListBox_FriendsRequests.ItemsSource = friendsEquals;
             }
             else if (TextBox_FindFriend.Text.Trim() == "")
             {
-                ListBox_FriendsRequests.ItemsSource = friendRequests;
+                ListBox_FriendsRequests.ItemsSource = _friendRequests;
             }
         }
 
@@ -363,19 +362,20 @@ namespace PassThePen
             if (!String.IsNullOrEmpty(TextBox_FindFriend.Text.Trim()))
             {
                 List<Friends> friendsEquals = new List<Friends>();
-                foreach (string stringUsername in listUsernameStrings)
-                {
 
+                foreach (string stringUsername in _listUsernameStrings)
+                {
                     if (stringUsername.StartsWith(TextBox_FindFriend.Text.Trim()))
                     {
-                        friendsEquals.Add(friendList.Find(fri => fri.friendUsername.Contains(stringUsername)));
+                        friendsEquals.Add(_friendList.Find(friend => friend.friendUsername.Contains(stringUsername)));
                     }
                 }
+
                 ListBox_FriendList.ItemsSource = friendsEquals;
             }
             else if (TextBox_FindFriend.Text.Trim() == "")
             {
-                ListBox_FriendList.ItemsSource = friendList;
+                ListBox_FriendList.ItemsSource = _friendList;
             }
         }
 
@@ -385,10 +385,10 @@ namespace PassThePen
             Image buttonDeleteFriend = (Image)sender;
             StackPanel parent = (StackPanel)buttonDeleteFriend.Parent;
             Friends friend = (Friends)parent.DataContext;
+
             PassThePenService.PlayerManagementClient client = new PassThePenService.PlayerManagementClient();
             client.DeleteFriend(friend);
             GetFriends();
-            client.Close();
         }
 
 
@@ -399,12 +399,12 @@ namespace PassThePen
                 PlayerManagementClient playerClient = new PlayerManagementClient();
                 int playerExist = 200;
                 int errorFriendRequest = 500;
-                if (playerClient.FindPlayer(Textbox_AddFriend.Text) == playerExist)
+                if (playerClient.FindPlayer(TextBox_AddFriend.Text) == playerExist)
                 {
                     PassThePenService.FriendRequestsClient client = new FriendRequestsClient();
                     FriendRequest friendRequest = new FriendRequest()
                     {
-                        usernamePlayer = Textbox_AddFriend.Text,
+                        usernamePlayer = TextBox_AddFriend.Text,
                         friendUsername = username
                     };
                     if (client.SendFriendRequests(friendRequest) == errorFriendRequest)
@@ -415,7 +415,7 @@ namespace PassThePen
                     }
                     else
                     {
-                        Textbox_AddFriend.Clear();
+                        TextBox_AddFriend.Clear();
                         MessageBox.Show(messageResource.GetString("MainMenu_FriendRequestSend_Message"));
                     }
 
@@ -428,12 +428,12 @@ namespace PassThePen
             catch (EndpointNotFoundException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (TimeoutException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
         }
 
@@ -442,15 +442,18 @@ namespace PassThePen
         {
             try
             {
+                const int statusPlayerIsNotInGroup = 404;
+                const int playerIsConected = 200;
+                const int groupIsNotFull = 200;
+
                 InstanceContext context = new InstanceContext(this);
                 PassThePenService.PlayerConnectionClient clientPlayerConection = new PassThePenService.PlayerConnectionClient(context);
                 PassThePenService.AutenticationClient clientAutenticate = new PassThePenService.AutenticationClient();
                 Image buttonInviteFriend = (Image)sender;
                 StackPanel parent = (StackPanel)buttonInviteFriend.Parent;
                 Friends friend = (Friends)parent.DataContext;
-                int statusPlayerIsNotInGroup = 404;
-                int playerIsConected = 200;
-                int groupIsNotFull = 200;
+                
+
                 if (clientAutenticate.FindPlayerIsConected(friend.friendUsername) == playerIsConected)
                 {
                     if (clientPlayerConection.GroupIsNotFull() == groupIsNotFull)
@@ -477,12 +480,12 @@ namespace PassThePen
             catch (EndpointNotFoundException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (TimeoutException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
         }
 
@@ -493,18 +496,18 @@ namespace PassThePen
             {
                 PassThePenService.PlayerManagementClient client = new PassThePenService.PlayerManagementClient();
                 Player playerObtained = client.GetDataPlayer(username);
-                Image_ProfileImage.Source = ImageManager.ToImage(playerObtained.profileImage);
+                Image_ProfileImage.Source = ImageManager.ByteToImage(playerObtained.profileImage);
                 Label_PrincipalPlayer.Content = username;
             }
             catch (EndpointNotFoundException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (TimeoutException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
         }
 
@@ -539,23 +542,23 @@ namespace PassThePen
                     break;
 
                 case 1:
-                    Image_InviteFiend1.Source = ImageManager.ToImage(listPlayers.ElementAt(0).profileImage);
+                    Image_InviteFiend1.Source = ImageManager.ByteToImage(listPlayers.ElementAt(0).profileImage);
                     Label_PlayerAdded1.Content = listPlayers.ElementAt(0).username;
                     break;
 
                 case 2:
-                    Image_InviteFiend1.Source = ImageManager.ToImage(listPlayers.ElementAt(0).profileImage);
+                    Image_InviteFiend1.Source = ImageManager.ByteToImage(listPlayers.ElementAt(0).profileImage);
                     Label_PlayerAdded1.Content = listPlayers.ElementAt(0).username;
-                    Image_InviteFiend2.Source = ImageManager.ToImage(listPlayers.ElementAt(1).profileImage);
+                    Image_InviteFiend2.Source = ImageManager.ByteToImage(listPlayers.ElementAt(1).profileImage);
                     Label_PlayerAdded2.Content = listPlayers.ElementAt(1).username;
                     break;
 
                 case 3:
-                    Image_InviteFiend1.Source = ImageManager.ToImage(listPlayers.ElementAt(0).profileImage);
+                    Image_InviteFiend1.Source = ImageManager.ByteToImage(listPlayers.ElementAt(0).profileImage);
                     Label_PlayerAdded1.Content = listPlayers.ElementAt(0).username;
-                    Image_InviteFiend2.Source = ImageManager.ToImage(listPlayers.ElementAt(1).profileImage);
+                    Image_InviteFiend2.Source = ImageManager.ByteToImage(listPlayers.ElementAt(1).profileImage);
                     Label_PlayerAdded2.Content = listPlayers.ElementAt(1).username;
-                    Image_InviteFiend3.Source = ImageManager.ToImage(listPlayers.ElementAt(2).profileImage);
+                    Image_InviteFiend3.Source = ImageManager.ByteToImage(listPlayers.ElementAt(2).profileImage);
                     Label_PlayerAdded3.Content = listPlayers.ElementAt(2).username;
                     break;
 
@@ -565,7 +568,7 @@ namespace PassThePen
 
                 case 5:
                     PlaceFourPlayersInGroup(listPlayers);
-                    Image_InviteFiend5.Source = ImageManager.ToImage(listPlayers.ElementAt(4).profileImage);
+                    Image_InviteFiend5.Source = ImageManager.ByteToImage(listPlayers.ElementAt(4).profileImage);
                     Label_PlayerAdded5.Content = listPlayers.ElementAt(4).username;
                     break;
 
@@ -573,17 +576,19 @@ namespace PassThePen
             }
         }
 
+
         private void PlaceFourPlayersInGroup(List<Player> listPlayers)
         {
-            Image_InviteFiend1.Source = ImageManager.ToImage(listPlayers.ElementAt(0).profileImage);
+            Image_InviteFiend1.Source = ImageManager.ByteToImage(listPlayers.ElementAt(0).profileImage);
             Label_PlayerAdded1.Content = listPlayers.ElementAt(0).username;
-            Image_InviteFiend2.Source = ImageManager.ToImage(listPlayers.ElementAt(1).profileImage);
+            Image_InviteFiend2.Source = ImageManager.ByteToImage(listPlayers.ElementAt(1).profileImage);
             Label_PlayerAdded2.Content = listPlayers.ElementAt(1).username;
-            Image_InviteFiend3.Source = ImageManager.ToImage(listPlayers.ElementAt(2).profileImage);
+            Image_InviteFiend3.Source = ImageManager.ByteToImage(listPlayers.ElementAt(2).profileImage);
             Label_PlayerAdded3.Content = listPlayers.ElementAt(2).username;
-            Image_InviteFiend4.Source = ImageManager.ToImage(listPlayers.ElementAt(3).profileImage);
+            Image_InviteFiend4.Source = ImageManager.ByteToImage(listPlayers.ElementAt(3).profileImage);
             Label_PlayerAdded4.Content = listPlayers.ElementAt(3).username;
         }  
+
 
         private List<Player> RemoveOwnerPlayerOfListPlayersInGroup(List<Player> playersInGroup)
         {
@@ -615,13 +620,18 @@ namespace PassThePen
             catch (EndpointNotFoundException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_ServerError_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
             catch (TimeoutException ex)
             {
                 MessageBox.Show(messageResource.GetString("Global_Timeout_Message"));
-                log.Add(ex.ToString());
+                _log.Add(ex.ToString());
             }
+        }
+
+        public void NotifyOnlyHostStart()
+        {
+            MessageBox.Show("Solo el host puede iniciar la partida", "", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 }

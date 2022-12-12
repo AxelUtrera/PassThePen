@@ -730,6 +730,9 @@ namespace PassThePen.PassThePenService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPlayerConnection/OpenExitHostMessage")]
         void OpenExitHostMessage();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPlayerConnection/NotifyOnlyHostStart")]
+        void NotifyOnlyHostStart();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

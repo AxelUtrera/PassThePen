@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PassThePen"
         xmlns:p ="clr-namespace:PassThePen.Properties"
         mc:Ignorable="d"
-        Title="{x:Static p:Resources.Login_Login_tittle}" Height="1080" Width="1920"
+        Title="{x:Static p:Resources.Login_Login_Tittle}" Height="1080" Width="1920"
         WindowState="Maximized"
         WindowStyle="None">
 
@@ -32,13 +32,13 @@
 
             <Image Source="Img/Logo_Pass_the_pen.png" HorizontalAlignment="Center" Height="199" Margin="0,30,0,0" Width="228"/>
 
-            <Label x:Name="label_Username" Margin=" 195,50,50,0 " FontSize="15" Content="{x:Static p:Resources.Global_Username_Label}"/>
+            <Label Margin=" 195,50,50,0 " FontSize="15" Content="{x:Static p:Resources.Global_Username_Label}"/>
             <TextBox Name="TextBox_Username" Margin="200,0"></TextBox>
-            <Label x:Name="label_Password" Margin="195,30 ,50,0" FontSize="15" Content="{x:Static p:Resources.Global_Label_Password}"/>
+            <Label Margin="195,30 ,50,0" FontSize="15" Content="{x:Static p:Resources.Global_Password_Label}"/>
             <PasswordBox Name="PasswordBox_PasswordUser"  Margin="200,0" BorderBrush="Black" Height="20"/>
 
 
-            <Button Cursor="Hand" x:Name="Button_login" Margin="50,25,50,0" Width="200" Height="35" Foreground="#f3f3f3" FontSize="16" Click="Button_login_Click" IsDefault="True">
+            <Button Cursor="Hand" x:Name="Button_Login" Margin="50,25,50,0" Width="200" Height="35" Foreground="#f3f3f3" FontSize="16" Click="Button_Login_Click" IsDefault="True">
 
                 <Button.Template >
                     <ControlTemplate TargetType="{x:Type Button}" >
@@ -49,11 +49,11 @@
                 </Button.Template>
             </Button>
             <StackPanel Orientation="Horizontal" Width="300" Height="30" HorizontalAlignment="Center" Margin="0,30,0,0">
-                <Label Content="{x:Static p:Resources.Login_New_Player_Label}" Width="180" FontSize="14" Margin="10,0,0,0"/>
-                <Button Cursor="Hand" Content="{x:Static p:Resources.Login_New_Player_Button}" Width="96" Height="23" Background="Transparent" Foreground="Blue" FontSize="14" BorderThickness="0,0,0,1" BorderBrush="Blue" Click="Button_Register_Click"/>
+                <Label Content="{x:Static p:Resources.Login_NewPlayer_Label}" Width="180" FontSize="14" Margin="10,0,0,0"/>
+                <Button Cursor="Hand" Content="{x:Static p:Resources.Login_NewPlayer_Button}" Width="96" Height="23" Background="Transparent" Foreground="Blue" FontSize="14" BorderThickness="0,0,0,1" BorderBrush="Blue" Click="Button_Register_Click"/>
             </StackPanel>
 
-            <Button Cursor="Hand" Content="{x:Static p:Resources.Login_Forgot_Password_Button}" Margin="0,15,0,0" Width="138" Height="18" Background="Transparent" BorderThickness="0" Foreground="OrangeRed" Click="Button_Forgot_Password_Click"/>
+            <Button Cursor="Hand" Content="{x:Static p:Resources.Login_ForgotPassword_Button}" Margin="0,15,0,0" Width="138" Height="18" Background="Transparent" BorderThickness="0" Foreground="OrangeRed" Click="Button_ForgotPassword_Click"/>
 
             <Label Content="{x:Static p:Resources.Login_GuestClic_Label}" Cursor="Hand" Margin="0,40,0,0" Foreground="Blue" BorderBrush="Blue" BorderThickness="0,0,0,1"  HorizontalAlignment="Center" FontSize="14" MouseLeftButtonDown="Button_LoginAsGuest_Click"/>
 

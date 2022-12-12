@@ -10,11 +10,11 @@ namespace PassThePen
 {
     public class LogClient
     {
-        private readonly string path;
+        private readonly string _path;
 
         public LogClient()
         {
-            this.path = GetPath();
+            this._path = GetPath();
         }
 
         public void Add(string message)
@@ -26,7 +26,7 @@ namespace PassThePen
 
             stringLog += DateTime.Now + " - " + message + Environment.NewLine;
 
-            StreamWriter streamWriter = new StreamWriter(path + nameFile, true);
+            StreamWriter streamWriter = new StreamWriter(_path + nameFile, true);
             streamWriter.Write(stringLog);
             streamWriter.Close();
 
@@ -45,8 +45,8 @@ namespace PassThePen
         {
             try
             {
-                if (!Directory.Exists(path))
-                    Directory.CreateDirectory(path);
+                if (!Directory.Exists(_path))
+                    Directory.CreateDirectory(_path);
             }
             catch (DirectoryNotFoundException ex)
             {
