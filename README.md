@@ -10,7 +10,6 @@
 5.	No se puede puntuar el dibujo propio.
 
 
-
 -----------------------------¿COMO JUGAR?-----------------------------
 
 1. El host debe iniciar la partida.
@@ -35,64 +34,4 @@ puntuacion de cada jugador.
 11. Entrar a sala de espera.
 12. Unirse a partida.
 13. Iniciar juego.
-
-
-
-Lista de id para internacionalizacion.
-
-Registrar usuario:
-Registrar usuario =  User register.
-Registrar nuevo usuario = Register new user.
-Nombres(s) = Name(s)
-Apellidos = Last name.
-Contraseña = password.
-Confirmar contraseña = confirm password.
-Registrarme = Register
-O registrate con:  = register with:
-Cancela = Cancel.
-
-Menu principal:
-Lista de amigos = Friends list.
-Jugar =  Play
-Jugadores en la sala = Friends room
-Abandonar sala  = Leave room.
-Enviar mensaje = Send message.
-
-Menu de juego:
-Toca dibujar = it's time to draw
-Tiempo restante = time remaining
-Puntaje  = score.
-Enviar mensaje = send
-
-Iniciar sesion:
-Nombre de jugador = Playername
-Contraseña =  Password
-Iniciar sesión = Log in
-Olvidé mi contraseña = I forgot my password
-¿Eres nuevo? = New player?
-Iniciar sesión con = Log in with
-
-Cambiar contraseña:
-¿Olvidaste tu contraseña? = Forgot your password?
-Introduce tu correo electronico = Introduce your email
-Enviar = Send
-Cancelar = Cancel
-
-Cambiar contraseña codigo
-Hemos enviado un codigo = We send you a code
-Ingrese el codigo = Enter the code
-Confirmar = confirm
-Cancelar = Cancel
-Reenviar codigo = Resend code
-
-Cambiar contraseña nueva contraseña:
-Nueva contraseña = New password
-Confirmar contraseña = Confirm password
-Guardar = Save
-Cancelar = Cancel
-
-Personalizar perfil:
-Nombre de jugador = Playername
-Apodo = Nickname
-Fecha de nacimiento = Birthday
-Correo electronico = Email
+14. Soporte para dos idiomas (Internacionalizacion)
